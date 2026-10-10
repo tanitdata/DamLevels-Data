@@ -1,0 +1,61 @@
+{
+  "table": "p3_node_registry",
+  "grain": "one row per connectivity node",
+  "primary_key": [
+    "node_id"
+  ],
+  "layer": "05_data/connectivity",
+  "columns": [
+    {
+      "name": "node_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "name_ar",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "name_fr",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "node_class",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: dam|conveyance|external_environmental"
+    },
+    {
+      "name": "first_seen_date",
+      "type": "date",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "last_seen_date",
+      "type": "date",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "evidence_path",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "node_class": [
+      "dam",
+      "conveyance",
+      "external_environmental"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

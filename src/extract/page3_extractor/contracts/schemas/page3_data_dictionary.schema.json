@@ -1,0 +1,62 @@
+{
+  "table": "page3_data_dictionary",
+  "grain": "one row per published column across every publication table",
+  "primary_key": [
+    "table_name",
+    "column_name"
+  ],
+  "layer": "09_publication_exports",
+  "columns": [
+    {
+      "name": "table_name",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "column_name",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "data_type",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "nullable",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "unit",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "null_meaning",
+      "type": "string",
+      "nullable": true,
+      "description": "what an empty value means; never zero"
+    },
+    {
+      "name": "source_layer",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {},
+  "derived_from": null,
+  "schema_version": "1.2.0"
+}

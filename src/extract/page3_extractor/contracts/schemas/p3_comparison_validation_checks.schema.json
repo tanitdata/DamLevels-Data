@@ -1,0 +1,49 @@
+{
+  "table": "p3_comparison_validation_checks",
+  "grain": "one comparison run x validation check",
+  "primary_key": [
+    "run_id",
+    "check_id"
+  ],
+  "layer": "05_data/validation",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "check_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "check_description",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: pass|fail"
+    },
+    {
+      "name": "detail",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "status": [
+      "pass",
+      "fail"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

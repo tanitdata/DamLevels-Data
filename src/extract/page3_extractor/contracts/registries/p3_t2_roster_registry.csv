@@ -1,0 +1,16 @@
+roster_version,dam_id,name_ar,name_en,aliases,valid_from,valid_to,evidence,registry_status
+1.1.0,DAM-MELLEGUE,ملاق,Mellegue,ملاق (الى مستوى 265 م)|مــالق,,,"GT sample rows, all eras",ACCEPTED_PHASE3
+1.1.0,DAM-SIDI-SALEM,سيدي سالم,Sidi Salem,سيدي سالم (الى مستوى 115 م)|سيدي ســالم,,,"GT sample rows, all eras",ACCEPTED_PHASE3
+1.1.0,DAM-BOUHERTMA,بوهرتمة,Bouhertma,بو هرتمه|بوهرتمه|بو هرتمــه,,,GT sample rows; spelling-variant crosswalk to the reference name 'BOU HEURTMA' remains a CANDIDATE,ACCEPTED_PHASE3
+1.1.0,DAM-JOUMINE,جومين,Joumine,جوميــن,,,GT sample rows,ACCEPTED_PHASE3
+1.1.0,DAM-SEJNANE,سجنان,Sejnane,سجنــان,,,GT sample rows,ACCEPTED_PHASE3
+1.1.0,DAM-SIDI-EL-BARRAK,سيدي البراق,Sidi El Barrak,,,,GT sample rows (modern era),ACCEPTED_PHASE3
+1.1.0,DAM-SILIANA,سليانة,Siliana,سليانــة,,,GT sample rows,ACCEPTED_PHASE3
+1.1.0,DAM-BIR-MCHERGA,بئر المشارقة,Bir Mcherga,بئر المشارقـة,,,GT sample rows,ACCEPTED_PHASE3
+1.1.0,DAM-NEBHANA,نبهانة,Nebhana,,,,GT sample rows,ACCEPTED_PHASE3
+1.1.0,DAM-SIDI-SAAD,سيدي سعد,Sidi Saad,سيدي سعـد,,,GT sample rows,ACCEPTED_PHASE3
+1.1.0,DAM-EL-HOUAREB,الهوارب,El Houareb,الوارب,,,GT sample rows (2014-2016 era); 1.1.0 corrected the canonical name_ar from الوارب to الهوارب against the printed label; الوارب retained as an alias,ACCEPTED_PHASE3
+1.1.0,DAM-EL-HMA,الحمى,El Hma,,2022-06-17,2024-01-08,379 corpus files 2022-06-17..2024-01-08 printed between بئر المشارقة and سيدي سعد; crosswalk to the reference name 'Hma' (dam_id `hma`) remains a CANDIDATE — the snapshot is PROVISIONAL,CANDIDATE_PENDING_HUMAN_CONFIRMATION
+1.1.0,DAM-LAKHMESS,لخمس,Lakhmess,,,,GT sample rows,ACCEPTED_PHASE3
+1.1.0,DAM-BARBARA,بربرة,Barbara,,,,T5 transfer labels,ACCEPTED_PHASE3
+1.1.0,DAM-ZAYATIN,الزياتين,Zayatin,زياتين,,,T5 transfer labels; crosswalk to reference 'ZIATINE' remains a CANDIDATE,ACCEPTED_PHASE3

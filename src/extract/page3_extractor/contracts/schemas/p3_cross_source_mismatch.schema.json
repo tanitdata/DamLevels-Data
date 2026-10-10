@@ -1,0 +1,318 @@
+{
+  "table": "p3_cross_source_mismatch",
+  "grain": "one comparison row whose result is not a clean match (filtered derivative of p3_cross_source_comparison)",
+  "primary_key": [
+    "comparison_id"
+  ],
+  "layer": "05_data/review_queues",
+  "columns": [
+    {
+      "name": "comparison_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "comparison_rule_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "reference_snapshot_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "entity_scope",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "entity_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "p3_family",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "p3_field_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "reference_field_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "unit",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "p3_temporal_reference",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "reference_temporal_reference",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "p3_raw_value",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "p3_normalized_value",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "p3_parsed_value",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "p3_semantic_state",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "p3_cell_evidence_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "p3_extraction_confidence",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "reference_raw_value",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "reference_normalized_value",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "reference_parsed_value",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "reference_semantic_state",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "reference_source_evidence_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "reference_audit_state",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "derived_expected_value",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "derivation_rule_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "component_count",
+      "type": "int",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "component_evidence_path",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "signed_difference",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "absolute_difference",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "relative_difference",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "absolute_tolerance",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "relative_tolerance",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "rounding_interval_low",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "rounding_interval_high",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "comparison_result",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: MATCH_EXACT|MATCH_WITHIN_TOLERANCE|ROUNDING_ONLY|MISMATCH|NOT_COMPARABLE"
+    },
+    {
+      "name": "semantic_alignment_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "temporal_alignment_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "roster_alignment_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "mismatch_attribution_status",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "attribution_confidence",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "review_required",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "notes",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "mismatch_severity",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: info|warn|error"
+    },
+    {
+      "name": "candidate_causes",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "required_next_evidence",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "review_status",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: open|in_review|resolved"
+    }
+  ],
+  "enums": {
+    "mismatch_severity": [
+      "info",
+      "warn",
+      "error"
+    ],
+    "review_status": [
+      "open",
+      "in_review",
+      "resolved"
+    ]
+  },
+  "derived_from": "p3_cross_source_comparison",
+  "schema_version": "1.0.0"
+}

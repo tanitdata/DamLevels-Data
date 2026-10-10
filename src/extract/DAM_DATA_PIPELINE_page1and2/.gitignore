@@ -1,0 +1,17 @@
+*.pdf
+*.db
+outputs/runs/
+*.csv.gz
+outputs/**/*.csv
+.ipynb_checkpoints/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.conda/
+.jupyter/
+.kernels/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

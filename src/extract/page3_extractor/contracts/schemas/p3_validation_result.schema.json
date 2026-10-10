@@ -1,0 +1,147 @@
+{
+  "table": "p3_validation_result",
+  "grain": "one row per (source PDF, section, entity, rule)",
+  "primary_key": [
+    "source_sha256",
+    "section_id",
+    "entity_id",
+    "rule_id"
+  ],
+  "layer": "05_data/validation",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": "RUN-<phase>-<YYYYMMDD_HHMM>-<config hash>, see USAGE_GUIDELINES.md SS10"
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": "SHA-256 of source PDF bytes; the file's identity"
+    },
+    {
+      "name": "source_file",
+      "type": "string",
+      "nullable": false,
+      "description": "relative path of the source PDF under the read-only corpus root"
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": "parsed bulletin date; null if undetermined (never inferred silently)"
+    },
+    {
+      "name": "parser_version",
+      "type": "string",
+      "nullable": false,
+      "description": "extractor/script version string"
+    },
+    {
+      "name": "config_hash",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of the exact parameters this run used"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": "row creation timestamp, UTC ISO-8601"
+    },
+    {
+      "name": "section_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "entity_type",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "entity_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "rule_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "eligibility_status",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: eligible|not_eligible"
+    },
+    {
+      "name": "observed_value",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "comparison_value",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "difference",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "tolerance",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: pass|fail|not_evaluated"
+    },
+    {
+      "name": "severity",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: info|warn|error"
+    },
+    {
+      "name": "evidence_json",
+      "type": "json",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "eligibility_status": [
+      "eligible",
+      "not_eligible"
+    ],
+    "status": [
+      "pass",
+      "fail",
+      "not_evaluated",
+      "warn"
+    ],
+    "severity": [
+      "info",
+      "warn",
+      "error"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.2.0",
+  "migration_note": "1.1.0 (Phase 3): status extended with warn. A rule that ran and found a tolerable discrepancy (a rounding-scale sum difference, a fill above 100%) is neither a pass nor a failure, and not_evaluated would hide that the rule ran at all."
+}

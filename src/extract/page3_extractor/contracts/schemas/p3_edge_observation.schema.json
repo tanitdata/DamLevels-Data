@@ -1,0 +1,74 @@
+{
+  "table": "p3_edge_observation",
+  "grain": "one row per (edge, bulletin_date) observation",
+  "primary_key": [
+    "obs_id"
+  ],
+  "layer": "05_data/connectivity",
+  "columns": [
+    {
+      "name": "obs_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "edge_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "value_day",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "value_prev_season_cum",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "value_curr_season_cum",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "semantic_state",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: numeric|blank|dash|hydraulic_text_state|row_absent"
+    },
+    {
+      "name": "cell_evidence_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "semantic_state": [
+      "numeric",
+      "blank",
+      "dash",
+      "hydraulic_text_state",
+      "row_absent",
+      "upstream_error",
+      "text",
+      "suspected_text_state",
+      "unparseable_numeric_candidate"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.2.0",
+  "migration_note": "1.1.0 (Phase 3): semantic_state extended to the full nine-value set so a dated edge observation can carry the same states as the cell it came from. The inherited value 'numeric' is retained unchanged and is the name used throughout, so evidence and publication tables share one vocabulary."
+}

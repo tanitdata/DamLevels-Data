@@ -1,0 +1,4 @@
+dam_id,valid_from,valid_to,status,storage_observation_count,reason
+brek,2020-09-24,2020-12-06,UNAVAILABLE,74,No unique evidence-backed capacity regime applies; no forward fill performed.
+lakhmess,2020-06-10,2020-08-30,UNAVAILABLE,75,No unique evidence-backed capacity regime applies; no forward fill performed.
+mellegue,2015-06-18,2015-06-18,UNAVAILABLE,0,No unique evidence-backed capacity regime applies; no forward fill performed.

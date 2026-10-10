@@ -1,0 +1,25 @@
+check_id,component,subject,check,result,evidence,notes
+E1-QA-001,Dam identity,dam_id,Unique governed IDs,PASS,data/dams.csv,36 rows
+E1-QA-002,Dam coordinates,latitude/longitude,Numeric WGS84 ranges,PASS,data/dams.csv,Derived from accepted controls; metadata reprojection only.
+E1-QA-003,Capacity,dated regimes,Evidence-backed stable observed blocks,PASS_WITH_EXPLICIT_GAPS,data/capacity_history.csv,Short/alternating episodes remain visible in notes.
+E1-QA-004,Bulletin manifest,full path registry,Row and SHA-256 format coverage,PASS,sources/manifest.csv,31843 rows; 31843 local paths present.
+E1-QA-005,Sample PDFs,redistribution gate,No PDF bytes copied,PASS,sources/samples/SAMPLE_SELECTION.csv,Redistribution unresolved.
+E1-QA-006,Frozen authority,V010,Before/after file hashes identical,PASS,<FROZEN_BASELINES>/V010_20260924_1620,9 files checked.
+E1-QA-007,Data-light scope,production data,No database/Parquet/raster copied,PASS,repository tree,Found 0 prohibited production artifacts.
+E1-QA-008,License,publication gate,README and licenses remain draft/private,PASS,README.md;LICENSE;LICENSE-DATA,No public-clearance claim.
+E2-QA-001,Bulletin manifest,logical versus physical inventory,Canonical manifest separated from byte-preserved E1 file manifest,PASS,sources/manifest.csv;sources/file_manifest.csv,3985 logical dates; 31843 physical path rows.
+E2-QA-002,Storage,required tidy fields,All emitted rows retain governed dam/date/value/unit/source/page/flag,PASS,data/storage.csv,214010 observations; no interpolation.
+E2-QA-003,Storage lineage,source-cell links,Every emitted storage/fill row has a unique lineage link,PASS,provenance/storage_lineage.csv,214010 emitted rows linked; one additional nonnumeric source-state lineage retained.
+E2-QA-004,Transfers,Page 3 authority,Every row remains probable and edge/accounting semantics remain distinct,PASS,data/transfers.csv,47556 selected canonical facts.
+E2-QA-005,Representation,CSV and Parquet,Row counts and ordered primary identifiers agree,PASS,data/parquet/,Storage and transfer representations agree.
+E2-QA-006,Capacity,date lookup,Known ambiguous and unavailable states supported without filling,PASS,src/validate/capacity.py;provenance/CAPACITY_UNKNOWN_PERIODS.csv,Three explicit unavailable intervals.
+E2-QA-007,Frozen authority,V010,Review ZIP hash unchanged,PASS,<FROZEN_BASELINES>/V010_20260924_1620,No frozen file modified.
+E2-QA-008,Scope,scientific processing,No extractor scientific pipeline E3 KPI or model ran,PASS,provenance/E2_BUILD_SUMMARY.json,Engineering projection and packaging only.
+E3-QA-001,Storage packaging,primary storage contract,Storage-only CSV/Parquet plus separate printed-fill reference,PASS,data/storage.csv;qa/printed_fill_reference.csv,129390 storage rows and 84620 printed-fill rows; accepted values preserved.
+E3-QA-002,Pydantic contracts,current public tables,Dam capacity bulletin storage and transfer rows validate,PASS,src/validate/models.py,Pydantic 2.12.5 tested.
+E3-QA-003,Professor QA,C uniqueness,Duplicate governed dam/date storage keys,PASS,qa/uniqueness.csv,129390 unique keys; zero duplicates.
+E3-QA-004,Professor QA,D-E capacity and fill,Date-aware capacity and precision-derived printed-fill checks,REVIEW_REQUIRED,qa/physical_validity.csv;qa/fill_consistency.csv,Findings remain unchanged and traceable; exclusions are not failures.
+E3-QA-005,Professor QA,F national total,Accepted Page1 printed grand-total reconciliation,REVIEW_REQUIRED,qa/national_reconciliation.csv,3965 pass; 6 discrepancies; 14 excluded.
+E3-QA-006,Professor QA,G transfer balance,Strict direct-comparison eligibility,NOT_NUMERICALLY_ELIGIBLE,qa/transfer_balance.csv,No compatible independent counterpart/date semantics; no ineligible row counted as failure.
+E3-QA-007,Frozen authority,V010,Review ZIP hash unchanged,PASS,<FROZEN_BASELINES>/V010_20260924_1620,No frozen file modified.
+E3-QA-008,Scope,scientific processing,No extractor watershed climate feature integration model GIS sampling or satellite pipeline ran,PASS,qa/E3_VALIDATION_REPORT.md,Engineering QA only.

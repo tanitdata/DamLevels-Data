@@ -1,0 +1,22 @@
+{
+  "source": "BARRAGES-16-7-2025.pdf",
+  "sha256": "23b866633e0b7001640e5cfd1811b00b03935ccd0a04760572c010642e792bbd",
+  "inspected_pages": [
+    1,
+    3
+  ],
+  "method": "PDF text extraction followed by rendered-page visual inspection",
+  "page1": {
+    "north_withdrawal": 2.905,
+    "national_withdrawal": 2.995,
+    "national_inflow": 0.108,
+    "national_stock": 849.24
+  },
+  "page3": {
+    "north_withdrawal": 2.027,
+    "national_withdrawal": 2.117,
+    "national_inflow": 0.11,
+    "national_stock": 849.24
+  },
+  "other_pdf_dates_independently_inspected_in_this_task": []
+}

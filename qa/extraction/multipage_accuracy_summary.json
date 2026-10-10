@@ -1,0 +1,145 @@
+{
+  "generated_utc": "2026-09-26T17:50:37.045644+00:00",
+  "engineering_run": "E6A.2",
+  "accepted_baseline_commit": "977ed9ca1e59640daaa4ceb6263d703a57e0436b",
+  "sample_seed": 20260926,
+  "target_accuracy": 0.995,
+  "confidence": 0.95,
+  "minimum_zero_error_sample_size": 765,
+  "primary_sample_size_target_per_numeric_family": 800,
+  "pooled_multipage_accuracy_reported": false,
+  "production_extractor_rerun": false,
+  "scientific_values_changed": false,
+  "page3_authority": "PROBABLE",
+  "numeric_families": {
+    "A1_PAGE1_EXTRACTION": {
+      "primary_sample_pdfs": 800,
+      "eligible": 800,
+      "matches": 800,
+      "errors": 0,
+      "unverifiable": 0,
+      "estimated_accuracy": 1.0,
+      "wilson_confidence": 0.95,
+      "wilson_lower": 0.995221123794324,
+      "wilson_upper": 1.0,
+      "target_accuracy": 0.995,
+      "required_zero_error_sample_size": 765,
+      "target_decision": "YES",
+      "primary_sampling_unit": "UNIQUE_SOURCE_PDF",
+      "one_primary_cell_per_pdf": true,
+      "proportional_stratification": true,
+      "population_by_stratum": {
+        "P1_LAYOUT_16_WITH_FILL": 2405,
+        "P1_LAYOUT_15_NO_FILL": 1576
+      },
+      "sample_by_stratum": {
+        "P1_LAYOUT_16_WITH_FILL": 483,
+        "P1_LAYOUT_15_NO_FILL": 317
+      },
+      "field_family_counts": {
+        "STORAGE": 800
+      },
+      "verification_method_counts": {
+        "COMPUTER_ASSISTED_SOURCE_REREAD": 800
+      },
+      "human_visual_verification": "NOT_PERFORMED_BY_A_HUMAN_IN_E6A2"
+    },
+    "A2_PAGE2_EXTRACTION": {
+      "primary_sample_pdfs": 800,
+      "eligible": 800,
+      "matches": 800,
+      "errors": 0,
+      "unverifiable": 0,
+      "estimated_accuracy": 1.0,
+      "wilson_confidence": 0.95,
+      "wilson_lower": 0.995221123794324,
+      "wilson_upper": 1.0,
+      "target_accuracy": 0.995,
+      "required_zero_error_sample_size": 765,
+      "target_decision": "YES",
+      "primary_sampling_unit": "UNIQUE_SOURCE_PDF",
+      "one_primary_cell_per_pdf": true,
+      "proportional_stratification": true,
+      "population_by_stratum": {
+        "PRE_CUTOFF_MONTH_TO_DATE_INFLOW": 3453,
+        "POST_CUTOFF_INTERVAL_EVAPORATION": 530
+      },
+      "sample_by_stratum": {
+        "PRE_CUTOFF_MONTH_TO_DATE_INFLOW": 694,
+        "POST_CUTOFF_INTERVAL_EVAPORATION": 106
+      },
+      "field_family_counts": {
+        "STORAGE_STATE": 141,
+        "PREVIOUS_YEAR_INFLOW": 122,
+        "CAPACITY_REGIME": 127,
+        "PREVIOUS_YEAR_OUTFLOW": 104,
+        "INFLOW_MONTH_TO_DATE": 105,
+        "DAILY_INFLOW": 77,
+        "DAILY_OUTFLOW": 88,
+        "RAINFALL": 28,
+        "EVAPORATION": 8
+      },
+      "verification_method_counts": {
+        "COMPUTER_ASSISTED_SOURCE_REREAD": 800
+      },
+      "human_visual_verification": "NOT_PERFORMED_BY_A_HUMAN_IN_E6A2"
+    },
+    "A3_PAGE3_TRANSCRIPTION": {
+      "primary_sample_pdfs": 800,
+      "eligible": 792,
+      "matches": 792,
+      "errors": 0,
+      "unverifiable": 8,
+      "estimated_accuracy": 1.0,
+      "wilson_confidence": 0.95,
+      "wilson_lower": 0.995173085319799,
+      "wilson_upper": 0.9999999999999999,
+      "target_accuracy": 0.995,
+      "required_zero_error_sample_size": 765,
+      "target_decision": "YES",
+      "primary_sampling_unit": "UNIQUE_SOURCE_PDF",
+      "one_primary_cell_per_pdf": true,
+      "proportional_stratification": true,
+      "population_by_stratum": {
+        "R1_c0_control_substitution|P3_PORTRAIT_STANDARD": 2619,
+        "R3_standard_letters_lamalef_reversed|P3_PORTRAIT_STANDARD": 989,
+        "R2_presentation_forms|P3_PORTRAIT_STANDARD": 343,
+        "R1_c0_control_substitution|P3_ROTATED": 12
+      },
+      "sample_by_stratum": {
+        "R1_c0_control_substitution|P3_PORTRAIT_STANDARD": 529,
+        "R3_standard_letters_lamalef_reversed|P3_PORTRAIT_STANDARD": 200,
+        "R2_presentation_forms|P3_PORTRAIT_STANDARD": 69,
+        "R1_c0_control_substitution|P3_ROTATED": 2
+      },
+      "field_family_counts": {
+        "T5_TODAY": 161,
+        "T6_CURRENT_SEASON_TO_DATE": 45,
+        "T4_TODAY": 189,
+        "T5_CURRENT_SEASON_TO_DATE": 163,
+        "T3_TODAY": 184,
+        "T6_TODAY": 58
+      },
+      "verification_method_counts": {
+        "COMPUTER_ASSISTED_SOURCE_REREAD": 800
+      },
+      "human_visual_verification": "NOT_PERFORMED_BY_A_HUMAN_IN_E6A2"
+    }
+  },
+  "page3_semantic_mapping": {
+    "sample_rows": 160,
+    "dispositions": {
+      "PRINTED_LABEL_MATCH_STABLE_ID_UNRESOLVED": 76,
+      "ACCOUNTING_NOT_HYDRAULIC_EDGE": 39,
+      "DATE_SEMANTICS_UNRESOLVED": 45
+    },
+    "combined_with_transcription_accuracy": false
+  },
+  "challenge_set": {
+    "rows": 28,
+    "included_in_primary_denominator": false
+  },
+  "correction_candidates": 0,
+  "verification_method": "COMPUTER_ASSISTED_SOURCE_REREAD_USING_PRESERVED_BBOX_LOCALIZATION",
+  "human_manual_audit_claimed": false
+}

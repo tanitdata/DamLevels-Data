@@ -1,0 +1,83 @@
+{
+  "generated_utc": "2026-10-10T20:11:54+00:00",
+  "python": "3.14.3",
+  "pandas": "2.3.3",
+  "numpy": "2.4.4",
+  "inputs": {
+    "storage": {
+      "path": "data\\parquet\\storage.parquet",
+      "sha256": "8e0a3fab2c3d49822c7b112b166dfe3e12a499b39c831ede94b7655f5079d376"
+    },
+    "transfers": {
+      "path": "data\\parquet\\transfers.parquet",
+      "sha256": "e1b0f2cc36240cfe0583222eba19d1216f82ea6d86c8122c78ca2f8a96307d30"
+    },
+    "dams": {
+      "path": "data\\dams.csv",
+      "sha256": "04d2d87d6a1195f7e937c7959918040176de0633829297ee1cecbf14e894b97e"
+    },
+    "capacity": {
+      "path": "data\\capacity_history.csv",
+      "sha256": "992f3b6dcb83450740987860d304060c9e8c2ed04a818d76b943049a903929f1"
+    },
+    "manifest": {
+      "path": "sources\\manifest.csv",
+      "sha256": "64ec550417ce440a2fffcf58412bc2eaefd988a507f4ca8c86990a1d69782071"
+    },
+    "national": {
+      "path": "provenance\\page1_national_totals.csv",
+      "sha256": "68e8242a4e022c0351673f793dd3679003919cc23af9796eefc70865e71e5966"
+    },
+    "dispositions": {
+      "path": "provenance\\national_reconciliation_dispositions.csv",
+      "sha256": "71456c07fd3b80e922f16fdf6f86e16376a972d420484d2e83bf4705006492c1"
+    },
+    "missingness": {
+      "path": "provenance\\storage_missingness.csv",
+      "sha256": "5c62a81eb8529e692a146f6062728b0b34aa80e7becddfc9b875524f5db9572c"
+    },
+    "lineage": {
+      "path": "provenance\\storage_lineage.csv",
+      "sha256": "7e4ad903d84cbca498b9a95bf4f38db11ef36d31fab40601619e8170b24b7097"
+    },
+    "printed_fill": {
+      "path": "qa\\printed_fill_reference.parquet",
+      "sha256": "4f051066913969a16b88ea73a46d31056c2060662f50ff8f685fa36710f2aa53"
+    },
+    "datapackage": {
+      "path": "datapackage.json",
+      "sha256": "2ddcc68926eb7374be3f263426f5e268aa71d089a8257528858593da53164d7c"
+    },
+    "page1": {
+      "path": "qa\\kpi\\inputs\\page1.parquet",
+      "sha256": "df039f5f586fc25ef1a23b1dfa1c6a0a8856da6cad5617784e5b044147950c9d"
+    },
+    "page2": {
+      "path": "qa\\kpi\\inputs\\page2.parquet",
+      "sha256": "334de0837b9a8d8141c8f57bdf5fa8ea0809aded79398ccd3e87f970e1166776"
+    },
+    "p3_accounting": {
+      "path": "qa\\kpi\\inputs\\P3_DAILY_CUMULATIVE.csv",
+      "sha256": "7353575316cfad844459662ff9e58a163ea0cf2fa93e8712f8e8170da1e855eb"
+    },
+    "qa_master": {
+      "path": "qa\\kpi\\inputs\\QA_MASTER_SUMMARY.csv",
+      "sha256": "95928a720a2b873835cb993b764dc597be573eee7b1019b77109c64e8a788f14"
+    },
+    "qa_summary": {
+      "path": "qa\\qa_summary.json",
+      "sha256": "9ed6b9005db37c61a6432839fbae1ac66b6ba4a1d30c976aed66fb40b1577de1"
+    },
+    "temporal_summary": {
+      "path": "qa\\kpi\\inputs\\TEMPORAL_PLAUSIBILITY_SUMMARY__temporal_plausibility_summary.json",
+      "sha256": "d50dc999ca2f284ab05420a5bf388517d54eaea17ba62303a3c7db6ddbe65ff6"
+    },
+    "catalogue": {
+      "path": "qa\\kpi\\ontology_ref\\VARIABLE_CATALOGUE.csv",
+      "sha256": "6522418e68c8d54ddff3254dcc0229ab6f75c301de73c62aa1c2b483dd0e420b"
+    }
+  },
+  "inputs_modified": false,
+  "writes_only_to": "qa\\kpi\\results",
+  "kpis": 28
+}

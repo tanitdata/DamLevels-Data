@@ -1,0 +1,145 @@
+{
+  "name": "storage",
+  "path": "data/storage.csv",
+  "schema": {
+    "primaryKey": "observation_id",
+    "foreignKeys": [
+      {
+        "fields": "dam_id",
+        "reference": {
+          "resource": "dams",
+          "fields": "dam_id"
+        }
+      }
+    ],
+    "fields": [
+      {
+        "name": "observation_id",
+        "type": "string",
+        "description": "Stable source-derived observation identifier.",
+        "constraints": {
+          "required": true
+        }
+      },
+      {
+        "name": "dam_id",
+        "type": "string",
+        "description": "Stable governed dam identifier.",
+        "constraints": {
+          "required": true
+        }
+      },
+      {
+        "name": "date",
+        "type": "date",
+        "description": "Bulletin date D. DLO 0.3 rule STATE_AT_BULLETIN_DATE: the storage holds at the instant D.",
+        "constraints": {
+          "required": true,
+          "minimum": "2014-07-02",
+          "maximum": "2025-10-10"
+        },
+        "rdfType": "http://www.w3.org/ns/sosa/phenomenonTime"
+      },
+      {
+        "name": "variable",
+        "type": "string",
+        "description": "Constant primary quantity: storage.",
+        "constraints": {
+          "required": true,
+          "enum": [
+            "storage"
+          ]
+        }
+      },
+      {
+        "name": "value",
+        "type": "number",
+        "description": "Observed numeric value; never interpolated.",
+        "constraints": {
+          "required": true,
+          "minimum": 0
+        },
+        "rdfType": "https://w3id.org/damlevels/variable/StoredWaterVolume"
+      },
+      {
+        "name": "unit",
+        "type": "string",
+        "description": "Constant Mm3 (million cubic metres).",
+        "constraints": {
+          "required": true,
+          "enum": [
+            "Mm3"
+          ]
+        }
+      },
+      {
+        "name": "source_file",
+        "type": "string",
+        "description": "Source PDF filename.",
+        "constraints": {
+          "required": true
+        }
+      },
+      {
+        "name": "source_sha256",
+        "type": "string",
+        "description": "Source PDF SHA-256.",
+        "constraints": {
+          "required": true,
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "description": "Physical/logical source page."
+      },
+      {
+        "name": "source_field",
+        "type": "string",
+        "description": "Accepted extractor source field.",
+        "constraints": {
+          "required": true,
+          "enum": [
+            "p1_stock_today_mm3"
+          ]
+        }
+      },
+      {
+        "name": "authority_release",
+        "type": "string",
+        "description": "Use-specific extraction authority."
+      },
+      {
+        "name": "engine_version",
+        "type": "string",
+        "description": "Extractor engine version."
+      },
+      {
+        "name": "source_row_key",
+        "type": "string",
+        "description": "Accepted extraction row key."
+      },
+      {
+        "name": "lineage_id",
+        "type": "string",
+        "description": "Linked cell-lineage identifier(s).",
+        "constraints": {
+          "required": true
+        }
+      },
+      {
+        "name": "flag",
+        "type": "string",
+        "description": "Pipe-separated row-level authority/QC flags."
+      }
+    ],
+    "uniqueKeys": [
+      [
+        "dam_id",
+        "date"
+      ]
+    ]
+  },
+  "x-note": "Proposed v2 contract. Adds required fields, value >= 0, unit enum, SHA-256 pattern, date range, the (dam_id, date) unique key (Table Schema v2 uniqueKeys) and DLO rdfType links. Not applied to the repository; used by run_kpis.py K03."
+}

@@ -1,0 +1,130 @@
+{
+  "table": "p3_layout_fingerprint",
+  "grain": "one row per (source PDF, page_index)",
+  "primary_key": [
+    "source_sha256",
+    "page_index"
+  ],
+  "layer": "05_data/bronze",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": "RUN-<phase>-<YYYYMMDD_HHMM>-<config hash>, see USAGE_GUIDELINES.md SS10"
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": "SHA-256 of source PDF bytes; the file's identity"
+    },
+    {
+      "name": "source_file",
+      "type": "string",
+      "nullable": false,
+      "description": "relative path of the source PDF under the read-only corpus root"
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": "parsed bulletin date; null if undetermined (never inferred silently)"
+    },
+    {
+      "name": "parser_version",
+      "type": "string",
+      "nullable": false,
+      "description": "extractor/script version string"
+    },
+    {
+      "name": "config_hash",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of the exact parameters this run used"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": "row creation timestamp, UTC ISO-8601"
+    },
+    {
+      "name": "page_index",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "exact_fingerprint",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of exact geometry"
+    },
+    {
+      "name": "approx_fingerprint",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of tolerant/rounded geometry"
+    },
+    {
+      "name": "cluster_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "outlier_score",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "table_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "table_shapes_json",
+      "type": "json",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "normalized_bboxes_json",
+      "type": "json",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "adjacency_graph_json",
+      "type": "json",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "anchor_bitmask",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "text_health_class",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: R1_c0_control_substitution|R2_presentation_forms|R3_reversed_lam_alef"
+    }
+  ],
+  "enums": {
+    "text_health_class": [
+      "R1_c0_control_substitution",
+      "R2_presentation_forms",
+      "R3_reversed_lam_alef",
+      "R0_no_arabic_detected"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.2.0",
+  "migration_note": "1.1.0 (Phase 3): text_health_class extended with R0_no_arabic_detected for pages whose text layer contains no Arabic at all - distinct from all three damage regimes."
+}

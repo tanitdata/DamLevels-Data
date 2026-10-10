@@ -1,0 +1,8 @@
+check,passed
+october_four_dates,True
+october_missing_contributors_close_difference,True
+october_residual_at_most_0_001,True
+july_p1_and_p2_36_repeated_on_both_dates,True
+three_atlas_comparison_rows_reproduced,True
+calendar_offsets_have_identical_sample_counts,True
+same_date_mae_smallest_for_all_three_national_p2_pairs,True

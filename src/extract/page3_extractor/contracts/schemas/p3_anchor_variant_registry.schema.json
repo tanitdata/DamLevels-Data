@@ -1,0 +1,62 @@
+{
+  "table": "p3_anchor_variant_registry",
+  "grain": "one accepted normalized spelling per (anchor definition, variant)",
+  "primary_key": [
+    "anchor_id",
+    "normalized_text"
+  ],
+  "layer": "02_page_context",
+  "columns": [
+    {
+      "name": "registry_version",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "anchor_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "section_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "normalized_text",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "match_method",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "observed_count",
+      "type": "int",
+      "nullable": false,
+      "description": "number of source files this variant was accepted on"
+    },
+    {
+      "name": "first_seen_source_sha256",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "evidence",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {},
+  "derived_from": null,
+  "schema_version": "1.2.0"
+}

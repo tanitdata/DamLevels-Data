@@ -1,0 +1,108 @@
+{
+  "table": "p3_mismatch_history",
+  "grain": "one stable mismatch fingerprint across extractor versions, rule versions, and reference snapshots",
+  "primary_key": [
+    "mismatch_fingerprint"
+  ],
+  "layer": "06_audit/run_manifests",
+  "columns": [
+    {
+      "name": "mismatch_fingerprint",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "comparison_rule_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "entity_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "p3_field_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "reference_field_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "first_seen_snapshot_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "last_seen_snapshot_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "first_seen_extractor_version",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "last_seen_extractor_version",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "current_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "resolved_by",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "resolution_category",
+      "type": "string",
+      "nullable": true,
+      "description": "enum: REFERENCE_SNAPSHOT_CHANGED|P3_EXTRACTOR_CHANGED|SEMANTIC_RULE_CHANGED|TEMPORAL_RULE_CHANGED|ROSTER_OR_CAPACITY_RULE_CHANGED|MANUAL_SOURCE_ADJUDICATION|ROUNDING_RULE_CHANGED|STILL_UNRESOLVED"
+    },
+    {
+      "name": "resolution_evidence_path",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "resolution_category": [
+      "REFERENCE_SNAPSHOT_CHANGED",
+      "P3_EXTRACTOR_CHANGED",
+      "SEMANTIC_RULE_CHANGED",
+      "TEMPORAL_RULE_CHANGED",
+      "ROSTER_OR_CAPACITY_RULE_CHANGED",
+      "MANUAL_SOURCE_ADJUDICATION",
+      "ROUNDING_RULE_CHANGED",
+      "STILL_UNRESOLVED"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

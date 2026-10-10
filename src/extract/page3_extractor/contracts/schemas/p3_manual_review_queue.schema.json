@@ -1,0 +1,141 @@
+{
+  "table": "p3_manual_review_queue",
+  "grain": "one row per (source PDF, review item)",
+  "primary_key": [
+    "source_sha256",
+    "page_index",
+    "section_id",
+    "entity_id"
+  ],
+  "layer": "05_data/review_queues",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": "RUN-<phase>-<YYYYMMDD_HHMM>-<config hash>, see USAGE_GUIDELINES.md SS10"
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": "SHA-256 of source PDF bytes; the file's identity"
+    },
+    {
+      "name": "source_file",
+      "type": "string",
+      "nullable": false,
+      "description": "relative path of the source PDF under the read-only corpus root"
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": "parsed bulletin date; null if undetermined (never inferred silently)"
+    },
+    {
+      "name": "parser_version",
+      "type": "string",
+      "nullable": false,
+      "description": "extractor/script version string"
+    },
+    {
+      "name": "config_hash",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of the exact parameters this run used"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": "row creation timestamp, UTC ISO-8601"
+    },
+    {
+      "name": "page_index",
+      "type": "int",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "section_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "entity_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "review_reason",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "priority",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: low|medium|high"
+    },
+    {
+      "name": "failure_codes_json",
+      "type": "json",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "validation_statuses_json",
+      "type": "json",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "annotated_page_path",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "crop_paths_json",
+      "type": "json",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "review_status",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: open|in_review|resolved"
+    },
+    {
+      "name": "reviewer",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "resolution",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "priority": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "review_status": [
+      "open",
+      "in_review",
+      "resolved"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

@@ -1,0 +1,45 @@
+# Copy to config/paths.local.toml (not tracked) and fill in local locations.
+# Any key can also be set as an environment variable DAMLEVELS_<KEY>.
+# Only the keys needed by the step you run are required.
+#
+# Token in published provenance -> what the location holds
+#   <BULLETIN_CORPUS>       DGBGTH bulletin PDFs split by page: raw_data/1, raw_data/2, raw_data/3
+#   <FULL_RECONSTRUCTION>   frozen reconstruction (extraction outputs, Page 3 canonical base, clean release)
+#   <V010_REVIEW_PACKAGE>   V010 review package (alias registers, Page 3 roster registry, catalogues)
+#   <FROZEN_BASELINES>      frozen baselines, incl. the V010 review ZIP
+#   <PFE_READY>             original Page 1+2 delivery DAM_DATA_PIPELINE_20260831
+#   <PFE_WORK>              earlier production workspaces (combined_run5, Page 3 runs)
+#   <TASK21>                watershed rasters (MERIT Hydro, FABDEM, JRC GSW)
+
+[paths]
+# Bulletin PDFs (E6A / E6A.2 source rereads)
+bulletin_page1_dir = "<BULLETIN_CORPUS>/raw_data/1"
+bulletin_page2_dir = "<BULLETIN_CORPUS>/raw_data/2"
+bulletin_page3_dir = "<BULLETIN_CORPUS>/raw_data/3"
+
+# E2 builder (src/build_e2.py)
+review_package_dir = "<V010_REVIEW_PACKAGE>"
+full_reconstruction_dir = "<FULL_RECONSTRUCTION>"
+v010_baseline_dir = "<FROZEN_BASELINES>/V010_20260924_1620"
+page1_value_lineage = "<PFE_READY>/DAM_DATA_PIPELINE_20260831/outputs/runs/RUN_20260831_FULL_01/page1/value_lineage.csv.gz"
+
+# E3 builder (src/build_e3.py); SHA-256 is checked
+page1_checksum_validation = "<FULL_RECONSTRUCTION>/data/extraction/page1/checksum_validation.csv.gz"
+page1_checksum_source = "<FULL_RECONSTRUCTION>/data/extraction/page1/checksum_source.csv.gz"
+
+# E6A.2 audit (src/build_e6a2.py, run by src/build.py)
+page1_observations = "<FULL_RECONSTRUCTION>/data/extraction/page1/observations.csv.gz"
+page2_value_lineage_run5 = "<PFE_WORK>/extraction/production_v2/output/combined_run5_20260813/page2/value_lineage.csv.gz"
+page3_canonical_facts = "<FULL_RECONSTRUCTION>/data/page3/canonical_base/PAGE3_CANONICAL_FACTS_LONG.parquet"
+page3_clean_daily_summary = "<FULL_RECONSTRUCTION>/data/page3/clean_release/CLEAN_PAGE3_DAILY_SUMMARY.csv"
+page3_cell_evidence = "<PFE_WORK>/extraction/page3/05_data/runs/RUN-P3-FULL-20260809_122800_phase6c_r1_recovery_final/03_extracted_facts/p3_cell_evidence.csv"
+
+# Contract validation (src/validate/contracts.py). Optional: when unset, the
+# frozen-baseline check is reported as skipped instead of failing.
+v010_review_zip = "<FROZEN_BASELINES>/V010_20260924_1620/dam_open_data_project_review_V010.zip"
+
+# GIS raster registry (src/gis/build_publication_gis.py)
+merit_hydro_dir = "<TASK21>/data/merit_hydro_v101/dir"
+merit_hydro_upa = "<TASK21>/data/merit_hydro_v101/upa"
+fabdem_tiles = "<TASK21>/data/fabdem_v12/tiles"
+jrc_gsw_occurrence = "<TASK21>/data/jrc_gsw_v1_4_2021/occurrence"

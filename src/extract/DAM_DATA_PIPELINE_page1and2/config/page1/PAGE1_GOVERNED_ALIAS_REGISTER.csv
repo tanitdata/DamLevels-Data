@@ -1,0 +1,37 @@
+﻿raw_name,raw_name_key,canonical_name,canonical_dam_id,mapping_method,review_status,evidence_source,mapping_version,collision_status
+ABID,ABID,Abid,abid,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+BARBARA,BARBARA,Barbara,barbara,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+BEN METIR,BENMETIR,Ben Metir,benmetir,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+BEZIRK,BEZIRK,Bezirk,bezirk,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+BIR M'CHERGA,BIRMCHERGA,Bir M'Cherga,birmcherga,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+BOU-HEURTMA,BOUHEURTMA,Bou Heurtma,bouheurtma,exact_normalized,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+CHIBA,CHIBA,Chiba,chiba,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+EL BREK,ELBREK,Brek,brek,approved_alias,approved_alias,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+EL HAOUAREB,ELHAOUAREB,El Houareb,elhouareb,approved_alias,approved_alias,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+GAMGOUM,GAMGOUM,Gamgoum,gamgoum,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+GHEZALA,GHEZALA,Ghezala,ghezala,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+HARKA,HARKA,Harka,harka,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+HMA,HMA,Hma,hma,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+JOUMINE,JOUMINE,Joumine,joumine,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+KASSEB,KASSEB,Kasseb,kasseb,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+KEBIR,KEBIR,Kebir,kebir,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+LAKHMESS,LAKHMESS,Lakhmess,lakhmess,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+LEBNA,LEBNA,Lebna,lebna,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+MASRI,MASRI,Masri,masri,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+MELAH,MELAH,Melah,melah,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+MELLEGUE,MELLEGUE,Mellegue,mellegue,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+MOULA,MOULA,Moula,moula,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+NEBHANA,NEBHANA,Nebhana,nebhana,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+RMEL,RMEL,Rmel,rmel,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+RMIL,RMIL,Rmil,rmil,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+SARRAT,SARRAT,Sarrat,sarrat,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+SEJNANE,SEJNANE,Sejnane,sejnane,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+S. EL BARRAK,SELBARRAK,Sidi El Barrak,sidielbarrak,approved_alias,approved_alias,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+SFICIFA,SFICIFA,Sficifa,sficifa,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+SIDI AICH,SIDIAICH,Sidi Aich,sidiaich,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+SIDI SAAD,SIDISAAD,Sidi Saad,sidisaad,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+SIDI SALEM,SIDISALEM,Sidi Salem,sidisalem,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+SILIANA,SILIANA,Siliana,siliana,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+TINE,TINE,Tine,tine,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+ZARGA,ZARGA,Zarga,zarga,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE
+ZIATINE,ZIATINE,Ziatine,ziatine,exact_name,approved_auto_exact,T1.1 raw tables + preserved T1.2 mapping + official 36-name registry,m1_t1_2_v1,UNIQUE

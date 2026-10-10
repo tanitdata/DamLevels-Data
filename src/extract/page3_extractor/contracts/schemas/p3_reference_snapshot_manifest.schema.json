@@ -1,0 +1,135 @@
+{
+  "table": "p3_reference_snapshot_manifest",
+  "grain": "one row per frozen reference snapshot",
+  "primary_key": [
+    "reference_snapshot_id"
+  ],
+  "layer": "02_inputs/reference_data/snapshots",
+  "columns": [
+    {
+      "name": "reference_snapshot_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "dataset_name",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "source_path",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "frozen_path",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "sha256",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "size_bytes",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "row_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "column_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "key_columns",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "key_duplicate_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "date_min",
+      "type": "date",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "date_max",
+      "type": "date",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "schema_hash",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "reference_audit_state",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: PROVISIONAL|PARTIALLY_AUDITED|AUDITED|REJECTED|UNKNOWN"
+    },
+    {
+      "name": "approved_for_comparison",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "approval_evidence_path",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "supplied_at",
+      "type": "datetime",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "notes",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "reference_audit_state": [
+      "PROVISIONAL",
+      "PARTIALLY_AUDITED",
+      "AUDITED",
+      "REJECTED",
+      "UNKNOWN"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

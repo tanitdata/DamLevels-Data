@@ -1,0 +1,139 @@
+{
+  "table": "p3_mismatch_triage",
+  "grain": "one mismatch attribution decision or unresolved triage event",
+  "primary_key": [
+    "triage_id"
+  ],
+  "layer": "05_data/review_queues",
+  "columns": [
+    {
+      "name": "triage_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "comparison_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "p3_extraction_issue_candidate",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "reference_data_issue_candidate",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "reference_internal_conflict_candidate",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "genuine_source_disagreement_candidate",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "semantic_misalignment_candidate",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "temporal_misalignment_candidate",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "roster_or_capacity_candidate",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "rounding_only_candidate",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "multiple_causes_candidate",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "assigned_attribution",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "attribution_confidence",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "evidence_supporting",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "evidence_against",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "evidence_still_required",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "review_status",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: open|in_review|resolved"
+    },
+    {
+      "name": "reviewer",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "reviewed_at",
+      "type": "datetime",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "resolution_notes",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "review_status": [
+      "open",
+      "in_review",
+      "resolved"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

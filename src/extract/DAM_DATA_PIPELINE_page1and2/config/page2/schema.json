@@ -1,0 +1,14 @@
+{
+  "column23_cutoff": "2024-04-27",
+  "physical_column_count": 26,
+  "physical_column_18": "water_level_current_m",
+  "physical_column_19": "storage_current_total_corresponding_p2_mm3",
+  "physical_column_20": "storage_current_exploitable_mm3",
+  "physical_column_21": "outflow_reporting_interval_p2_mm3",
+  "physical_column_22": "inflow_reporting_interval_p2_mm3",
+  "physical_column_23_pre_cutoff": "inflow_month_to_date_p2_mm3",
+  "physical_column_23_post_cutoff": "evaporation_reporting_interval_mm3",
+  "physical_column_24": "rainfall_reporting_interval_mm",
+  "physical_column_25": "p2_rs_unresolved_prohibited",
+  "rs_policy": "UNRESOLVED_PROHIBITED"
+}

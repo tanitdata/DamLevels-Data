@@ -1,0 +1,128 @@
+{
+  "table": "p3_route_decision",
+  "grain": "one row per (source PDF, route decision)",
+  "primary_key": [
+    "source_sha256",
+    "route_id"
+  ],
+  "layer": "05_data/validation",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": "RUN-<phase>-<YYYYMMDD_HHMM>-<config hash>, see USAGE_GUIDELINES.md SS10"
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": "SHA-256 of source PDF bytes; the file's identity"
+    },
+    {
+      "name": "source_file",
+      "type": "string",
+      "nullable": false,
+      "description": "relative path of the source PDF under the read-only corpus root"
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": "parsed bulletin date; null if undetermined (never inferred silently)"
+    },
+    {
+      "name": "parser_version",
+      "type": "string",
+      "nullable": false,
+      "description": "extractor/script version string"
+    },
+    {
+      "name": "config_hash",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of the exact parameters this run used"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": "row creation timestamp, UTC ISO-8601"
+    },
+    {
+      "name": "page_index",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "route_id",
+      "type": "string",
+      "nullable": false,
+      "description": "e.g. RT-01..RT-07"
+    },
+    {
+      "name": "preflight_class",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "geometry_engine",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "numeric_engine",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "anchor_engine",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "label_engine",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "fallback_engines_json",
+      "type": "json",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "trigger_evidence_json",
+      "type": "json",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "decision_confidence",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "terminal_status",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: routed|review|quarantine"
+    }
+  ],
+  "enums": {
+    "terminal_status": [
+      "routed",
+      "review",
+      "quarantine"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

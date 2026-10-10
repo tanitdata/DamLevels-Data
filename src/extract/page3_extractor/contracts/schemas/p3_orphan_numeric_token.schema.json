@@ -1,0 +1,132 @@
+{
+  "table": "p3_orphan_numeric_token",
+  "grain": "one strict numeric token the page prints inside the cell of a numeric-position fact that published no number",
+  "primary_key": [
+    "source_sha256",
+    "evidence_id",
+    "token_origin",
+    "token_text"
+  ],
+  "layer": "04_validation",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "extractor_version",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "source_file_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "family_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "record_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "canonical_field_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "evidence_id",
+      "type": "string",
+      "nullable": false,
+      "description": "the cell of the fact that published no number"
+    },
+    {
+      "name": "semantic_state",
+      "type": "string",
+      "nullable": false,
+      "description": "the empty state the fact was published with"
+    },
+    {
+      "name": "layout_slot",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "orphan_class",
+      "type": "string",
+      "nullable": false,
+      "description": "UNCLAIMED_MEASUREMENT is an alarm; the EXCLUDED_* classes and CLAIMED_BY_ANOTHER_FACT are recorded decisions"
+    },
+    {
+      "name": "token_text",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "token_value",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "token_class",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "token_bbox",
+      "type": "string",
+      "nullable": false,
+      "description": "the token's own character-box union, in page coordinates"
+    },
+    {
+      "name": "token_span_text",
+      "type": "string",
+      "nullable": true,
+      "description": "the whole span the token was lifted out of"
+    },
+    {
+      "name": "token_origin",
+      "type": "string",
+      "nullable": false,
+      "description": "block/line/span index of the token in the page's span layer"
+    }
+  ],
+  "enums": {
+    "orphan_class": [
+      "UNCLAIMED_MEASUREMENT",
+      "EXCLUDED_PARENTHETICAL_LEVEL",
+      "EXCLUDED_STRUCTURAL_UNIT_MARKER",
+      "CLAIMED_BY_ANOTHER_FACT"
+    ],
+    "token_class": [
+      "MEASUREMENT_CANDIDATE",
+      "PARENTHETICAL_LEVEL_QUALIFIER",
+      "STRUCTURAL_UNIT_MARKER",
+      "BARE_INTEGER"
+    ]
+  },
+  "derived_from": "page3_all_facts_long + the page's native span layer",
+  "schema_version": "1.3.0",
+  "migration_note": "1.3.0 (Phase 5C): new table for PATCH-P5C-002, the generic orphan-numeric silent-omission detector. Additive: no existing table changed."
+}

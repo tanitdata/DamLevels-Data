@@ -1,0 +1,193 @@
+{
+  "table": "p3_source_status",
+  "grain": "one row per source PDF: exactly one terminal status",
+  "primary_key": [
+    "source_sha256"
+  ],
+  "layer": "01_source_inventory",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": "run identity this row was produced by"
+    },
+    {
+      "name": "extractor_version",
+      "type": "string",
+      "nullable": false,
+      "description": "page3_extractor version"
+    },
+    {
+      "name": "configuration_hash",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of the semantic configuration"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": "row creation timestamp, UTC ISO-8601"
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": "SHA-256 of the source PDF bytes"
+    },
+    {
+      "name": "source_file",
+      "type": "string",
+      "nullable": false,
+      "description": "path of the source PDF relative to the input directory"
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": "resolved bulletin date; null when undetermined"
+    },
+    {
+      "name": "source_file_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "file_size_bytes",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bulletin_date_filename",
+      "type": "date",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "bulletin_date_printed",
+      "type": "date",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "date_conflict",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "logical_page_class",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "layout_family",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "exact_dimension_pair",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "shape_signature",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "text_regime",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "rotation",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "rotation_normalization",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "route_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "terminal_status",
+      "type": "string",
+      "nullable": false,
+      "description": "exactly one of the eight terminal statuses"
+    },
+    {
+      "name": "fact_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "cell_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "review_item_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "failure_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "validation_fail_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "wall_seconds",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "notes",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "terminal_status": [
+      "SUCCESS_FAST_PATH",
+      "SUCCESS_GEOMETRY_FALLBACK",
+      "SUCCESS_SPECIALIST_FALLBACK",
+      "PARTIAL_REVIEW_REQUIRED",
+      "QUARANTINED_NOT_LOGICAL_PAGE3",
+      "FAILED_SOURCE_READ",
+      "FAILED_UNRESOLVED_LAYOUT",
+      "FAILED_SEMANTIC_VALIDATION",
+      "FAILED_EXTRACTOR_ERROR"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.2.0"
+}

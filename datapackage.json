@@ -1,0 +1,1157 @@
+{
+  "profile": "data-package",
+  "name": "damlevels-data",
+  "title": "DamLevels-Data: daily storage of Tunisia's 36 large dams, 2014-2025",
+  "description": "Provenance-traced daily storage observations, qualified inter-dam transfer facts, dam metadata, QA results and GIS layers reconstructed from the DGBGTH bulletins published by ONAGRI. Current quality indicators: qa/kpi/results.",
+  "version": "1.0.0",
+  "licenses": [
+    {
+      "name": "CC-BY-4.0",
+      "path": "https://creativecommons.org/licenses/by/4.0/",
+      "title": "Creative Commons Attribution 4.0 International (tables and documentation; see LICENSE-DATA)"
+    },
+    {
+      "name": "TN-LNDPO",
+      "path": "LICENSE-DATA",
+      "title": "Source values: Licence Nationale de Données Publiques Ouvertes (Tunisie); attribution to DGBGTH/ONAGRI required"
+    }
+  ],
+  "resources": [
+    {
+      "name": "dams",
+      "path": "data/dams.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "primaryKey": "dam_id",
+        "fields": [
+          {
+            "name": "dam_id",
+            "type": "string",
+            "description": "Stable governed dam identifier."
+          },
+          {
+            "name": "name_fr",
+            "type": "string",
+            "description": "Governed French/canonical name."
+          },
+          {
+            "name": "name_ar",
+            "type": "string",
+            "description": "Evidence-backed Arabic name where established."
+          },
+          {
+            "name": "name_ar_status",
+            "type": "string",
+            "description": "Authority or candidate status of the Arabic-name mapping."
+          },
+          {
+            "name": "name_ar_source",
+            "type": "string",
+            "description": "Evidence locator for the Arabic name."
+          },
+          {
+            "name": "aliases",
+            "type": "string",
+            "description": "Pipe-separated governed historical aliases."
+          },
+          {
+            "name": "basin",
+            "type": "string",
+            "description": "Hydrographic basin only where explicitly supported."
+          },
+          {
+            "name": "basin_status",
+            "type": "string",
+            "description": "Evidence status of basin assignment."
+          },
+          {
+            "name": "basin_source",
+            "type": "string",
+            "description": "Evidence locator for basin assignment."
+          },
+          {
+            "name": "reference_capacity_mm3",
+            "type": "number",
+            "description": "Latest durable observed Page 2 capacity regime.",
+            "unit": "Mm3"
+          },
+          {
+            "name": "capacity_valid_from",
+            "type": "date",
+            "description": "Start of latest observed capacity regime."
+          },
+          {
+            "name": "latitude",
+            "type": "number",
+            "description": "Accepted control latitude, EPSG:4326."
+          },
+          {
+            "name": "longitude",
+            "type": "number",
+            "description": "Accepted control longitude, EPSG:4326."
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "description": "Task21 row status."
+          },
+          {
+            "name": "geometry_status",
+            "type": "string",
+            "description": "Task21 geometry status."
+          },
+          {
+            "name": "control_status",
+            "type": "string",
+            "description": "Task21 control-point status."
+          },
+          {
+            "name": "identity_source",
+            "type": "string",
+            "description": "Identity evidence path."
+          },
+          {
+            "name": "coordinate_source",
+            "type": "string",
+            "description": "Coordinate evidence path and transform."
+          },
+          {
+            "name": "capacity_source",
+            "type": "string",
+            "description": "Capacity evidence path."
+          },
+          {
+            "name": "notes",
+            "type": "string",
+            "description": "Row limitations."
+          }
+        ]
+      }
+    },
+    {
+      "name": "capacity-history",
+      "path": "data/capacity_history.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "primaryKey": [
+          "dam_id",
+          "valid_from"
+        ],
+        "foreignKeys": [
+          {
+            "fields": "dam_id",
+            "reference": {
+              "resource": "dams",
+              "fields": "dam_id"
+            }
+          }
+        ],
+        "fields": [
+          {
+            "name": "dam_id",
+            "type": "string",
+            "description": "Stable governed dam identifier."
+          },
+          {
+            "name": "valid_from",
+            "type": "date",
+            "description": "First supported date, inclusive."
+          },
+          {
+            "name": "valid_to",
+            "type": "date",
+            "description": "Last supported date, inclusive; blank means current observed regime."
+          },
+          {
+            "name": "capacity_mm3",
+            "type": "number",
+            "description": "Printed Page 2 capacity in Mm3.",
+            "unit": "Mm3"
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "Source product."
+          },
+          {
+            "name": "source_file",
+            "type": "string",
+            "description": "First supporting bulletin file."
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "description": "Logical bulletin page."
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "description": "Regime evidence status."
+          },
+          {
+            "name": "notes",
+            "type": "string",
+            "description": "Observation support and explicit conflicts."
+          }
+        ]
+      }
+    },
+    {
+      "name": "bulletin-manifest",
+      "path": "sources/manifest.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "primaryKey": "bulletin_id",
+        "fields": [
+          {
+            "name": "bulletin_id",
+            "type": "string",
+            "description": "Stable logical bulletin identifier."
+          },
+          {
+            "name": "bulletin_date",
+            "type": "date",
+            "description": "Accepted bulletin date."
+          },
+          {
+            "name": "original_url",
+            "type": "string",
+            "description": "Original URL where established; otherwise blank."
+          },
+          {
+            "name": "page1_source_file",
+            "type": "string",
+            "description": "Accepted Page 1 source filename."
+          },
+          {
+            "name": "page1_sha256",
+            "type": "string",
+            "description": "Page 1 SHA-256."
+          },
+          {
+            "name": "page2_source_file",
+            "type": "string",
+            "description": "Accepted Page 2 source filename."
+          },
+          {
+            "name": "page2_sha256",
+            "type": "string",
+            "description": "Page 2 SHA-256."
+          },
+          {
+            "name": "page3_source_file",
+            "type": "string",
+            "description": "Selected Page 3 source filename."
+          },
+          {
+            "name": "page3_sha256",
+            "type": "string",
+            "description": "Page 3 SHA-256."
+          },
+          {
+            "name": "pages_available",
+            "type": "string",
+            "description": "Pipe-separated logical pages supported by accepted inventories."
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "description": "Complete or partial page-set status."
+          },
+          {
+            "name": "provenance_status",
+            "type": "string",
+            "description": "Page-specific authority statuses."
+          },
+          {
+            "name": "notes",
+            "type": "string",
+            "description": "Manifest limitations."
+          }
+        ]
+      }
+    },
+    {
+      "name": "bulletin-file-manifest",
+      "path": "sources/file_manifest.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "primaryKey": "source_file",
+        "fields": [
+          {
+            "name": "source_file",
+            "type": "string",
+            "description": "Path relative to the external bulletin root."
+          },
+          {
+            "name": "bulletin_date",
+            "type": "date",
+            "description": "Filename-supported bulletin date where parsed."
+          },
+          {
+            "name": "original_url",
+            "type": "string",
+            "description": "Original URL where established; otherwise blank."
+          },
+          {
+            "name": "sha256",
+            "type": "string",
+            "description": "Physical file SHA-256 from the frozen manifest."
+          },
+          {
+            "name": "page_count",
+            "type": "integer",
+            "description": "Split-branch page count where established."
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "description": "Physical manifest status."
+          },
+          {
+            "name": "local_source_status",
+            "type": "string",
+            "description": "Local path validation status from E1."
+          },
+          {
+            "name": "notes",
+            "type": "string",
+            "description": "Physical-file limitations."
+          }
+        ]
+      }
+    },
+    {
+      "name": "storage",
+      "path": "data/storage.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "primaryKey": "observation_id",
+        "foreignKeys": [
+          {
+            "fields": "dam_id",
+            "reference": {
+              "resource": "dams",
+              "fields": "dam_id"
+            }
+          }
+        ],
+        "fields": [
+          {
+            "name": "observation_id",
+            "type": "string",
+            "description": "Stable source-derived observation identifier."
+          },
+          {
+            "name": "dam_id",
+            "type": "string",
+            "description": "Stable governed dam identifier."
+          },
+          {
+            "name": "date",
+            "type": "date",
+            "description": "Bulletin reporting date."
+          },
+          {
+            "name": "variable",
+            "type": "string",
+            "description": "Constant primary quantity: storage.",
+            "constraints": {
+              "required": true,
+              "enum": [
+                "storage"
+              ]
+            }
+          },
+          {
+            "name": "value",
+            "type": "number",
+            "description": "Observed numeric value; never interpolated."
+          },
+          {
+            "name": "unit",
+            "type": "string",
+            "description": "Mm3 or percent."
+          },
+          {
+            "name": "source_file",
+            "type": "string",
+            "description": "Source PDF filename."
+          },
+          {
+            "name": "source_sha256",
+            "type": "string",
+            "description": "Source PDF SHA-256."
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "description": "Physical/logical source page."
+          },
+          {
+            "name": "source_field",
+            "type": "string",
+            "description": "Accepted extractor source field."
+          },
+          {
+            "name": "authority_release",
+            "type": "string",
+            "description": "Use-specific extraction authority."
+          },
+          {
+            "name": "engine_version",
+            "type": "string",
+            "description": "Extractor engine version."
+          },
+          {
+            "name": "source_row_key",
+            "type": "string",
+            "description": "Accepted extraction row key."
+          },
+          {
+            "name": "lineage_id",
+            "type": "string",
+            "description": "Linked cell-lineage identifier(s)."
+          },
+          {
+            "name": "flag",
+            "type": "string",
+            "description": "Pipe-separated row-level authority/QC flags."
+          }
+        ]
+      },
+      "description": "Primary Page 1 storage observations only; exactly one intended record per governed dam/date."
+    },
+    {
+      "name": "transfers",
+      "path": "data/transfers.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "primaryKey": "transfer_observation_id",
+        "fields": [
+          {
+            "name": "transfer_observation_id",
+            "type": "string",
+            "description": "Selected Page 3 canonical fact ID."
+          },
+          {
+            "name": "date",
+            "type": "date",
+            "description": "Effective observation date as published in the selected product."
+          },
+          {
+            "name": "bulletin_date",
+            "type": "date",
+            "description": "Bulletin date."
+          },
+          {
+            "name": "effective_date_rule",
+            "type": "string",
+            "description": "Date rule recorded by the selected product."
+          },
+          {
+            "name": "from_dam_id",
+            "type": "string",
+            "description": "Confirmed stable source dam ID; blank if unproven/not applicable."
+          },
+          {
+            "name": "to_dam_id",
+            "type": "string",
+            "description": "Confirmed stable destination dam ID; blank if unproven/not applicable."
+          },
+          {
+            "name": "from_node_id",
+            "type": "string",
+            "description": "Page 3 source node identity."
+          },
+          {
+            "name": "to_node_id",
+            "type": "string",
+            "description": "Page 3 destination node identity."
+          },
+          {
+            "name": "from_mapping_status",
+            "type": "string",
+            "description": "Stable-ID crosswalk status."
+          },
+          {
+            "name": "to_mapping_status",
+            "type": "string",
+            "description": "Stable-ID crosswalk status."
+          },
+          {
+            "name": "entity_id",
+            "type": "string",
+            "description": "Page 3 route/accounting entity."
+          },
+          {
+            "name": "row_role",
+            "type": "string",
+            "description": "Physical edge or accounting observation."
+          },
+          {
+            "name": "variable",
+            "type": "string",
+            "description": "Reported Page 3 measure."
+          },
+          {
+            "name": "value",
+            "type": "number",
+            "description": "Reported value; blank states remain blank."
+          },
+          {
+            "name": "unit",
+            "type": "string",
+            "description": "Reported unit normalized to Mm3."
+          },
+          {
+            "name": "source_file",
+            "type": "string",
+            "description": "Source PDF filename."
+          },
+          {
+            "name": "source_sha256",
+            "type": "string",
+            "description": "Source PDF SHA-256."
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "description": "Logical page 3."
+          },
+          {
+            "name": "source_field",
+            "type": "string",
+            "description": "Canonical Page 3 field ID."
+          },
+          {
+            "name": "authority_release",
+            "type": "string",
+            "description": "Qualified Page 3 authority."
+          },
+          {
+            "name": "flag",
+            "type": "string",
+            "description": "Pipe-separated qualification/QC flags."
+          },
+          {
+            "name": "semantic_status",
+            "type": "string",
+            "description": "Physical-edge/accounting and crosswalk qualification."
+          },
+          {
+            "name": "value_status",
+            "type": "string",
+            "description": "Numeric/zero/blank/structural state."
+          },
+          {
+            "name": "continuity_status",
+            "type": "string",
+            "description": "Selected Page 3 continuity status."
+          },
+          {
+            "name": "source_consistency_status",
+            "type": "string",
+            "description": "Selected source-consistency status."
+          },
+          {
+            "name": "evidence_id",
+            "type": "string",
+            "description": "Page 3 evidence ID."
+          },
+          {
+            "name": "record_id",
+            "type": "string",
+            "description": "Page 3 record ID."
+          },
+          {
+            "name": "series_id",
+            "type": "string",
+            "description": "Audited Page 3 series ID."
+          },
+          {
+            "name": "raw_text",
+            "type": "string",
+            "description": "Source-normalized raw text."
+          }
+        ]
+      }
+    },
+    {
+      "name": "storage-parquet",
+      "path": "data/parquet/storage.parquet",
+      "format": "parquet",
+      "schema": {
+        "primaryKey": "observation_id",
+        "foreignKeys": [
+          {
+            "fields": "dam_id",
+            "reference": {
+              "resource": "dams",
+              "fields": "dam_id"
+            }
+          }
+        ],
+        "fields": [
+          {
+            "name": "observation_id",
+            "type": "string",
+            "description": "Stable source-derived observation identifier."
+          },
+          {
+            "name": "dam_id",
+            "type": "string",
+            "description": "Stable governed dam identifier."
+          },
+          {
+            "name": "date",
+            "type": "date",
+            "description": "Bulletin reporting date."
+          },
+          {
+            "name": "variable",
+            "type": "string",
+            "description": "Constant primary quantity: storage.",
+            "constraints": {
+              "required": true,
+              "enum": [
+                "storage"
+              ]
+            }
+          },
+          {
+            "name": "value",
+            "type": "number",
+            "description": "Observed numeric value; never interpolated."
+          },
+          {
+            "name": "unit",
+            "type": "string",
+            "description": "Mm3 or percent."
+          },
+          {
+            "name": "source_file",
+            "type": "string",
+            "description": "Source PDF filename."
+          },
+          {
+            "name": "source_sha256",
+            "type": "string",
+            "description": "Source PDF SHA-256."
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "description": "Physical/logical source page."
+          },
+          {
+            "name": "source_field",
+            "type": "string",
+            "description": "Accepted extractor source field."
+          },
+          {
+            "name": "authority_release",
+            "type": "string",
+            "description": "Use-specific extraction authority."
+          },
+          {
+            "name": "engine_version",
+            "type": "string",
+            "description": "Extractor engine version."
+          },
+          {
+            "name": "source_row_key",
+            "type": "string",
+            "description": "Accepted extraction row key."
+          },
+          {
+            "name": "lineage_id",
+            "type": "string",
+            "description": "Linked cell-lineage identifier(s)."
+          },
+          {
+            "name": "flag",
+            "type": "string",
+            "description": "Pipe-separated row-level authority/QC flags."
+          }
+        ]
+      },
+      "description": "Primary Page 1 storage observations only; exactly one intended record per governed dam/date."
+    },
+    {
+      "name": "transfers-parquet",
+      "path": "data/parquet/transfers.parquet",
+      "format": "parquet",
+      "schema": {
+        "primaryKey": "transfer_observation_id",
+        "fields": [
+          {
+            "name": "transfer_observation_id",
+            "type": "string",
+            "description": "Selected Page 3 canonical fact ID."
+          },
+          {
+            "name": "date",
+            "type": "date",
+            "description": "Effective observation date as published in the selected product."
+          },
+          {
+            "name": "bulletin_date",
+            "type": "date",
+            "description": "Bulletin date."
+          },
+          {
+            "name": "effective_date_rule",
+            "type": "string",
+            "description": "Date rule recorded by the selected product."
+          },
+          {
+            "name": "from_dam_id",
+            "type": "string",
+            "description": "Confirmed stable source dam ID; blank if unproven/not applicable."
+          },
+          {
+            "name": "to_dam_id",
+            "type": "string",
+            "description": "Confirmed stable destination dam ID; blank if unproven/not applicable."
+          },
+          {
+            "name": "from_node_id",
+            "type": "string",
+            "description": "Page 3 source node identity."
+          },
+          {
+            "name": "to_node_id",
+            "type": "string",
+            "description": "Page 3 destination node identity."
+          },
+          {
+            "name": "from_mapping_status",
+            "type": "string",
+            "description": "Stable-ID crosswalk status."
+          },
+          {
+            "name": "to_mapping_status",
+            "type": "string",
+            "description": "Stable-ID crosswalk status."
+          },
+          {
+            "name": "entity_id",
+            "type": "string",
+            "description": "Page 3 route/accounting entity."
+          },
+          {
+            "name": "row_role",
+            "type": "string",
+            "description": "Physical edge or accounting observation."
+          },
+          {
+            "name": "variable",
+            "type": "string",
+            "description": "Reported Page 3 measure."
+          },
+          {
+            "name": "value",
+            "type": "number",
+            "description": "Reported value; blank states remain blank."
+          },
+          {
+            "name": "unit",
+            "type": "string",
+            "description": "Reported unit normalized to Mm3."
+          },
+          {
+            "name": "source_file",
+            "type": "string",
+            "description": "Source PDF filename."
+          },
+          {
+            "name": "source_sha256",
+            "type": "string",
+            "description": "Source PDF SHA-256."
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "description": "Logical page 3."
+          },
+          {
+            "name": "source_field",
+            "type": "string",
+            "description": "Canonical Page 3 field ID."
+          },
+          {
+            "name": "authority_release",
+            "type": "string",
+            "description": "Qualified Page 3 authority."
+          },
+          {
+            "name": "flag",
+            "type": "string",
+            "description": "Pipe-separated qualification/QC flags."
+          },
+          {
+            "name": "semantic_status",
+            "type": "string",
+            "description": "Physical-edge/accounting and crosswalk qualification."
+          },
+          {
+            "name": "value_status",
+            "type": "string",
+            "description": "Numeric/zero/blank/structural state."
+          },
+          {
+            "name": "continuity_status",
+            "type": "string",
+            "description": "Selected Page 3 continuity status."
+          },
+          {
+            "name": "source_consistency_status",
+            "type": "string",
+            "description": "Selected source-consistency status."
+          },
+          {
+            "name": "evidence_id",
+            "type": "string",
+            "description": "Page 3 evidence ID."
+          },
+          {
+            "name": "record_id",
+            "type": "string",
+            "description": "Page 3 record ID."
+          },
+          {
+            "name": "series_id",
+            "type": "string",
+            "description": "Audited Page 3 series ID."
+          },
+          {
+            "name": "raw_text",
+            "type": "string",
+            "description": "Source-normalized raw text."
+          }
+        ]
+      }
+    },
+    {
+      "name": "printed-fill-reference",
+      "path": "qa/printed_fill_reference.csv",
+      "profile": "tabular-data-resource",
+      "description": "Non-primary printed fill percentages retained for professor QA check E.",
+      "schema": {
+        "primaryKey": "observation_id",
+        "foreignKeys": [
+          {
+            "fields": "dam_id",
+            "reference": {
+              "resource": "dams",
+              "fields": "dam_id"
+            }
+          }
+        ],
+        "fields": [
+          {
+            "name": "observation_id",
+            "type": "string",
+            "description": "Stable source-derived observation identifier."
+          },
+          {
+            "name": "dam_id",
+            "type": "string",
+            "description": "Stable governed dam identifier."
+          },
+          {
+            "name": "date",
+            "type": "date",
+            "description": "Bulletin reporting date."
+          },
+          {
+            "name": "variable",
+            "type": "string",
+            "description": "Constant non-primary QA quantity: printed_fill_pct.",
+            "constraints": {
+              "required": true,
+              "enum": [
+                "printed_fill_pct"
+              ]
+            }
+          },
+          {
+            "name": "value",
+            "type": "number",
+            "description": "Fill percentage printed in the source bulletin; never recomputed or repaired.",
+            "unit": "percent"
+          },
+          {
+            "name": "unit",
+            "type": "string",
+            "description": "Mm3 or percent."
+          },
+          {
+            "name": "source_file",
+            "type": "string",
+            "description": "Source PDF filename."
+          },
+          {
+            "name": "source_sha256",
+            "type": "string",
+            "description": "Source PDF SHA-256."
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "description": "Physical/logical source page."
+          },
+          {
+            "name": "source_field",
+            "type": "string",
+            "description": "Accepted extractor source field."
+          },
+          {
+            "name": "authority_release",
+            "type": "string",
+            "description": "Use-specific extraction authority."
+          },
+          {
+            "name": "engine_version",
+            "type": "string",
+            "description": "Extractor engine version."
+          },
+          {
+            "name": "source_row_key",
+            "type": "string",
+            "description": "Accepted extraction row key."
+          },
+          {
+            "name": "lineage_id",
+            "type": "string",
+            "description": "Linked cell-lineage identifier(s)."
+          },
+          {
+            "name": "flag",
+            "type": "string",
+            "description": "Pipe-separated row-level authority/QC flags."
+          }
+        ]
+      }
+    },
+    {
+      "name": "printed-fill-reference-parquet",
+      "path": "qa/printed_fill_reference.parquet",
+      "profile": "data-resource",
+      "description": "Non-primary printed fill percentages retained for professor QA check E.",
+      "schema": {
+        "primaryKey": "observation_id",
+        "foreignKeys": [
+          {
+            "fields": "dam_id",
+            "reference": {
+              "resource": "dams",
+              "fields": "dam_id"
+            }
+          }
+        ],
+        "fields": [
+          {
+            "name": "observation_id",
+            "type": "string",
+            "description": "Stable source-derived observation identifier."
+          },
+          {
+            "name": "dam_id",
+            "type": "string",
+            "description": "Stable governed dam identifier."
+          },
+          {
+            "name": "date",
+            "type": "date",
+            "description": "Bulletin reporting date."
+          },
+          {
+            "name": "variable",
+            "type": "string",
+            "description": "Constant non-primary QA quantity: printed_fill_pct.",
+            "constraints": {
+              "required": true,
+              "enum": [
+                "printed_fill_pct"
+              ]
+            }
+          },
+          {
+            "name": "value",
+            "type": "number",
+            "description": "Fill percentage printed in the source bulletin; never recomputed or repaired.",
+            "unit": "percent"
+          },
+          {
+            "name": "unit",
+            "type": "string",
+            "description": "Mm3 or percent."
+          },
+          {
+            "name": "source_file",
+            "type": "string",
+            "description": "Source PDF filename."
+          },
+          {
+            "name": "source_sha256",
+            "type": "string",
+            "description": "Source PDF SHA-256."
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "description": "Physical/logical source page."
+          },
+          {
+            "name": "source_field",
+            "type": "string",
+            "description": "Accepted extractor source field."
+          },
+          {
+            "name": "authority_release",
+            "type": "string",
+            "description": "Use-specific extraction authority."
+          },
+          {
+            "name": "engine_version",
+            "type": "string",
+            "description": "Extractor engine version."
+          },
+          {
+            "name": "source_row_key",
+            "type": "string",
+            "description": "Accepted extraction row key."
+          },
+          {
+            "name": "lineage_id",
+            "type": "string",
+            "description": "Linked cell-lineage identifier(s)."
+          },
+          {
+            "name": "flag",
+            "type": "string",
+            "description": "Pipe-separated row-level authority/QC flags."
+          }
+        ]
+      }
+    },
+    {
+      "name": "dams-geojson",
+      "path": "gis/vector/dams.geojson",
+      "profile": "data-resource",
+      "format": "geojson",
+      "mediatype": "application/geo+json",
+      "description": "Accepted dam controls with stable dam_id.",
+      "spatial": {
+        "crs": "EPSG:4326",
+        "coordinatePrecision": 6,
+        "sourceCrs": "EPSG:32632",
+        "areaCalculationCrs": "EPSG:32632"
+      },
+      "provenance": {
+        "source": "<FULL_RECONSTRUCTION>/geospatial/final/TASK21_FINAL_WATERSHEDS.gpkg",
+        "sourceSha256": "006b0c93dc8c8afb0b6ef6661a67bcc8061e628f17f6cc2afe17c76aa8a2850e",
+        "authority": "R10+R10A+R10B+R11+R11A_COMPOSITE"
+      }
+    },
+    {
+      "name": "catchments",
+      "path": "gis/vector/catchments.geojson",
+      "profile": "data-resource",
+      "format": "geojson",
+      "mediatype": "application/geo+json",
+      "description": "Thirty-five accepted total catchments; Mellègue has no canonical accepted total.",
+      "licenses": [
+        {
+          "name": "CC-BY-NC-SA-4.0",
+          "path": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+          "title": "Derived from FABDEM (CC BY-NC-SA 4.0) and MERIT Hydro (CC BY-NC 4.0); see LICENSE-DATA"
+        }
+      ],
+      "spatial": {
+        "crs": "EPSG:4326",
+        "coordinatePrecision": 6,
+        "sourceCrs": "EPSG:32632",
+        "areaCalculationCrs": "EPSG:32632"
+      },
+      "provenance": {
+        "source": "<FULL_RECONSTRUCTION>/geospatial/final/TASK21_FINAL_WATERSHEDS.gpkg",
+        "sourceSha256": "006b0c93dc8c8afb0b6ef6661a67bcc8061e628f17f6cc2afe17c76aa8a2850e",
+        "authority": "R10+R10A+R10B+R11+R11A_COMPOSITE"
+      }
+    },
+    {
+      "name": "catchments-incremental",
+      "path": "gis/vector/catchments_incremental.geojson",
+      "profile": "data-resource",
+      "format": "geojson",
+      "mediatype": "application/geo+json",
+      "description": "Thirty-four incremental geometries: 32 ordinary-ready plus two qualified special cases.",
+      "licenses": [
+        {
+          "name": "CC-BY-NC-SA-4.0",
+          "path": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+          "title": "Derived from FABDEM (CC BY-NC-SA 4.0) and MERIT Hydro (CC BY-NC 4.0); see LICENSE-DATA"
+        }
+      ],
+      "spatial": {
+        "crs": "EPSG:4326",
+        "coordinatePrecision": 6,
+        "sourceCrs": "EPSG:32632",
+        "areaCalculationCrs": "EPSG:32632"
+      },
+      "provenance": {
+        "source": "<FULL_RECONSTRUCTION>/geospatial/final/TASK21_FINAL_WATERSHEDS.gpkg",
+        "sourceSha256": "006b0c93dc8c8afb0b6ef6661a67bcc8061e628f17f6cc2afe17c76aa8a2850e",
+        "authority": "R10+R10A+R10B+R11+R11A_COMPOSITE"
+      }
+    },
+    {
+      "name": "transfer-network",
+      "path": "gis/vector/transfer_network.geojson",
+      "profile": "data-resource",
+      "format": "geojson",
+      "mediatype": "application/geo+json",
+      "description": "Ten typed artificial-transfer relationships; four deliberately have null geometry.",
+      "spatial": {
+        "crs": "EPSG:4326",
+        "coordinatePrecision": 6,
+        "sourceCrs": "EPSG:32632",
+        "areaCalculationCrs": "EPSG:32632"
+      },
+      "provenance": {
+        "source": "<FULL_RECONSTRUCTION>/geospatial/final/TASK21_FINAL_WATERSHEDS.gpkg",
+        "sourceSha256": "006b0c93dc8c8afb0b6ef6661a67bcc8061e628f17f6cc2afe17c76aa8a2850e",
+        "authority": "R10+R10A+R10B+R11+R11A_COMPOSITE"
+      }
+    },
+    {
+      "name": "natural-network",
+      "path": "gis/vector/natural_network.geojson",
+      "profile": "data-resource",
+      "format": "geojson",
+      "mediatype": "application/geo+json",
+      "description": "Eight controlled-dam natural-network edges; not a complete river network.",
+      "licenses": [
+        {
+          "name": "CC-BY-NC-SA-4.0",
+          "path": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+          "title": "Derived from MERIT Hydro (CC BY-NC 4.0) flow routing; see LICENSE-DATA"
+        }
+      ],
+      "spatial": {
+        "crs": "EPSG:4326",
+        "coordinatePrecision": 6,
+        "sourceCrs": "EPSG:32632",
+        "areaCalculationCrs": "EPSG:32632"
+      },
+      "provenance": {
+        "source": "<FULL_RECONSTRUCTION>/geospatial/final/TASK21_FINAL_WATERSHEDS.gpkg",
+        "sourceSha256": "006b0c93dc8c8afb0b6ef6661a67bcc8061e628f17f6cc2afe17c76aa8a2850e",
+        "authority": "R10+R10A+R10B+R11+R11A_COMPOSITE"
+      }
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "table": "p3_edge_registry",
+  "grain": "one row per connectivity edge or accounting relationship",
+  "primary_key": [
+    "edge_id"
+  ],
+  "layer": "05_data/connectivity",
+  "columns": [
+    {
+      "name": "edge_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "from_node_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "to_node_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "via_node_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "edge_or_accounting",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: edge|accounting"
+    },
+    {
+      "name": "label_ar_raw",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "label_normalized",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "valid_from",
+      "type": "date",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "valid_to",
+      "type": "date",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "evidence_path",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "edge_or_accounting": [
+      "edge",
+      "accounting"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

@@ -1,0 +1,86 @@
+{
+  "table": "p3_schema_era_assignment",
+  "grain": "one measured schema-era assignment per (source PDF, family)",
+  "primary_key": [
+    "source_sha256",
+    "family_id"
+  ],
+  "layer": "02_page_context",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": "run identity this row was produced by"
+    },
+    {
+      "name": "extractor_version",
+      "type": "string",
+      "nullable": false,
+      "description": "page3_extractor version"
+    },
+    {
+      "name": "configuration_hash",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of the semantic configuration"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": "row creation timestamp, UTC ISO-8601"
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": "SHA-256 of the source PDF bytes"
+    },
+    {
+      "name": "source_file",
+      "type": "string",
+      "nullable": false,
+      "description": "path of the source PDF relative to the input directory"
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": "resolved bulletin date; null when undetermined"
+    },
+    {
+      "name": "family_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "era_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "assignment_basis",
+      "type": "string",
+      "nullable": false,
+      "description": "measured shape, never the calendar year"
+    },
+    {
+      "name": "observed_shape",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "schema_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {},
+  "derived_from": null,
+  "schema_version": "1.2.0"
+}

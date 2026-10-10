@@ -1,0 +1,5 @@
+metric,scope,atlas_evaluated,atlas_exact,atlas_rounding_only,atlas_above_bound,reconstructed_evaluated,reconstructed_exact,reconstructed_rounding_only,reconstructed_above_bound,counts_reproduced
+inflow,NATIONAL,537,52,485,0,537,52,485,0,True
+stock,NATIONAL,3597,905,2676,16,3604,907,2680,17,False
+withdrawal,NATIONAL,526,13,12,501,526,13,12,501,True
+withdrawal,REGIONS_COMBINED,1730,1023,206,501,1730,1023,206,501,True

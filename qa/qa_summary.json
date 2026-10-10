@@ -1,0 +1,417 @@
+{
+  "generated_utc": "2026-09-26T17:57:06.667345+00:00",
+  "engineering_run": "E6A.2",
+  "baseline_git_commit": "977ed9ca1e59640daaa4ceb6263d703a57e0436b",
+  "pydantic_version": "2.12.5",
+  "authority": {
+    "storage": "PAGE1_0.2.3_CURRENT_EXTRACTION_DELIVERY",
+    "page3": "PAGE3_SELECTED_RELEASE_PROBABLE"
+  },
+  "scientific_pipelines_rerun": false,
+  "models_run": false,
+  "production_extractor_rerun": false,
+  "satellite_validation_run": false,
+  "protected_baseline": {
+    "protected_files": 32,
+    "all_unchanged": true
+  },
+  "kpis": {
+    "A1": {
+      "name": "Page 1 extraction",
+      "population": 800,
+      "eligible": 800,
+      "pass": 800,
+      "fail": 0,
+      "excluded_unknown": 0,
+      "status": "YES",
+      "details": {
+        "primary_sample_pdfs": 800,
+        "eligible": 800,
+        "matches": 800,
+        "errors": 0,
+        "unverifiable": 0,
+        "estimated_accuracy": 1.0,
+        "wilson_confidence": 0.95,
+        "wilson_lower": 0.995221123794324,
+        "wilson_upper": 1.0,
+        "target_accuracy": 0.995,
+        "required_zero_error_sample_size": 765,
+        "target_decision": "YES",
+        "primary_sampling_unit": "UNIQUE_SOURCE_PDF",
+        "one_primary_cell_per_pdf": true,
+        "proportional_stratification": true,
+        "population_by_stratum": {
+          "P1_LAYOUT_16_WITH_FILL": 2405,
+          "P1_LAYOUT_15_NO_FILL": 1576
+        },
+        "sample_by_stratum": {
+          "P1_LAYOUT_16_WITH_FILL": 483,
+          "P1_LAYOUT_15_NO_FILL": 317
+        },
+        "field_family_counts": {
+          "STORAGE": 800
+        },
+        "verification_method_counts": {
+          "COMPUTER_ASSISTED_SOURCE_REREAD": 800
+        },
+        "human_visual_verification": "NOT_PERFORMED_BY_A_HUMAN_IN_E6A2"
+      }
+    },
+    "A2": {
+      "name": "Page 2 extraction",
+      "population": 800,
+      "eligible": 800,
+      "pass": 800,
+      "fail": 0,
+      "excluded_unknown": 0,
+      "status": "YES",
+      "details": {
+        "primary_sample_pdfs": 800,
+        "eligible": 800,
+        "matches": 800,
+        "errors": 0,
+        "unverifiable": 0,
+        "estimated_accuracy": 1.0,
+        "wilson_confidence": 0.95,
+        "wilson_lower": 0.995221123794324,
+        "wilson_upper": 1.0,
+        "target_accuracy": 0.995,
+        "required_zero_error_sample_size": 765,
+        "target_decision": "YES",
+        "primary_sampling_unit": "UNIQUE_SOURCE_PDF",
+        "one_primary_cell_per_pdf": true,
+        "proportional_stratification": true,
+        "population_by_stratum": {
+          "PRE_CUTOFF_MONTH_TO_DATE_INFLOW": 3453,
+          "POST_CUTOFF_INTERVAL_EVAPORATION": 530
+        },
+        "sample_by_stratum": {
+          "PRE_CUTOFF_MONTH_TO_DATE_INFLOW": 694,
+          "POST_CUTOFF_INTERVAL_EVAPORATION": 106
+        },
+        "field_family_counts": {
+          "STORAGE_STATE": 141,
+          "PREVIOUS_YEAR_INFLOW": 122,
+          "CAPACITY_REGIME": 127,
+          "PREVIOUS_YEAR_OUTFLOW": 104,
+          "INFLOW_MONTH_TO_DATE": 105,
+          "DAILY_INFLOW": 77,
+          "DAILY_OUTFLOW": 88,
+          "RAINFALL": 28,
+          "EVAPORATION": 8
+        },
+        "verification_method_counts": {
+          "COMPUTER_ASSISTED_SOURCE_REREAD": 800
+        },
+        "human_visual_verification": "NOT_PERFORMED_BY_A_HUMAN_IN_E6A2"
+      }
+    },
+    "A3": {
+      "name": "Page 3 numeric transcription",
+      "population": 800,
+      "eligible": 792,
+      "pass": 792,
+      "fail": 0,
+      "excluded_unknown": 8,
+      "status": "YES",
+      "details": {
+        "primary_sample_pdfs": 800,
+        "eligible": 792,
+        "matches": 792,
+        "errors": 0,
+        "unverifiable": 8,
+        "estimated_accuracy": 1.0,
+        "wilson_confidence": 0.95,
+        "wilson_lower": 0.995173085319799,
+        "wilson_upper": 0.9999999999999999,
+        "target_accuracy": 0.995,
+        "required_zero_error_sample_size": 765,
+        "target_decision": "YES",
+        "primary_sampling_unit": "UNIQUE_SOURCE_PDF",
+        "one_primary_cell_per_pdf": true,
+        "proportional_stratification": true,
+        "population_by_stratum": {
+          "R1_c0_control_substitution|P3_PORTRAIT_STANDARD": 2619,
+          "R3_standard_letters_lamalef_reversed|P3_PORTRAIT_STANDARD": 989,
+          "R2_presentation_forms|P3_PORTRAIT_STANDARD": 343,
+          "R1_c0_control_substitution|P3_ROTATED": 12
+        },
+        "sample_by_stratum": {
+          "R1_c0_control_substitution|P3_PORTRAIT_STANDARD": 529,
+          "R3_standard_letters_lamalef_reversed|P3_PORTRAIT_STANDARD": 200,
+          "R2_presentation_forms|P3_PORTRAIT_STANDARD": 69,
+          "R1_c0_control_substitution|P3_ROTATED": 2
+        },
+        "field_family_counts": {
+          "T5_TODAY": 161,
+          "T6_CURRENT_SEASON_TO_DATE": 45,
+          "T4_TODAY": 189,
+          "T5_CURRENT_SEASON_TO_DATE": 163,
+          "T3_TODAY": 184,
+          "T6_TODAY": 58
+        },
+        "verification_method_counts": {
+          "COMPUTER_ASSISTED_SOURCE_REREAD": 800
+        },
+        "human_visual_verification": "NOT_PERFORMED_BY_A_HUMAN_IN_E6A2"
+      }
+    },
+    "A3B": {
+      "name": "Page 3 semantic mapping",
+      "population": 160,
+      "eligible": 160,
+      "pass": 0,
+      "fail": 0,
+      "excluded_unknown": 160,
+      "status": "CATEGORICAL_REVIEW_WITH_EXPLICIT_GAPS",
+      "details": {
+        "sample_rows": 160,
+        "dispositions": {
+          "PRINTED_LABEL_MATCH_STABLE_ID_UNRESOLVED": 76,
+          "ACCOUNTING_NOT_HYDRAULIC_EDGE": 39,
+          "DATE_SEMANTICS_UNRESOLVED": 45
+        },
+        "combined_with_transcription_accuracy": false
+      }
+    },
+    "B": {
+      "name": "completeness",
+      "population": 143316,
+      "eligible": 143316,
+      "pass": 129390,
+      "fail": 13926,
+      "excluded_unknown": 0,
+      "status": "YES_WITH_EXPLICIT_GAPS",
+      "details": {
+        "calendar_start": "2014-07-02",
+        "calendar_end": "2025-10-10",
+        "governed_dams": 36,
+        "canonical_bulletin_dates": 3985,
+        "page1_bulletin_dates": 3981,
+        "partial_bulletins_without_page1": 4,
+        "partial_bulletin_dates_without_page1": [
+          "2019-09-30",
+          "2022-05-03",
+          "2022-10-28",
+          "2024-12-28"
+        ],
+        "expected_dam_date_pairs": 143316,
+        "observed_storage_pairs": 129390,
+        "missing_pairs": 13926,
+        "overall_bulletin_date_completeness": 0.9028301096876832,
+        "continuous_calendar_days": 4119,
+        "calendar_classifications": {
+          "COMPLETE": 1631,
+          "DAM_NOT_REPORTED": 2350,
+          "NO_BULLETIN": 134,
+          "PARTIAL_BULLETIN": 4
+        },
+        "missingness_classifications": {
+          "VALUE_BLANK_IN_SOURCE": 1,
+          "DAM_NOT_REPORTED": 13925,
+          "EXTRACTION_MISSING": 0,
+          "PARTIAL_BULLETIN_DAM_OPPORTUNITIES_OUTSIDE_DENOMINATOR": 144
+        },
+        "worst_dam_by_consecutive_bulletin_gap": {
+          "dam_id": "sarrat",
+          "expected_bulletin_dates": 3981,
+          "observed_storage_dates": 1631,
+          "missing_bulletin_dates": 2350,
+          "completeness_pct": "40.969606",
+          "first_observation": "2021-04-08",
+          "last_observation": "2025-10-10",
+          "longest_consecutive_missing_bulletin_run": 2350,
+          "longest_missing_run_start": "2014-07-02",
+          "longest_missing_run_end": "2021-04-07",
+          "leading_missing_bulletin_dates": 2350,
+          "trailing_missing_bulletin_dates": 0,
+          "longest_continuous_calendar_gap_days": 3,
+          "calendar_gap_start": "2022-06-25",
+          "calendar_gap_end": "2022-06-27",
+          "notes": "Expected dates are canonical bulletins with Page 1; no interpolation."
+        },
+        "decision": "YES_WITH_EXPLICIT_GAPS",
+        "limitations": "Most missing dam/date states are classified from the accepted Page 1 row census rather than a new source-cell inspection; no missing values are filled.",
+        "overall_completeness_text": "90.283011%",
+        "worst_gap": "sarrat — 2350 bulletin dates (2014-07-02 to 2021-04-07)",
+        "outside_denominator_partial_bulletin_opportunities": 144,
+        "outside_denominator_label": "OUTSIDE_DENOMINATOR_PARTIAL_BULLETIN_OPPORTUNITIES"
+      }
+    },
+    "C": {
+      "name": "uniqueness",
+      "population": 129390,
+      "eligible": 129390,
+      "pass": 129390,
+      "fail": 0,
+      "excluded_unknown": 0,
+      "status": "PASS",
+      "details": {
+        "unique_keys": 129390,
+        "duplicate_keys": 0,
+        "duplicate_records": 0
+      }
+    },
+    "D": {
+      "name": "physical validity",
+      "population": 129390,
+      "eligible": 129241,
+      "pass": 127753,
+      "fail": 1488,
+      "excluded_unknown": 149,
+      "status": "REVIEW_REQUIRED",
+      "details": {
+        "classifications": {
+          "PASS": 127753,
+          "NEGATIVE_STORAGE": 0,
+          "ABOVE_CAPACITY": 1488,
+          "CAPACITY_UNAVAILABLE": 149,
+          "CAPACITY_AMBIGUOUS": 0
+        }
+      }
+    },
+    "E": {
+      "name": "fill consistency",
+      "population": 129390,
+      "eligible": 84471,
+      "pass": 80814,
+      "fail": 3657,
+      "excluded_unknown": 44919,
+      "status": "REVIEW_REQUIRED",
+      "details": {
+        "classifications": {
+          "MATCH_WITHIN_ROUNDING": 80814,
+          "MISMATCH": 3657,
+          "NO_PRINTED_FILL": 44770,
+          "CAPACITY_UNAVAILABLE": 149,
+          "CAPACITY_AMBIGUOUS": 0
+        }
+      }
+    },
+    "F": {
+      "name": "national total reconciliation",
+      "population": 3985,
+      "eligible": 3967,
+      "pass": 3965,
+      "fail": 2,
+      "excluded_unknown": 18,
+      "status": "REVIEW_REQUIRED",
+      "details": {
+        "classifications": {
+          "MATCH_EXACT": 1022,
+          "MATCH_WITHIN_ROUNDING": 2943,
+          "SOURCE_ROSTER_SCOPE_DIFFERENCE": 4,
+          "SOURCE_PRINTED_DISAGREEMENT": 2,
+          "MISSING_COMPONENT": 14,
+          "EXTRACTION_SUSPECT": 0,
+          "UNRESOLVED": 0
+        },
+        "roster_scope_dates": [
+          "2015-10-03",
+          "2015-10-04",
+          "2015-10-05",
+          "2015-10-06"
+        ],
+        "remaining_disagreement_dates": [
+          "2017-12-30",
+          "2022-02-09"
+        ]
+      }
+    },
+    "G": {
+      "name": "transfer balance",
+      "population": 15852,
+      "eligible": 0,
+      "pass": 0,
+      "fail": 0,
+      "excluded_unknown": 15852,
+      "status": "NOT_NUMERICALLY_ELIGIBLE_WITH_EXPLICIT_EXCLUSIONS",
+      "details": {
+        "daily_physical_facts": 11889,
+        "accounting_rows": 3963,
+        "primary_classifications": {
+          "MATCH_EXACT": 0,
+          "MATCH_WITHIN_ROUNDING": 0,
+          "DISCREPANCY_DOCUMENTED": 0,
+          "NO_DIRECT_COUNTERPART": 0,
+          "UNRESOLVED_DAM_CROSSWALK": 7926,
+          "ACCOUNTING_NOT_HYDRAULIC_EDGE": 3963,
+          "DATE_SEMANTICS_UNRESOLVED": 3963,
+          "SOURCE_CONSISTENCY_NOT_CHECKED": 0
+        },
+        "reason_counts": {
+          "NO_DIRECT_COUNTERPART": 15852,
+          "UNRESOLVED_DAM_CROSSWALK": 7926,
+          "ACCOUNTING_NOT_HYDRAULIC_EDGE": 3963,
+          "DATE_SEMANTICS_UNRESOLVED": 15852,
+          "SOURCE_CONSISTENCY_NOT_CHECKED": 15852
+        }
+      }
+    },
+    "H": {
+      "name": "temporal plausibility",
+      "population": 129390,
+      "eligible": 119548,
+      "pass": 114235,
+      "fail": 5313,
+      "excluded_unknown": 9842,
+      "status": "YES_WITH_EXPLICIT_GAPS",
+      "details": {
+        "storage_observations_screened": 129390,
+        "contiguous_day_comparisons": 127192,
+        "robust_outliers": 5313,
+        "normal": 114235,
+        "gap_not_comparable": 2198,
+        "source_review_required_mad_zero": 7644,
+        "unresolved": 0,
+        "formula": "z_robust = 0.6745 * (delta - per-dam median contiguous daily delta) / per-dam MAD",
+        "screening_threshold": "absolute robust z >= 6.0",
+        "threshold_interpretation": "Analyst review screen; not a hydrological law.",
+        "mad_zero_rule": "Equal-to-median delta receives z=0; other deltas are SOURCE_REVIEW_REQUIRED without a numeric z.",
+        "representative_exception_rows": 40,
+        "representative_exception_traces_confirmed": 40,
+        "decision": "YES_WITH_EXPLICIT_GAPS",
+        "limitations": "Flags are not corrections; operational/release/inflow explanations are not complete, and long-gap pairs are excluded from daily comparison."
+      }
+    }
+  },
+  "historical_e6a1_kpi_a": {
+    "name": "extraction accuracy",
+    "population": 1500,
+    "eligible": 1500,
+    "pass": 1500,
+    "fail": 0,
+    "excluded_unknown": 0,
+    "status": "INCONCLUSIVE",
+    "details": {
+      "sample_seed": 20260925,
+      "sample_design": "96-row census of 2015-10-03..06 roster-scope dates plus 39 seeded dates x 9 seeded dam rows for each of four layout/time strata",
+      "sampled_cells": 1500,
+      "verifiable_cells": 1500,
+      "matches": 1500,
+      "errors": 0,
+      "unverifiable": 0,
+      "accuracy": 1.0,
+      "error_rate": 0.0,
+      "wilson_confidence": 0.95,
+      "wilson_lower": 0.9974455692798185,
+      "wilson_upper": 1.0,
+      "wilson_interval_type": "DESCRIPTIVE_SIMPLE_BINOMIAL_INTERVAL",
+      "wilson_population_inference_valid": false,
+      "wilson_interpretation": "Conditional on independent equally sampled Bernoulli trials; not valid as a population-wide confidence bound for this unequal-stratum, bulletin-clustered design.",
+      "target_accuracy": 0.995,
+      "target_decision": "INCONCLUSIVE",
+      "target_decision_reason": "Unequal stratum allocation and bulletin-level clustering prevent population-wide inference from the pooled simple-binomial interval.",
+      "strata_counts": {
+        "EARLY_LAYOUT15": 351,
+        "KNOWN_ROSTER_SCOPE": 96,
+        "MIDDLE_LAYOUT16": 351,
+        "RECENT_LAYOUT16": 351,
+        "TRANSITION_LAYOUT16": 351
+      },
+      "audit_label": "INDEPENDENT_SOURCE_CELL_CONSISTENCY_AUDIT",
+      "reviewer_method": "Computer-assisted direct PDF source-cell reread with pdfplumber using preserved cell bounding boxes; 15 representative visual spot checks; production extractor not invoked.",
+      "correction_candidates": 0
+    }
+  }
+}

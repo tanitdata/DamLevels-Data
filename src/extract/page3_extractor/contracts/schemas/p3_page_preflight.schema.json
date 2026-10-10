@@ -1,0 +1,192 @@
+{
+  "table": "p3_page_preflight",
+  "grain": "one row per (source PDF, page_index)",
+  "primary_key": [
+    "source_sha256",
+    "page_index"
+  ],
+  "layer": "05_data/bronze",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": "RUN-<phase>-<YYYYMMDD_HHMM>-<config hash>, see USAGE_GUIDELINES.md SS10"
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": "SHA-256 of source PDF bytes; the file's identity"
+    },
+    {
+      "name": "source_file",
+      "type": "string",
+      "nullable": false,
+      "description": "relative path of the source PDF under the read-only corpus root"
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": "parsed bulletin date; null if undetermined (never inferred silently)"
+    },
+    {
+      "name": "parser_version",
+      "type": "string",
+      "nullable": false,
+      "description": "extractor/script version string"
+    },
+    {
+      "name": "config_hash",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of the exact parameters this run used"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": "row creation timestamp, UTC ISO-8601"
+    },
+    {
+      "name": "page_index",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "width_pt",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "height_pt",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "rotation",
+      "type": "int",
+      "nullable": false,
+      "description": "degrees"
+    },
+    {
+      "name": "visual_orientation",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: portrait|landscape"
+    },
+    {
+      "name": "text_chars",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "word_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "arabic_chars",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "control_chars",
+      "type": "int",
+      "nullable": false,
+      "description": "C0 control substitution count, see CLM-018 R1"
+    },
+    {
+      "name": "replacement_chars",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "font_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "drawing_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "line_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "rect_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "image_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "raster_coverage_pct",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "render_status",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: not_rendered|rendered|render_failed"
+    },
+    {
+      "name": "logical_page3_score",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "logical_page_class",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: P3_PORTRAIT_STANDARD|P3_ROTATED|NOT_P3|REVIEW"
+    },
+    {
+      "name": "logical_page_reasons_json",
+      "type": "json",
+      "nullable": false,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "visual_orientation": [
+      "portrait",
+      "landscape"
+    ],
+    "render_status": [
+      "not_rendered",
+      "rendered",
+      "render_failed"
+    ],
+    "logical_page_class": [
+      "P3_PORTRAIT_STANDARD",
+      "P3_ROTATED",
+      "NOT_P3",
+      "REVIEW"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

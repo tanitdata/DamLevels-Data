@@ -1,0 +1,17 @@
+{
+  "storage_observations_screened": 129390,
+  "contiguous_day_comparisons": 127192,
+  "robust_outliers": 5313,
+  "normal": 114235,
+  "gap_not_comparable": 2198,
+  "source_review_required_mad_zero": 7644,
+  "unresolved": 0,
+  "formula": "z_robust = 0.6745 * (delta - per-dam median contiguous daily delta) / per-dam MAD",
+  "screening_threshold": "absolute robust z >= 6.0",
+  "threshold_interpretation": "Analyst review screen; not a hydrological law.",
+  "mad_zero_rule": "Equal-to-median delta receives z=0; other deltas are SOURCE_REVIEW_REQUIRED without a numeric z.",
+  "representative_exception_rows": 40,
+  "representative_exception_traces_confirmed": 40,
+  "decision": "YES_WITH_EXPLICIT_GAPS",
+  "limitations": "Flags are not corrections; operational/release/inflow explanations are not complete, and long-gap pairs are excluded from daily comparison."
+}

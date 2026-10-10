@@ -1,0 +1,30 @@
+{
+  "sample_seed": 20260925,
+  "sample_design": "96-row census of 2015-10-03..06 roster-scope dates plus 39 seeded dates x 9 seeded dam rows for each of four layout/time strata",
+  "sampled_cells": 1500,
+  "verifiable_cells": 1500,
+  "matches": 1500,
+  "errors": 0,
+  "unverifiable": 0,
+  "accuracy": 1.0,
+  "error_rate": 0.0,
+  "wilson_confidence": 0.95,
+  "wilson_lower": 0.9974455692798185,
+  "wilson_upper": 1.0,
+  "wilson_interval_type": "DESCRIPTIVE_SIMPLE_BINOMIAL_INTERVAL",
+  "wilson_population_inference_valid": false,
+  "wilson_interpretation": "Conditional on independent equally sampled Bernoulli trials; not valid as a population-wide confidence bound for this unequal-stratum, bulletin-clustered design.",
+  "target_accuracy": 0.995,
+  "target_decision": "INCONCLUSIVE",
+  "target_decision_reason": "Unequal stratum allocation and bulletin-level clustering prevent population-wide inference from the pooled simple-binomial interval.",
+  "strata_counts": {
+    "EARLY_LAYOUT15": 351,
+    "KNOWN_ROSTER_SCOPE": 96,
+    "MIDDLE_LAYOUT16": 351,
+    "RECENT_LAYOUT16": 351,
+    "TRANSITION_LAYOUT16": 351
+  },
+  "audit_label": "INDEPENDENT_SOURCE_CELL_CONSISTENCY_AUDIT",
+  "reviewer_method": "Computer-assisted direct PDF source-cell reread with pdfplumber using preserved cell bounding boxes; 15 representative visual spot checks; production extractor not invoked.",
+  "correction_candidates": 0
+}

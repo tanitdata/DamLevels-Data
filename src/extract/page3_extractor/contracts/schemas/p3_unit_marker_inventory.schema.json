@@ -1,0 +1,116 @@
+{
+  "table": "p3_unit_marker_inventory",
+  "grain": "one row per detected unit marker occurrence; a unit marker is not a routing anchor",
+  "primary_key": [
+    "source_sha256",
+    "unit_marker_occurrence_id"
+  ],
+  "layer": "02_page_context",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": "run identity this row was produced by"
+    },
+    {
+      "name": "extractor_version",
+      "type": "string",
+      "nullable": false,
+      "description": "page3_extractor version"
+    },
+    {
+      "name": "configuration_hash",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of the semantic configuration"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": "row creation timestamp, UTC ISO-8601"
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": "SHA-256 of the source PDF bytes"
+    },
+    {
+      "name": "source_file",
+      "type": "string",
+      "nullable": false,
+      "description": "path of the source PDF relative to the input directory"
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": "resolved bulletin date; null when undetermined"
+    },
+    {
+      "name": "unit_marker_occurrence_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "unit_marker_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "raw_text",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "normalized_text",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "bbox_x0",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bbox_y0",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bbox_x1",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bbox_y1",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "nearest_fragment_rank",
+      "type": "int",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "is_routing_anchor",
+      "type": "bool",
+      "nullable": false,
+      "description": "always False by contract"
+    }
+  ],
+  "enums": {},
+  "derived_from": null,
+  "schema_version": "1.2.0"
+}

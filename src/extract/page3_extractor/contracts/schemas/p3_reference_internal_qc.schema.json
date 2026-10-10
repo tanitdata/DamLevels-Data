@@ -1,0 +1,142 @@
+{
+  "table": "p3_reference_internal_qc",
+  "grain": "one row per reference snapshot x bulletin date x dam/entity x variable pair",
+  "primary_key": [
+    "reference_internal_qc_id"
+  ],
+  "layer": "05_data/validation",
+  "columns": [
+    {
+      "name": "reference_internal_qc_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "reference_snapshot_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "entity_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "variable_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "page1_field",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "page1_raw_value",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "page1_parsed_value",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "page2_field",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "page2_raw_value",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "page2_parsed_value",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "absolute_difference",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "relative_difference",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "tolerance_used",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "result_status",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: MATCH_WITHIN_TOLERANCE|REFERENCE_INTERNAL_DISAGREEMENT|PAGE1_ONLY|PAGE2_ONLY|BOTH_MISSING|NOT_COMPARABLE"
+    },
+    {
+      "name": "reference_provenance_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "page1_source_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "page2_source_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "source_evidence_path",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "result_status": [
+      "MATCH_WITHIN_TOLERANCE",
+      "REFERENCE_INTERNAL_DISAGREEMENT",
+      "PAGE1_ONLY",
+      "PAGE2_ONLY",
+      "BOTH_MISSING",
+      "NOT_COMPARABLE"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

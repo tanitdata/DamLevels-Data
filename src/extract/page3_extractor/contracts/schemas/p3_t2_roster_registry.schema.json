@@ -1,0 +1,73 @@
+{
+  "table": "p3_t2_roster_registry",
+  "grain": "one row per dam in the versioned T2 roster registry",
+  "primary_key": [
+    "roster_version",
+    "dam_id"
+  ],
+  "layer": "03_extracted_facts",
+  "columns": [
+    {
+      "name": "roster_version",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "dam_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "name_ar",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "name_en",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "aliases",
+      "type": "string",
+      "nullable": true,
+      "description": "pipe separated"
+    },
+    {
+      "name": "valid_from",
+      "type": "date",
+      "nullable": true,
+      "description": "empty means not measured, not 'always'"
+    },
+    {
+      "name": "valid_to",
+      "type": "date",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "evidence",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "registry_status",
+      "type": "string",
+      "nullable": false,
+      "description": "ACCEPTED_PHASE3, or CANDIDATE_PENDING_HUMAN_CONFIRMATION for an entry whose canonical id and English name no human has confirmed"
+    }
+  ],
+  "enums": {
+    "registry_status": [
+      "ACCEPTED_PHASE3",
+      "CANDIDATE_PENDING_HUMAN_CONFIRMATION"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.2.0"
+}

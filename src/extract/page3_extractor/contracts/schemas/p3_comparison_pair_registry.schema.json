@@ -1,0 +1,151 @@
+{
+  "table": "p3_comparison_pair_registry",
+  "grain": "one authorized semantic comparison rule and validity period",
+  "primary_key": [
+    "comparison_rule_id"
+  ],
+  "layer": "04_extractors/contracts",
+  "columns": [
+    {
+      "name": "comparison_rule_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "p3_family",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "p3_field_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "reference_field_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "reference_page_or_source",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "grain",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "entity_scope",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "unit",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "p3_temporal_reference",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "reference_temporal_reference",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "aggregation_rule",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "denominator_class",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "roster_registry_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "valid_from",
+      "type": "date",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "valid_to",
+      "type": "date",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "comparison_method",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "absolute_tolerance",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "relative_tolerance",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "rounding_increment",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: enabled|disabled|draft"
+    },
+    {
+      "name": "evidence_path",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "notes",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "status": [
+      "enabled",
+      "disabled",
+      "draft"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

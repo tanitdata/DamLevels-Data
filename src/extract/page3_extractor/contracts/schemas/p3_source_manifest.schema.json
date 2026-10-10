@@ -1,0 +1,120 @@
+{
+  "table": "p3_source_manifest",
+  "grain": "one row per source PDF file",
+  "primary_key": [
+    "source_sha256"
+  ],
+  "layer": "05_data/bronze",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": "RUN-<phase>-<YYYYMMDD_HHMM>-<config hash>, see USAGE_GUIDELINES.md SS10"
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": "SHA-256 of source PDF bytes; the file's identity"
+    },
+    {
+      "name": "source_file",
+      "type": "string",
+      "nullable": false,
+      "description": "relative path of the source PDF under the read-only corpus root"
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": "parsed bulletin date; null if undetermined (never inferred silently)"
+    },
+    {
+      "name": "parser_version",
+      "type": "string",
+      "nullable": false,
+      "description": "extractor/script version string"
+    },
+    {
+      "name": "config_hash",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of the exact parameters this run used"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": "row creation timestamp, UTC ISO-8601"
+    },
+    {
+      "name": "file_size_bytes",
+      "type": "int",
+      "nullable": false,
+      "description": "bytes"
+    },
+    {
+      "name": "page_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "encrypted",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "open_status",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: ok|error"
+    },
+    {
+      "name": "filename_date_raw",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "filename_date_parsed",
+      "type": "date",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "document_date_raw",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "document_date_parsed",
+      "type": "date",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "date_conflict",
+      "type": "bool",
+      "nullable": false,
+      "description": "filename date vs document date disagree"
+    },
+    {
+      "name": "duplicate_group_id",
+      "type": "string",
+      "nullable": true,
+      "description": "set when two source hashes share a filename date"
+    }
+  ],
+  "enums": {
+    "open_status": [
+      "ok",
+      "error"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

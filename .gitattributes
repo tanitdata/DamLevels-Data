@@ -1,0 +1,4 @@
+# Store every file byte-for-byte. Published SHA-256 values (provenance,
+# receipts, datapackage) refer to these exact bytes, so no line-ending
+# conversion is allowed on commit or checkout.
+* -text

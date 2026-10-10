@@ -1,0 +1,157 @@
+{
+  "table": "p3_engine_run",
+  "grain": "one row per (source PDF, page_index, engine, task)",
+  "primary_key": [
+    "source_sha256",
+    "page_index",
+    "engine",
+    "task",
+    "run_id"
+  ],
+  "layer": "05_data/bronze",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": "RUN-<phase>-<YYYYMMDD_HHMM>-<config hash>, see USAGE_GUIDELINES.md SS10"
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": "SHA-256 of source PDF bytes; the file's identity"
+    },
+    {
+      "name": "source_file",
+      "type": "string",
+      "nullable": false,
+      "description": "relative path of the source PDF under the read-only corpus root"
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": "parsed bulletin date; null if undetermined (never inferred silently)"
+    },
+    {
+      "name": "parser_version",
+      "type": "string",
+      "nullable": false,
+      "description": "extractor/script version string"
+    },
+    {
+      "name": "config_hash",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of the exact parameters this run used"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": "row creation timestamp, UTC ISO-8601"
+    },
+    {
+      "name": "page_index",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "engine",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: pymupdf|pdfplumber|camelot|opencv|ocr"
+    },
+    {
+      "name": "engine_version",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "task",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: words|drawings|geometry|numeric_tokens|ocr"
+    },
+    {
+      "name": "configuration_json",
+      "type": "json",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: ok|error|skipped"
+    },
+    {
+      "name": "runtime_seconds",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "peak_memory_mb",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "candidate_count",
+      "type": "int",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "error_type",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "error_message",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "output_hash",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "deterministic_match",
+      "type": "bool",
+      "nullable": true,
+      "description": "rerun-hash comparison result"
+    }
+  ],
+  "enums": {
+    "engine": [
+      "pymupdf",
+      "pdfplumber",
+      "camelot",
+      "opencv",
+      "ocr"
+    ],
+    "task": [
+      "words",
+      "drawings",
+      "geometry",
+      "numeric_tokens",
+      "ocr"
+    ],
+    "status": [
+      "ok",
+      "error",
+      "skipped"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

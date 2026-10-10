@@ -1,0 +1,127 @@
+{
+  "table": "page3_source_status",
+  "grain": "one row per source PDF with its single terminal status - publication projection",
+  "primary_key": [
+    "source_sha256"
+  ],
+  "layer": "09_publication_exports",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "extractor_version",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "configuration_hash",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "source_file_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "source_relative_path",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bulletin_date_filename",
+      "type": "date",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "bulletin_date_printed",
+      "type": "date",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "date_conflict",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "logical_page_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "layout_family",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "rotation_normalization",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "text_regime",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "terminal_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "fact_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "review_item_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "notes",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "terminal_status": [
+      "SUCCESS_FAST_PATH",
+      "SUCCESS_GEOMETRY_FALLBACK",
+      "SUCCESS_SPECIALIST_FALLBACK",
+      "PARTIAL_REVIEW_REQUIRED",
+      "QUARANTINED_NOT_LOGICAL_PAGE3",
+      "FAILED_SOURCE_READ",
+      "FAILED_UNRESOLVED_LAYOUT",
+      "FAILED_SEMANTIC_VALIDATION",
+      "FAILED_EXTRACTOR_ERROR"
+    ]
+  },
+  "derived_from": "p3_source_status",
+  "schema_version": "1.2.0"
+}

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "damlevels-data"
+version = "1.0.0"
+description = "Provenance-rich daily storage data for Tunisia's large dams: contracts, QA and builders"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = ["pandas", "pdfplumber", "pyarrow", "pydantic"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+gis = ["geopandas", "pyogrio", "shapely", "pyproj", "rasterio"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

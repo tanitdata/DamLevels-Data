@@ -1,0 +1,177 @@
+{
+  "table": "p3_performance_counters",
+  "grain": "one row per (run, source PDF) of stage counters and timings",
+  "primary_key": [
+    "run_id",
+    "source_sha256"
+  ],
+  "layer": "07_performance",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": "run identity this row was produced by"
+    },
+    {
+      "name": "extractor_version",
+      "type": "string",
+      "nullable": false,
+      "description": "page3_extractor version"
+    },
+    {
+      "name": "configuration_hash",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of the semantic configuration"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": "row creation timestamp, UTC ISO-8601"
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": "SHA-256 of the source PDF bytes"
+    },
+    {
+      "name": "source_file",
+      "type": "string",
+      "nullable": false,
+      "description": "path of the source PDF relative to the input directory"
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": "resolved bulletin date; null when undetermined"
+    },
+    {
+      "name": "source_filesystem_reads",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "source_bytes_read",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "pymupdf_document_opens",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "pdfplumber_document_opens",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "textpage_builds",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "word_extractions",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "rawdict_extractions",
+      "type": "int",
+      "nullable": false,
+      "description": "reads of the *existing* TextPage's span layer by the conditional native fallback; at most one per page and zero on a page whose word-level fast path succeeded"
+    },
+    {
+      "name": "glyph_trace_extractions",
+      "type": "int",
+      "nullable": false,
+      "description": "glyph-trace reads of the page's own content stream by the conditional R1 T2 overprint recovery (PATCH-P5D-001); at most one per page and zero on every page that holds no overprint candidate"
+    },
+    {
+      "name": "drawing_scans",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "page_renders",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "ocr_invocations",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "camelot_invocations",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "opencv_invocations",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "cache_hits",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "cache_misses",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "fallback_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "context_build_seconds",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "extract_seconds",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "validate_seconds",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "total_seconds",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    }
+  ],
+  "enums": {},
+  "derived_from": null,
+  "schema_version": "1.3.1",
+  "migration_note": "1.3.1 (Phase 6C, PATCH-P5D-001): additive counter glyph_trace_extractions for the conditional glyph-trace reading of R1 T2 overprint cells. 1.3.0 (Phase 5C): additive counter for the conditional native-span fallback. No column removed or renamed."
+}

@@ -1,0 +1,138 @@
+{
+  "table": "p3_extraction_failure",
+  "grain": "one row per (source PDF, failure event)",
+  "primary_key": [
+    "source_sha256",
+    "page_index",
+    "failure_stage",
+    "failure_code",
+    "run_id"
+  ],
+  "layer": "05_data/validation",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": "RUN-<phase>-<YYYYMMDD_HHMM>-<config hash>, see USAGE_GUIDELINES.md SS10"
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": "SHA-256 of source PDF bytes; the file's identity"
+    },
+    {
+      "name": "source_file",
+      "type": "string",
+      "nullable": false,
+      "description": "relative path of the source PDF under the read-only corpus root"
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": "parsed bulletin date; null if undetermined (never inferred silently)"
+    },
+    {
+      "name": "parser_version",
+      "type": "string",
+      "nullable": false,
+      "description": "extractor/script version string"
+    },
+    {
+      "name": "config_hash",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of the exact parameters this run used"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": "row creation timestamp, UTC ISO-8601"
+    },
+    {
+      "name": "page_index",
+      "type": "int",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "section_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "fragment_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "failure_stage",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "failure_code",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "severity",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: info|warn|error|fatal"
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "engine",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "engine_error",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "evidence_json",
+      "type": "json",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "retry_history_json",
+      "type": "json",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "requires_manual_review",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "severity": [
+      "info",
+      "warn",
+      "error",
+      "fatal"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

@@ -1,0 +1,115 @@
+{
+  "table": "p3_comparison_input_coverage",
+  "grain": "one row per attempted comparison key",
+  "primary_key": [
+    "coverage_id"
+  ],
+  "layer": "05_data/validation",
+  "columns": [
+    {
+      "name": "coverage_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "comparison_rule_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "reference_snapshot_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "entity_scope",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "entity_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "p3_available",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "reference_available",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "derivation_available",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "p3_evidence_available",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "reference_provenance_available",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "semantic_alignment_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "temporal_alignment_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "roster_alignment_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "comparability_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "not_comparable_reason",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {},
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

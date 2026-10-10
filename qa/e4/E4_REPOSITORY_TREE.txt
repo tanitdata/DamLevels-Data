@@ -1,0 +1,80 @@
+DamLevels-Data/
+  [F] .gitignore (344 bytes)
+  [F] CHANGELOG.md (3467 bytes)
+  [F] CITATION.cff (372 bytes)
+  [D] data/
+    [F] capacity_history.csv (15555 bytes)
+    [F] dams.csv (23235 bytes)
+    [D] parquet/
+      [F] .gitkeep (2 bytes)
+      [F] storage.parquet (4219375 bytes)
+      [F] transfers.parquet (833741 bytes)
+    [F] storage.csv (43032838 bytes)
+    [F] transfers.csv (37269752 bytes)
+  [F] datapackage.json (31737 bytes)
+  [D] docs/
+    [F] data_dictionary.md (6741 bytes)
+    [F] known_issues.md (2914 bytes)
+  [D] gis/
+    [D] project/
+      [F] .gitkeep (2 bytes)
+    [D] styles/
+      [F] .gitkeep (2 bytes)
+    [D] vector/
+      [F] .gitkeep (2 bytes)
+  [F] LICENSE (451 bytes)
+  [F] LICENSE-DATA (488 bytes)
+  [D] provenance/
+    [F] CAPACITY_UNKNOWN_PERIODS.csv (434 bytes)
+    [F] E2_BUILD_SUMMARY.json (3585 bytes)
+    [F] ENGINEERING_CHANGES.csv (7768 bytes)
+    [F] national_reconciliation_dispositions.csv (3112 bytes)
+    [F] page1_national_totals.csv (2221744 bytes)
+    [F] storage_lineage.csv (46990961 bytes)
+    [F] storage_missingness.csv (12351081 bytes)
+  [F] pyproject.toml (470 bytes)
+  [D] qa/
+    [F] audit_sample.csv (4075 bytes)
+    [F] E1_VALIDATION_REPORT.md (2985 bytes)
+    [F] E2_VALIDATION_REPORT.md (6356 bytes)
+    [F] E3_VALIDATION_REPORT.md (7356 bytes)
+    [D] e4/
+      [F] bulletin_review_sample.csv (2936 bytes)
+      [F] dams_review.csv (23298 bytes)
+      [F] E4_ACCEPTANCE_CHECKLIST.csv (1683 bytes)
+      [F] E4_ACCEPTANCE_REPORT.md (8896 bytes)
+      [F] qa_exception_sample.csv (2999 bytes)
+      [F] storage_trace_sample.csv (4396 bytes)
+      [F] transfer_review_sample.csv (4339 bytes)
+    [F] fill_consistency.csv (26234366 bytes)
+    [F] national_reconciliation.csv (4864035 bytes)
+    [F] physical_validity.csv (19160755 bytes)
+    [F] printed_fill_reference.csv (31444013 bytes)
+    [F] printed_fill_reference.parquet (2722397 bytes)
+    [F] qa_summary.json (3491 bytes)
+    [F] report.md (4266 bytes)
+    [F] transfer_balance.csv (7728407 bytes)
+    [F] uniqueness.csv (129 bytes)
+  [F] README.md (5309 bytes)
+  [D] sources/
+    [F] file_manifest.csv (10824978 bytes)
+    [F] manifest.csv (1897786 bytes)
+    [D] samples/
+      [F] SAMPLE_SELECTION.csv (1545 bytes)
+    [F] uncanonicalized_files.csv (851729 bytes)
+  [D] src/
+    [F] build_e2.py (48367 bytes)
+    [F] build_e3.py (13403 bytes)
+    [F] build.py (727 bytes)
+    [D] extract/
+      [F] __init__.py (84 bytes)
+    [D] validate/
+      [F] __init__.py (68 bytes)
+      [F] capacity.py (3162 bytes)
+      [F] contracts.py (7307 bytes)
+      [F] models.py (5803 bytes)
+      [F] quality.py (31176 bytes)
+  [D] tests/
+    [F] test_capacity.py (553 bytes)
+    [F] test_models.py (2880 bytes)
+    [F] test_quality.py (4017 bytes)

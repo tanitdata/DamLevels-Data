@@ -1,0 +1,57 @@
+{
+  "source_facts_sha256": "79c278780991b18e039db3bf4414dbaba34760c9dbc819572654a5a30d140062",
+  "source_registry_sha256": "0f4c61bccae9854541cbac82a170ae0085b02b840115563bf634a1b64289f63f",
+  "rows": 274183,
+  "columns": 39,
+  "canonical_field_ids": 22,
+  "measure_ids": 23,
+  "field_measure_grain_combinations": 29,
+  "row_counts_reconciled": true,
+  "all_effective_dates_equal_bulletin": true,
+  "all_blank_fields": [
+    "schema_era",
+    "gap_episode_id"
+  ],
+  "observed_vocabulary": {
+    "grain": {
+      "NATIONAL_DAY": 32440,
+      "ROW_SLOT_DAY": 108056,
+      "REGION_DAY": 23778,
+      "TRANSFER_EDGE_DAY": 35667,
+      "TRANSFER_ACCOUNTING_DAY": 11889,
+      "EXTERNAL_DELIVERY_DAY": 11889,
+      "DAM_DAY": 50464
+    },
+    "value_status": {
+      "PRESENT_NUMERIC": 261561,
+      "PRESENT_ZERO": 8427,
+      "STRUCTURAL_NOT_EXPECTED": 4026,
+      "WITHHELD_UNRESOLVED": 10,
+      "PRESENT_TEXT": 104,
+      "SOURCE_BLANK": 55
+    },
+    "identity_status": {
+      "IDENTITY_NOT_APPLICABLE": 115663,
+      "IDENTITY_UNRESOLVABLE_TEXT_REGIME": 105240,
+      "IDENTITY_RESOLVED": 50464,
+      "IDENTITY_RESOLVED_ROSTER_ENTRY_CANDIDATE": 2816
+    },
+    "identity_provisional": {
+      "FALSE": 271367,
+      "TRUE": 2816
+    },
+    "source_consistency_status": {
+      "SOURCE_CONSISTENT": 22544,
+      "NOT_CHECKED": 218725,
+      "SOURCE_ROUNDING_DIFFERENCE": 32870,
+      "SOURCE_ARITHMETIC_INCONSISTENCY": 44
+    },
+    "usability_status": {
+      "OK": 168583,
+      "PARTIAL": 105600
+    },
+    "effective_date_rule": {
+      "SAME_DAY": 274183
+    }
+  }
+}

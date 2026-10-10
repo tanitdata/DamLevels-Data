@@ -1,0 +1,61 @@
+source_sha256,source_file,bulletin_date,row_label_en,canonical_field_id,canonical_name,raw_text,parsed_value,region_id,dam_id,dam_candidate,identity_status,family_usability_status
+0813c18a8938d5d09e5646590cb5b943f56fd09b98346b1ad066c5e8815f5993,3-7-2022_3.pdf,2022-07-03,Mellegue,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"23,050",23.05,,DAM-MELLEGUE,ملاق,IDENTITY_RESOLVED,OK
+0813c18a8938d5d09e5646590cb5b943f56fd09b98346b1ad066c5e8815f5993,3-7-2022_3.pdf,2022-07-03,Sidi Salem,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"181,479",181.479,,DAM-SIDI-SALEM,سيدي سالم,IDENTITY_RESOLVED,OK
+0813c18a8938d5d09e5646590cb5b943f56fd09b98346b1ad066c5e8815f5993,3-7-2022_3.pdf,2022-07-03,Bouhertma,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"46,794",46.794,,DAM-BOUHERTMA,بو هرتمه,IDENTITY_RESOLVED,OK
+0813c18a8938d5d09e5646590cb5b943f56fd09b98346b1ad066c5e8815f5993,3-7-2022_3.pdf,2022-07-03,Joumine,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"41,619",41.619,,DAM-JOUMINE,جومين,IDENTITY_RESOLVED,OK
+0813c18a8938d5d09e5646590cb5b943f56fd09b98346b1ad066c5e8815f5993,3-7-2022_3.pdf,2022-07-03,Sejnane,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"101,758",101.758,,DAM-SEJNANE,سجنان,IDENTITY_RESOLVED,OK
+0813c18a8938d5d09e5646590cb5b943f56fd09b98346b1ad066c5e8815f5993,3-7-2022_3.pdf,2022-07-03,Siliana,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"7,147",7.147,,DAM-SILIANA,سليانة,IDENTITY_RESOLVED,OK
+0813c18a8938d5d09e5646590cb5b943f56fd09b98346b1ad066c5e8815f5993,3-7-2022_3.pdf,2022-07-03,Bir Mcherga,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"20,032",20.032,,DAM-BIR-MCHERGA,بئر المشارقة,IDENTITY_RESOLVED,OK
+0813c18a8938d5d09e5646590cb5b943f56fd09b98346b1ad066c5e8815f5993,3-7-2022_3.pdf,2022-07-03,El Hma,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"0,463",0.463,,DAM-EL-HMA,الحمى,IDENTITY_RESOLVED_ROSTER_ENTRY_CANDIDATE,OK
+0813c18a8938d5d09e5646590cb5b943f56fd09b98346b1ad066c5e8815f5993,3-7-2022_3.pdf,2022-07-03,Sidi Saad,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"33,833",33.833,,DAM-SIDI-SAAD,سيدي سعد,IDENTITY_RESOLVED,OK
+0813c18a8938d5d09e5646590cb5b943f56fd09b98346b1ad066c5e8815f5993,3-7-2022_3.pdf,2022-07-03,El Houareb,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"4,681",4.681,,DAM-EL-HOUAREB,الهوارب,IDENTITY_RESOLVED,OK
+39d4f7d546f395629c46bac0c1e81a4d5ebfd956c44aa9caed2753d9464955ba,4-7-2022_3.pdf,2022-07-04,Mellegue,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"22,930",22.93,,DAM-MELLEGUE,مالق,IDENTITY_RESOLVED,OK
+39d4f7d546f395629c46bac0c1e81a4d5ebfd956c44aa9caed2753d9464955ba,4-7-2022_3.pdf,2022-07-04,Sidi Salem,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"180,515",180.515,,DAM-SIDI-SALEM,سيدي سالم,IDENTITY_RESOLVED,OK
+39d4f7d546f395629c46bac0c1e81a4d5ebfd956c44aa9caed2753d9464955ba,4-7-2022_3.pdf,2022-07-04,Bouhertma,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"46,451",46.451,,DAM-BOUHERTMA,بو هرتمه,IDENTITY_RESOLVED,OK
+39d4f7d546f395629c46bac0c1e81a4d5ebfd956c44aa9caed2753d9464955ba,4-7-2022_3.pdf,2022-07-04,Joumine,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"41,380",41.38,,DAM-JOUMINE,جومين,IDENTITY_RESOLVED,OK
+39d4f7d546f395629c46bac0c1e81a4d5ebfd956c44aa9caed2753d9464955ba,4-7-2022_3.pdf,2022-07-04,Sejnane,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"101,822",101.822,,DAM-SEJNANE,سجنان,IDENTITY_RESOLVED,OK
+39d4f7d546f395629c46bac0c1e81a4d5ebfd956c44aa9caed2753d9464955ba,4-7-2022_3.pdf,2022-07-04,Siliana,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"7,117",7.117,,DAM-SILIANA,سليانة,IDENTITY_RESOLVED,OK
+39d4f7d546f395629c46bac0c1e81a4d5ebfd956c44aa9caed2753d9464955ba,4-7-2022_3.pdf,2022-07-04,Bir Mcherga,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"19,985",19.985,,DAM-BIR-MCHERGA,بئر المشارقة,IDENTITY_RESOLVED,OK
+39d4f7d546f395629c46bac0c1e81a4d5ebfd956c44aa9caed2753d9464955ba,4-7-2022_3.pdf,2022-07-04,El Hma,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"0,461",0.461,,DAM-EL-HMA,الحمى,IDENTITY_RESOLVED_ROSTER_ENTRY_CANDIDATE,OK
+39d4f7d546f395629c46bac0c1e81a4d5ebfd956c44aa9caed2753d9464955ba,4-7-2022_3.pdf,2022-07-04,Sidi Saad,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"33,755",33.755,,DAM-SIDI-SAAD,سيدي سعد,IDENTITY_RESOLVED,OK
+39d4f7d546f395629c46bac0c1e81a4d5ebfd956c44aa9caed2753d9464955ba,4-7-2022_3.pdf,2022-07-04,El Houareb,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"4,645",4.645,,DAM-EL-HOUAREB,الهوارب,IDENTITY_RESOLVED,OK
+95b6f159a1c33b6f19f7aefca9c2087a0cca1e4f9ce0e8277b803a417b2f965f,1-7-2022_3.pdf,2022-07-01,Mellegue,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"23,211",23.211,,DAM-MELLEGUE,مالق,IDENTITY_RESOLVED,OK
+95b6f159a1c33b6f19f7aefca9c2087a0cca1e4f9ce0e8277b803a417b2f965f,1-7-2022_3.pdf,2022-07-01,Sidi Salem,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"183,695",183.695,,DAM-SIDI-SALEM,سيدي سالم,IDENTITY_RESOLVED,OK
+95b6f159a1c33b6f19f7aefca9c2087a0cca1e4f9ce0e8277b803a417b2f965f,1-7-2022_3.pdf,2022-07-01,Bouhertma,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"47,554",47.554,,DAM-BOUHERTMA,بو هرتمه,IDENTITY_RESOLVED,OK
+95b6f159a1c33b6f19f7aefca9c2087a0cca1e4f9ce0e8277b803a417b2f965f,1-7-2022_3.pdf,2022-07-01,Joumine,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"42,173",42.173,,DAM-JOUMINE,جومين,IDENTITY_RESOLVED,OK
+95b6f159a1c33b6f19f7aefca9c2087a0cca1e4f9ce0e8277b803a417b2f965f,1-7-2022_3.pdf,2022-07-01,Sejnane,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"102,209",102.209,,DAM-SEJNANE,سجنان,IDENTITY_RESOLVED,OK
+95b6f159a1c33b6f19f7aefca9c2087a0cca1e4f9ce0e8277b803a417b2f965f,1-7-2022_3.pdf,2022-07-01,Siliana,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"7,454",7.454,,DAM-SILIANA,سليانة,IDENTITY_RESOLVED,OK
+95b6f159a1c33b6f19f7aefca9c2087a0cca1e4f9ce0e8277b803a417b2f965f,1-7-2022_3.pdf,2022-07-01,Bir Mcherga,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"20,125",20.125,,DAM-BIR-MCHERGA,بئر المشارقة,IDENTITY_RESOLVED,OK
+95b6f159a1c33b6f19f7aefca9c2087a0cca1e4f9ce0e8277b803a417b2f965f,1-7-2022_3.pdf,2022-07-01,El Hma,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"0,468",0.468,,DAM-EL-HMA,الحمى,IDENTITY_RESOLVED_ROSTER_ENTRY_CANDIDATE,OK
+95b6f159a1c33b6f19f7aefca9c2087a0cca1e4f9ce0e8277b803a417b2f965f,1-7-2022_3.pdf,2022-07-01,Sidi Saad,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"33,990",33.99,,DAM-SIDI-SAAD,سيدي سعد,IDENTITY_RESOLVED,OK
+95b6f159a1c33b6f19f7aefca9c2087a0cca1e4f9ce0e8277b803a417b2f965f,1-7-2022_3.pdf,2022-07-01,El Houareb,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"4,797",4.797,,DAM-EL-HOUAREB,الهوارب,IDENTITY_RESOLVED,OK
+b0aab6b90c0d4d000d12e0757cd2a32ebeada359b930c827a3a53b3ad5a3c2ce,30-6-2022_3.pdf,2022-06-30,Mellegue,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"23,371",23.371,,DAM-MELLEGUE,مالق,IDENTITY_RESOLVED,OK
+b0aab6b90c0d4d000d12e0757cd2a32ebeada359b930c827a3a53b3ad5a3c2ce,30-6-2022_3.pdf,2022-06-30,Sidi Salem,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"185,911",185.911,,DAM-SIDI-SALEM,سيدي سالم,IDENTITY_RESOLVED,OK
+b0aab6b90c0d4d000d12e0757cd2a32ebeada359b930c827a3a53b3ad5a3c2ce,30-6-2022_3.pdf,2022-06-30,Bouhertma,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"47,859",47.859,,DAM-BOUHERTMA,بو هرتمه,IDENTITY_RESOLVED,OK
+b0aab6b90c0d4d000d12e0757cd2a32ebeada359b930c827a3a53b3ad5a3c2ce,30-6-2022_3.pdf,2022-06-30,Joumine,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"42,416",42.416,,DAM-JOUMINE,جومين,IDENTITY_RESOLVED,OK
+b0aab6b90c0d4d000d12e0757cd2a32ebeada359b930c827a3a53b3ad5a3c2ce,30-6-2022_3.pdf,2022-06-30,Sejnane,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"102,470",102.47,,DAM-SEJNANE,سجنان,IDENTITY_RESOLVED,OK
+b0aab6b90c0d4d000d12e0757cd2a32ebeada359b930c827a3a53b3ad5a3c2ce,30-6-2022_3.pdf,2022-06-30,Siliana,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"7,607",7.607,,DAM-SILIANA,سليانة,IDENTITY_RESOLVED,OK
+b0aab6b90c0d4d000d12e0757cd2a32ebeada359b930c827a3a53b3ad5a3c2ce,30-6-2022_3.pdf,2022-06-30,Bir Mcherga,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"20,218",20.218,,DAM-BIR-MCHERGA,بئر المشارقة,IDENTITY_RESOLVED,OK
+b0aab6b90c0d4d000d12e0757cd2a32ebeada359b930c827a3a53b3ad5a3c2ce,30-6-2022_3.pdf,2022-06-30,El Hma,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"0,471",0.471,,DAM-EL-HMA,الحمى,IDENTITY_RESOLVED_ROSTER_ENTRY_CANDIDATE,OK
+b0aab6b90c0d4d000d12e0757cd2a32ebeada359b930c827a3a53b3ad5a3c2ce,30-6-2022_3.pdf,2022-06-30,Sidi Saad,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"34,068",34.068,,DAM-SIDI-SAAD,سيدي سعد,IDENTITY_RESOLVED,OK
+b0aab6b90c0d4d000d12e0757cd2a32ebeada359b930c827a3a53b3ad5a3c2ce,30-6-2022_3.pdf,2022-06-30,El Houareb,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"4,877",4.877,,DAM-EL-HOUAREB,الهوارب,IDENTITY_RESOLVED,OK
+df1f96296046ca5d71895a4d2a41c3ce25a5b05fc69d7c2bdaf7758fbd463bb3,2-7-2022_3.pdf,2022-07-02,Mellegue,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"23,131",23.131,,DAM-MELLEGUE,ملاق,IDENTITY_RESOLVED,OK
+df1f96296046ca5d71895a4d2a41c3ce25a5b05fc69d7c2bdaf7758fbd463bb3,2-7-2022_3.pdf,2022-07-02,Sidi Salem,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"183,203",183.203,,DAM-SIDI-SALEM,سيدي سالم,IDENTITY_RESOLVED,OK
+df1f96296046ca5d71895a4d2a41c3ce25a5b05fc69d7c2bdaf7758fbd463bb3,2-7-2022_3.pdf,2022-07-02,Bouhertma,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"47,148",47.148,,DAM-BOUHERTMA,بو هرتمه,IDENTITY_RESOLVED,OK
+df1f96296046ca5d71895a4d2a41c3ce25a5b05fc69d7c2bdaf7758fbd463bb3,2-7-2022_3.pdf,2022-07-02,Joumine,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"41,896",41.896,,DAM-JOUMINE,جومين,IDENTITY_RESOLVED,OK
+df1f96296046ca5d71895a4d2a41c3ce25a5b05fc69d7c2bdaf7758fbd463bb3,2-7-2022_3.pdf,2022-07-02,Sejnane,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"102,014",102.014,,DAM-SEJNANE,سجنان,IDENTITY_RESOLVED,OK
+df1f96296046ca5d71895a4d2a41c3ce25a5b05fc69d7c2bdaf7758fbd463bb3,2-7-2022_3.pdf,2022-07-02,Siliana,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"7,301",7.301,,DAM-SILIANA,سليانة,IDENTITY_RESOLVED,OK
+df1f96296046ca5d71895a4d2a41c3ce25a5b05fc69d7c2bdaf7758fbd463bb3,2-7-2022_3.pdf,2022-07-02,Bir Mcherga,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"20,078",20.078,,DAM-BIR-MCHERGA,بئر المشارقة,IDENTITY_RESOLVED,OK
+df1f96296046ca5d71895a4d2a41c3ce25a5b05fc69d7c2bdaf7758fbd463bb3,2-7-2022_3.pdf,2022-07-02,El Hma,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"0,466",0.466,,DAM-EL-HMA,الحمى,IDENTITY_RESOLVED_ROSTER_ENTRY_CANDIDATE,OK
+df1f96296046ca5d71895a4d2a41c3ce25a5b05fc69d7c2bdaf7758fbd463bb3,2-7-2022_3.pdf,2022-07-02,Sidi Saad,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"33,911",33.911,,DAM-SIDI-SAAD,سيدي سعد,IDENTITY_RESOLVED,OK
+df1f96296046ca5d71895a4d2a41c3ce25a5b05fc69d7c2bdaf7758fbd463bb3,2-7-2022_3.pdf,2022-07-02,El Houareb,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"4,757",4.757,,DAM-EL-HOUAREB,الهوارب,IDENTITY_RESOLVED,OK
+fc7822404d5ad69613b16d5215d4d67b4a12b3956b293f433efaa8f7474c763e,5-7-2022_3.pdf,2022-07-05,Mellegue,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"22,689",22.689,,DAM-MELLEGUE,مالق,IDENTITY_RESOLVED,OK
+fc7822404d5ad69613b16d5215d4d67b4a12b3956b293f433efaa8f7474c763e,5-7-2022_3.pdf,2022-07-05,Sidi Salem,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"179,079",179.079,,DAM-SIDI-SALEM,سيدي سالم,IDENTITY_RESOLVED,OK
+fc7822404d5ad69613b16d5215d4d67b4a12b3956b293f433efaa8f7474c763e,5-7-2022_3.pdf,2022-07-05,Bouhertma,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"46,107",46.107,,DAM-BOUHERTMA,بو هرتمه,IDENTITY_RESOLVED,OK
+fc7822404d5ad69613b16d5215d4d67b4a12b3956b293f433efaa8f7474c763e,5-7-2022_3.pdf,2022-07-05,Joumine,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"41,109",41.109,,DAM-JOUMINE,جومين,IDENTITY_RESOLVED,OK
+fc7822404d5ad69613b16d5215d4d67b4a12b3956b293f433efaa8f7474c763e,5-7-2022_3.pdf,2022-07-05,Sejnane,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"101,630",101.63,,DAM-SEJNANE,سجنان,IDENTITY_RESOLVED,OK
+fc7822404d5ad69613b16d5215d4d67b4a12b3956b293f433efaa8f7474c763e,5-7-2022_3.pdf,2022-07-05,Siliana,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"7,086",7.086,,DAM-SILIANA,سليانة,IDENTITY_RESOLVED,OK
+fc7822404d5ad69613b16d5215d4d67b4a12b3956b293f433efaa8f7474c763e,5-7-2022_3.pdf,2022-07-05,Bir Mcherga,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"19,892",19.892,,DAM-BIR-MCHERGA,بئر المشارقة,IDENTITY_RESOLVED,OK
+fc7822404d5ad69613b16d5215d4d67b4a12b3956b293f433efaa8f7474c763e,5-7-2022_3.pdf,2022-07-05,El Hma,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"0,458",0.458,,DAM-EL-HMA,الحمى,IDENTITY_RESOLVED_ROSTER_ENTRY_CANDIDATE,OK
+fc7822404d5ad69613b16d5215d4d67b4a12b3956b293f433efaa8f7474c763e,5-7-2022_3.pdf,2022-07-05,Sidi Saad,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"33,677",33.677,,DAM-SIDI-SAAD,سيدي سعد,IDENTITY_RESOLVED,OK
+fc7822404d5ad69613b16d5215d4d67b4a12b3956b293f433efaa8f7474c763e,5-7-2022_3.pdf,2022-07-05,El Houareb,p3_t2_dam_stock_mm3,dam_stock_today_mm3,"4,609",4.609,,DAM-EL-HOUAREB,الهوارب,IDENTITY_RESOLVED,OK

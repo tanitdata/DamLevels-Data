@@ -1,0 +1,155 @@
+{
+  "table": "p3_anchor_candidate",
+  "grain": "one row per (source PDF, page_index, anchor_candidate_id)",
+  "primary_key": [
+    "source_sha256",
+    "page_index",
+    "anchor_candidate_id"
+  ],
+  "layer": "05_data/bronze",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": "RUN-<phase>-<YYYYMMDD_HHMM>-<config hash>, see USAGE_GUIDELINES.md SS10"
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": "SHA-256 of source PDF bytes; the file's identity"
+    },
+    {
+      "name": "source_file",
+      "type": "string",
+      "nullable": false,
+      "description": "relative path of the source PDF under the read-only corpus root"
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": "parsed bulletin date; null if undetermined (never inferred silently)"
+    },
+    {
+      "name": "parser_version",
+      "type": "string",
+      "nullable": false,
+      "description": "extractor/script version string"
+    },
+    {
+      "name": "config_hash",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of the exact parameters this run used"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": "row creation timestamp, UTC ISO-8601"
+    },
+    {
+      "name": "page_index",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "anchor_candidate_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "section_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "engine",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "raw_text",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "normalized_text",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bbox_x0",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bbox_y0",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bbox_x1",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bbox_y1",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "match_method",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: exact|nfkc|lam_alef_tolerant|geometry_only"
+    },
+    {
+      "name": "match_score",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "is_hard_negative",
+      "type": "bool",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "review_status",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: confirmed|candidate|rejected"
+    }
+  ],
+  "enums": {
+    "match_method": [
+      "exact",
+      "nfkc",
+      "lam_alef_tolerant",
+      "geometry_only",
+      "partial_tokens_plus_charset"
+    ],
+    "review_status": [
+      "confirmed",
+      "candidate",
+      "rejected"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.2.0",
+  "migration_note": "1.1.0 (Phase 3): match_method extended with partial_tokens_plus_charset. A partial required-token hit corroborated by character coverage is not an exact, NFKC or lam-alef-tolerant match, and calling it one would overstate the evidence."
+}

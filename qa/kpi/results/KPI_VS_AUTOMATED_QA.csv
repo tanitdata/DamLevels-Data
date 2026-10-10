@@ -1,0 +1,21 @@
+kpi_id,name,automated_qa_ref,automated_qa_pct,value_pct,change_pct_points,verdict,note
+K01,Declared-schema conformance (4 tables),E3 Pydantic contracts,100.0,100.0,0.0,CONFIRMED,"frictionless 5.19.1; tables: dams, capacity-history, storage, transfers"
+K04,"Key uniqueness (dam_id, date)",Q18 / C,100.0,100.0,0.0,CONFIRMED,
+K07a,Source roster coverage (publisher side),Q16 / B,90.283,90.2837,0.0007,REFRAMED,"measures what DGBGTH printed (roster growth, dams not yet reported), not an extraction defect"
+K07b,Coverage inside each dam's reporting era,Q17,97.1393,99.9923,2.853,CORRECTED,"Q17 mixed the P1-or-P2 union (129,508) with a calendar-day denominator"
+K09a,"Page 1 = Page 2 storage (same dam, same day)",Q01,99.9992,99.9992,0.0,CONFIRMED,0 more pairs within one printed unit; different: 1
+K09b,"Page 1 = Page 2 inflow (same dam, same day)",Q02,99.9957,99.9913,-0.0044,CONFIRMED,1 more pairs within one printed unit; different: 7
+K09c,"Page 1 = Page 2 outflow (same dam, same day)",Q03,99.933,99.9307,-0.0023,CONFIRMED,2 more pairs within one printed unit; different: 56
+K10a,Daily vs inflow month-to-date counter,Q04,96.2553,99.4795,3.2242,CORRECTED,QA reset the counter on the bulletin date; DLO 0.3 (rules MTD/STD) resets it on the day D-1
+K10b,Daily vs outflow month-to-date counter,Q05,97.0633,99.5568,2.4935,CORRECTED,QA reset the counter on the bulletin date; DLO 0.3 (rules MTD/STD) resets it on the day D-1
+K10c,Daily vs inflow season-to-date counter,Q06,96.7359,97.0307,0.2948,CORRECTED,"QA reset the counter on the bulletin date; DLO 0.3 (rules MTD/STD) resets it on the day D-1; without the Ziatine/Gamgoum rows (column swap, see K10_ziatine_gamgoum_swap_test.csv): 118928/119948 = 99.15 %"
+K10d,Daily vs outflow season-to-date counter,Q07,98.7753,99.0528,0.2775,CORRECTED,QA reset the counter on the bulletin date; DLO 0.3 (rules MTD/STD) resets it on the day D-1
+K11,Printed fill = storage / useful capacity,Q10 / E,95.6707,99.9988,4.3281,CORRECTED,QA rounding rule (fill only) passes 80814; it ignored the rounding of V (0.0005) and C (0.005)
+K12,National total = sum of dam storage,Q09 / F,99.9496,99.9496,0.0,CONFIRMED,4 roster-scope dates excluded as in F
+K13,Physically possible storage value,Q11 / D,98.8487,100.0,1.1513,REFRAMED,"storage above useful capacity is possible (flood surcharge, capacity after sedimentation) and is kept as diagnostic D1"
+K14,Page 3 daily vs season total (qualified),Q14,92.2693,92.5414,0.2721,CORRECTED,without a reset rule this reproduces Q14 exactly (13129/14229); 44 season-reset rows (bulletin of 2 September) are no longer counted as mismatches
+K15a,Page 1 extraction accuracy (sample),A1,100.0,100.0,0.0,CONFIRMED (carried),Wilson lower bound 0.9952; needs the PDFs to recompute
+K15b,Page 2 extraction accuracy (sample),A2,100.0,100.0,0.0,CONFIRMED (carried),Wilson lower bound 0.9952; needs the PDFs to recompute
+K15c,Page 3 transcription accuracy (sample),A3,100.0,100.0,0.0,CONFIRMED (carried),Wilson lower bound 0.9952; needs the PDFs to recompute
+D2,Water balance closes within printed rounding,Q13,,31.1513,,DIAGNOSTIC,"evaporation, seepage, spill and timing are not printed, so non-closure is expected and is not an error rate"
+D3,Robust storage-change review flags,Q12 / H,,4.4442,,DIAGNOSTIC,carried from the automated QA; 7644 changes had MAD = 0 and got no score

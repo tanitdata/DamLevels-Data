@@ -1,0 +1,91 @@
+{
+  "table": "p3_reference_snapshot_diff",
+  "grain": "one row per changed key-field between two reference snapshots",
+  "primary_key": [
+    "diff_id"
+  ],
+  "layer": "05_data/validation",
+  "columns": [
+    {
+      "name": "diff_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "old_snapshot_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "new_snapshot_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "record_key",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "field_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "old_raw_value",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "new_raw_value",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "old_parsed_value",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "new_parsed_value",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "change_type",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "change_reason",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "source_evidence_path",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    }
+  ],
+  "enums": {},
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

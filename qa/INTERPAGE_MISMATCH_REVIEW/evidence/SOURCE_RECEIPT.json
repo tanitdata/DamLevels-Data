@@ -1,0 +1,13 @@
+{
+  "merged_rows": 129508,
+  "p3_cells": 274183,
+  "p1_roster_rows": 129391,
+  "p1_dates": 3981,
+  "p3_dates": 3963,
+  "original_comparison_run_available": false,
+  "rounding_note": "Assumed precision bounds; these do not establish semantic equality.",
+  "source_files": {
+    "<INTERPAGE_INPUTS>/merged_daily_candidate.csv": "1b685a551fd510ec631d28cca844d32fa4ee560177ac60a4c7a4869d895c5e74",
+    "<INTERPAGE_INPUTS>/p3_cell_observation.csv": "02f98bcef38b38347f50597d4776a1791128cbf818835b14005205ad978389ef"
+  }
+}

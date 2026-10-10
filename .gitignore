@@ -1,0 +1,31 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
+.env.*
+
+# Machine-specific locations of external inputs (copy config/paths.example.toml)
+config/paths.local.toml
+
+# Large or third-party binaries never go into git
+*.db
+*.sqlite
+*.gpkg
+*.tif
+*.tiff
+*.nc
+*.hdf
+*.h5
+*.joblib
+*.pt
+
+# Bulletins: only the two documented samples are tracked
+sources/samples/*.pdf
+!sources/samples/2-7-2014.pdf
+!sources/samples/01-02-2020.pdf
+
+# Page 1+2 pipeline run outputs
+/src/extract/DAM_DATA_PIPELINE_page1and2/outputs/

@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use this dataset or code, please cite it as below, and credit the source data to DGBGTH / ONAGRI (see LICENSE-DATA)."
+title: "DamLevels-Data: daily storage of Tunisia's 36 large dams, 2014-2025"
+type: dataset
+version: 1.0.0
+date-released: 2026-10-10
+authors:
+  - family-names: "Nasfi"
+    given-names: "Mohamed Hamza"
+  - family-names: "Boulares"
+    given-names: "Soura"
+  - family-names: "Gasmi"
+    given-names: "Tarek"
+abstract: >-
+  Provenance-traced reconstruction of the daily DGBGTH dam bulletins published
+  by ONAGRI (July 2014 to October 2025): 129,390 storage observations for 36
+  dams, qualified inter-dam transfer facts, dam metadata and capacity regimes,
+  QA results, and GIS layers. Values are extracted from the PDF text layer and
+  vector rulings by deterministic engines (no OCR) and every row links to its
+  source bulletin.
+keywords:
+  - Tunisia
+  - dams
+  - reservoir storage
+  - hydrology
+  - open data
+license: CC-BY-4.0
+references:
+  - type: data
+    title: "Situation des barrages (daily bulletins)"
+    authors:
+      - name: "Direction Générale des Barrages et des Grands Travaux Hydrauliques (DGBGTH)"
+    publisher:
+      name: "Observatoire National de l'Agriculture (ONAGRI)"
+    url: "https://www.onagri.nat.tn/Situation-des-barrages/fr/19"
+    license-url: "https://catalog.agridata.tn"

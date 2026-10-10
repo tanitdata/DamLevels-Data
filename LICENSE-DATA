@@ -1,0 +1,72 @@
+DATA LICENSING — DamLevels-Data
+
+Three licences apply, depending on the file. In every case keep the source
+attribution in section 1.
+
+---------------------------------------------------------------------------
+1. Source values (DGBGTH bulletins published by ONAGRI)
+---------------------------------------------------------------------------
+
+The daily bulletins "Situation des barrages" are produced by the Direction
+Générale des Barrages et des Grands Travaux Hydrauliques (DGBGTH), Ministère
+de l'Agriculture, des Ressources Hydrauliques et de la Pêche, and published by
+the Observatoire National de l'Agriculture (ONAGRI):
+https://www.onagri.nat.tn/Situation-des-barrages/fr/19
+
+The values are reused under the Licence Nationale de Données Publiques
+Ouvertes (Décret gouvernemental n° 2021-3 du 6 janvier 2021 relatif aux
+données publiques ouvertes), the licence under which ONAGRI publishes its open
+data (https://catalog.agridata.tn). The bulletin page itself does not state a
+licence; this repository relies on the national licence as the default for
+ONAGRI open data. It permits reuse, redistribution and adaptation, including
+commercial use, provided the data producer and the date of the data are
+referenced.
+
+Required attribution:
+
+  Source: DGBGTH, Ministère de l'Agriculture, des Ressources Hydrauliques et
+  de la Pêche (Tunisie), bulletins "Situation des barrages" published by
+  ONAGRI, 2014-07-02 to 2025-10-10. Licence Nationale de Données Publiques
+  Ouvertes. Extracted and restructured by DamLevels-Data.
+
+The two sample bulletins in sources/samples/ are redistributed under the same
+licence. All other bulletins are available from ONAGRI; sources/manifest.csv
+gives the original_url of each.
+
+---------------------------------------------------------------------------
+2. Tables and documentation created by this project — CC BY 4.0
+---------------------------------------------------------------------------
+
+Everything in data/, sources/, provenance/, qa/, docs/ and datapackage.json,
+plus gis/vector/dams.geojson, gis/vector/transfer_network.geojson,
+gis/styles/ and gis/project/, is licensed under the Creative Commons
+Attribution 4.0 International licence:
+https://creativecommons.org/licenses/by/4.0/
+
+Attribution: DamLevels-Data (see CITATION.cff), together with the source
+attribution in section 1.
+
+---------------------------------------------------------------------------
+3. Terrain-derived GIS layers — CC BY-NC-SA 4.0
+---------------------------------------------------------------------------
+
+gis/vector/catchments.geojson, gis/vector/catchments_incremental.geojson and
+gis/vector/natural_network.geojson were delineated from third-party terrain
+and hydrography rasters and are licensed under Creative Commons
+Attribution-NonCommercial-ShareAlike 4.0 International:
+https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+This follows the most restrictive upstream terms:
+
+- FABDEM v1-2 (Hawker et al., University of Bristol): CC BY-NC-SA 4.0;
+  commercial use requires permission from the University of Bristol.
+  https://doi.org/10.5523/bris.s5hqmjcdj8yo2ibzi9b4ew3sn
+- MERIT Hydro v1.0.1 (Yamazaki et al., 2019, University of Tokyo): used
+  under its CC BY-NC 4.0 option.
+  https://global-hydrodynamics.github.io/MERIT_Hydro/
+- JRC Global Surface Water v1.4 (Pekel et al., 2016, Nature 540, 418-422):
+  free use with attribution ("Source: EC JRC/Google").
+
+No raster from these sources is redistributed (gis/RASTER_MANIFEST.csv lists
+them by hash only). Commercial reuse of these three layers is not covered by
+this repository.

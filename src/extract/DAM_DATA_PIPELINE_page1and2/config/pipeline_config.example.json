@@ -1,0 +1,7 @@
+{
+  "page1_pdf_root": "C:/path/to/direct/page1/pdf/children",
+  "page2_pdf_root": "C:/path/to/direct/page2/pdf/children",
+  "output_base": "../outputs/runs",
+  "page1_workers": 8,
+  "page2_workers": 12
+}

@@ -1,0 +1,198 @@
+{
+  "table": "p3_cell_evidence",
+  "grain": "one row per (source PDF, section_id, fragment_id, cell_id)",
+  "primary_key": [
+    "source_sha256",
+    "section_id",
+    "fragment_id",
+    "cell_id"
+  ],
+  "layer": "06_audit/cell_evidence",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": "RUN-<phase>-<YYYYMMDD_HHMM>-<config hash>, see USAGE_GUIDELINES.md SS10"
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": "SHA-256 of source PDF bytes; the file's identity"
+    },
+    {
+      "name": "source_file",
+      "type": "string",
+      "nullable": false,
+      "description": "relative path of the source PDF under the read-only corpus root"
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": "parsed bulletin date; null if undetermined (never inferred silently)"
+    },
+    {
+      "name": "parser_version",
+      "type": "string",
+      "nullable": false,
+      "description": "extractor/script version string"
+    },
+    {
+      "name": "config_hash",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of the exact parameters this run used"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": "row creation timestamp, UTC ISO-8601"
+    },
+    {
+      "name": "page_index",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "section_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "fragment_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "cell_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "row_index",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "column_index",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bbox_x0",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bbox_y0",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bbox_x1",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bbox_y1",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "raw_text",
+      "type": "string",
+      "nullable": true,
+      "description": "null only for structurally absent cells, never for blanks (blanks keep empty-string raw_text)"
+    },
+    {
+      "name": "normalized_text",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "strict_parsed_value",
+      "type": "float",
+      "nullable": true,
+      "description": "null for blank/dash/text-state cells; never coerced to 0"
+    },
+    {
+      "name": "repaired_value",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "semantic_state",
+      "type": "string",
+      "nullable": false,
+      "description": "enum: numeric|blank|dash|hydraulic_text_state|upstream_error|row_absent"
+    },
+    {
+      "name": "data_type",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "engine",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "engine_version",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "repair_rule_id",
+      "type": "string",
+      "nullable": true,
+      "description": "required if repaired_value is not null"
+    },
+    {
+      "name": "confidence",
+      "type": "float",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "crop_path",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "semantic_state": [
+      "numeric",
+      "blank",
+      "dash",
+      "hydraulic_text_state",
+      "upstream_error",
+      "row_absent",
+      "number",
+      "text",
+      "suspected_text_state",
+      "unparseable_numeric_candidate"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.2.0",
+  "migration_note": "1.1.0 (Phase 3): semantic_state enum extended additively from 6 to 9 values. Added text, suspected_text_state and unparseable_numeric_candidate so a non-numeric cell keeps its measured state instead of being flattened into an existing value. No value was removed or renamed; every 1.0.0 row stays valid."
+}

@@ -1,0 +1,403 @@
+{
+  "table": "p3_cell_observation",
+  "grain": "one row per extracted scalar or explicit textual state, linked to one cell",
+  "primary_key": [
+    "source_sha256",
+    "record_id",
+    "canonical_field_id"
+  ],
+  "layer": "03_extracted_facts",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": "run identity this row was produced by"
+    },
+    {
+      "name": "extractor_version",
+      "type": "string",
+      "nullable": false,
+      "description": "page3_extractor version"
+    },
+    {
+      "name": "configuration_hash",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of the semantic configuration"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": "row creation timestamp, UTC ISO-8601"
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": "SHA-256 of the source PDF bytes"
+    },
+    {
+      "name": "source_file",
+      "type": "string",
+      "nullable": false,
+      "description": "path of the source PDF relative to the input directory"
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": "resolved bulletin date; null when undetermined"
+    },
+    {
+      "name": "source_file_id",
+      "type": "string",
+      "nullable": false,
+      "description": "stable per-file id inside this run"
+    },
+    {
+      "name": "source_relative_path",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bulletin_date_filename",
+      "type": "date",
+      "nullable": true,
+      "description": "date parsed from the file name"
+    },
+    {
+      "name": "bulletin_date_printed",
+      "type": "date",
+      "nullable": true,
+      "description": "date printed on the page, captured in the same pass"
+    },
+    {
+      "name": "logical_page_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "layout_family",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "rotation_normalization",
+      "type": "string",
+      "nullable": false,
+      "description": "identity or derotated_<deg>"
+    },
+    {
+      "name": "family_id",
+      "type": "string",
+      "nullable": false,
+      "description": "T1..T6"
+    },
+    {
+      "name": "record_type",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "record_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "row_label_raw",
+      "type": "string",
+      "nullable": true,
+      "description": "label exactly as read, duplicates preserved"
+    },
+    {
+      "name": "row_label_ar",
+      "type": "string",
+      "nullable": true,
+      "description": "normalized Arabic; empty when the regime makes it unrecoverable"
+    },
+    {
+      "name": "row_label_en",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "canonical_label_ar",
+      "type": "string",
+      "nullable": true,
+      "description": "readable Arabic label from the semantic registry; unlike row_label_ar this is never garbled by the page's text regime, and it never replaces row_label_raw"
+    },
+    {
+      "name": "canonical_label_en",
+      "type": "string",
+      "nullable": true,
+      "description": "readable English label from the semantic registry"
+    },
+    {
+      "name": "canonical_field_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "canonical_name",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "raw_text",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "decoded_text_ar",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "parsed_value",
+      "type": "float",
+      "nullable": true,
+      "description": "null for every non-numeric state; never coerced to 0"
+    },
+    {
+      "name": "value_type",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "unit",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "temporal_reference",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "semantic_state",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "region_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "dam_id",
+      "type": "string",
+      "nullable": true,
+      "description": "empty when the roster match is unresolved"
+    },
+    {
+      "name": "dam_candidate",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "match_method",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "match_confidence",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "source_node_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "destination_node_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "via_node_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "is_accounting_observation",
+      "type": "bool",
+      "nullable": false,
+      "description": "True only for the T5 restating row; never an edge"
+    },
+    {
+      "name": "schema_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "layout_slot",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "column_semantics_method",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "anchor_confirmation",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "evidence_id",
+      "type": "string",
+      "nullable": true,
+      "description": "resolves to exactly one cell of one fragment"
+    },
+    {
+      "name": "extraction_status",
+      "type": "string",
+      "nullable": false,
+      "description": "did this extractor read the cell faithfully? Says nothing about whether the source's arithmetic reconciles"
+    },
+    {
+      "name": "validation_status",
+      "type": "string",
+      "nullable": false,
+      "description": "page-level verdict: the strongest result of every rule that ran on this fact's family. Not a per-fact quality filter - use extraction_status and source_consistency_status for that"
+    },
+    {
+      "name": "source_consistency_status",
+      "type": "string",
+      "nullable": false,
+      "description": "does the bulletin's own printed arithmetic hold for this fact? Set only by rules that consumed this fact, so it never smears one page's disagreement over unrelated values"
+    },
+    {
+      "name": "review_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "comparison_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "recovery_method",
+      "type": "string",
+      "nullable": true,
+      "description": "set only when the published value was reassembled from a token the page's word segmentation welded onto an adjacent label"
+    },
+    {
+      "name": "recovery_gate",
+      "type": "string",
+      "nullable": true,
+      "description": "the printed identity that confirmed the reassembled value, or the reason it was refused"
+    },
+    {
+      "name": "recovery_evidence",
+      "type": "string",
+      "nullable": true,
+      "description": "the value cell's own text, the assembled text, and every donor token with its box and character offsets"
+    },
+    {
+      "name": "notes",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "dam_candidate_raw",
+      "type": "string",
+      "nullable": true,
+      "description": "the row label exactly as the layer it was read from gave it; raw evidence, never a display label"
+    },
+    {
+      "name": "dam_candidate_normalized",
+      "type": "string",
+      "nullable": true,
+      "description": "NFKC-normalised, tatweel- and bidi-control-stripped label with the parenthetical level qualifier separated and any numeric span content removed; the string the roster was matched against"
+    },
+    {
+      "name": "identity_status",
+      "type": "string",
+      "nullable": false,
+      "description": "whether the entity behind this row is resolved, and if not why not; separate from numeric authenticity on purpose"
+    },
+    {
+      "name": "family_usability_status",
+      "type": "string",
+      "nullable": false,
+      "description": "usability of this fact's own T-family on this page, equal to p3_family_status.family_status; a page whose only partial family is T2 is distinguishable from one with a T1/T3/T4/T5/T6 defect"
+    }
+  ],
+  "enums": {
+    "semantic_state": [
+      "numeric",
+      "blank",
+      "dash",
+      "upstream_error",
+      "hydraulic_text_state",
+      "text",
+      "row_absent",
+      "suspected_text_state",
+      "unparseable_numeric_candidate"
+    ],
+    "extraction_status": [
+      "EXTRACTED",
+      "UNPARSEABLE",
+      "SOURCE_BLANK",
+      "UPSTREAM_ERROR"
+    ],
+    "source_consistency_status": [
+      "SOURCE_CONSISTENT",
+      "SOURCE_ROUNDING_DIFFERENCE",
+      "SOURCE_ARITHMETIC_INCONSISTENCY",
+      "NOT_CHECKED"
+    ],
+    "identity_status": [
+      "IDENTITY_RESOLVED",
+      "IDENTITY_RESOLVED_ROSTER_ENTRY_CANDIDATE",
+      "IDENTITY_UNRESOLVED_NO_EXACT_MATCH",
+      "IDENTITY_UNRESOLVABLE_TEXT_REGIME",
+      "IDENTITY_ROW_LABEL_ABSENT",
+      "IDENTITY_NOT_APPLICABLE"
+    ],
+    "family_usability_status": [
+      "OK",
+      "PARTIAL",
+      "FRAGMENT_ABSENT",
+      "UNRESOLVED_SHAPE",
+      "QUARANTINED"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.3.0",
+  "migration_note": "1.3.0 (Phase 5C): additive only. dam_candidate_raw / dam_candidate_normalized separate raw label evidence from the string identity was matched against; identity_status separates entity identity from numeric authenticity; family_usability_status publishes the per-family status that p3_family_status already computed. No column was removed or renamed, so every row valid under 1.2.0 remains valid."
+}

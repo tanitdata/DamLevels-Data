@@ -1,0 +1,43 @@
+{
+  "table": "p3_accounting_relationship_registry",
+  "grain": "one row per accounting relationship (never a graph edge)",
+  "primary_key": [
+    "rel_id"
+  ],
+  "layer": "05_data/connectivity",
+  "columns": [
+    {
+      "name": "rel_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "subject_node_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "expression",
+      "type": "string",
+      "nullable": false,
+      "description": "e.g. sejnane_transfer_inflow = edge2 + edge3"
+    },
+    {
+      "name": "tolerance_class",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "evidence_path",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    }
+  ],
+  "enums": {},
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

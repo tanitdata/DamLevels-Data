@@ -1,0 +1,79 @@
+{
+  "table": "page3_open_review_items",
+  "grain": "one row per unresolved review item a reader should know about",
+  "primary_key": [
+    "review_item_id"
+  ],
+  "layer": "09_publication_exports",
+  "columns": [
+    {
+      "name": "review_item_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "source_relative_path",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "family_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "entity_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "review_reason",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "priority",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "evidence_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "review_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    }
+  ],
+  "enums": {},
+  "derived_from": "p3_manual_review_queue",
+  "schema_version": "1.2.0"
+}

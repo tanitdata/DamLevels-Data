@@ -1,0 +1,126 @@
+{
+  "table": "p3_anchor_attempt",
+  "grain": "one row per (source PDF, anchor definition) - always emitted, one terminal status",
+  "primary_key": [
+    "source_sha256",
+    "anchor_id"
+  ],
+  "layer": "02_page_context",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": "run identity this row was produced by"
+    },
+    {
+      "name": "extractor_version",
+      "type": "string",
+      "nullable": false,
+      "description": "page3_extractor version"
+    },
+    {
+      "name": "configuration_hash",
+      "type": "string",
+      "nullable": false,
+      "description": "hash of the semantic configuration"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime",
+      "nullable": false,
+      "description": "row creation timestamp, UTC ISO-8601"
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": false,
+      "description": "SHA-256 of the source PDF bytes"
+    },
+    {
+      "name": "source_file",
+      "type": "string",
+      "nullable": false,
+      "description": "path of the source PDF relative to the input directory"
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": "resolved bulletin date; null when undetermined"
+    },
+    {
+      "name": "anchor_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "section_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "text_regime",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "terminal_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "reason",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "candidate_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "best_score",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "best_match_method",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "best_raw_text",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "best_normalized_text",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "terminal_status": [
+      "ACCEPTED",
+      "REJECTED_NO_CANDIDATE",
+      "REJECTED_PROHIBITED_TOKEN",
+      "REJECTED_DISTANCE_GATE",
+      "REJECTED_BELOW_THRESHOLD",
+      "AMBIGUOUS_MULTIPLE_CANDIDATES",
+      "TEXT_REGIME_INCOMPATIBLE"
+    ]
+  },
+  "derived_from": null,
+  "schema_version": "1.2.0"
+}

@@ -1,0 +1,95 @@
+{
+  "manifest": {
+    "canonical_bulletins": 3985,
+    "complete_three_pages": 3962,
+    "partial_bulletins": 23,
+    "page1_dates": 3981,
+    "page2_dates": 3983,
+    "page3_dates": 3963,
+    "multi_source_dates": 0,
+    "filename_date_mismatches": [
+      [
+        "3",
+        "28-9-2019_3.pdf",
+        "2019-09-29"
+      ],
+      [
+        "3",
+        "29-9-2019_3.pdf",
+        "2019-09-30"
+      ]
+    ],
+    "unresolved_file_records": 3270,
+    "accepted_source_pairs_unmatched": 0,
+    "availability": {
+      "1|2|3": 3962,
+      "1|2": 18,
+      "3": 1,
+      "2": 3,
+      "1": 1
+    }
+  },
+  "lineage_scan": {
+    "lineage_rows_scanned": 1896094,
+    "lineage_rows_retained": 214011,
+    "duplicate_lineage_keys": 0
+  },
+  "storage": {
+    "page1_source_rows": 129391,
+    "storage_rows": 214010,
+    "primary_storage_rows": 129390,
+    "printed_fill_rows": 84620,
+    "storage_missing_source_rows": 1,
+    "printed_fill_missing_source_rows": 44771,
+    "storage_date_min": "2014-07-02",
+    "storage_date_max": "2025-10-10",
+    "storage_dams": 36,
+    "lineage_status": {
+      "LINKED": 214010
+    }
+  },
+  "transfers": {
+    "transfer_rows": 47556,
+    "semantic_categories": {
+      "PROBABLE_PHYSICAL_EDGE_WITH_UNRESOLVED_DAM_CROSSWALK": 23778,
+      "PROBABLE_PHYSICAL_TRANSFER_EDGE": 11889,
+      "PROBABLE_ACCOUNTING_OBSERVATION_NOT_HYDRAULIC_EDGE": 11889
+    },
+    "value_statuses": {
+      "PRESENT_NUMERIC": 38105,
+      "PRESENT_ZERO": 5370,
+      "STRUCTURAL_NOT_EXPECTED": 4026,
+      "SOURCE_BLANK": 55
+    },
+    "date_min": "2014-07-02",
+    "date_max": "2025-10-10"
+  },
+  "dams": {
+    "missing_arabic": 21,
+    "missing_basin": 30,
+    "basin_filled": 6
+  },
+  "capacity_unknown_periods": 3,
+  "v010_unchanged": true,
+  "source_hashes": {
+    "page1_observations": "91e8373f36ff68b2080f54762ea9d15c041d3f9b45b21768d9b694168939ac85",
+    "page2_observations": "ec1c1002ecf5d3c6a9e3ad29a52273870fb4d5e774669c6e6ab0284a9b6d22b5",
+    "page3_canonical_facts": "79c278780991b18e039db3bf4414dbaba34760c9dbc819572654a5a30d140062",
+    "page3_transfer_facts": "d6f82b94529f19057642c745f4cc3b711e1efd469bbbd24dcb1f96f77e6d4863",
+    "page1_lineage": "8a423c44945f6e1113641a143370c7d6740f9197c0c944fb968cc98904231724"
+  },
+  "output_hashes": {
+    "sources/file_manifest.csv": "2debc06e3532edaca2b2d78bb30f8933d0b41a4e85fe835817b226aced9ebb14",
+    "sources/manifest.csv": "0c7d2bee6d5cd8c38fae5cf0342aaef08ea4ed5cced0bda4f3cca2b834873791",
+    "sources/uncanonicalized_files.csv": "0423c07921a23a8f63a2cd83e399e5efbb0a281c1a888617b0957aee44043231",
+    "data/dams.csv": "df0e23a6505bc5bcdcb4bc29292326ab32c6c65b853ce70e04f90ec79e480955",
+    "data/storage.csv": "bcded2d533ca70e90f7df40862b5eb6af8727a328b6147bb65e39f77f266ff22",
+    "data/transfers.csv": "41ef5f2b05f6c2881c2bac87803f1652152542f91846d4108ba67eb7242a18cc",
+    "data/parquet/storage.parquet": "aa9ccd7c263e357bf7ffea3e34e14f241bc36e56b4c0e5d9fe225a0359680675",
+    "data/parquet/transfers.parquet": "e1b0f2cc36240cfe0583222eba19d1216f82ea6d86c8122c78ca2f8a96307d30",
+    "provenance/storage_lineage.csv": "7e4ad903d84cbca498b9a95bf4f38db11ef36d31fab40601619e8170b24b7097",
+    "provenance/storage_missingness.csv": "5c62a81eb8529e692a146f6062728b0b34aa80e7becddfc9b875524f5db9572c",
+    "provenance/CAPACITY_UNKNOWN_PERIODS.csv": "fbe3fdbb412526f24458863c14743c7f22972e95d78ca59b20cb01cb7e4ebca6",
+    "datapackage.json": "33937905d6395fc87da8c689b5fcafb68a6e5d18e50ec7dc60952cf72a0441ef"
+  }
+}

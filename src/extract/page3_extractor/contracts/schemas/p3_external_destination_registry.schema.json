@@ -1,0 +1,37 @@
+{
+  "table": "p3_external_destination_registry",
+  "grain": "one row per external/environmental destination",
+  "primary_key": [
+    "dest_id"
+  ],
+  "layer": "05_data/connectivity",
+  "columns": [
+    {
+      "name": "dest_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "dest_class",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "notes",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {},
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}

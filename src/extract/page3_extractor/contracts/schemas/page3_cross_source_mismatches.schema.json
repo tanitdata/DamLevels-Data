@@ -1,0 +1,203 @@
+{
+  "table": "page3_cross_source_mismatches",
+  "grain": "one row per Page 3 versus reference comparison that is not a clean match",
+  "primary_key": [
+    "comparison_id"
+  ],
+  "layer": "09_publication_exports",
+  "columns": [
+    {
+      "name": "comparison_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "comparison_rule_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "mapping_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "reference_snapshot_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "reference_snapshot_sha256",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "reference_audit_state",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "source_sha256",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "bulletin_date",
+      "type": "date",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "entity_scope",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "entity_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "p3_field_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "reference_field_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "unit",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "p3_temporal_reference",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "reference_temporal_reference",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "p3_raw_value",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "p3_parsed_value",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "p3_evidence_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "reference_raw_value",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "reference_parsed_value",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "reference_source_evidence_id",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "difference",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "absolute_tolerance",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "relative_tolerance",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "comparison_result",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "mismatch_attribution_status",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "attribution_confidence",
+      "type": "float",
+      "nullable": true,
+      "description": ""
+    },
+    {
+      "name": "required_next_evidence",
+      "type": "string",
+      "nullable": true,
+      "description": ""
+    }
+  ],
+  "enums": {
+    "comparison_result": [
+      "MATCH_EXACT",
+      "MATCH_WITHIN_ROUNDING",
+      "NOT_COMPARABLE_SEMANTICS",
+      "NOT_COMPARABLE_TEMPORAL",
+      "NOT_COMPARABLE_ROSTER",
+      "LIKELY_PAGE3_EXTRACTION_ERROR",
+      "LIKELY_REFERENCE_CSV_ISSUE",
+      "REFERENCE_INTERNAL_PAGE1_PAGE2_CONFLICT",
+      "POSSIBLE_GENUINE_SOURCE_DISAGREEMENT",
+      "UNIT_OR_ROUNDING_MISMATCH",
+      "ROSTER_OR_CAPACITY_REGIME_MISMATCH",
+      "AMBIGUOUS_MULTIPLE_CAUSES",
+      "UNRESOLVED_NEEDS_SOURCE_REVIEW"
+    ]
+  },
+  "derived_from": "p3_cross_source_comparison",
+  "schema_version": "1.2.0"
+}

@@ -1,0 +1,11 @@
+{
+  "october_restricted_max_abs": 40.62099999999987,
+  "october_union_max_abs": 0.0009999999999763531,
+  "july_2_and_3_p1_unchanged_dams": {
+    "2022-07-02": 36,
+    "2022-07-03": 36
+  },
+  "highest_likelihood_descriptive_break": "2024-01-09",
+  "shift_definition": "P3(t) versus reference(t+k), k in {-1,0,1}; identical complete dates per pair/regime",
+  "caveat": "Union roster cannot detect contributors missing from both pages. No source values corrected."
+}

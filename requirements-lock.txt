@@ -1,0 +1,34 @@
+# Repository tooling: src/build.py, src/validate, tests, qa/kpi/run_kpis.py
+# Recorded 2026-10-10 from the Python 3.14.3 environment used for E7; the full
+# rebuild (src/build.py and qa/kpi/run_kpis.py) was verified with these versions.
+# pdfplumber / pdfminer.six match src/extract/DAM_DATA_PIPELINE_page1and2/requirements-lock.txt.
+# frictionless is needed for KPI K01 and the schema part of K03 (its own
+# dependencies are not pinned here). The extraction engines keep their own locks.
+frictionless==5.19.1
+pandas==2.3.3
+numpy==2.4.4
+pyarrow==24.0.0
+pydantic==2.12.5
+pydantic-core==2.41.5
+annotated-types==0.7.0
+typing-extensions==4.15.0
+typing-inspection==0.4.2
+python-dateutil==2.9.0.post0
+pytz==2026.2
+tzdata==2026.2
+six==1.17.0
+pdfplumber==0.11.9
+pdfminer.six==20251230
+pypdfium2==4.30.0
+Pillow==12.2.0
+charset-normalizer==3.4.7
+cryptography==46.0.6
+cffi==2.0.0
+pycparser==3.0
+matplotlib==3.10.9
+pytest==9.0.2
+iniconfig==2.3.0
+packaging==26.0
+pluggy==1.6.0
+pygments==2.20.0
+colorama==0.4.6

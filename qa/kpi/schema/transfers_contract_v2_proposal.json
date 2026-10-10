@@ -1,0 +1,177 @@
+{
+  "name": "transfers",
+  "path": "data/transfers.csv",
+  "schema": {
+    "primaryKey": "transfer_observation_id",
+    "fields": [
+      {
+        "name": "transfer_observation_id",
+        "type": "string",
+        "description": "Selected Page 3 canonical fact ID."
+      },
+      {
+        "name": "date",
+        "type": "date",
+        "description": "Kept as published (equals bulletin_date, rule SAME_DAY). Use phenomenon_time_start/end for the day covered."
+      },
+      {
+        "name": "bulletin_date",
+        "type": "date",
+        "description": "Bulletin date."
+      },
+      {
+        "name": "effective_date_rule",
+        "type": "string",
+        "description": "Date rule recorded by the selected product."
+      },
+      {
+        "name": "dlo_temporal_rule",
+        "type": "string",
+        "constraints": {
+          "enum": [
+            "DAY_BEFORE_BULLETIN",
+            "SEASON_TO_DATE",
+            "PREVIOUS_SEASON_TO_DATE_UNRESOLVED"
+          ]
+        },
+        "description": "DLO 0.3 temporal rule of the source field and grain (mappings/VARIABLE_CATALOGUE.csv)."
+      },
+      {
+        "name": "phenomenon_time_start",
+        "type": "date",
+        "description": "First day covered: D-1 for today; 1 September of the season of D-1 for current_season_to_date; blank when the rule is unresolved."
+      },
+      {
+        "name": "phenomenon_time_end_exclusive",
+        "type": "date",
+        "description": "Day after the last day covered: the bulletin date D; blank when the rule is unresolved."
+      },
+      {
+        "name": "from_dam_id",
+        "type": "string",
+        "description": "Confirmed stable source dam ID; blank if unproven/not applicable."
+      },
+      {
+        "name": "to_dam_id",
+        "type": "string",
+        "description": "Confirmed stable destination dam ID; blank if unproven/not applicable."
+      },
+      {
+        "name": "from_node_id",
+        "type": "string",
+        "description": "Page 3 source node identity."
+      },
+      {
+        "name": "to_node_id",
+        "type": "string",
+        "description": "Page 3 destination node identity."
+      },
+      {
+        "name": "from_mapping_status",
+        "type": "string",
+        "description": "Stable-ID crosswalk status."
+      },
+      {
+        "name": "to_mapping_status",
+        "type": "string",
+        "description": "Stable-ID crosswalk status."
+      },
+      {
+        "name": "entity_id",
+        "type": "string",
+        "description": "Page 3 route/accounting entity."
+      },
+      {
+        "name": "row_role",
+        "type": "string",
+        "description": "Physical edge or accounting observation."
+      },
+      {
+        "name": "variable",
+        "type": "string",
+        "description": "Reported Page 3 measure."
+      },
+      {
+        "name": "value",
+        "type": "number",
+        "description": "Reported value; blank states remain blank."
+      },
+      {
+        "name": "unit",
+        "type": "string",
+        "description": "Reported unit normalized to Mm3."
+      },
+      {
+        "name": "source_file",
+        "type": "string",
+        "description": "Source PDF filename."
+      },
+      {
+        "name": "source_sha256",
+        "type": "string",
+        "description": "Source PDF SHA-256."
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "description": "Logical page 3."
+      },
+      {
+        "name": "source_field",
+        "type": "string",
+        "description": "Canonical Page 3 field ID."
+      },
+      {
+        "name": "authority_release",
+        "type": "string",
+        "description": "Qualified Page 3 authority."
+      },
+      {
+        "name": "flag",
+        "type": "string",
+        "description": "Pipe-separated qualification/QC flags."
+      },
+      {
+        "name": "semantic_status",
+        "type": "string",
+        "description": "Physical-edge/accounting and crosswalk qualification."
+      },
+      {
+        "name": "value_status",
+        "type": "string",
+        "description": "Numeric/zero/blank/structural state."
+      },
+      {
+        "name": "continuity_status",
+        "type": "string",
+        "description": "Selected Page 3 continuity status."
+      },
+      {
+        "name": "source_consistency_status",
+        "type": "string",
+        "description": "Selected source-consistency status."
+      },
+      {
+        "name": "evidence_id",
+        "type": "string",
+        "description": "Page 3 evidence ID."
+      },
+      {
+        "name": "record_id",
+        "type": "string",
+        "description": "Page 3 record ID."
+      },
+      {
+        "name": "series_id",
+        "type": "string",
+        "description": "Audited Page 3 series ID."
+      },
+      {
+        "name": "raw_text",
+        "type": "string",
+        "description": "Source-normalized raw text."
+      }
+    ]
+  },
+  "x-note": "Proposed v2 contract: three added columns carry the verified DLO time; the published date is kept for provenance. Not applied."
+}

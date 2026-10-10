@@ -1,0 +1,142 @@
+﻿layer,source_layer,feature_index,association_role,source_value,dam_id,classification,evidence,notes
+dams.geojson,accepted_dam_controls,0,dam_id,mellegue,mellegue,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,1,dam_id,sarrat,sarrat,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,2,dam_id,benmetir,benmetir,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,3,dam_id,kasseb,kasseb,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,4,dam_id,barbara,barbara,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,5,dam_id,sidisalem,sidisalem,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,6,dam_id,bouheurtma,bouheurtma,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,7,dam_id,joumine,joumine,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,8,dam_id,ghezala,ghezala,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,9,dam_id,melah,melah,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,10,dam_id,tine,tine,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,11,dam_id,sejnane,sejnane,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,12,dam_id,sidielbarrak,sidielbarrak,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,13,dam_id,ziatine,ziatine,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,14,dam_id,gamgoum,gamgoum,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,15,dam_id,harka,harka,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,16,dam_id,siliana,siliana,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,17,dam_id,lakhmess,lakhmess,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,18,dam_id,rmil,rmil,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,19,dam_id,birmcherga,birmcherga,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,20,dam_id,rmel,rmel,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,21,dam_id,nebhana,nebhana,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,22,dam_id,sidisaad,sidisaad,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,23,dam_id,elhouareb,elhouareb,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,24,dam_id,sficifa,sficifa,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,25,dam_id,sidiaich,sidiaich,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,26,dam_id,bezirk,bezirk,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,27,dam_id,masri,masri,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,28,dam_id,lebna,lebna,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,29,dam_id,abid,abid,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,30,dam_id,brek,brek,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,31,dam_id,zarga,zarga,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,32,dam_id,kebir,kebir,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,33,dam_id,moula,moula,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,34,dam_id,chiba,chiba,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+dams.geojson,accepted_dam_controls,35,dam_id,hma,hma,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,0,dam_id,sarrat,sarrat,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,1,dam_id,benmetir,benmetir,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,2,dam_id,kasseb,kasseb,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,3,dam_id,barbara,barbara,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,4,dam_id,sidisalem,sidisalem,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,5,dam_id,bouheurtma,bouheurtma,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,6,dam_id,joumine,joumine,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,7,dam_id,ghezala,ghezala,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,8,dam_id,melah,melah,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,9,dam_id,tine,tine,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,10,dam_id,sejnane,sejnane,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,11,dam_id,sidielbarrak,sidielbarrak,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,12,dam_id,ziatine,ziatine,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,13,dam_id,gamgoum,gamgoum,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,14,dam_id,harka,harka,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,15,dam_id,siliana,siliana,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,16,dam_id,lakhmess,lakhmess,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,17,dam_id,rmil,rmil,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,18,dam_id,birmcherga,birmcherga,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,19,dam_id,rmel,rmel,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,20,dam_id,nebhana,nebhana,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,21,dam_id,sidisaad,sidisaad,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,22,dam_id,elhouareb,elhouareb,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,23,dam_id,sficifa,sficifa,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,24,dam_id,sidiaich,sidiaich,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,25,dam_id,bezirk,bezirk,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,26,dam_id,masri,masri,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,27,dam_id,lebna,lebna,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,28,dam_id,abid,abid,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,29,dam_id,brek,brek,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,30,dam_id,zarga,zarga,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,31,dam_id,kebir,kebir,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,32,dam_id,moula,moula,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,33,dam_id,chiba,chiba,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments.geojson,accepted_total_watersheds,34,dam_id,hma,hma,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,0,dam_id,sarrat,sarrat,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,1,dam_id,benmetir,benmetir,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,2,dam_id,kasseb,kasseb,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,3,dam_id,barbara,barbara,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,4,dam_id,bouheurtma,bouheurtma,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,5,dam_id,joumine,joumine,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,6,dam_id,ghezala,ghezala,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,7,dam_id,melah,melah,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,8,dam_id,tine,tine,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,9,dam_id,sejnane,sejnane,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,10,dam_id,sidielbarrak,sidielbarrak,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,11,dam_id,ziatine,ziatine,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,12,dam_id,gamgoum,gamgoum,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,13,dam_id,harka,harka,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,14,dam_id,siliana,siliana,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,15,dam_id,lakhmess,lakhmess,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,16,dam_id,rmil,rmil,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,17,dam_id,birmcherga,birmcherga,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,18,dam_id,rmel,rmel,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,19,dam_id,nebhana,nebhana,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,20,dam_id,sidisaad,sidisaad,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,21,dam_id,elhouareb,elhouareb,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,22,dam_id,sficifa,sficifa,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,23,dam_id,sidiaich,sidiaich,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,24,dam_id,bezirk,bezirk,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,25,dam_id,masri,masri,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,26,dam_id,lebna,lebna,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,27,dam_id,abid,abid,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,28,dam_id,brek,brek,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,29,dam_id,zarga,zarga,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,30,dam_id,kebir,kebir,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,31,dam_id,moula,moula,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,32,dam_id,chiba,chiba,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+catchments_incremental.geojson,incremental_catchments,33,dam_id,hma,hma,MATCHED,data/dams.csv,Stable ID exact membership check; spelling was not used as a key.
+natural_network.geojson,natural_dam_graph,0,from_dam_id,sarrat,sarrat,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+natural_network.geojson,natural_dam_graph,0,to_dam_id,mellegue,mellegue,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+natural_network.geojson,natural_dam_graph,1,from_dam_id,benmetir,benmetir,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+natural_network.geojson,natural_dam_graph,1,to_dam_id,bouheurtma,bouheurtma,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+natural_network.geojson,natural_dam_graph,2,from_dam_id,bouheurtma,bouheurtma,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+natural_network.geojson,natural_dam_graph,2,to_dam_id,sidisalem,sidisalem,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+natural_network.geojson,natural_dam_graph,3,from_dam_id,kasseb,kasseb,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+natural_network.geojson,natural_dam_graph,3,to_dam_id,sidisalem,sidisalem,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+natural_network.geojson,natural_dam_graph,4,from_dam_id,mellegue,mellegue,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+natural_network.geojson,natural_dam_graph,4,to_dam_id,sidisalem,sidisalem,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+natural_network.geojson,natural_dam_graph,5,from_dam_id,lakhmess,lakhmess,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+natural_network.geojson,natural_dam_graph,5,to_dam_id,siliana,siliana,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+natural_network.geojson,natural_dam_graph,6,from_dam_id,sficifa,sficifa,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+natural_network.geojson,natural_dam_graph,6,to_dam_id,sidisaad,sidisaad,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+natural_network.geojson,natural_dam_graph,7,from_dam_id,brek,brek,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+natural_network.geojson,natural_dam_graph,7,to_dam_id,sidisaad,sidisaad,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+transfer_network.geojson,artificial_transfer_edges,0,from_entity,barbara,barbara,MATCHED,data/dams.csv|source from_entity semantics,Non-dam source systems remain named entities; no candidate dam mapping was invented.
+transfer_network.geojson,artificial_transfer_edges,0,to_dam_id,bouheurtma,bouheurtma,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+transfer_network.geojson,artificial_transfer_edges,1,from_entity,harka,harka,MATCHED,data/dams.csv|source from_entity semantics,Non-dam source systems remain named entities; no candidate dam mapping was invented.
+transfer_network.geojson,artificial_transfer_edges,1,to_dam_id,sejnane,sejnane,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+transfer_network.geojson,artificial_transfer_edges,2,from_entity,sidielbarrak,sidielbarrak,MATCHED,data/dams.csv|source from_entity semantics,Non-dam source systems remain named entities; no candidate dam mapping was invented.
+transfer_network.geojson,artificial_transfer_edges,2,to_dam_id,sejnane,sejnane,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+transfer_network.geojson,artificial_transfer_edges,3,from_entity,ziatine,ziatine,MATCHED,data/dams.csv|source from_entity semantics,Non-dam source systems remain named entities; no candidate dam mapping was invented.
+transfer_network.geojson,artificial_transfer_edges,3,to_dam_id,sejnane,sejnane,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+transfer_network.geojson,artificial_transfer_edges,4,from_entity,oued_bou_abdallah_unlocated,,NOT_APPLICABLE,data/dams.csv|source from_entity semantics,Non-dam source systems remain named entities; no candidate dam mapping was invented.
+transfer_network.geojson,artificial_transfer_edges,4,to_dam_id,lakhmess,lakhmess,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+transfer_network.geojson,artificial_transfer_edges,5,from_entity,oued_djarabia_low_flow,,NOT_APPLICABLE,data/dams.csv|source from_entity semantics,Non-dam source systems remain named entities; no candidate dam mapping was invented.
+transfer_network.geojson,artificial_transfer_edges,5,to_dam_id,birmcherga,birmcherga,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+transfer_network.geojson,artificial_transfer_edges,6,from_entity,oued_miliane_at_thuburbo_majus_low_flow,,NOT_APPLICABLE,data/dams.csv|source from_entity semantics,Non-dam source systems remain named entities; no candidate dam mapping was invented.
+transfer_network.geojson,artificial_transfer_edges,6,to_dam_id,birmcherga,birmcherga,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+transfer_network.geojson,artificial_transfer_edges,7,from_entity,oued_defla_11km2,,NOT_APPLICABLE,data/dams.csv|source from_entity semantics,Non-dam source systems remain named entities; no candidate dam mapping was invented.
+transfer_network.geojson,artificial_transfer_edges,7,to_dam_id,bezirk,bezirk,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+transfer_network.geojson,artificial_transfer_edges,8,from_entity,tahouna_adjacent_basin_13km2,,NOT_APPLICABLE,data/dams.csv|source from_entity semantics,Non-dam source systems remain named entities; no candidate dam mapping was invented.
+transfer_network.geojson,artificial_transfer_edges,8,to_dam_id,masri,masri,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.
+transfer_network.geojson,artificial_transfer_edges,9,from_entity,zarga_kebir_moula_supply_system,,NOT_APPLICABLE,data/dams.csv|source from_entity semantics,Non-dam source systems remain named entities; no candidate dam mapping was invented.
+transfer_network.geojson,artificial_transfer_edges,9,to_dam_id,sidielbarrak,sidielbarrak,MATCHED,data/dams.csv,Stable endpoint ID exact membership check.

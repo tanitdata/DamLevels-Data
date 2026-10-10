@@ -1,0 +1,75 @@
+{
+  "table": "p3_comparison_summary",
+  "grain": "one comparison run x rule x result/attribution category",
+  "primary_key": [
+    "run_id",
+    "comparison_rule_id",
+    "category"
+  ],
+  "layer": "07_reports/profiling",
+  "columns": [
+    {
+      "name": "run_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "comparison_rule_id",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "category",
+      "type": "string",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "denominator_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "comparable_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "missing_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "match_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "mismatch_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "attribution_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    },
+    {
+      "name": "unresolved_count",
+      "type": "int",
+      "nullable": false,
+      "description": ""
+    }
+  ],
+  "enums": {},
+  "derived_from": null,
+  "schema_version": "1.0.0"
+}
