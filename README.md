@@ -1,5 +1,7 @@
 # DamLevels-Data
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23304326.svg)](https://doi.org/10.5281/zenodo.23304326)
+
 **How much water is in Tunisia's dams, day by day, since 2014?**
 
 Every day the Tunisian Ministry of Agriculture publishes a three-page PDF bulletin on the country's large dams. The information is public, but it is locked in PDF tables: there is no spreadsheet, no API, and the layout has changed over the years. This repository turns eleven years of those bulletins into clean, documented tables you can open in Excel, pandas, R or QGIS, and every number in them can be traced back to the exact cell of the page it was read from.
@@ -293,7 +295,7 @@ Details are in [`LICENSE-DATA`](LICENSE-DATA). The Page 3 extractor imports PyMu
 
 ## 13. Citation and authors
 
-Please cite this repository using [`CITATION.cff`](CITATION.cff) (GitHub shows a **Cite this repository** button).
+Please cite this repository using [`CITATION.cff`](CITATION.cff) (GitHub shows a **Cite this repository** button). Every release is archived on Zenodo: DOI [10.5281/zenodo.23304326](https://doi.org/10.5281/zenodo.23304326) always points to the latest version; each version also has its own DOI on that page.
 
 **Authors:** Mohamed Hamza Nasfi, Soura Boulares, Tarek Gasmi.
 

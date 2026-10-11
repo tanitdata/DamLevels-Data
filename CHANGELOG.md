@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Zenodo concept DOI 10.5281/zenodo.23304326 (all versions; 1.1.2 is 10.5281/zenodo.23304327) added to the README (badge and citation section) and to `CITATION.cff`.
+
 ## 1.1.2 — documentation and citation — 2026-10-11
 
 - Version 1.1.2 in `CITATION.cff`, `datapackage.json`, `pyproject.toml` and `mcp_server`; KPIs rerun (values identical, receipt updated). First release archived on Zenodo.
