@@ -10,12 +10,12 @@ another developer continuing the project.
 | Every column in the current canonical fact table | [PAGE3_FIELD_DICTIONARY.csv](PAGE3_FIELD_DICTIONARY.csv) |
 | Actual measure, field and grain combinations | [PAGE3_MEASURE_DICTIONARY.csv](PAGE3_MEASURE_DICTIONARY.csv) |
 | Prose for the thesis methodology/data chapter | [THESIS_AUDIT_SECTION_DRAFT.md](THESIS_AUDIT_SECTION_DRAFT.md) |
-| Executed equality results and exact column pairs | [Interpage report](../../artifacts/runs/interpage_20260908_v1/report.md) |
-| Original-PDF checks and transfer hypothesis | [Withdrawal source investigation](../../artifacts/runs/withdrawal_source_review_20260908_v1/report.md) |
+| Executed equality results and exact column pairs | Interpage report: `<PFE_FINAL>/artifacts/runs/interpage_20260908_v1/report.md` (private project, not in this repository) |
+| Original-PDF checks and transfer hypothesis | Withdrawal source investigation: `<PFE_FINAL>/artifacts/runs/withdrawal_source_review_20260908_v1/report.md` (private project, not in this repository) |
 
 ## Entering data
 
-Paths below are relative to the PFE Final project root. The authoritative
+This guide comes from the private PFE Final project; paths below are relative to its root. The authoritative
 machine-local root is `<PFE_FINAL>`; `configs/inputs.json` defines the inputs.
 
 - `data/reference/page12_run_20260831/page1/observations.csv.gz` and its
@@ -29,9 +29,10 @@ machine-local root is `<PFE_FINAL>`; `configs/inputs.json` defines the inputs.
 
 ## Implementation and preservation
 
-The active comparison implementation is
-[interpage.py](../../src/pfe_dams/quality/interpage.py), with
-[22 boundary tests](../../tests/unit/test_interpage.py). Private report generation,
+The active comparison implementation is `<PFE_FINAL>/src/pfe_dams/quality/interpage.py`,
+with 22 boundary tests in `<PFE_FINAL>/tests/unit/test_interpage.py`. Both are in the
+private PFE Final project and are not included in this repository; the published
+inter-page check is `qa/INTERPAGE_MISMATCH_REVIEW/`. Private report generation,
 source-review and archive-building scripts remain in `local_build/`.
 
 The reviewed dated copy is under `artifacts/audit_packages/page3_audit_20260909_v2/`, with a

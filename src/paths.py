@@ -4,7 +4,9 @@ Builders never hard-code machine paths. Each external input has a key; its
 location comes from the environment variable ``DAMLEVELS_<KEY>`` or from the
 ``[paths]`` table of ``config/paths.local.toml`` (not tracked; copy
 ``config/paths.example.toml``). Paths written into published files use the
-logical root tokens from ``ROOT_TOKENS`` instead of local drive letters.
+logical root tokens (``<FULL_RECONSTRUCTION>``, ``<BULLETIN_CORPUS>``, ...) instead
+of local drive letters; which local folder each token stands for is set in the
+same untracked config, never in this file.
 """
 from __future__ import annotations
 
@@ -15,31 +17,32 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 LOCAL_CONFIG = REPO / "config" / "paths.local.toml"
 
-# Logical names for the external roots that appear in historical provenance.
-# Order matters: longer prefixes first.
-ROOT_TOKENS = [
-    (r"<V010_REVIEW_PACKAGE>", "<V010_REVIEW_PACKAGE>"),
-    (r"<FULL_RECONSTRUCTION>", "<FULL_RECONSTRUCTION>"),
-    (r"<FROZEN_BASELINES>", "<FROZEN_BASELINES>"),
-    (r"<REPO>", "<REPO>"),
-    (r"<PFE_READY>", "<PFE_READY>"),
-    (r"<PFE_WORK>", "<PFE_WORK>"),
-    (r"<PFE_FINAL>", "<PFE_FINAL>"),
-    (r"<TASK21>", "<TASK21>"),
-    (r"<SATELLITE_DATA>", "<SATELLITE_DATA>"),
-    (r"<PFE_SUBMITTABLE>", "<PFE_SUBMITTABLE>"),
-    (r"<BULLETIN_CORPUS>", "<BULLETIN_CORPUS>"),
-]
 
-
-def _load_config() -> dict[str, str]:
+def _load_config() -> dict:
     if not LOCAL_CONFIG.is_file():
         return {}
     with LOCAL_CONFIG.open("rb") as stream:
-        return dict(tomllib.load(stream).get("paths", {}))
+        return tomllib.load(stream)
 
 
-_CONFIG = _load_config()
+def _root_tokens(config: dict) -> list[tuple[str, str]]:
+    """(local prefix, logical token) pairs, longest prefix first.
+
+    Local roots are machine-specific, so they are never written in the code: they
+    come from the ``[roots]`` table of the local config (``"<TOKEN>" = "local path"``)
+    or from ``DAMLEVELS_ROOT_<NAME>`` environment variables for the token ``<NAME>``.
+    """
+    roots = {token: path for token, path in config.get("roots", {}).items() if path}
+    for name, value in os.environ.items():
+        if name.startswith("DAMLEVELS_ROOT_") and value:
+            roots[f"<{name[len('DAMLEVELS_ROOT_'):]}>"] = value
+    roots.setdefault("<REPO>", str(REPO))
+    return sorted(((path, token) for token, path in roots.items()), key=lambda item: -len(item[0]))
+
+
+_FILE_CONFIG = _load_config()
+_CONFIG = dict(_FILE_CONFIG.get("paths", {}))
+ROOT_TOKENS = _root_tokens(_FILE_CONFIG)
 
 
 def optional(key: str) -> Path | None:
@@ -61,7 +64,7 @@ def external(key: str) -> Path:
 def portable(text: str) -> str:
     """Replace known local roots with logical tokens and use forward slashes."""
     for prefix, token in ROOT_TOKENS:
-        for variant in (prefix, prefix.replace("\\", "/")):
+        for variant in (prefix, prefix.replace("\\", "/"), prefix.replace("/", "\\")):
             if variant in text:
                 text = text.replace(variant, token)
     if "<" in text and "\\" in text:

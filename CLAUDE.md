@@ -25,7 +25,7 @@ DamLevels-Data reconstructs the daily state of Tunisia's 36 large dams (2 July 2
 | `docs/` | `data_dictionary.md`, `known_issues.md`, `gis.md`, `engineering_notes.md`, `img/` |
 | `src/extract/` | frozen extraction engines: `DAM_DATA_PIPELINE_page1and2/` (Page 1 `page1-authoritative-0.2.3`, Page 2 `page2-authoritative-1.0.0`) and `page3_extractor/` (`1.2.0rc2`) |
 | `src/` | `build.py` (QA regeneration + contract validation), historical builders `build_e2.py`, `build_e3.py`, `build_e6a*.py`, `validate/` (Pydantic contracts, capacity lookup, QA), `gis/`, `figures/`, `paths.py` |
-| `tests/` | pytest suite (76 tests, including `test_ontology.py` and `test_mcp_server.py`) |
+| `tests/` | pytest suite, including `test_ontology.py` and `test_mcp_server.py` (real stdio sessions included); pytest prints the count |
 | `mcp_server/` | read-only MCP server (`damlevels_mcp`): `core.py` holds all query logic and the data rules, `ontology.py` the DLO lookups, `server.py` only registers tools/resources |
 | `datapackage.json` | Frictionless descriptor of every resource and field, with per-resource licences |
 
@@ -36,7 +36,7 @@ Run from the repository root. Python 3.11+ (verified on 3.14.3); pinned versions
 ```bash
 pip install -r requirements-lock.txt
 
-python -m pytest -q                                   # full test suite (53 tests); needs nothing outside the repo
+python -m pytest -q                                   # full test suite; needs nothing outside the repo
 
 PYTHONPATH=src python -c "from pathlib import Path; from validate.contracts import validate_repository; print(validate_repository(Path('.')) or 'OK')"
                                                       # contract validation only; needs nothing outside the repo
@@ -52,11 +52,11 @@ python src/figures/make_readme_map.py [--rivers PATH] # redraw docs/img/map_dams
 pip install -e "mcp_server[ontology]"                 # MCP server; then `python -m damlevels_mcp` (stdio)
 ```
 
-MCP server rules: keep new logic in `mcp_server/damlevels_mcp/core.py` (testable without MCP) and register it in `server.py`. Every tool must stay read-only, return `_envelope(...)` (coverage + attribution + notes), refuse dates outside 2014-07-02..2025-10-10 with `OUTSIDE_RECORD`, never fill or substitute missing values, and get a test in `tests/test_mcp_server.py` that compares its output with the published tables. There is no data after 2025-10-10.
+MCP server rules: keep new logic in `mcp_server/damlevels_mcp/core.py` (testable without MCP) and register it in `server.py`. Every tool must stay read-only, return `_envelope(...)` (coverage + attribution + notes), refuse dates outside 2014-07-02..2025-10-10 with `OUTSIDE_RECORD`, refuse malformed input with an error code (`BAD_DATE`, `BAD_RANGE`, `BAD_LIMIT`, …) rather than an empty answer, return every candidate instead of choosing when a name or label is ambiguous, never fill or substitute missing values, and get a test in `tests/test_mcp_server.py` that compares its output with the published tables. There is no data after 2025-10-10.
 
 On Windows PowerShell use `$env:PYTHONPATH = "src"` instead of the `PYTHONPATH=src` prefix.
 
-External inputs (bulletin PDFs, run outputs, rasters) are never hard-coded. Builders resolve them through `src/paths.py` from an **untracked** `config/paths.local.toml` (copy `config/paths.example.toml`) or `DAMLEVELS_<KEY>` environment variables. Paths written into published files use logical root tokens (`<FULL_RECONSTRUCTION>`, `<BULLETIN_CORPUS>`, `<TASK21>`, …), never drive letters.
+External inputs (bulletin PDFs, run outputs, rasters) are never hard-coded. Builders resolve them through `src/paths.py` from an **untracked** `config/paths.local.toml` (copy `config/paths.example.toml`) or `DAMLEVELS_<KEY>` environment variables. Paths written into published files use logical root tokens (`<FULL_RECONSTRUCTION>`, `<BULLETIN_CORPUS>`, `<TASK21>`, …), never drive letters. Which local folder each token stands for is set in the `[roots]` table of that untracked config (or `DAMLEVELS_ROOT_<NAME>`), never in code. Executed notebooks and receipts must not keep user names or local paths in their outputs.
 
 ## Rules that protect the data
 

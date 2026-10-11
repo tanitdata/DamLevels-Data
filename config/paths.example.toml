@@ -10,6 +10,21 @@
 #   <PFE_READY>             original Page 1+2 delivery DAM_DATA_PIPELINE_20260831
 #   <PFE_WORK>              earlier production workspaces (combined_run5, Page 3 runs)
 #   <TASK21>                watershed rasters (MERIT Hydro, FABDEM, JRC GSW)
+#   <PFE_FINAL>, <PFE_SUBMITTABLE>, <SATELLITE_DATA>  other archived project roots
+#
+# [roots] tells src/paths.py which local folder each token stands for, so that
+# paths written into published files are tokenised. A root can also be set as
+# DAMLEVELS_ROOT_<NAME> (e.g. DAMLEVELS_ROOT_FULL_RECONSTRUCTION). <REPO> is the
+# repository itself and needs no entry.
+
+[roots]
+"<BULLETIN_CORPUS>" = "C:/path/to/dam_pdfs_split"
+"<FULL_RECONSTRUCTION>" = "C:/path/to/dam_open_data_project"
+"<V010_REVIEW_PACKAGE>" = "C:/path/to/dam_open_data_project_review"
+"<FROZEN_BASELINES>" = "C:/path/to/clone_communication"
+"<PFE_READY>" = "C:/path/to/pfe_ready"
+"<PFE_WORK>" = "C:/path/to/pfe_work"
+"<TASK21>" = "C:/path/to/Task21"
 
 [paths]
 # Bulletin PDFs (E6A / E6A.2 source rereads)

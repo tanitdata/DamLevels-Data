@@ -1,4 +1,8 @@
+import csv
+import json
+from collections import Counter
 from decimal import Decimal
+from pathlib import Path
 
 import pytest
 
@@ -18,6 +22,8 @@ from validate.research_qa import (
     proportional_stratified_sample,
     wilson_interval,
 )
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_wilson_interval_for_1500_perfect_matches_is_descriptively_above_target():
@@ -166,22 +172,59 @@ def test_wilson_target_decision_is_family_specific_and_requires_enough_independe
     assert too_small == "INCONCLUSIVE"
 
 
-def test_challenge_and_unverifiable_rows_are_outside_primary_denominator():
-    rows = [
-        {"sample_role": "PRIMARY_NUMERIC", "disposition": "MATCH"},
-        {"sample_role": "PRIMARY_NUMERIC", "disposition": "UNVERIFIABLE"},
-        {"sample_role": "CHALLENGE", "disposition": "MATCH"},
-    ]
-    eligible = [row for row in rows if row["sample_role"] == "PRIMARY_NUMERIC" and row["disposition"] != "UNVERIFIABLE"]
-    assert len(eligible) == 1
+class _Candidate(dict):
+    """Audit candidate fixture: unspecified descriptive fields read as 'x'."""
+
+    def __missing__(self, key):
+        return "x"
+
+
+def _read(value: str) -> dict[str, str]:
+    return {"source_value": value, "source_raw_text": value, "source_hash_checked": "YES", "verification_issue": ""}
+
+
+def test_challenge_and_unverifiable_rows_are_outside_primary_denominator(monkeypatch):
+    import build_e6a2
+
+    reads = {"M": _read("1.5"), "U": _read(""), "E": _read("2.0")}
+    monkeypatch.setattr(build_e6a2, "_read_source_cells", lambda candidates: reads)
+    candidates = [_Candidate(audit_id="M", accepted_value="1.5"), _Candidate(audit_id="U", accepted_value="1.5"),
+                  _Candidate(audit_id="E", accepted_value="1.5")]
+    rows, summary = build_e6a2._audit_rows("A3_PAGE3_TRANSCRIPTION", candidates, {}, {})
+    assert [r["disposition"] for r in rows] == ["MATCH", "UNVERIFIABLE", "EXTRACTION_DISCREPANCY_CANDIDATE"]
+    assert (summary["primary_sample_pdfs"], summary["eligible"], summary["matches"], summary["errors"],
+            summary["unverifiable"]) == (3, 2, 1, 1, 1)
+    assert summary["estimated_accuracy"] == 0.5
+    # Published audit: the 8 unverifiable Page 3 cells and the challenge set are not in the denominator.
+    published = json.loads((ROOT / "qa/extraction/multipage_accuracy_summary.json").read_text(encoding="utf-8"))
+    a3 = published["numeric_families"]["A3_PAGE3_TRANSCRIPTION"]
+    with open(ROOT / "qa/extraction/page3_transcription_audit_sample.csv", encoding="utf-8-sig", newline="") as f:
+        dispositions = Counter(r["disposition"] for r in csv.DictReader(f))
+    assert a3["eligible"] == a3["primary_sample_pdfs"] - dispositions["UNVERIFIABLE"] == 792
+    with open(ROOT / "qa/extraction/challenge_set.csv", encoding="utf-8-sig", newline="") as f:
+        assert {r["in_primary_denominator"] for r in csv.DictReader(f)} == {"NO"}
+    assert published["challenge_set"]["included_in_primary_denominator"] is False
 
 
 def test_page3_transcription_and_semantic_mapping_are_not_the_same_family():
-    numeric_family = "A3_PAGE3_TRANSCRIPTION"
-    categorical_family = "A3B_PAGE3_SEMANTIC_MAPPING"
-    assert numeric_family != categorical_family
-    assert "TRANSCRIPTION" in numeric_family
-    assert "SEMANTIC" in categorical_family
+    from build_e6a2 import _semantic_rows
+
+    base = {"source_sha256": "h", "evidence_id": "", "record_id": "r", "entity_id": "e", "from_node_id": "a",
+            "to_node_id": "b", "from_dam_id": "", "to_dam_id": "", "stratum": "s", "bulletin_date": "2020-02-01",
+            "source_file": "f", "page": "3"}
+    candidates = [
+        {**base, "row_role": "ACCOUNTING_OBSERVATION", "from_mapping_status": "NOT_APPLICABLE", "to_mapping_status": "CONFIRMED"},
+        {**base, "row_role": "PHYSICAL_TRANSFER_EDGE", "from_mapping_status": "CANDIDATE_X", "to_mapping_status": "CONFIRMED"},
+        {**base, "row_role": "PHYSICAL_TRANSFER_EDGE", "from_mapping_status": "CONFIRMED", "to_mapping_status": "CONFIRMED"},
+    ]
+    rows, counts = _semantic_rows(candidates, {})
+    assert {r["audit_family"] for r in rows} == {"A3B_PAGE3_SEMANTIC_MAPPING"}
+    assert [r["semantic_decision"] for r in rows] == [
+        "ACCOUNTING_NOT_HYDRAULIC_EDGE", "PRINTED_LABEL_MATCH_STABLE_ID_UNRESOLVED", "UNVERIFIABLE"]
+    assert all("disposition" not in r and "match" not in r for r in rows)  # no transcription accuracy fields
+    published = json.loads((ROOT / "qa/extraction/multipage_accuracy_summary.json").read_text(encoding="utf-8"))
+    assert published["page3_semantic_mapping"]["combined_with_transcription_accuracy"] is False
+    assert "A3B_PAGE3_SEMANTIC_MAPPING" not in published["numeric_families"]
 
 
 def test_page2_field_families_stay_explicit():
@@ -194,11 +237,16 @@ def test_page2_field_families_stay_explicit():
 
 
 def test_multipage_builder_forbids_a_pooled_accuracy_claim_by_contract():
+    # Static check of the builder (generate_e6a2 needs the external PDF corpus) plus the published summary.
     source = (__import__("inspect").getsource(__import__("build_e6a2")))
     assert '"pooled_multipage_accuracy_reported": False' in source
+    published = json.loads((ROOT / "qa/extraction/multipage_accuracy_summary.json").read_text(encoding="utf-8"))
+    assert published["pooled_multipage_accuracy_reported"] is False
+    assert not any("pooled" in key for key in published["numeric_families"])
 
 
 def test_main_build_preserves_historical_e6a_rows_instead_of_regenerating_them():
+    # Static check only: running build.py needs external inputs (config/paths.local.toml).
     source = (__import__("inspect").getsource(__import__("build")))
     assert "generate_e6a(" not in source
     assert 'for key in ("B", "H")' in source

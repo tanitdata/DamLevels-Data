@@ -10,8 +10,9 @@ caveats. Rules enforced here (see CLAUDE.md and docs/data_dictionary.md):
 - dams are identified by dam_id; names are only used to find the dam_id;
 - fill uses the capacity regime in force on that date and is not computed when
   that capacity is unknown or ambiguous;
-- Page 3 transfer facts are always returned with their PROBABLE authority and
-  the note that `today` amounts describe the day before the bulletin.
+- Page 3 transfer facts are always returned with their PROBABLE authority,
+  both endpoint mapping statuses and the time rule of the requested measure;
+  candidate node crosswalks are reported separately and never promoted.
 """
 from __future__ import annotations
 
@@ -22,6 +23,7 @@ import sys
 import unicodedata
 from dataclasses import dataclass
 from datetime import date
+from decimal import ROUND_HALF_EVEN, Decimal
 from functools import cached_property
 from pathlib import Path
 from typing import Any
@@ -34,6 +36,17 @@ ATTRIBUTION = (
     "Extracted and restructured by DamLevels-Data (CC BY 4.0)."
 )
 MAX_DAILY_ROWS = 400
+MAX_TRANSFER_ROWS = 1000
+HALF_UNIT = 0.0005  # storage is printed to 0.001 Mm3
+ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
+# Page 3 nodes whose crosswalk to a stable dam_id is a candidate only (docs/known_issues.md).
+CANDIDATE_NODES = {"NODE-DAM-BOUHERTMA": "bouheurtma", "NODE-DAM-ZAYATIN": "ziatine"}
+TRANSFER_TIME_RULES = {
+    "today": "amount over day D-1, the day before bulletin date D (DLO DAY_BEFORE_BULLETIN).",
+    "current_season_to_date": "cumulative amount from 1 September of the current season up to day D-1 "
+                              "(DLO SEASON_TO_DATE); not a daily amount.",
+    "previous_season_to_date": "cumulative amount over the same interval one season earlier; not a daily amount.",
+}
 
 
 class QueryError(ValueError):
@@ -54,14 +67,20 @@ def default_root() -> Path:
 
 
 def _fold(text: str) -> str:
-    """Lower-case, strip accents and non-alphanumerics: 'Bir M'Cherga' -> 'birmcherga'."""
-    text = unicodedata.normalize("NFKD", str(text))
+    """Lower-case, strip accents, tatweel and non-alphanumerics: 'Bir M'Cherga' -> 'birmcherga'."""
+    text = unicodedata.normalize("NFKD", str(text)).replace("ـ", "")
     text = "".join(c for c in text if not unicodedata.combining(c))
     return re.sub(r"[^0-9a-z؀-ۿ]", "", text.lower())
 
 
 def _round(value: float | None, digits: int = 3) -> float | None:
     return None if value is None or pd.isna(value) else round(float(value), digits)
+
+
+def _mean(values) -> float:
+    """Exact decimal mean of 0.001-unit values, rounded half-to-even to 0.001."""
+    vals = [Decimal(repr(float(v))) for v in values]
+    return float((sum(vals) / len(vals)).quantize(Decimal("0.001"), rounding=ROUND_HALF_EVEN))
 
 
 @dataclass(frozen=True)
@@ -108,9 +127,31 @@ class DamData:
         return sorted(m.loc[m["page1_source_file"] != "", "bulletin_date"])
 
     @cached_property
+    def bulletin_dates(self) -> list[str]:
+        """Every logical bulletin date in the manifest, with or without Page 1."""
+        return sorted(self.manifest["bulletin_date"])
+
+    @cached_property
     def national_totals(self) -> pd.DataFrame:
         frame = pd.read_csv(self.root / "provenance/page1_national_totals.csv", dtype=str)
-        return frame.set_index("bulletin_date")
+        return frame[frame["field"] == "p1_stock_today_mm3"].set_index("bulletin_date")
+
+    @cached_property
+    def national_dispositions(self) -> dict[str, dict]:
+        """Known national-total exceptions: evidence-backed dispositions and the KPI K12 disagreements."""
+        out = {}
+        disp = pd.read_csv(self.root / "provenance/national_reconciliation_dispositions.csv", dtype=str)
+        for r in disp.itertuples():
+            out[r.bulletin_date] = {"classification": r.classification, "evidence": r.evidence_summary,
+                                    "reference": "provenance/national_reconciliation_dispositions.csv"}
+        k12 = pd.read_csv(self.root / "qa/kpi/results/K12_national_disagreements.csv", dtype=str)
+        for r in k12.itertuples():
+            out.setdefault(r.bulletin_date, {
+                "classification": "SOURCE_PRINTED_DISAGREEMENT",
+                "evidence": "The printed national TOTAL differs from the sum of the printed dam values beyond "
+                            "the rounding bound. Both are kept as printed; neither is corrected.",
+                "reference": "qa/kpi/results/K12_national_disagreements.csv"})
+        return out
 
     @cached_property
     def lineage(self) -> pd.DataFrame:
@@ -146,8 +187,11 @@ class DamData:
                 "notes": notes or []}
 
     def _date(self, value: str, field: str = "date") -> str:
+        text = value.strip() if isinstance(value, str) else ""
         try:
-            parsed = date.fromisoformat(str(value).strip())
+            if not ISO_DATE.fullmatch(text):
+                raise ValueError(text)
+            parsed = date.fromisoformat(text)
         except ValueError as exc:
             raise QueryError("BAD_DATE", f"{field} must be an ISO date YYYY-MM-DD, got {value!r}") from exc
         iso = parsed.isoformat()
@@ -157,24 +201,52 @@ class DamData:
                              "No value is estimated outside the archive.", coverage=cov.as_dict())
         return iso
 
-    def resolve_dam(self, query: str) -> str:
-        """Map a dam_id, French name, alias or Arabic name to a dam_id."""
-        key = _fold(query)
-        if not key:
-            raise QueryError("UNKNOWN_DAM", "Empty dam name.")
-        table = {}
+    def _range(self, start: str, end: str) -> tuple[str, str]:
+        start_iso, end_iso = self._date(start, "start"), self._date(end, "end")
+        if start_iso > end_iso:
+            raise QueryError("BAD_RANGE", "start must not be after end.", start=start_iso, end=end_iso)
+        return start_iso, end_iso
+
+    @cached_property
+    def _label_table(self) -> dict[str, set[str]]:
+        table: dict[str, set[str]] = {}
         for row in self.dams.itertuples():
             for label in [row.dam_id, row.name_fr, row.name_ar, *str(row.aliases).split("|")]:
                 if label:
                     table.setdefault(_fold(label), set()).add(row.dam_id)
+        return table
+
+    def match_dam(self, query: str) -> tuple[str, str]:
+        """Map a dam_id, French name, alias or Arabic name to (dam_id, match_type).
+
+        match_type is 'exact' (the whole name equals a known label) or 'partial' (the
+        name is part of the labels of exactly one dam). A query that only contains a
+        known label inside a longer text is not accepted; its dam is returned as a
+        candidate instead.
+        """
+        key = _fold(query) if isinstance(query, str) else ""
+        if not key:
+            raise QueryError("UNKNOWN_DAM", "Empty dam name.")
+        table = self._label_table
         if key in table and len(table[key]) == 1:
-            return next(iter(table[key]))
-        partial = sorted({d for k, ids in table.items() if key in k or (len(k) > 3 and k in key) for d in ids})
+            return next(iter(table[key])), "exact"
+        partial = sorted({d for k, ids in table.items() if key in k for d in ids})
         if len(partial) == 1:
-            return partial[0]
-        suggestions = partial or sorted({d for k in difflib.get_close_matches(key, list(table), n=5, cutoff=0.6) for d in table[k]})
-        raise QueryError("UNKNOWN_DAM" if not partial else "AMBIGUOUS_DAM",
-                         f"No unique dam matches {query!r}.", candidates=suggestions)
+            return partial[0], "partial"
+        if partial:
+            raise QueryError("AMBIGUOUS_DAM", f"No unique dam matches {query!r}.", candidates=partial,
+                             match_type="partial")
+        contained = sorted({d for k, ids in table.items() if len(k) > 3 and k in key for d in ids})
+        if contained:
+            raise QueryError("UNKNOWN_DAM", f"No dam is named {query!r}; the text contains the name of a dam. "
+                             "Use the dam_id of the intended candidate.", candidates=contained,
+                             match_type="label_inside_query")
+        suggestions = sorted({d for k in difflib.get_close_matches(key, list(table), n=5, cutoff=0.6) for d in table[k]})
+        raise QueryError("UNKNOWN_DAM", f"No unique dam matches {query!r}.", candidates=suggestions,
+                         match_type="similar_spelling")
+
+    def resolve_dam(self, query: str) -> str:
+        return self.match_dam(query)[0]
 
     def _dam_row(self, dam_id: str) -> pd.Series:
         return self.dams.set_index("dam_id").loc[dam_id]
@@ -242,22 +314,24 @@ class DamData:
 
     def find_dam(self, query: str) -> dict:
         try:
-            return self._envelope({"match": self._dam_label(self.resolve_dam(query))})
+            dam_id, match_type = self.match_dam(query)
+            return self._envelope({"match": self._dam_label(dam_id), "match_type": match_type})
         except QueryError as err:
             cands = [self._dam_label(d) for d in err.details.get("candidates", [])]
-            return self._envelope({"match": None, "candidates": cands}, [str(err)])
+            return self._envelope({"match": None, "match_type": err.details.get("match_type"), "candidates": cands},
+                                  [str(err)])
 
     def get_storage(self, dam: str, start: str, end: str, resolution: str = "daily") -> dict:
         dam_id = self.resolve_dam(dam)
-        start_iso, end_iso = self._date(start, "start"), self._date(end, "end")
-        if start_iso > end_iso:
-            raise QueryError("BAD_RANGE", "start must not be after end.")
+        start_iso, end_iso = self._range(start, end)
         s = self.storage
         sel = s[(s["dam_id"] == dam_id) & (s["date"] >= start_iso) & (s["date"] <= end_iso)]
         span = self.dam_spans.loc[dam_id]
         active_from, active_to = max(start_iso, span["first_date"]), min(end_iso, span["last_date"])
-        bulletin_dates = [d for d in self.page1_dates if active_from <= d <= active_to]
-        missing = sorted(set(bulletin_dates) - set(sel["date"]))
+        all_bulletins = [d for d in self.bulletin_dates if active_from <= d <= active_to]
+        page1 = [d for d in self.page1_dates if active_from <= d <= active_to]
+        without_page1 = sorted(set(all_bulletins) - set(page1))
+        missing = sorted(set(page1) - set(sel["date"]))
         notes = ["Stock values describe the morning of each bulletin date.",
                  "Dates without a value are listed as missing; nothing is interpolated."]
         if start_iso < span["first_date"]:
@@ -265,13 +339,19 @@ class DamData:
         calendar_days = (date.fromisoformat(active_to) - date.fromisoformat(active_from)).days + 1 if active_from <= active_to else 0
         result: dict[str, Any] = {
             "dam": self._dam_label(dam_id), "unit": "Mm3", "start": start_iso, "end": end_iso,
+            "dam_period": {"start": active_from, "end": active_to} if active_from <= active_to else None,
             "values_found": int(len(sel)),
-            "bulletins_with_page1_in_dam_period": len(bulletin_dates),
-            "calendar_days_without_bulletin": calendar_days - len(bulletin_dates),
+            "bulletins_in_dam_period": len(all_bulletins),
+            "bulletins_with_page1_in_dam_period": len(page1),
+            "bulletins_without_page1": without_page1[:50], "bulletins_without_page1_count": len(without_page1),
+            "calendar_days_without_bulletin": calendar_days - len(all_bulletins),
             "missing_dates": missing[:50], "missing_count": len(missing),
         }
-        notes.append("missing_dates are bulletin dates on which this dam has no value; "
-                     "calendar_days_without_bulletin counts days on which no bulletin was published.")
+        notes.append("Counts are limited to dam_period, the part of the request in which this dam appears in the "
+                     "bulletins. missing_dates are bulletin dates with a Page 1 on which this dam has no value; "
+                     "bulletins_without_page1 are bulletins that exist without a Page 1 (storage is printed only on "
+                     "Page 1 and is not taken from another page); calendar_days_without_bulletin counts days for "
+                     "which the archive holds no bulletin at all. Lists are cut at 50 dates; counts are complete.")
         if resolution == "daily":
             if len(sel) > MAX_DAILY_ROWS:
                 raise QueryError("TOO_MANY_ROWS", f"{len(sel)} daily values; narrow the range or use "
@@ -281,10 +361,11 @@ class DamData:
             m = sel.assign(month=sel["date"].str[:7]).groupby("month")["value"]
             result["series"] = [
                 {"month": k, "days_with_value": int(g.size), "first_mm3": _round(g.iloc[0]), "last_mm3": _round(g.iloc[-1]),
-                 "min_mm3": _round(g.min()), "max_mm3": _round(g.max()), "mean_mm3": _round(g.mean())}
+                 "min_mm3": _round(g.min()), "max_mm3": _round(g.max()), "mean_mm3": _mean(g)}
                 for k, g in m
             ]
-            notes.append("Monthly figures are computed only from the days with a value.")
+            notes.append("Monthly figures are computed only from the days with a value; mean_mm3 is the exact "
+                         "decimal mean rounded half-to-even to 0.001 Mm3.")
         else:
             raise QueryError("BAD_RESOLUTION", "resolution must be 'daily' or 'monthly'.")
         return self._envelope(result, notes)
@@ -321,22 +402,50 @@ class DamData:
             return self._envelope({"date": iso, "status": "NO_BULLETIN_VALUES", "total_mm3": None}, notes)
         caps = [self._capacity(d, iso) for d in day["dam_id"]]
         known = [(v, c["capacity_mm3"]) for v, c in zip(day["value"], caps) if c["status"] == "KNOWN" and c["capacity_mm3"]]
+        excluded = [d for d, c in zip(day["dam_id"], caps) if not (c["status"] == "KNOWN" and c["capacity_mm3"])]
         total = float(day["value"].sum())
+        numerator, denominator = sum(v for v, _ in known), sum(c for _, c in known)
         printed = self.national_totals.loc[iso] if iso in self.national_totals.index else None
-        result = {
+        result: dict[str, Any] = {
             "date": iso, "status": "OK", "dams_with_value": int(len(day)), "total_mm3": _round(total),
-            "fill_pct_of_known_capacity": _round(100 * sum(v for v, _ in known) / sum(c for _, c in known), 1) if known else None,
-            "dams_without_known_capacity": [d for d, c in zip(day["dam_id"], caps) if c["status"] != "KNOWN"],
-            "printed_national_total_mm3": _round(float(printed["printed_total_mm3"])) if printed is not None else None,
+            "fill_pct_of_known_capacity": _round(100 * numerator / denominator, 1) if known else None,
+            "fill_numerator_mm3": _round(numerator) if known else None,
+            "known_capacity_sum_mm3": _round(denominator, 2) if known else None,
+            "dams_in_fill": len(known),
+            "dams_without_known_capacity": excluded,
+            "printed_national_total_mm3": None,
         }
-        if printed is not None:
-            notes.append("printed_national_total_mm3 is the TOTAL printed on Page 1; small differences are rounding.")
+        if excluded:
+            notes.append(f"{', '.join(excluded)}: capacity not known on this date. These dams are included in "
+                         "total_mm3 but excluded from both the numerator and the denominator of "
+                         "fill_pct_of_known_capacity, which therefore covers dams_in_fill dams only.")
+        if printed is not None and printed["printed_total_mm3"]:
+            printed_total = float(printed["printed_total_mm3"])
+            places = int(printed["printed_decimal_places"] or 3)
+            bound = len(day) * HALF_UNIT + 0.5 * 10.0 ** (-places)
+            disposition = self.national_dispositions.get(iso)
+            result["printed_national_total_mm3"] = _round(printed_total)
+            result["printed_total_comparison"] = {
+                "difference_mm3": _round(total - printed_total),
+                "rounding_bound_mm3": _round(bound, 4),
+                "disposition": disposition["classification"] if disposition else
+                ("WITHIN_ROUNDING" if abs(total - printed_total) <= bound + 1e-9 else "OUTSIDE_ROUNDING"),
+            }
+            notes.append("printed_national_total_mm3 is the TOTAL printed on Page 1; rounding_bound_mm3 is the largest "
+                         "difference that printing each value to 0.001 Mm3 can explain.")
+            if disposition:
+                notes.append(f"Known exception ({disposition['classification']}, {disposition['reference']}): "
+                             f"{disposition['evidence']}")
         return self._envelope(result, notes)
 
     def compare_years(self, dam: str, month_day: str) -> dict:
-        if not re.fullmatch(r"\d{2}-\d{2}", month_day or ""):
+        if not isinstance(month_day, str) or not re.fullmatch(r"\d{2}-\d{2}", month_day):
             raise QueryError("BAD_DATE", "month_day must be MM-DD, e.g. '02-01'.")
-        everyone = dam.strip().lower() in {"all", "national", "*"}
+        try:
+            date.fromisoformat(f"2000-{month_day}")  # leap year: accepts 02-29, rejects 02-30, 13-01, 00-00
+        except ValueError as exc:
+            raise QueryError("BAD_DATE", f"month_day {month_day!r} is not a calendar day.") from exc
+        everyone = isinstance(dam, str) and dam.strip().lower() in {"all", "national", "*"}
         dam_id = None if everyone else self.resolve_dam(dam)
         first, last = int(self.coverage.first[:4]), int(self.coverage.last[:4])
         series = []
@@ -356,9 +465,11 @@ class DamData:
                 row = self._value(dam_id, iso)
                 series.append({"date": iso, "storage_mm3": _round(row["value"]) if row is not None else None})
         target = "all dams with a value (count varies by year)" if everyone else self._dam_label(dam_id)
-        return self._envelope({"target": target, "unit": "Mm3", "series": series},
-                              ["Exact dates only; a year without a bulletin value on that date shows null.",
-                               "National totals include only the dams printed that day; the roster grew over time."])
+        notes = ["Exact dates only; a year without a bulletin value on that date shows null.",
+                 "National totals include only the dams printed that day; the roster grew over time."]
+        if month_day == "02-29":
+            notes.append("02-29 exists only in leap years; other years are not listed.")
+        return self._envelope({"target": target, "unit": "Mm3", "series": series}, notes)
 
     def get_source(self, dam: str, on: str) -> dict:
         dam_id = self.resolve_dam(dam)
@@ -381,25 +492,58 @@ class DamData:
             },
         }
         return self._envelope(result, ["bulletin_url is the combined three-page PDF on ONAGRI; source_sha256 "
-                                       "identifies the split Page 1 file the value was read from."])
+                                       "identifies the split Page 1 file the value was read from.",
+                                       "get_source covers Page 1 storage values only; each get_transfers row "
+                                       "carries its own Page 3 source file, hash and evidence identifier."])
+
+    def _transfer_row(self, r, bulletin_urls: dict[str, str]) -> dict:
+        return {
+            "transfer_observation_id": r.transfer_observation_id, "bulletin_date": r.bulletin_date,
+            "from": r.from_dam_id or r.from_node_id or None, "to": r.to_dam_id or r.to_node_id or None,
+            "from_node_id": r.from_node_id or None, "to_node_id": r.to_node_id or None,
+            "from_mapping_status": r.from_mapping_status, "to_mapping_status": r.to_mapping_status,
+            "role": r.row_role, "measure": r.variable, "value_mm3": _round(r.value), "value_status": r.value_status,
+            "authority": r.authority_release,
+            "source": {"source_file": r.source_file, "source_sha256": r.source_sha256, "page": r.page,
+                       "source_field": r.source_field, "evidence_id": r.evidence_id or None,
+                       "printed_text": r.raw_text if r.raw_text else None,
+                       "bulletin_url": bulletin_urls.get(r.bulletin_date) or None},
+        }
 
     def get_transfers(self, start: str, end: str, dam: str | None = None, measure: str = "today", limit: int = 200) -> dict:
-        start_iso, end_iso = self._date(start, "start"), self._date(end, "end")
-        if measure not in {"today", "current_season_to_date", "previous_season_to_date"}:
+        start_iso, end_iso = self._range(start, end)
+        if measure not in TRANSFER_TIME_RULES:
             raise QueryError("BAD_MEASURE", "measure must be today, current_season_to_date or previous_season_to_date.")
+        if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= MAX_TRANSFER_ROWS:
+            raise QueryError("BAD_LIMIT", f"limit must be an integer from 1 to {MAX_TRANSFER_ROWS}, got {limit!r}.")
         t = self.transfers
         sel = t[(t["bulletin_date"] >= start_iso) & (t["bulletin_date"] <= end_iso) & (t["variable"] == measure)]
+        candidates = sel.iloc[0:0]
+        dam_id = None
         if dam:
             dam_id = self.resolve_dam(dam)
+            nodes = [n for n, d in CANDIDATE_NODES.items() if d == dam_id]
+            candidates = sel[sel["from_node_id"].isin(nodes) | sel["to_node_id"].isin(nodes)]
             sel = sel[(sel["from_dam_id"] == dam_id) | (sel["to_dam_id"] == dam_id)]
-        rows = [{
-            "bulletin_date": r.bulletin_date, "from": r.from_dam_id or r.from_node_id, "to": r.to_dam_id or r.to_node_id,
-            "role": r.row_role, "measure": r.variable, "value_mm3": _round(r.value), "value_status": r.value_status,
-            "authority": r.authority_release, "to_mapping_status": r.to_mapping_status,
-        } for r in sel.head(limit).itertuples()]
+        urls = dict(zip(self.manifest["bulletin_date"], self.manifest["original_url"]))
+        rows = [self._transfer_row(r, urls) for r in sel.head(limit).itertuples()]
+        result: dict[str, Any] = {"start": start_iso, "end": end_iso, "measure": measure,
+                                  "time_rule": TRANSFER_TIME_RULES[measure], "rows": rows,
+                                  "matched": int(len(sel)), "returned": len(rows), "truncated": len(sel) > limit}
         notes = ["Page 3 facts have authority PROBABLE.",
-                 "date is the bulletin date; under DLO 0.3 the 'today' amount describes the day before the bulletin.",
+                 "bulletin_date is the date of the bulletin (D), used for start/end. The published table stores "
+                 "date = bulletin date with effective_date_rule SAME_DAY; under DLO 0.3 the amount refers to "
+                 f"another period: {measure} is the {TRANSFER_TIME_RULES[measure]}",
                  "ACCOUNTING_OBSERVATION rows (Sejnane accounting) are not physical transfers."]
+        if dam_id is not None:
+            notes.append(f"rows are the facts whose stable from/to dam_id is {dam_id}.")
+            if len(candidates):
+                result["candidate_endpoint_rows"] = [self._transfer_row(r, urls) for r in candidates.head(limit).itertuples()]
+                result["candidate_endpoint_matched"] = int(len(candidates))
+                result["candidate_endpoint_truncated"] = len(candidates) > limit
+                notes.append(f"candidate_endpoint_rows: {len(candidates)} facts name a Page 3 node whose crosswalk to "
+                             f"{dam_id} is only a candidate (see *_mapping_status). They are not counted in rows and "
+                             "the node is not promoted to this dam.")
         if len(sel) > limit:
-            notes.append(f"{len(sel)} rows matched; only the first {limit} are returned.")
-        return self._envelope({"start": start_iso, "end": end_iso, "rows": rows, "matched": int(len(sel))}, notes)
+            notes.append(f"{len(sel)} rows matched; only the first {limit} are returned (truncated).")
+        return self._envelope(result, notes)

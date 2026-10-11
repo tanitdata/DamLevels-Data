@@ -11,6 +11,7 @@ from pathlib import Path
 import pytest
 
 rdflib = pytest.importorskip("rdflib")
+from rdflib.compare import isomorphic  # noqa: E402
 from rdflib.namespace import OWL, RDF, SKOS  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,21 +32,36 @@ def graph():
 
 
 def _normalised(g):
-    """Triples with numeric literals compared by value (0.0 and 0 are the same decimal)."""
-    out = set()
+    """Copy of g with decimal literals in canonical form (0.0 and 0 are the same decimal).
+
+    Blank nodes are kept, so the result must be compared with graph isomorphism.
+    """
+    out = rdflib.Graph()
     for s, p, o in g:
-        if isinstance(s, rdflib.BNode) or isinstance(o, rdflib.BNode):
-            continue
         if isinstance(o, rdflib.Literal) and o.datatype is not None and str(o.datatype).endswith("#decimal"):
-            o = ("decimal", Decimal(str(o)))
+            o = rdflib.Literal(str(Decimal(str(o)).normalize()), datatype=o.datatype)
         out.add((s, p, o))
     return out
+
+
+def _same_statements(a, b) -> bool:
+    return len(a) == len(b) and isomorphic(_normalised(a), _normalised(b))
 
 
 def test_turtle_and_owl_files_carry_the_same_statements(graph):
     owl_graph = rdflib.Graph().parse(OWL_FILE, format="xml")
     assert len(owl_graph) == len(graph)
-    assert _normalised(owl_graph) == _normalised(graph)
+    assert _same_statements(owl_graph, graph)
+
+
+def test_statement_comparison_detects_a_changed_blank_node_triple(graph):
+    changed = rdflib.Graph()
+    for triple in graph:
+        changed.add(triple)
+    s, p, o = next(t for t in graph if isinstance(t[0], rdflib.BNode))
+    changed.remove((s, p, o))
+    changed.add((s, p, rdflib.Literal("MUTATED")))
+    assert len(changed) == len(graph) and not _same_statements(changed, graph)
 
 
 def test_documented_counts(graph):
@@ -123,11 +139,31 @@ def test_flows_are_dated_the_day_before_the_bulletin(graph):
     assert rows[("stored water volume", "2019-02-01")] == 280.478
 
 
-def test_owl_rl_reasoning_finds_no_contradiction(graph):
+OWLRL_ERROR = rdflib.URIRef("http://www.daml.org/2002/03/agents/agent-ont#error")
+
+
+def _owl_rl_problems(g):
+    """OWL RL closure of g: owlrl error messages and instances of owl:Nothing."""
     owlrl = pytest.importorskip("owlrl")
     closure = rdflib.Graph()
-    for triple in graph:
+    for triple in g:
         closure.add(triple)
     owlrl.DeductiveClosure(owlrl.OWLRL_Semantics, axiomatic_triples=False, datatype_axioms=False).expand(closure)
+    errors = sorted(str(o) for o in closure.objects(None, OWLRL_ERROR))
+    return closure, errors, set(closure.subjects(RDF.type, OWL.Nothing))
+
+
+def test_owl_rl_reasoning_finds_no_contradiction(graph):
+    closure, errors, nothing = _owl_rl_problems(graph)
     assert len(closure) > len(graph)
-    assert not set(closure.subjects(RDF.type, OWL.Nothing))
+    assert errors == [] and not nothing
+
+
+def test_owl_rl_check_detects_an_inconsistency():
+    bad = rdflib.Graph()
+    a, b, x = (rdflib.URIRef(f"urn:test:{n}") for n in "abx")
+    bad.add((a, OWL.disjointWith, b))
+    bad.add((x, RDF.type, a))
+    bad.add((x, RDF.type, b))
+    _, errors, _ = _owl_rl_problems(bad)
+    assert errors and "Disjoint classes" in errors[0]

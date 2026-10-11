@@ -64,6 +64,17 @@ This follows the most restrictive upstream terms:
 - FABDEM v1-2 (Hawker et al., University of Bristol): CC BY-NC-SA 4.0;
   commercial use requires permission from the University of Bristol.
   https://doi.org/10.5523/bris.s5hqmjcdj8yo2ibzi9b4ew3sn
+  Licence statements required by the FABDEM v1-2 readme
+  (https://data.bris.ac.uk/datasets/s5hqmjcdj8yo2ibzi9b4ew3sn/readme.txt),
+  which apply to these layers and to the overview map:
+    "FABDEM is produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014
+    and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS
+    by the European Union and ESA; all rights reserved."
+    "The organisations in charge of the Copernicus programme by law or by
+    delegation do not incur any liability for any use of the Copernicus
+    WorldDEM-30."
+  Original Copernicus DEM licence:
+  https://docs.sentinel-hub.com/api/latest/static/files/data/dem/resources/license/License-COPDEM-30.pdf
 - MERIT Hydro v1.0.1 (Yamazaki et al., 2019, University of Tokyo): used
   under its CC BY-NC 4.0 option.
   https://global-hydrodynamics.github.io/MERIT_Hydro/

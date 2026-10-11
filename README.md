@@ -15,7 +15,7 @@ Every day the Tunisian Ministry of Agriculture publishes a three-page PDF bullet
 
 ![Map of Tunisia's 36 large dams, their catchments, river links and transfer routes, coloured by fill on 10 October 2025](docs/img/map_dams.png)
 
-*The 36 dams on the latest bulletin date in the record, 10 October 2025. Together they held 649 million m³, 27 % of their capacity; 18 dams were below a quarter full and only Barbara was above 75 %. Most dams sit in the wetter north, in the Medjerda basin and along the northern coast. Dark blue lines are the natural river links between dams, dashed purple lines the artificial transfer routes. Open the dam layer as an interactive map: [`gis/vector/dams.geojson`](gis/vector/dams.geojson) (GitHub draws it on a map); the figure is produced by [`src/figures/make_readme_map.py`](src/figures/make_readme_map.py).*
+*The 36 dams on the latest bulletin date in the record, 10 October 2025. Together they held 649 million m³, 27 % of their capacity; 18 dams were below a quarter full and only Barbara was above 75 %. Most dams sit in the wetter north, in the Medjerda basin and along the northern coast. Dark blue lines are the natural river links between dams, dashed purple lines the artificial transfer routes. Open the dam layer as an interactive map: [`gis/vector/dams.geojson`](gis/vector/dams.geojson) (GitHub draws it on a map); the figure is produced by [`src/figures/make_readme_map.py`](src/figures/make_readme_map.py). Map and catchments: CC BY-NC-SA 4.0, derived from FABDEM v1-2 and MERIT Hydro. FABDEM is produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved.*
 
 ---
 
@@ -103,7 +103,7 @@ flowchart LR
 2. **Read the pages.** Three deterministic engines read the characters of the PDF text layer and the lines drawn to make the tables. The Page 1 engine finds the column borders from the vertical rulings and assigns each character to its cell. Nothing is retyped and no OCR is used, so running an engine twice on the same file gives the same output. Page 1 yields 129,391 dam-day observations, Page 2 129,472, Page 3 274,183 facts.
 3. **Identify the dams.** Dam names are printed in French and Arabic with varying spellings. A governed alias register maps every printed name to one stable `dam_id`.
 4. **Keep the evidence.** Every value keeps its file, fingerprint, page, column, bounding box and raw printed text (1,896,094 Page 1 cells traced). Missing or unreadable cells stay missing; nothing is interpolated or forward-filled.
-5. **Check.** Each value is tested five ways ([section 5](#5-how-the-data-was-checked)).
+5. **Check.** Five complementary checks are applied wherever a value can be compared with something else ([section 5](#5-how-the-data-was-checked)).
 6. **Package.** The results are published as long ("tidy") tables with a data dictionary, known issues, GIS layers and an ontology.
 
 The extraction code is in [`src/extract/`](src/extract/); the packaging, contracts and checks are in [`src/`](src/) and [`qa/`](qa/).
@@ -123,7 +123,7 @@ The column headings do not always mean what they seem to say. These rules are bu
 
 ## 5. How the data was checked
 
-No value is trusted on its own. Each one is compared with something independent.
+No value is trusted on its own. Five complementary checks compare values with something independent. Each check applies only where its comparison exists, so each has its own denominator: not every value goes through every check. For example, 44,770 storage values have no printed fill % to compare with, and the direct re-reading of the PDF is a random sample (800 Page 1, 800 Page 2 and 792 verifiable Page 3 cells), not the whole record.
 
 | Check | Rule | Result |
 |---|---|---|
@@ -131,7 +131,7 @@ No value is trusted on its own. Each one is compared with something independent.
 | Against the other page | storage is printed on both Page 1 and Page 2; the two must be equal | 128,995 / 128,996 pairs equal |
 | Against the calendar | today's running total − yesterday's = today's flow (±0.0015 Mm³) | 99.48 % of 122,957 monthly inflow steps |
 | Against the fill % | printed fill = storage / capacity, allowing for the rounding of all three numbers | 84,470 / 84,471 rows |
-| Against the original PDF | a random sample of cells re-read directly from the page | 2,392 / 2,392 cells correct |
+| Against the original PDF | a random sample of cells re-read directly from the page | 2,392 / 2,392 sampled cells correct (800 + 800 + 792) |
 
 All results, with every exception row, are in [`qa/kpi/results/`](qa/kpi/results/) and can be recomputed with `python qa/kpi/run_kpis.py`. A quick check of your own: on 1 February 2020 the 33 dams on the page add up to **1,471.419 Mm³**; the bulletin prints a total of **1 471,421** — the 0.002 difference is rounding.
 

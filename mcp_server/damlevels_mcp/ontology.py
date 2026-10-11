@@ -19,7 +19,8 @@ class Ontology:
         try:
             import rdflib
         except ImportError as exc:  # optional dependency
-            raise QueryError("ONTOLOGY_UNAVAILABLE", "Install rdflib to query the ontology.") from exc
+            raise QueryError("ONTOLOGY_UNAVAILABLE", "Install rdflib to query the ontology: "
+                             "pip install -e \"mcp_server[ontology]\".") from exc
         return rdflib.Graph().parse(self.path, format="turtle")
 
     def _labels(self, node, prop: str) -> dict[str, list[str]]:
@@ -28,7 +29,7 @@ class Ontology:
         out: dict[str, list[str]] = {}
         for lit in self.graph.objects(node, rdflib.URIRef(SKOS + prop)):
             out.setdefault(lit.language or "", []).append(str(lit))
-        return out
+        return {lang: sorted(vals) for lang, vals in sorted(out.items())}
 
     def _first(self, node, prop: str, lang: str = "en") -> str | None:
         labels = self._labels(node, prop)
@@ -45,7 +46,7 @@ class Ontology:
         g = self.graph
         maps_to = rdflib.URIRef(DLO + "mapsToVariable")
         out = []
-        for concept in set(g.objects(None, maps_to)):
+        for concept in sorted(set(g.objects(None, maps_to)), key=str):
             keys = {_fold(str(concept).rsplit("/", 1)[1])}
             for prop in ("prefLabel", "altLabel"):
                 for values in self._labels(concept, prop).values():
@@ -69,29 +70,34 @@ class Ontology:
         return sorted(rows, key=lambda r: (r["table"] or "", r["column"]))
 
     def describe(self, term: str) -> dict:
+        g = self.graph  # raises ONTOLOGY_UNAVAILABLE before any other rdflib import
         import rdflib
 
-        key = _fold(term)
+        key = _fold(term) if isinstance(term, str) else ""
         if not key:
             raise QueryError("UNKNOWN_TERM", "Empty term.")
-        g = self.graph
         # A printed column name maps directly to one concept.
         for mapping in g.subjects(rdflib.URIRef(DLO + "sourceColumn"), rdflib.Literal(term.strip())):
             concept = next(g.objects(mapping, rdflib.URIRef(DLO + "mapsToVariable")), None)
             if concept is None:
-                return {"term": term, "concept": None,
+                return {"term": term, "concept": None, "match_type": "printed_column",
                         "note": "This column is mapped but has no concept: its meaning is not documented by the publisher."}
-            return self._concept_dict(term, concept)
+            return {**self._concept_dict(term, concept), "match_type": "printed_column"}
         exact = [c for c, keys in self._concepts if key in keys]
         partial = [c for c, keys in self._concepts if any(key in k for k in keys)]
-        found = exact or partial
+        found, match_type = (exact, "exact_label") if exact else (partial, "partial_label")
         if not found:
             raise QueryError("UNKNOWN_TERM", f"No concept matches {term!r}.",
                              known_concepts=sorted(self._first(c, "prefLabel") for c, _ in self._concepts))
-        if len(found) > 1 and not exact:
-            return {"term": term, "concept": None,
-                    "candidates": sorted(self._first(c, "prefLabel") for c in found)}
-        return self._concept_dict(term, found[0])
+        if len(found) > 1:
+            return {"term": term, "concept": None, "match_type": match_type, "ambiguous": True,
+                    "note": "This term is a label of several concepts with different meanings and time rules. "
+                            "Do not pick one: call describe_variable again with the printed column name "
+                            "(see printed_columns) that the value comes from.",
+                    "candidates": sorted(({"concept": self._first(c, "prefLabel"), "iri": str(c),
+                                           "printed_columns": self._columns_for(c)} for c in found),
+                                         key=lambda d: d["iri"])}
+        return {**self._concept_dict(term, found[0]), "match_type": match_type}
 
     def _concept_dict(self, term: str, concept) -> dict:
         import rdflib

@@ -3,7 +3,7 @@
   "name": "damlevels-data",
   "title": "DamLevels-Data: daily storage of Tunisia's 36 large dams, 2014-2025",
   "description": "Provenance-traced daily storage observations, qualified inter-dam transfer facts, dam metadata, QA results and GIS layers reconstructed from the DGBGTH bulletins published by ONAGRI. Current quality indicators: qa/kpi/results.",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "licenses": [
     {
       "name": "CC-BY-4.0",
@@ -424,6 +424,7 @@
     },
     {
       "name": "transfers",
+      "description": "Page 3 inter-dam transfer and Sejnane accounting facts, authority PROBABLE. Time semantics: in all rows date = bulletin_date (the bulletin date D) and effective_date_rule = SAME_DAY, as recorded by the selected Page 3 product. This conflicts with the DamLevels ontology (DLO 0.3): the 'today' amount is the amount over day D-1 (DAY_BEFORE_BULLETIN), and current_season_to_date / previous_season_to_date are cumulative totals from 1 September up to day D-1 (SEASON_TO_DATE), not daily amounts. The published fields are kept as printed; see docs/known_issues.md.",
       "path": "data/transfers.csv",
       "profile": "tabular-data-resource",
       "schema": {
@@ -437,7 +438,7 @@
           {
             "name": "date",
             "type": "date",
-            "description": "Effective observation date as published in the selected product."
+            "description": "Date as stored by the selected Page 3 product: equal to bulletin_date (the bulletin date D) in all rows, with effective_date_rule SAME_DAY. It is not the day the amount refers to: under DLO 0.3 'today' is the amount over day D-1 and season-to-date measures are totals from 1 September up to day D-1."
           },
           {
             "name": "bulletin_date",
@@ -447,7 +448,7 @@
           {
             "name": "effective_date_rule",
             "type": "string",
-            "description": "Date rule recorded by the selected product."
+            "description": "Date rule recorded by the selected product (SAME_DAY in all rows; conflicts with DLO 0.3, see the resource description)."
           },
           {
             "name": "from_dam_id",
@@ -492,7 +493,7 @@
           {
             "name": "variable",
             "type": "string",
-            "description": "Reported Page 3 measure."
+            "description": "Reported Page 3 measure: today (amount over day D-1), current_season_to_date or previous_season_to_date (cumulative totals up to day D-1, not daily amounts)."
           },
           {
             "name": "value",
@@ -680,6 +681,7 @@
     },
     {
       "name": "transfers-parquet",
+      "description": "Page 3 inter-dam transfer and Sejnane accounting facts, authority PROBABLE. Time semantics: in all rows date = bulletin_date (the bulletin date D) and effective_date_rule = SAME_DAY, as recorded by the selected Page 3 product. This conflicts with the DamLevels ontology (DLO 0.3): the 'today' amount is the amount over day D-1 (DAY_BEFORE_BULLETIN), and current_season_to_date / previous_season_to_date are cumulative totals from 1 September up to day D-1 (SEASON_TO_DATE), not daily amounts. The published fields are kept as printed; see docs/known_issues.md.",
       "path": "data/parquet/transfers.parquet",
       "format": "parquet",
       "schema": {
@@ -693,7 +695,7 @@
           {
             "name": "date",
             "type": "date",
-            "description": "Effective observation date as published in the selected product."
+            "description": "Date as stored by the selected Page 3 product: equal to bulletin_date (the bulletin date D) in all rows, with effective_date_rule SAME_DAY. It is not the day the amount refers to: under DLO 0.3 'today' is the amount over day D-1 and season-to-date measures are totals from 1 September up to day D-1."
           },
           {
             "name": "bulletin_date",
@@ -703,7 +705,7 @@
           {
             "name": "effective_date_rule",
             "type": "string",
-            "description": "Date rule recorded by the selected product."
+            "description": "Date rule recorded by the selected product (SAME_DAY in all rows; conflicts with DLO 0.3, see the resource description)."
           },
           {
             "name": "from_dam_id",
@@ -748,7 +750,7 @@
           {
             "name": "variable",
             "type": "string",
-            "description": "Reported Page 3 measure."
+            "description": "Reported Page 3 measure: today (amount over day D-1), current_season_to_date or previous_season_to_date (cumulative totals up to day D-1, not daily amounts)."
           },
           {
             "name": "value",
