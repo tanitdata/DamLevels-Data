@@ -295,7 +295,7 @@ Details are in [`LICENSE-DATA`](LICENSE-DATA). The Page 3 extractor imports PyMu
 
 ## 13. Citation and authors
 
-Please cite this repository using [`CITATION.cff`](CITATION.cff) (GitHub shows a **Cite this repository** button). Every release is archived on Zenodo: DOI [10.5281/zenodo.23304326](https://doi.org/10.5281/zenodo.23304326) always points to the latest version; each version also has its own DOI on that page.
+Please cite this repository using [`CITATION.cff`](CITATION.cff). Every release is archived on Zenodo: DOI [10.5281/zenodo.23304326](https://doi.org/10.5281/zenodo.23304326) always points to the latest version; each version also has its own DOI on that page.
 
 **Authors:** Mohamed Hamza Nasfi, Soura Boulares, Tarek Gasmi.
 
