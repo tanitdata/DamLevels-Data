@@ -3,6 +3,7 @@
 ## Unreleased — documentation
 
 - README: new section 8 "Ask the data with an AI assistant (MCP server)" with example questions, a worked answer (Sidi Salem, 2025-10-10), the 10 October national series, the built-in rules, the tool list and setup for Claude Code and Claude Desktop; the summary table links to it. Later sections renumbered 9–13.
+- CLAUDE.md: the record is stated as closed (no data after 2025-10-10); one-version rule across the five version fields and the release procedure (`gh release` with a full SHA, never move published tags); README section 8 must follow MCP tool changes; a pre-commit scan for local paths, user names and secrets (notebooks included), with its known harmless matches; FABDEM/Copernicus credits must survive any map or GIS regeneration.
 
 ## 1.1.1 — review fixes — 2026-10-11
 

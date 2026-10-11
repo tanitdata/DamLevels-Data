@@ -6,8 +6,9 @@ Guidance for working in this repository. Read it before changing any file.
 
 DamLevels-Data reconstructs the daily state of Tunisia's 36 large dams (2 July 2014 – 10 October 2025) from the DGBGTH bulletins *Situation des barrages* published as PDFs by ONAGRI. It is a **published dataset first and a codebase second**: the tables in `data/`, their provenance and their QA results are the product. Code exists to produce, validate and explain them.
 
-- Public repository: https://github.com/tanitdata/DamLevels-Data (public, default branch `main`).
-- Audience of `README.md`: internet users (researchers, journalists, citizens), not developers. Keep it plain, concrete and illustrated. Engineering detail goes in `docs/engineering_notes.md`.
+- Public repository: https://github.com/tanitdata/DamLevels-Data (public, default branch `main`, releases tagged `vX.Y.Z`).
+- **The record is closed**: the last bulletin is 2025-10-10 and no later data exists or will be added. Treat it as a historical archive; never present it as current or extend it with estimates.
+- Audience of `README.md`: internet users (researchers, journalists, citizens), not developers. Keep it plain, concrete and illustrated. Engineering detail goes in `docs/engineering_notes.md`. README sections are numbered (1–13) and linked from its contents list and summary table; keep numbers and anchors in sync when adding or moving a section.
 - Values are read from the PDF text layer and drawn table lines by deterministic engines. **There is no OCR anywhere in this project**; if any text claims otherwise, it is a documentation error.
 
 ## Repository map
@@ -52,7 +53,7 @@ python src/figures/make_readme_map.py [--rivers PATH] # redraw docs/img/map_dams
 pip install -e "mcp_server[ontology]"                 # MCP server; then `python -m damlevels_mcp` (stdio)
 ```
 
-MCP server rules: keep new logic in `mcp_server/damlevels_mcp/core.py` (testable without MCP) and register it in `server.py`. Every tool must stay read-only, return `_envelope(...)` (coverage + attribution + notes), refuse dates outside 2014-07-02..2025-10-10 with `OUTSIDE_RECORD`, refuse malformed input with an error code (`BAD_DATE`, `BAD_RANGE`, `BAD_LIMIT`, …) rather than an empty answer, return every candidate instead of choosing when a name or label is ambiguous, never fill or substitute missing values, and get a test in `tests/test_mcp_server.py` that compares its output with the published tables. There is no data after 2025-10-10.
+MCP server rules: when a tool is added, removed or changes behaviour, update `mcp_server/README.md` **and** README section 8 ("Ask the data with an AI assistant"); recompute the worked example and the 10 October series there from the server itself, never by hand. Keep new logic in `mcp_server/damlevels_mcp/core.py` (testable without MCP) and register it in `server.py`. Every tool must stay read-only, return `_envelope(...)` (coverage + attribution + notes), refuse dates outside 2014-07-02..2025-10-10 with `OUTSIDE_RECORD`, refuse malformed input with an error code (`BAD_DATE`, `BAD_RANGE`, `BAD_LIMIT`, …) rather than an empty answer, return every candidate instead of choosing when a name or label is ambiguous, never fill or substitute missing values, and get a test in `tests/test_mcp_server.py` that compares its output with the published tables. There is no data after 2025-10-10.
 
 On Windows PowerShell use `$env:PYTHONPATH = "src"` instead of the `PYTHONPATH=src` prefix.
 
@@ -77,11 +78,15 @@ These are the project's invariants. Breaking one silently corrupts the published
 8. **The current quality indicators are `qa/kpi/`.** The D, E and B values in `qa/qa_summary.json` / `qa/report.md` use superseded rules and are kept only as history. Quote numbers from `qa/kpi/results/KPI_RESULTS.csv`.
 9. **Every number in prose must be checkable.** Before writing a figure into the README or docs, compute it from the repository files.
 
-## Recording changes
+## Recording changes and releasing
 
-- Add an entry at the top of `CHANGELOG.md` for every change (version heading, date, what changed and why).
+- Add an entry at the top of `CHANGELOG.md` for every change. Changes not yet released go under `## Unreleased`; a release renames that heading to `## X.Y.Z — title — date`.
 - Any change to a data, provenance, GIS-registry or descriptor file gets a row in `provenance/ENGINEERING_CHANGES.csv` with SHA-256 before and after. Corrections append history; they do not overwrite it.
-- Keep `README.md`, `docs/data_dictionary.md`, `docs/known_issues.md` and `datapackage.json` consistent with each other.
+- Keep `README.md`, `docs/data_dictionary.md`, `docs/known_issues.md`, `datapackage.json` and `mcp_server/README.md` consistent with each other.
+- **One version for everything.** Dataset, code and MCP server share a single version (currently 1.1.1), set in `CITATION.cff` (`version`, `date-released`), `datapackage.json`, `pyproject.toml`, `mcp_server/pyproject.toml` and `mcp_server/damlevels_mcp/__init__.py`. Bump all five together.
+- **Release** only when the owners ask: bump the version, date the CHANGELOG entry, run tests and contract validation, commit and push, then
+  `gh release create vX.Y.Z --repo tanitdata/DamLevels-Data --target <full 40-character commit SHA> --title "DamLevels-Data X.Y.Z" --notes-file <that CHANGELOG entry>`
+  (a short SHA is rejected). Releases are what Zenodo archives for a DOI, so never move or delete a published tag.
 
 ## Licences
 
@@ -95,7 +100,13 @@ Do not change licence terms without the project owners' decision.
 | `gis/context/` | Natural Earth, public domain |
 | Code (including `mcp_server/`) | MIT (`LICENSE`); the Page 3 extractor imports PyMuPDF (AGPL-3.0) |
 
-Never commit: the bulletin corpus (only the two documented samples), provider rasters (MERIT Hydro, FABDEM, JRC), HydroSHEDS-derived river data, SQLite run databases, `config/paths.local.toml`, or any absolute local path, personal email or credential.
+Never commit: the bulletin corpus (only the two documented samples), provider rasters (MERIT Hydro, FABDEM, JRC), HydroSHEDS-derived river data, SQLite run databases, `config/paths.local.toml`, or any absolute local path, user name, personal email or credential. Before each commit, scan the staged files — notebooks and JSON included, where backslashes are escaped:
+
+```bash
+git diff --cached --name-only | grep -vx CLAUDE.md | xargs -r grep -nIiE '([A-Za-z]:(\\\\|\\|/)+(Users|Documents|Downloads|pfe|dam_|Task21|clone|satellite)|/Users/|/home/|LENOVO|@gmail|password|api[_-]?key|token=)' || echo "clean"
+```
+
+Expected output: nothing or `clean`. Review every hit by eye: known harmless matches are generic prose such as "hard-coded `D:\` / `C:\Users\…` paths" (no user name), code identifiers ending in `token=`, and the absence assertions in `tests/test_gis_packaging.py`. Logical tokens such as `<FULL_RECONSTRUCTION>` and GitHub no-reply addresses are fine. Upstream credits must travel with derived material: the FABDEM v1-2 Copernicus WorldDEM-30 / Airbus statements in `LICENSE-DATA` and the README map caption must stay if the map or GIS layers are regenerated.
 
 ## Git conventions
 
