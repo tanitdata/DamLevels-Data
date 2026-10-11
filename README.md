@@ -13,6 +13,10 @@ Every day the Tunisian Ministry of Agriculture publishes a three-page PDF bullet
 | **Source** | DGBGTH bulletins *Situation des barrages*, published by [ONAGRI](https://www.onagri.nat.tn/Situation-des-barrages/fr/19) |
 | **Method** | deterministic reading of the PDF text and drawn table lines — no OCR, no manual retyping |
 
+![Map of Tunisia's 36 large dams, their catchments, river links and transfer routes, coloured by fill on 10 October 2025](docs/img/map_dams.png)
+
+*The 36 dams on the latest bulletin date in the record, 10 October 2025. Together they held 649 million m³, 27 % of their capacity; 18 dams were below a quarter full and only Barbara was above 75 %. Most dams sit in the wetter north, in the Medjerda basin and along the northern coast. Dark blue lines are the natural river links between dams, dashed purple lines the artificial transfer routes. Open the dam layer as an interactive map: [`gis/vector/dams.geojson`](gis/vector/dams.geojson) (GitHub draws it on a map); the figure is produced by [`src/figures/make_readme_map.py`](src/figures/make_readme_map.py).*
+
 ---
 
 ## Contents
@@ -179,7 +183,7 @@ Good practice:
 - **Not every dam is printed every day.** Some dams were added to the bulletin later (Melah 2019, Tine 2020, Harka and Sarrat 2021).
 - Parquet versions of the large tables are in [`data/parquet/`](data/parquet/).
 
-For maps, open [`gis/project/DamLevels-Data.qgs`](gis/project/DamLevels-Data.qgs) in QGIS 3.44+, or load the GeoJSON files in [`gis/vector/`](gis/vector/) in any GIS tool.
+For maps, open [`gis/project/DamLevels-Data.qgs`](gis/project/DamLevels-Data.qgs) in QGIS 3.44+, or load the GeoJSON files in [`gis/vector/`](gis/vector/) in any GIS tool. Clicking a `.geojson` file on GitHub shows it on an interactive map.
 
 ## 8. What is in the repository
 
@@ -218,7 +222,8 @@ It is built on W3C/OGC standards (SOSA, OWL-Time, QUDT, PROV, SKOS) and can be o
 |---|---|
 | Source values (DGBGTH bulletins, published by ONAGRI) | [Licence Nationale de Données Publiques Ouvertes](https://www.data.gov.tn/fr/licences-de-r%C3%A9utilisation-des-donn%C3%A9es-publiques-ouvertes/) — cite the producer and the date |
 | Tables, QA, provenance, documentation, ontology, dam points, transfer network, styles, QGIS project | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
-| `gis/vector/catchments*.geojson`, `natural_network.geojson` (derived from FABDEM and MERIT Hydro) | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) — non-commercial |
+| `gis/vector/catchments*.geojson`, `natural_network.geojson` (derived from FABDEM and MERIT Hydro), and the overview map `docs/img/map_dams.png` | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) — non-commercial |
+| Country outlines in `gis/context/` | Natural Earth, public domain |
 | Code (`src/`, `tests/`, `qa/kpi/*.py`) | [MIT](LICENSE) |
 
 When you reuse the data, please include:

@@ -73,3 +73,17 @@ This follows the most restrictive upstream terms:
 No raster from these sources is redistributed (gis/RASTER_MANIFEST.csv lists
 them by hash only). Commercial reuse of these three layers is not covered by
 this repository.
+
+The overview map docs/img/map_dams.png shows these catchments and is
+therefore also CC BY-NC-SA 4.0. Its background rivers are drainage lines
+derived from HydroSHEDS (Lehner, Verdin and Jarvis, 2008, EOS 89(10), 93-94;
+https://www.hydrosheds.org), used with attribution; the river data itself is
+not redistributed.
+
+---------------------------------------------------------------------------
+4. Context layers
+---------------------------------------------------------------------------
+
+gis/context/naturalearth_countries.geojson contains country outlines from
+Natural Earth (https://www.naturalearthdata.com), which are in the public
+domain.

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.2 — overview map — 2026-10-11
+
+- Added an overview map to the top of the README (`docs/img/map_dams.png`): the 36 dams coloured by fill on 2025-10-10 (computed with the capacity regime in force that day), sized by reference capacity, with catchments, the 8 river links, mapped transfer routes, background rivers derived from HydroSHEDS and an inset locating the area in Tunisia.
+- Added the script that draws it (`src/figures/make_readme_map.py`) and Natural Earth country outlines (`gis/context/naturalearth_countries.geojson`, public domain).
+- `LICENSE-DATA`: the map is CC BY-NC-SA 4.0 (it shows the FABDEM/MERIT-derived catchments); HydroSHEDS and Natural Earth credited.
+
 ## 1.0.1 — public README and ontology — 2026-10-11
 
 - Rewrote `README.md` for readers outside the project: what the data is, the three bulletin pages with images, how a printed cell becomes a row (with its provenance), how the dataset was built, how to read the time rules, the five checks, source errors, a tested quick start, repository map, limitations, licences and citation.
