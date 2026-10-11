@@ -12,6 +12,7 @@ Every day the Tunisian Ministry of Agriculture publishes a three-page PDF bullet
 | **Also** | dam metadata and capacities, inter-dam transfers, catchments and river links (GIS), quality checks, and an ontology that defines every printed column |
 | **Source** | DGBGTH bulletins *Situation des barrages*, published by [ONAGRI](https://www.onagri.nat.tn/Situation-des-barrages/fr/19) |
 | **Method** | deterministic reading of the PDF text and drawn table lines — no OCR, no manual retyping |
+| **Ask an AI** | a read-only MCP server lets Claude or any MCP-compatible assistant answer questions from the archive, with the source page of every number ([section 8](#8-ask-the-data-with-an-ai-assistant-mcp-server)) |
 
 ![Map of Tunisia's 36 large dams, their catchments, river links and transfer routes, coloured by fill on 10 October 2025](docs/img/map_dams.png)
 
@@ -28,11 +29,12 @@ Every day the Tunisian Ministry of Agriculture publishes a three-page PDF bullet
 5. [How the data was checked](#5-how-the-data-was-checked)
 6. [Errors found in the bulletins themselves](#6-errors-found-in-the-bulletins-themselves)
 7. [Quick start](#7-quick-start)
-8. [What is in the repository](#8-what-is-in-the-repository)
-9. [The ontology: a label on every number](#9-the-ontology-a-label-on-every-number)
-10. [Limitations](#10-limitations)
-11. [Licences and attribution](#11-licences-and-attribution)
-12. [Citation and authors](#12-citation-and-authors)
+8. [Ask the data with an AI assistant (MCP server)](#8-ask-the-data-with-an-ai-assistant-mcp-server)
+9. [What is in the repository](#9-what-is-in-the-repository)
+10. [The ontology: a label on every number](#10-the-ontology-a-label-on-every-number)
+11. [Limitations](#11-limitations)
+12. [Licences and attribution](#12-licences-and-attribution)
+13. [Citation and authors](#13-citation-and-authors)
 
 ---
 
@@ -183,11 +185,65 @@ Good practice:
 - **Not every dam is printed every day.** Some dams were added to the bulletin later (Melah 2019, Tine 2020, Harka and Sarrat 2021).
 - Parquet versions of the large tables are in [`data/parquet/`](data/parquet/).
 
-**Ask an AI assistant.** The repository includes a read-only [MCP server](mcp_server/) that lets Claude (or any MCP client) query the archive — storage, fill, national totals, year-on-year comparisons, transfers, and the meaning of bulletin terms — with the dating rules built in and a link to the bulletin page behind every number. See [`mcp_server/README.md`](mcp_server/README.md).
+Prefer to ask in plain language? See [section 8](#8-ask-the-data-with-an-ai-assistant-mcp-server).
 
 For maps, open [`gis/project/DamLevels-Data.qgs`](gis/project/DamLevels-Data.qgs) in QGIS 3.44+, or load the GeoJSON files in [`gis/vector/`](gis/vector/) in any GIS tool. Clicking a `.geojson` file on GitHub shows it on an interactive map.
 
-## 8. What is in the repository
+## 8. Ask the data with an AI assistant (MCP server)
+
+You don't need to write code to use the archive. The repository includes a read-only **[MCP server](mcp_server/)** — a small program that plugs the dataset into AI assistants that support the [Model Context Protocol](https://modelcontextprotocol.io), such as Claude Desktop and Claude Code. You ask a question in English, French or Arabic; the assistant looks the answer up in the published tables instead of guessing, and can show you the bulletin page each number came from.
+
+**Questions you can ask**
+
+- *How full was Sidi Salem on 10 October 2025, and where does that number come from?*
+- *How much water did Tunisia's dams hold on 10 October each year since 2014?*
+- *Compare Sidi El Barrak this winter with the same days last year.*
+- *What does الإيرادات mean in the bulletin, and which day does it refer to?*
+- *Which transfers between dams were reported in February 2020?*
+
+**What an answer looks like.** Asked about Sidi Salem on 10 October 2025, the server returns:
+
+| | |
+|---|---|
+| Storage | **137.196 million m³** |
+| Capacity in force that day | 580.35 million m³ |
+| Fill | **23.6 %** (the bulletin itself prints 23.6 %) |
+| Source | [`BARRAGES-10-10-2025.pdf`](https://www.onagri.nat.tn/uploads/barrages/BARRAGES-10-10-2025.pdf), page 1, printed as `137,196` |
+
+and for the national question, total storage on 10 October of each year:
+
+| 2014 | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025 |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1,179 | 1,139 | 660 | 586 | 896 | 1,393 | 966 | 669 | 736 | 579 | 501 | 649 |
+
+*Million m³, sum of the dams printed that day (26 dams in 2014, all 36 from 2021), so early years are not fully comparable.*
+
+**Why answers can be trusted.** The rules of the data are built into the server, so the assistant cannot get them wrong:
+
+- dates after 10 October 2025 are refused (`OUTSIDE_RECORD`) — nothing is ever estimated;
+- a missing day is reported as missing, never as zero and never replaced by a neighbouring day;
+- flows are dated to the day before the bulletin; fill uses the capacity in force on that date;
+- transfers are always marked as less certain (`PROBABLE`);
+- every answer carries the source attribution and any caveats.
+
+**Tools available to the assistant:** `find_dam` (French or Arabic names), `list_dams`, `get_storage`, `get_fill`, `national_storage`, `compare_years`, `get_source`, `get_transfers`, `describe_variable` (meanings from the [ontology](ontology/)), `dataset_info`.
+
+**Set it up** (Python 3.11+, from a clone of this repository):
+
+```bash
+pip install -e "mcp_server[ontology]"
+claude mcp add damlevels -- python -m damlevels_mcp      # Claude Code
+```
+
+For Claude Desktop, add this to `claude_desktop_config.json`:
+
+```json
+{ "mcpServers": { "damlevels": { "command": "python", "args": ["-m", "damlevels_mcp"] } } }
+```
+
+Full documentation, all tools and their tests: [`mcp_server/README.md`](mcp_server/README.md).
+
+## 9. What is in the repository
 
 | Folder / file | What it contains |
 |---|---|
@@ -205,13 +261,13 @@ For maps, open [`gis/project/DamLevels-Data.qgs`](gis/project/DamLevels-Data.qgs
 | [`mcp_server/`](mcp_server/) | read-only MCP server for AI assistants |
 | [`datapackage.json`](datapackage.json) | machine-readable description of every table and field ([Frictionless Data](https://frictionlessdata.io/)) |
 
-## 9. The ontology: a label on every number
+## 10. The ontology: a label on every number
 
 A spreadsheet can hold `8,645`, but not say what it is. The **DamLevels Ontology (DLO 0.3)** in [`ontology/`](ontology/) maps the 84 printed columns to 33 concepts and 16 time rules, so each value knows *what* was measured, *where*, *for which day*, in *which unit*, and *which page* it came from. For example, `8,645` in the Sidi El Barrak row above becomes: *released water volume · Sidi El Barrak reservoir · 31 January 2019 · million m³ · a reference value from one year earlier*.
 
 It is built on W3C/OGC standards (SOSA, OWL-Time, QUDT, PROV, SKOS) and can be opened in Protégé or queried with SPARQL; see [`ontology/README.md`](ontology/README.md) for example queries and their output.
 
-## 10. Limitations
+## 11. Limitations
 
 - **Page 3 (transfers) is the weakest source.** Its facts are published with authority `PROBABLE`; two transfer endpoints are only candidate matches, and their dates follow the bulletin rather than the verified day (see [known issues](docs/known_issues.md)).
 - **Some metadata is incomplete.** Basin names are given for 6 dams only; Arabic names for part of the roster.
@@ -219,7 +275,7 @@ It is built on W3C/OGC standards (SOSA, OWL-Time, QUDT, PROV, SKOS) and can be o
 - **Catchments:** Mellègue has no accepted catchment; two incremental catchments are special cases (see [GIS notes](docs/gis.md)).
 - **Not official statistics.** This is an independent reconstruction from public bulletins. No forecasting model is included or claimed.
 
-## 11. Licences and attribution
+## 12. Licences and attribution
 
 | What | Licence |
 |---|---|
@@ -235,7 +291,7 @@ When you reuse the data, please include:
 
 Details are in [`LICENSE-DATA`](LICENSE-DATA). The Page 3 extractor imports PyMuPDF (AGPL-3.0); distributing a build that bundles PyMuPDF must follow the AGPL.
 
-## 12. Citation and authors
+## 13. Citation and authors
 
 Please cite this repository using [`CITATION.cff`](CITATION.cff) (GitHub shows a **Cite this repository** button).
 

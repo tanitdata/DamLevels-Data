@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased — documentation
+
+- README: new section 8 "Ask the data with an AI assistant (MCP server)" with example questions, a worked answer (Sidi Salem, 2025-10-10), the 10 October national series, the built-in rules, the tool list and setup for Claude Code and Claude Desktop; the summary table links to it. Later sections renumbered 9–13.
+
 ## 1.1.1 — review fixes — 2026-10-11
 
 Fixes for the findings of an independent review of 1.1.0 (F01–F18). No published value changed.
