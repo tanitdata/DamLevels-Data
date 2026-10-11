@@ -4,7 +4,12 @@
 # pdfplumber / pdfminer.six match src/extract/DAM_DATA_PIPELINE_page1and2/requirements-lock.txt.
 # frictionless is needed for KPI K01 and the schema part of K03 (its own
 # dependencies are not pinned here). The extraction engines keep their own locks.
+# rdflib and owlrl run the ontology tests (tests/test_ontology.py).
 frictionless==5.19.1
+rdflib==7.1.4
+owlrl==7.1.3
+pyparsing==3.3.2
+isodate==0.7.2
 pandas==2.3.3
 numpy==2.4.4
 pyarrow==24.0.0

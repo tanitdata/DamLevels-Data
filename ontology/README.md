@@ -77,6 +77,20 @@ The same three numbers sit side by side in one printed row; the ontology gives e
 | `column_meanings.rq` | What does each printed column mean, and how is it dated? (83 rows) |
 | `time_rules.rq` | Which time rules exist, and how many columns use each? (16 rows) |
 
+## Tests
+
+`tests/test_ontology.py` (run with `pytest`) checks that:
+
+- the Turtle and OWL files carry the same statements;
+- the counts above are correct (84 mappings, 33 concepts, 16 time rules, 46 semantic tests, 200 observations, 36 dams/reservoirs/catchments);
+- every observation has its feature, concept, time, column mapping and source page, and every empty one carries an explicit status (for example *not printed in this layout*);
+- every concept and time rule has a label and a definition, and no undefined project term is referenced;
+- the 20 sample storage observations equal the values in `data/storage.csv`;
+- the example queries return the documented rows, and inflow is dated the day before the bulletin;
+- OWL RL reasoning (owlrl) finds no contradiction.
+
+Not covered here: the full instance graph and its SHACL rules, which are not part of this repository.
+
 ## Licence
 
 CC BY 4.0, like the other project material (see `../LICENSE-DATA`). The sample observation values come from the DGBGTH bulletins published by ONAGRI; keep the source attribution.

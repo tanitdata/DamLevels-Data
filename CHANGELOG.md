@@ -7,6 +7,7 @@
 - Added the DamLevels Ontology (DLO 0.3) view in `ontology/` (Turtle and OWL) with a README and three tested SPARQL queries.
 - Added bulletin page images to `docs/img/` (1 February 2020 pages 1–3, one Page 1 row, and Page 1 of 2 July 2014).
 - `LICENSE-DATA`: `ontology/` is CC BY 4.0; bulletin images fall under the source licence.
+- Added `tests/test_ontology.py` (11 tests): TTL/OWL equivalence, documented counts, completeness of observations, mappings, concepts and time rules, no undefined project terms, sample values against `data/storage.csv`, example queries, time dating, and OWL RL consistency. rdflib and owlrl added to `requirements-lock.txt`.
 
 ## 1.0.0 — licences settled, publication release — 2026-10-10
 
