@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3 — CLAUDE.md — 2026-10-11
+
+- Added `CLAUDE.md`: project purpose, repository map, verified commands, data invariants, change-recording rules, licences and git conventions for anyone (human or AI assistant) working in the repository.
+
 ## 1.0.2 — overview map — 2026-10-11
 
 - Added an overview map to the top of the README (`docs/img/map_dams.png`): the 36 dams coloured by fill on 2025-10-10 (computed with the capacity regime in force that day), sized by reference capacity, with catchments, the 8 river links, mapped transfer routes, background rivers derived from HydroSHEDS and an inset locating the area in Tunisia.
