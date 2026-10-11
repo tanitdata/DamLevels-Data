@@ -7,10 +7,13 @@ date-released: 2026-10-11
 authors:
   - family-names: "Nasfi"
     given-names: "Mohamed Hamza"
+    affiliation: "MUST University, TanitData"
   - family-names: "Boulares"
     given-names: "Soura"
+    affiliation: "MUST University, TanitData"
   - family-names: "Gasmi"
     given-names: "Tarek"
+    affiliation: "DataDoIt, TanitData"
 abstract: >-
   Provenance-traced reconstruction of the daily DGBGTH dam bulletins published
   by ONAGRI (July 2014 to October 2025): 129,390 storage observations for 36
