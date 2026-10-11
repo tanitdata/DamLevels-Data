@@ -3,7 +3,7 @@
 ## Unreleased — documentation
 
 - README: new section 8 "Ask the data with an AI assistant (MCP server)" with example questions, a worked answer (Sidi Salem, 2025-10-10), the 10 October national series, the built-in rules, the tool list and setup for Claude Code and Claude Desktop; the summary table links to it. Later sections renumbered 9–13.
-- CLAUDE.md: the record is stated as closed (no data after 2025-10-10); one-version rule across the five version fields and the release procedure (`gh release` with a full SHA, never move published tags); README section 8 must follow MCP tool changes; a pre-commit scan for local paths, user names and secrets (notebooks included), with its known harmless matches; FABDEM/Copernicus credits must survive any map or GIS regeneration.
+- Internal maintainer notes are no longer published: `CLAUDE.md` was removed from the repository and is ignored by git.
 
 ## 1.1.1 — review fixes — 2026-10-11
 
@@ -15,7 +15,7 @@ Fixes for the findings of an independent review of 1.1.0 (F01–F18). No publish
 - **Privacy (F02).** Removed a workstation user name and local paths from the executed audit notebook outputs, the QGIS project metadata, the inter-page mismatch receipt and `docs/page3_audit/README.md`; `src/paths.py` no longer contains any machine path (local roots for the logical tokens now come from the `[roots]` table of the untracked config). The git history of `main` was rewritten with the same replacements and force-pushed; authorship is unchanged.
 - **Licences (F04, F12).** `LICENSE-DATA` and the README map credit carry the Copernicus WorldDEM-30 / Airbus statements required by the FABDEM v1-2 readme. `CITATION.cff` states the licence of each part and links `LICENSE-DATA`.
 - **Descriptor and records (F06, F17).** Both transfer schemas in `datapackage.json` now state that `date` = bulletin date with `SAME_DAY` and how DLO 0.3 dates each measure. `provenance/ENGINEERING_CHANGES.csv` records the descriptor transition from E7 to 1.0.0 and every 1.1.1 file change with SHA-256 before and after. KPIs rerun: all values identical, receipt updated.
-- **Tests and documentation (F09, F10, F16, F18).** Ontology tests compare TTL and OWL including blank nodes (graph isomorphism) and read owlrl error messages, each with a self-test that must fail on a broken graph; the two research-QA tests that compared local constants now exercise the production audit functions and the published audit files. New MCP tests cover each fix and run real stdio sessions, including the ambiguous labels under three hash seeds. README describes the five checks as complementary, with their own denominators; the MCP README states exactly what the tests cover; CLAUDE.md no longer hard-codes test counts; private-project links in `docs/page3_audit/README.md` are marked as such.
+- **Tests and documentation (F09, F10, F16, F18).** Ontology tests compare TTL and OWL including blank nodes (graph isomorphism) and read owlrl error messages, each with a self-test that must fail on a broken graph; the two research-QA tests that compared local constants now exercise the production audit functions and the published audit files. New MCP tests cover each fix and run real stdio sessions, including the ambiguous labels under three hash seeds. README describes the five checks as complementary, with their own denominators; the MCP README states exactly what the tests cover; private-project links in `docs/page3_audit/README.md` are marked as such.
 - **Versions.** Dataset, code and MCP server share one version: 1.1.1 (`CITATION.cff`, `datapackage.json`, `pyproject.toml`, `mcp_server`).
 
 ## 1.1.0 — MCP server — 2026-10-11
@@ -23,11 +23,11 @@ Fixes for the findings of an independent review of 1.1.0 (F01–F18). No publish
 - Added `mcp_server/` (`damlevels-mcp` 0.1.0): a read-only Model Context Protocol server over the published tables with ten tools (`dataset_info`, `list_dams`, `find_dam`, `get_storage`, `get_fill`, `national_storage`, `compare_years`, `get_source`, `get_transfers`, `describe_variable`) and three document resources.
 - Built-in rules: coverage 2014-07-02..2025-10-10 with `OUTSIDE_RECORD` outside it; missing values reported, never filled or substituted; fill from the capacity regime in force; Page 3 facts flagged `PROBABLE`; flows dated to the day before the bulletin; every answer carries coverage, attribution and caveats.
 - `describe_variable` reads the DLO 0.3 ontology to explain French/Arabic/English terms and printed columns with their time rules.
-- Added `tests/test_mcp_server.py` (23 tests: tool outputs against the published tables, no-fill and out-of-record rules, ontology lookups, MCP tool listing and error handling); `mcp` added to `requirements-lock.txt`; README and CLAUDE.md updated.
+- Added `tests/test_mcp_server.py` (23 tests: tool outputs against the published tables, no-fill and out-of-record rules, ontology lookups, MCP tool listing and error handling); `mcp` added to `requirements-lock.txt`; README updated.
 
-## 1.0.3 — CLAUDE.md — 2026-10-11
+## 1.0.3 — maintainer notes — 2026-10-11
 
-- Added `CLAUDE.md`: project purpose, repository map, verified commands, data invariants, change-recording rules, licences and git conventions for anyone (human or AI assistant) working in the repository.
+- Added internal maintainer notes (since removed from the published repository).
 
 ## 1.0.2 — overview map — 2026-10-11
 

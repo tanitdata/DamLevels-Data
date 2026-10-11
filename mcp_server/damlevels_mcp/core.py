@@ -2,7 +2,7 @@
 
 Every public method returns a JSON-serialisable dict built by ``_envelope`` so
 that each answer carries the record's coverage, the source attribution and any
-caveats. Rules enforced here (see CLAUDE.md and docs/data_dictionary.md):
+caveats. Rules enforced here (see docs/data_dictionary.md):
 
 - values are never interpolated, forward-filled or replaced by zero; a date
   without a value is reported as missing, never as the nearest value;

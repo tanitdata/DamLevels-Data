@@ -32,3 +32,7 @@ sources/samples/*.pdf
 
 # Page 1+2 pipeline run outputs
 /src/extract/DAM_DATA_PIPELINE_page1and2/outputs/
+
+# Local maintainer notes (read by Claude Code, never published)
+CLAUDE.md
+CLAUDE.local.md
