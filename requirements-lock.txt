@@ -5,7 +5,9 @@
 # frictionless is needed for KPI K01 and the schema part of K03 (its own
 # dependencies are not pinned here). The extraction engines keep their own locks.
 # rdflib and owlrl run the ontology tests (tests/test_ontology.py).
+# mcp runs the MCP server and tests/test_mcp_server.py (its own dependencies are not pinned here).
 frictionless==5.19.1
+mcp==1.27.0
 rdflib==7.1.4
 owlrl==7.1.3
 pyparsing==3.3.2

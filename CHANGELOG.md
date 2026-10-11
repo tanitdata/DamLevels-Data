@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.0 — MCP server — 2026-10-11
+
+- Added `mcp_server/` (`damlevels-mcp` 0.1.0): a read-only Model Context Protocol server over the published tables with ten tools (`dataset_info`, `list_dams`, `find_dam`, `get_storage`, `get_fill`, `national_storage`, `compare_years`, `get_source`, `get_transfers`, `describe_variable`) and three document resources.
+- Built-in rules: coverage 2014-07-02..2025-10-10 with `OUTSIDE_RECORD` outside it; missing values reported, never filled or substituted; fill from the capacity regime in force; Page 3 facts flagged `PROBABLE`; flows dated to the day before the bulletin; every answer carries coverage, attribution and caveats.
+- `describe_variable` reads the DLO 0.3 ontology to explain French/Arabic/English terms and printed columns with their time rules.
+- Added `tests/test_mcp_server.py` (23 tests: tool outputs against the published tables, no-fill and out-of-record rules, ontology lookups, MCP tool listing and error handling); `mcp` added to `requirements-lock.txt`; README and CLAUDE.md updated.
+
 ## 1.0.3 — CLAUDE.md — 2026-10-11
 
 - Added `CLAUDE.md`: project purpose, repository map, verified commands, data invariants, change-recording rules, licences and git conventions for anyone (human or AI assistant) working in the repository.

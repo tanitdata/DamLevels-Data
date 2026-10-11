@@ -183,6 +183,8 @@ Good practice:
 - **Not every dam is printed every day.** Some dams were added to the bulletin later (Melah 2019, Tine 2020, Harka and Sarrat 2021).
 - Parquet versions of the large tables are in [`data/parquet/`](data/parquet/).
 
+**Ask an AI assistant.** The repository includes a read-only [MCP server](mcp_server/) that lets Claude (or any MCP client) query the archive — storage, fill, national totals, year-on-year comparisons, transfers, and the meaning of bulletin terms — with the dating rules built in and a link to the bulletin page behind every number. See [`mcp_server/README.md`](mcp_server/README.md).
+
 For maps, open [`gis/project/DamLevels-Data.qgs`](gis/project/DamLevels-Data.qgs) in QGIS 3.44+, or load the GeoJSON files in [`gis/vector/`](gis/vector/) in any GIS tool. Clicking a `.geojson` file on GitHub shows it on an interactive map.
 
 ## 8. What is in the repository
@@ -200,6 +202,7 @@ For maps, open [`gis/project/DamLevels-Data.qgs`](gis/project/DamLevels-Data.qgs
 | [`ontology/`](ontology/) | DamLevels Ontology (DLO 0.3) with example queries |
 | [`docs/`](docs/) | [data dictionary](docs/data_dictionary.md), [known issues](docs/known_issues.md), [GIS notes](docs/gis.md), [engineering notes](docs/engineering_notes.md) |
 | [`src/`](src/), [`tests/`](tests/) | extraction engines, contracts, checks and builders |
+| [`mcp_server/`](mcp_server/) | read-only MCP server for AI assistants |
 | [`datapackage.json`](datapackage.json) | machine-readable description of every table and field ([Frictionless Data](https://frictionlessdata.io/)) |
 
 ## 9. The ontology: a label on every number
@@ -224,7 +227,7 @@ It is built on W3C/OGC standards (SOSA, OWL-Time, QUDT, PROV, SKOS) and can be o
 | Tables, QA, provenance, documentation, ontology, dam points, transfer network, styles, QGIS project | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | `gis/vector/catchments*.geojson`, `natural_network.geojson` (derived from FABDEM and MERIT Hydro), and the overview map `docs/img/map_dams.png` | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) — non-commercial |
 | Country outlines in `gis/context/` | Natural Earth, public domain |
-| Code (`src/`, `tests/`, `qa/kpi/*.py`) | [MIT](LICENSE) |
+| Code (`src/`, `tests/`, `qa/kpi/*.py`, `mcp_server/`) | [MIT](LICENSE) |
 
 When you reuse the data, please include:
 

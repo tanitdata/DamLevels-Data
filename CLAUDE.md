@@ -25,7 +25,8 @@ DamLevels-Data reconstructs the daily state of Tunisia's 36 large dams (2 July 2
 | `docs/` | `data_dictionary.md`, `known_issues.md`, `gis.md`, `engineering_notes.md`, `img/` |
 | `src/extract/` | frozen extraction engines: `DAM_DATA_PIPELINE_page1and2/` (Page 1 `page1-authoritative-0.2.3`, Page 2 `page2-authoritative-1.0.0`) and `page3_extractor/` (`1.2.0rc2`) |
 | `src/` | `build.py` (QA regeneration + contract validation), historical builders `build_e2.py`, `build_e3.py`, `build_e6a*.py`, `validate/` (Pydantic contracts, capacity lookup, QA), `gis/`, `figures/`, `paths.py` |
-| `tests/` | pytest suite (53 tests, including `test_ontology.py`) |
+| `tests/` | pytest suite (76 tests, including `test_ontology.py` and `test_mcp_server.py`) |
+| `mcp_server/` | read-only MCP server (`damlevels_mcp`): `core.py` holds all query logic and the data rules, `ontology.py` the DLO lookups, `server.py` only registers tools/resources |
 | `datapackage.json` | Frictionless descriptor of every resource and field, with per-resource licences |
 
 ## Commands
@@ -47,7 +48,11 @@ PYTHONPATH=src python src/build.py                    # regenerate QA C-G + E6A.
                                                       # needs config/paths.local.toml (bulletin PDFs, lineage inputs)
 
 python src/figures/make_readme_map.py [--rivers PATH] # redraw docs/img/map_dams.png
+
+pip install -e "mcp_server[ontology]"                 # MCP server; then `python -m damlevels_mcp` (stdio)
 ```
+
+MCP server rules: keep new logic in `mcp_server/damlevels_mcp/core.py` (testable without MCP) and register it in `server.py`. Every tool must stay read-only, return `_envelope(...)` (coverage + attribution + notes), refuse dates outside 2014-07-02..2025-10-10 with `OUTSIDE_RECORD`, never fill or substitute missing values, and get a test in `tests/test_mcp_server.py` that compares its output with the published tables. There is no data after 2025-10-10.
 
 On Windows PowerShell use `$env:PYTHONPATH = "src"` instead of the `PYTHONPATH=src` prefix.
 
@@ -88,7 +93,7 @@ Do not change licence terms without the project owners' decision.
 | Tables, QA, provenance, docs, ontology, dam points, transfer network, styles, QGIS project | CC BY 4.0 |
 | `gis/vector/catchments*.geojson`, `natural_network.geojson`, `docs/img/map_dams.png` | CC BY-NC-SA 4.0 (derived from FABDEM and MERIT Hydro) |
 | `gis/context/` | Natural Earth, public domain |
-| Code | MIT (`LICENSE`); the Page 3 extractor imports PyMuPDF (AGPL-3.0) |
+| Code (including `mcp_server/`) | MIT (`LICENSE`); the Page 3 extractor imports PyMuPDF (AGPL-3.0) |
 
 Never commit: the bulletin corpus (only the two documented samples), provider rasters (MERIT Hydro, FABDEM, JRC), HydroSHEDS-derived river data, SQLite run databases, `config/paths.local.toml`, or any absolute local path, personal email or credential.
 
