@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "damlevels-data"
-version = "1.1.1"
+version = "1.1.2"
 description = "Provenance-rich daily storage data for Tunisia's large dams: contracts, QA and builders"
 requires-python = ">=3.11"
 license = {text = "MIT"}

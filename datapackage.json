@@ -3,7 +3,7 @@
   "name": "damlevels-data",
   "title": "DamLevels-Data: daily storage of Tunisia's 36 large dams, 2014-2025",
   "description": "Provenance-traced daily storage observations, qualified inter-dam transfer facts, dam metadata, QA results and GIS layers reconstructed from the DGBGTH bulletins published by ONAGRI. Current quality indicators: qa/kpi/results.",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "licenses": [
     {
       "name": "CC-BY-4.0",

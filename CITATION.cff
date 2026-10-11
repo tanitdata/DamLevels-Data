@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this dataset or code, please cite it as below, and credit the source data to DGBGTH / ONAGRI (see LICENSE-DATA)."
 title: "DamLevels-Data: daily storage of Tunisia's 36 large dams, 2014-2025"
 type: dataset
-version: 1.1.1
+version: 1.1.2
 date-released: 2026-10-11
 authors:
   - family-names: "Nasfi"

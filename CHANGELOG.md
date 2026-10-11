@@ -1,7 +1,8 @@
 # Changelog
 
-## Unreleased — documentation
+## 1.1.2 — documentation and citation — 2026-10-11
 
+- Version 1.1.2 in `CITATION.cff`, `datapackage.json`, `pyproject.toml` and `mcp_server`; KPIs rerun (values identical, receipt updated). First release archived on Zenodo.
 - `CITATION.cff`: author affiliations added (Mohamed Hamza Nasfi and Soura Boulares: MUST University, TanitData; Tarek Gasmi: DataDoIt, TanitData). Zenodo copies them into the archive record.
 - README: new section 8 "Ask the data with an AI assistant (MCP server)" with example questions, a worked answer (Sidi Salem, 2025-10-10), the 10 October national series, the built-in rules, the tool list and setup for Claude Code and Claude Desktop; the summary table links to it. Later sections renumbered 9–13.
 - Internal maintainer notes are no longer published: `CLAUDE.md` was removed from the repository and is ignored by git.
