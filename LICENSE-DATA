@@ -37,11 +37,14 @@ gives the original_url of each.
 2. Tables and documentation created by this project — CC BY 4.0
 ---------------------------------------------------------------------------
 
-Everything in data/, sources/, provenance/, qa/, docs/ and datapackage.json,
-plus gis/vector/dams.geojson, gis/vector/transfer_network.geojson,
-gis/styles/ and gis/project/, is licensed under the Creative Commons
-Attribution 4.0 International licence:
+Everything in data/, sources/, provenance/, qa/, docs/, ontology/ and
+datapackage.json, plus gis/vector/dams.geojson,
+gis/vector/transfer_network.geojson, gis/styles/ and gis/project/, is
+licensed under the Creative Commons Attribution 4.0 International licence:
 https://creativecommons.org/licenses/by/4.0/
+
+The bulletin page images in docs/img/ are renderings of the public DGBGTH
+bulletins and fall under section 1.
 
 Attribution: DamLevels-Data (see CITATION.cff), together with the source
 attribution in section 1.

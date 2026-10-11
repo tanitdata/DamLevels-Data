@@ -1,0 +1,16 @@
+# The time rules that say which day (or period) a printed value describes,
+# and how many printed columns use each rule.
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dlc:  <https://w3id.org/damlevels/code/>
+PREFIX dlo:  <https://w3id.org/damlevels/ontology/>
+
+SELECT ?timeRule ?definition (COUNT(?mapping) AS ?columns)
+WHERE {
+  ?rule skos:inScheme dlc:TemporalSupportScheme ;
+        skos:prefLabel ?timeRule .
+  OPTIONAL { ?rule skos:definition ?definition . FILTER(LANGMATCHES(LANG(?definition), "en") || LANG(?definition) = "") }
+  OPTIONAL { ?mapping a dlo:ColumnMapping ; dlo:temporalSupport ?rule . }
+  FILTER(LANGMATCHES(LANG(?timeRule), "en"))
+}
+GROUP BY ?timeRule ?definition
+ORDER BY DESC(?columns) ?timeRule

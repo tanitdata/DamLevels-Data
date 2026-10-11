@@ -1,0 +1,29 @@
+# Every sample observation for Sidi El Barrak: what was measured, the value,
+# the day it describes, the time rule that dates it, and the source page.
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX qudt: <http://qudt.org/schema/qudt/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dlo:  <https://w3id.org/damlevels/ontology/>
+
+SELECT ?variable ?value ?unit ?describes ?timeRule ?sourcePageSha256
+WHERE {
+  ?obs a dlo:BulletinObservation ;
+       sosa:hasFeatureOfInterest ?feature ;
+       sosa:observedProperty ?property ;
+       sosa:hasResult ?result ;
+       sosa:usedProcedure ?mapping ;
+       sosa:phenomenonTime ?time ;
+       prov:used ?page .
+  FILTER(STRENDS(STR(?feature), "/sidielbarrak"))
+  ?property skos:prefLabel ?variable .
+  ?result qudt:numericValue ?value ;
+          qudt:unit ?unit .
+  ?mapping dlo:temporalSupport ?rule .
+  ?rule skos:prefLabel ?timeRule .
+  FILTER(LANGMATCHES(LANG(?timeRule), "en"))
+  BIND(STRAFTER(STR(?time), "/time/") AS ?describes)
+  BIND(STRAFTER(STR(?page), "/page/") AS ?sourcePageSha256)
+}
+ORDER BY ?variable ?describes

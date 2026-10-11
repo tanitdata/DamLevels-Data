@@ -1,108 +1,238 @@
 # DamLevels-Data
 
-Daily storage of Tunisia's 36 large dams, July 2014 to October 2025, reconstructed from the DGBGTH bulletins "Situation des barrages" published by ONAGRI.
+**How much water is in Tunisia's dams, day by day, since 2014?**
 
-- `data/storage.csv` — 129,390 storage observations (Mm³), one row per dam and bulletin date, each linked to its source PDF, page and lineage cell.
-- `data/dams.csv`, `data/capacity_history.csv` — stable `dam_id`, French/Arabic names, coordinates and dated capacity regimes.
-- `data/transfers.csv` — 47,556 qualified inter-dam transfer facts from Page 3 (authority `PROBABLE`).
-- `gis/` — dams, catchments, incremental catchments, natural and transfer networks (GeoJSON, EPSG:4326) and a QGIS project.
-- `qa/` — engineering QA, extraction audits and the current quality indicators (`qa/kpi/`).
-- `sources/manifest.csv` — every bulletin used, with ONAGRI URL and per-page SHA-256; two sample bulletins in `sources/samples/`.
+Every day the Tunisian Ministry of Agriculture publishes a three-page PDF bulletin on the country's large dams. The information is public, but it is locked in PDF tables: there is no spreadsheet, no API, and the layout has changed over the years. This repository turns eleven years of those bulletins into clean, documented tables you can open in Excel, pandas, R or QGIS, and every number in them can be traced back to the exact cell of the page it was read from.
 
-Values are read from the PDF text layer and vector rulings by deterministic extraction engines; no OCR is used. Join on `dam_id`, never on dam names. Missing values stay missing; nothing is interpolated. See `docs/data_dictionary.md` and `docs/known_issues.md` before using the data.
+| | |
+|---|---|
+| **Period** | 2 July 2014 to 10 October 2025 (3,985 bulletin dates, 11,927 PDF pages) |
+| **Dams** | 36 large dams, each with a stable identifier (`dam_id`) |
+| **Main table** | 129,390 daily storage values in million m³ (`data/storage.csv`) |
+| **Also** | dam metadata and capacities, inter-dam transfers, catchments and river links (GIS), quality checks, and an ontology that defines every printed column |
+| **Source** | DGBGTH bulletins *Situation des barrages*, published by [ONAGRI](https://www.onagri.nat.tn/Situation-des-barrages/fr/19) |
+| **Method** | deterministic reading of the PDF text and drawn table lines — no OCR, no manual retyping |
 
-## Licences
+---
+
+## Contents
+
+1. [The source: a daily PDF bulletin](#1-the-source-a-daily-pdf-bulletin)
+2. [From a printed cell to a row of data](#2-from-a-printed-cell-to-a-row-of-data)
+3. [How the dataset was built](#3-how-the-dataset-was-built)
+4. [Reading the numbers correctly](#4-reading-the-numbers-correctly)
+5. [How the data was checked](#5-how-the-data-was-checked)
+6. [Errors found in the bulletins themselves](#6-errors-found-in-the-bulletins-themselves)
+7. [Quick start](#7-quick-start)
+8. [What is in the repository](#8-what-is-in-the-repository)
+9. [The ontology: a label on every number](#9-the-ontology-a-label-on-every-number)
+10. [Limitations](#10-limitations)
+11. [Licences and attribution](#11-licences-and-attribution)
+12. [Citation and authors](#12-citation-and-authors)
+
+---
+
+## 1. The source: a daily PDF bulletin
+
+Each bulletin has three pages. This is the bulletin of **1 February 2020**, one of the two sample bulletins included in [`sources/samples/`](sources/samples/).
+
+**Page 1 — inflows, releases and stock, per dam.** This is the page the main storage table comes from. Note the header: *"du 31-01-20 observée le 01-02-20"* — flows describe the previous day, stocks describe the bulletin day (see [section 4](#4-reading-the-numbers-correctly)).
+
+![Page 1 of the bulletin of 1 February 2020](docs/img/bulletin_2020-02-01_page1.png)
+
+**Page 2 — levels, capacities, rain and a second copy of storage, inflow and release.** The duplicated values are used to cross-check Page 1.
+
+![Page 2 of the bulletin of 1 February 2020](docs/img/bulletin_2020-02-01_page2.png)
+
+**Page 3 — national totals, regions and water transfers between dams** (in Arabic).
+
+<img src="docs/img/bulletin_2020-02-01_page3.png" alt="Page 3 of the bulletin of 1 February 2020" width="560">
+
+**The layout changes over time.** In July 2014 Page 1 printed fewer dams and had no fill-percentage column; dams such as Sarrat only appear from April 2021. The extraction engines detect the layout of each page instead of assuming one.
+
+![Page 1 of the bulletin of 2 July 2014](docs/img/bulletin_2014-07-02_page1.png)
+
+Every bulletin used is listed in [`sources/manifest.csv`](sources/manifest.csv) with its link on the ONAGRI site and the SHA-256 fingerprint of each page, so anyone can download the same files and check that they are byte-identical.
+
+## 2. From a printed cell to a row of data
+
+Take one row of Page 1: **Sidi El Barrak** on the bulletin of 1 February 2020.
+
+![The Sidi El Barrak row of Page 1, 1 February 2020](docs/img/row_sidi_el_barrak_2020-02-01.png)
+
+The second-last number, `283,496`, is the stock in the reservoir that morning, in million m³ with a French decimal comma. In [`data/storage.csv`](data/storage.csv) it becomes this row:
+
+| Column | Value | Meaning |
+|---|---|---|
+| `dam_id` | `sidielbarrak` | stable identifier — join on this, never on the printed name |
+| `date` | `2020-02-01` | bulletin date (stock is a state on this day) |
+| `variable`, `value`, `unit` | `storage`, `283.496`, `Mm3` | the number, converted from `283,496` |
+| `source_file` | `01-02-2020_1.pdf` | the page it was read from |
+| `source_sha256` | `0bb40123…6032c5` | fingerprint of that exact PDF page |
+| `page` | `1` | |
+| `source_field` | `p1_stock_today_mm3` | which printed column |
+| `engine_version` | `page1-authoritative-0.2.3` | which reader produced it |
+| `lineage_id` | `P1LIN-d1da0054…` | link to the cell-level record below |
+| `flag` | `ACCEPTED_PAGE1_OBSERVATION\|LINEAGE_LINKED` | status |
+
+and its cell-level record in [`provenance/storage_lineage.csv`](provenance/storage_lineage.csv) keeps the evidence: physical column `14`, the cell's bounding box on the page, the raw printed characters `283,496`, the parse status `NUMERIC_PARSED`, and a link to the check against the printed regional subtotal.
+
+This "passport" exists for every value. If a number looks wrong, you can open the original PDF, go to the cell, and see what was printed.
+
+## 3. How the dataset was built
+
+```mermaid
+flowchart LR
+    A["ONAGRI bulletins<br/>3,985 dates · PDF"] --> B["Inventory<br/>SHA-256 per page<br/>split into pages 1 · 2 · 3"]
+    B --> C1["Page 1 engine<br/>characters + table lines"]
+    B --> C2["Page 2 engine<br/>words + boxes"]
+    B --> C3["Page 3 engine<br/>text + drawn grid"]
+    C1 --> D["Identify dams<br/>printed names → dam_id"]
+    C2 --> D
+    C3 --> E["Transfers kept apart<br/>authority: PROBABLE"]
+    D --> F["Checks<br/>totals · Page 1 vs Page 2<br/>calendar · sample vs PDF"]
+    E --> F
+    F --> G["Published tables<br/>+ provenance + QA"]
+```
+
+1. **Collect and fingerprint.** All bulletins were downloaded from ONAGRI, fingerprinted with SHA-256 and split into their three pages. Duplicates, backups and files with a date that disagrees with their content are kept in an inventory ([`sources/file_manifest.csv`](sources/file_manifest.csv)) rather than silently dropped.
+2. **Read the pages.** Three deterministic engines read the characters of the PDF text layer and the lines drawn to make the tables. The Page 1 engine finds the column borders from the vertical rulings and assigns each character to its cell. Nothing is retyped and no OCR is used, so running an engine twice on the same file gives the same output. Page 1 yields 129,391 dam-day observations, Page 2 129,472, Page 3 274,183 facts.
+3. **Identify the dams.** Dam names are printed in French and Arabic with varying spellings. A governed alias register maps every printed name to one stable `dam_id`.
+4. **Keep the evidence.** Every value keeps its file, fingerprint, page, column, bounding box and raw printed text (1,896,094 Page 1 cells traced). Missing or unreadable cells stay missing; nothing is interpolated or forward-filled.
+5. **Check.** Each value is tested five ways ([section 5](#5-how-the-data-was-checked)).
+6. **Package.** The results are published as long ("tidy") tables with a data dictionary, known issues, GIS layers and an ontology.
+
+The extraction code is in [`src/extract/`](src/extract/); the packaging, contracts and checks are in [`src/`](src/) and [`qa/`](qa/).
+
+## 4. Reading the numbers correctly
+
+The column headings do not always mean what they seem to say. These rules are built into the data and written down in the [ontology](ontology/):
+
+| Printed value | What it actually describes |
+|---|---|
+| Stock, level, fill % on the bulletin of day D | the state on **day D** |
+| Inflow, release, transfer, evaporation on the bulletin of day D | the amount over **day D−1** |
+| The two values under *Lâchers du jour* (release of the day) | the first is the release over **day D−1** (dated `31-01-20` on the 1 February 2020 bulletin); the second is the release on the **same day one year earlier** (`31-01-19`) — easy to mistake for a current value |
+| Month-to-date totals | from the first day of the month of D−1 — they restart on the bulletin of the **2nd** of the month |
+| Season totals | from **1 September** — they restart on the bulletin of 2 September |
+| Capacity | the printed *useful capacity at the last survey*; storage can exceed it during floods |
+
+## 5. How the data was checked
+
+No value is trusted on its own. Each one is compared with something independent.
+
+| Check | Rule | Result |
+|---|---|---|
+| Against the printed totals | the dams of each page must add up to the printed regional and national totals (within rounding) | national total: 3,965 / 3,967 bulletins |
+| Against the other page | storage is printed on both Page 1 and Page 2; the two must be equal | 128,995 / 128,996 pairs equal |
+| Against the calendar | today's running total − yesterday's = today's flow (±0.0015 Mm³) | 99.48 % of 122,957 monthly inflow steps |
+| Against the fill % | printed fill = storage / capacity, allowing for the rounding of all three numbers | 84,470 / 84,471 rows |
+| Against the original PDF | a random sample of cells re-read directly from the page | 2,392 / 2,392 cells correct |
+
+All results, with every exception row, are in [`qa/kpi/results/`](qa/kpi/results/) and can be recomputed with `python qa/kpi/run_kpis.py`. A quick check of your own: on 1 February 2020 the 33 dams on the page add up to **1,471.419 Mm³**; the bulletin prints a total of **1 471,421** — the 0.002 difference is rounding.
+
+## 6. Errors found in the bulletins themselves
+
+Some problems are in the source, not in the extraction. They are documented and **never silently repaired**:
+
+- **Swapped rows.** From 2017 to 2021 the season-to-date inflows of Ziatine and Gamgoum are printed in each other's rows (checked in `13-1-2018_1.pdf`). The values are published as printed.
+- **One fill mismatch.** Masri, 9 February 2022: printed fill 44.9 %, computed 43.87 %.
+- **Two national totals that do not add up**: 30 December 2017 and 9 February 2022.
+- **Mis-dated files.** Two Page 3 files of September 2019 carry the wrong date in their filename; they were re-dated from their content and fingerprint.
+- **Undocumented column.** Page 2 has a column "R.S." whose meaning the publisher does not explain; it is not interpreted.
+
+The full list is in [`docs/known_issues.md`](docs/known_issues.md).
+
+## 7. Quick start
+
+Download the repository (green **Code** button → *Download ZIP*) or `git clone`, then:
+
+```python
+import pandas as pd
+
+storage = pd.read_csv("data/storage.csv", parse_dates=["date"])
+dams = pd.read_csv("data/dams.csv")
+df = storage.merge(dams[["dam_id", "name_fr", "reference_capacity_mm3"]], on="dam_id")
+
+# One dam over a few days
+sidi = df[df.dam_id == "sidielbarrak"].set_index("date")["value"].sort_index()
+print(sidi.loc["2020-01-29":"2020-02-03"])
+
+# Total storage of all printed dams on one day
+print(df.groupby("date")["value"].sum().loc["2020-02-01"])   # 1471.419
+```
+
+```
+date
+2020-01-29    283.496
+2020-01-30    283.496
+2020-01-31    283.496
+2020-02-01    283.496
+2020-02-02    283.496
+2020-02-03    283.798
+```
+
+Good practice:
+
+- **Join on `dam_id`**, never on dam names (they vary between bulletins and between French and Arabic).
+- **Missing days are gaps.** If a dam has no row for a date, the bulletin did not give a usable value; do not assume zero.
+- **Not every dam is printed every day.** Some dams were added to the bulletin later (Melah 2019, Tine 2020, Harka and Sarrat 2021).
+- Parquet versions of the large tables are in [`data/parquet/`](data/parquet/).
+
+For maps, open [`gis/project/DamLevels-Data.qgs`](gis/project/DamLevels-Data.qgs) in QGIS 3.44+, or load the GeoJSON files in [`gis/vector/`](gis/vector/) in any GIS tool.
+
+## 8. What is in the repository
+
+| Folder / file | What it contains |
+|---|---|
+| [`data/storage.csv`](data/storage.csv) | 129,390 daily storage values (Mm³) with full provenance |
+| [`data/dams.csv`](data/dams.csv) | 36 dams: `dam_id`, French and Arabic names, coordinates, reference capacity |
+| [`data/capacity_history.csv`](data/capacity_history.csv) | capacity regimes with the dates they apply |
+| [`data/transfers.csv`](data/transfers.csv) | 47,556 inter-dam transfer facts from Page 3 (authority `PROBABLE`) |
+| [`gis/`](gis/) | dams, 35 catchments, 34 incremental catchments, 8 natural river links, 10 transfer routes (GeoJSON, EPSG:4326), styles and a QGIS project |
+| [`sources/`](sources/) | bulletin manifest with ONAGRI links and fingerprints, two sample bulletins |
+| [`provenance/`](provenance/) | cell-level lineage, missing values, change log |
+| [`qa/`](qa/) | quality indicators ([`qa/kpi/`](qa/kpi/)), extraction audits, consistency tables |
+| [`ontology/`](ontology/) | DamLevels Ontology (DLO 0.3) with example queries |
+| [`docs/`](docs/) | [data dictionary](docs/data_dictionary.md), [known issues](docs/known_issues.md), [GIS notes](docs/gis.md), [engineering notes](docs/engineering_notes.md) |
+| [`src/`](src/), [`tests/`](tests/) | extraction engines, contracts, checks and builders |
+| [`datapackage.json`](datapackage.json) | machine-readable description of every table and field ([Frictionless Data](https://frictionlessdata.io/)) |
+
+## 9. The ontology: a label on every number
+
+A spreadsheet can hold `8,645`, but not say what it is. The **DamLevels Ontology (DLO 0.3)** in [`ontology/`](ontology/) maps the 84 printed columns to 33 concepts and 16 time rules, so each value knows *what* was measured, *where*, *for which day*, in *which unit*, and *which page* it came from. For example, `8,645` in the Sidi El Barrak row above becomes: *released water volume · Sidi El Barrak reservoir · 31 January 2019 · million m³ · a reference value from one year earlier*.
+
+It is built on W3C/OGC standards (SOSA, OWL-Time, QUDT, PROV, SKOS) and can be opened in Protégé or queried with SPARQL; see [`ontology/README.md`](ontology/README.md) for example queries and their output.
+
+## 10. Limitations
+
+- **Page 3 (transfers) is the weakest source.** Its facts are published with authority `PROBABLE`; two transfer endpoints are only candidate matches, and their dates follow the bulletin rather than the verified day (see [known issues](docs/known_issues.md)).
+- **Some metadata is incomplete.** Basin names are given for 6 dams only; Arabic names for part of the roster.
+- **Six bulletins have no ONAGRI link** in the current listing (2019-09-28, 2020-06-01, 2022-07-08, 2024-08-24 to 26).
+- **Catchments:** Mellègue has no accepted catchment; two incremental catchments are special cases (see [GIS notes](docs/gis.md)).
+- **Not official statistics.** This is an independent reconstruction from public bulletins. No forecasting model is included or claimed.
+
+## 11. Licences and attribution
 
 | What | Licence |
 |---|---|
-| Source values (DGBGTH bulletins via ONAGRI) | Licence Nationale de Données Publiques Ouvertes — cite the producer and date (attribution text in `LICENSE-DATA`) |
-| Tables, QA, provenance, docs, dam points, transfer network, styles, QGIS project | CC BY 4.0 |
-| `gis/vector/catchments*.geojson`, `natural_network.geojson` (derived from FABDEM and MERIT Hydro) | CC BY-NC-SA 4.0 |
-| Code (`src/`, `tests/`, `qa/kpi/*.py`) | MIT (`LICENSE`) |
+| Source values (DGBGTH bulletins, published by ONAGRI) | [Licence Nationale de Données Publiques Ouvertes](https://www.data.gov.tn/fr/licences-de-r%C3%A9utilisation-des-donn%C3%A9es-publiques-ouvertes/) — cite the producer and the date |
+| Tables, QA, provenance, documentation, ontology, dam points, transfer network, styles, QGIS project | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| `gis/vector/catchments*.geojson`, `natural_network.geojson` (derived from FABDEM and MERIT Hydro) | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) — non-commercial |
+| Code (`src/`, `tests/`, `qa/kpi/*.py`) | [MIT](LICENSE) |
 
-The Page 3 extractor (`src/extract/page3_extractor/`) imports PyMuPDF, which is licensed under AGPL-3.0; distributing a combined build with PyMuPDF must follow the AGPL. Cite the dataset with `CITATION.cff`.
+When you reuse the data, please include:
 
-The completed scope ends at data reconstruction, QA and feature-ready packaging; no forecasting model or performance claim is part of this repository.
+> Source: DGBGTH, Ministère de l'Agriculture, des Ressources Hydrauliques et de la Pêche (Tunisie), bulletins "Situation des barrages" published by ONAGRI, 2014-07-02 to 2025-10-10. Licence Nationale de Données Publiques Ouvertes. Extracted and restructured by DamLevels-Data.
 
-## E5 GIS publication status
+Details are in [`LICENSE-DATA`](LICENSE-DATA). The Page 3 extractor imports PyMuPDF (AGPL-3.0); distributing a build that bundles PyMuPDF must follow the AGPL.
 
-Engineering run E5 packages the accepted composite Task21 spatial state into five lightweight GeoJSON layers and one repository-relative QGIS project. The source is the frozen R11A GeoPackage assembled from R10, the R10A Siliana/incremental correction, the R10B Mellègue decision, and R11/R11A packaging. It contains 36 dam controls, 35 accepted total catchments, 34 incremental geometries (32 ordinary-ready and two special), eight natural controlled-dam edges, and ten artificial-transfer relationships.
+## 12. Citation and authors
 
-Published geometry uses EPSG:4326 with six-decimal coordinates. Area is calculated and checked only in EPSG:32632. Mellègue remains excluded from canonical total and incremental layers; its sensitivity candidates are not promoted. The conversion reruns no watershed delineation and changes no scientific selection.
+Please cite this repository using [`CITATION.cff`](CITATION.cff) (GitHub shows a **Cite this repository** button).
 
-## E6A.2 status
+**Authors:** Mohamed Hamza Nasfi, Soura Boulares, Tarek Gasmi.
 
-Engineering run E6A.2 adds separate design-valid audits for Page 1 extraction, Page 2 extraction, Page 3 numeric transcription, and Page 3 semantic mapping while preserving E6A completeness (B), temporal plausibility (H), and accepted checks C through G. The numeric audits use a fixed seed, proportional layout/regime strata, and at most one primary target cell per PDF. They report no pooled Page 1+Page 2+Page 3 accuracy. `data/storage.csv` contains 129,390 primary storage observations for 36 governed dams; all 84,620 independently printed fill percentages remain byte-value-preserved in `qa/printed_fill_reference.csv`.
+The work was carried out as a Licence capstone project at MUST University, within the DataDoIt × MUST University incubator, for [TanitData](https://github.com/tanitdata), an open-data studio based in Tunisia. The bulletins are produced by the Direction Générale des Barrages et des Grands Travaux Hydrauliques (DGBGTH) and published by the Observatoire National de l'Agriculture (ONAGRI).
 
-No production extractor or scientific pipeline was rerun. No model was run. E6A.2 rereads selected original PDF cell regions without calling production parser functions; it does not generate extraction output. This is a computer-assisted source reread using inherited lineage localization, not a human manual audit. Page 3 remains `PROBABLE`, and its transcription result is separate from categorical semantic mapping.
-
-## Source and licence
-
-The data come from the daily bulletins "Situation des barrages" produced by DGBGTH (Ministère de l'Agriculture, des Ressources Hydrauliques et de la Pêche) and published by ONAGRI at <https://www.onagri.nat.tn/Situation-des-barrages/fr/19>. They are reused under the Licence Nationale de Données Publiques Ouvertes, which requires citing the data producer and the date of the data; see `LICENSE-DATA` for the attribution text. `sources/manifest.csv` gives the `original_url` of 3,979 of the 3,985 bulletins used, and `sources/original_url_evidence.csv` records how each link was matched. The bulletins themselves are not redistributed except for two samples in `sources/samples/`.
-
-## Quality indicators (E7)
-
-The current quality indicators are the 2026-09-30 recompute in `qa/kpi/` (`run_kpis.py`, results in `qa/kpi/results/`). It corrects three rules of the earlier automated QA: month- and season-to-date counters reset on the bulletin of D−1's period (bulletin D reports day D−1), the printed-fill tolerance includes the rounding of storage and capacity, and storage above useful capacity is a diagnostic rather than a failure. Headline results: printed fill agrees with storage/capacity for 84,470 of 84,471 eligible rows; all 129,390 storage values are physically possible (finite, ≥ 0); 1.15 % of rows exceed the printed useful capacity (diagnostic D1). The D, E and B values in `qa/qa_summary.json` and `qa/report.md` are kept as the historical engineering record. `qa/kpi/AUDIT_OF_EXISTING_QA.md` explains each change.
-
-## Data conventions
-
-- `dam_id` is a stable governed identifier and never derives from the current spelling.
-- `name_fr` preserves the selected governed French/canonical label.
-- Arabic labels are included only where the selected Page 3 roster supplies evidence; candidate mappings retain their status.
-- Storage and capacity units are million cubic metres (`Mm3`).
-- `storage` is the only variable in `data/storage.csv`. `printed_fill_pct` remains a separate non-primary source observation in `qa/printed_fill_reference.csv`.
-- Missing values remain absent from the observation table and are recorded in `provenance/storage_missingness.csv`; nothing is interpolated or forward-filled.
-- Capacity lookup returns `KNOWN`, `AMBIGUOUS`, or `UNAVAILABLE` and never fills an unresolved interval.
-- Basin names are populated only for six dams with explicit official Medjerda-context support. Other basin fields remain blank.
-- Page 3 rows remain `PROBABLE`; accounting observations are not represented as physical transfer edges.
-
-## Provenance philosophy
-
-Every published value should point to a source, producer, audit, and version. Corrections append history instead of overwriting it. E1 through E5 derive from frozen reconstruction baseline `<FROZEN_BASELINES>/V010_20260924_1620`; that baseline remains unchanged. Paths to anything outside the repository are recorded with logical root tokens (`<FULL_RECONSTRUCTION>`, `<BULLETIN_CORPUS>`, …) next to SHA-256 values; `config/paths.example.toml` lists the tokens. Accepted E2 remains recoverable as local Git commit `79cbdac`, accepted E3.1 as `81d45d5`, and accepted E4 as `146f1ca`.
-
-## Repository structure
-
-- `sources/manifest.csv` — one logical record per accepted bulletin date.
-- `sources/file_manifest.csv` — complete path-level corpus evidence, including duplicates and backups.
-- `data/storage.csv` and `data/parquet/storage.parquet` — accepted Page 1 primary storage observations only.
-- `data/transfers.csv` and `data/parquet/transfers.parquet` — qualified Page 3 edge/accounting facts.
-- `data/dams.csv` and `data/capacity_history.csv` — stable identities, selected metadata, and dated capacity evidence.
-- `gis/vector/` — five lightweight EPSG:4326 publication layers derived from the accepted R11A GeoPackage.
-- `gis/styles/` and `gis/project/DamLevels-Data.qgs` — presentation-only styles and an uncompressed relative-path QGIS project.
-- `gis/GIS_SOURCE_AUTHORITY.csv` and `gis/RASTER_MANIFEST.csv` — spatial authority and external raster metadata; no provider raster is committed.
-- `src/validate/` — Pydantic row models, date-aware capacity lookup, and QA C-G implementations.
-- `qa/printed_fill_reference.csv` — separately packaged printed percentages with full E2 provenance.
-- `qa/kpi/` — current quality indicators (2026-09-30 recompute), their inputs, exception rows, DQV export and run receipt.
-- `qa/` — generated A-H engineering tables, shared JSON/Markdown summary, and validation receipts.
-- `qa/INTERPAGE_MISMATCH_REVIEW/` — inter-page mismatch review with evidence.
-- `src/extract/DAM_DATA_PIPELINE_page1and2/` — frozen Page 1 (`page1-authoritative-0.2.3`) and Page 2 (`page2-authoritative-1.0.0`) engines with orchestration, build/audit notebooks, fixtures and dependency lock. Run outputs stay outside git.
-- `src/extract/page3_extractor/` — Page 3 extractor `1.2.0rc2`.
-- `src/paths.py`, `config/paths.example.toml` — locations of external inputs (copy to `config/paths.local.toml`, which is not tracked).
-- `docs/page3_audit/` — Page 3 field and measure dictionaries and semantics.
-- `qa/extraction/` — E6A.2 Page 1, Page 2, and Page 3 samples, separate accuracy results, semantic dispositions, sampling design, and noninferential challenge set.
-- `qa/e4/` — deterministic human-review samples, acceptance checklist, repository tree, and E4 report.
-- `qa/gis/` — E5 CRS, stable-ID, geometry, area, QGIS, and raster-disposition checks.
-- `docs/` — data dictionary and known limitations.
-- `provenance/` — append-only engineering changes.
-
-## Current authority limitations
-
-Page 3 remains qualified/probable in the frozen baseline. E3.1 retains capacity-bound, fill-consistency, and printed-national-total review cases without changing source values; the E7 recompute reclassifies the capacity and fill cases (see Quality indicators). Direct Page 3 transfer balance is not numerically eligible because endpoint, counterpart, source-consistency, and effective-date requirements are not all established. Bulletin redistribution and the earlier reconstruction gaps remain unresolved.
-
-## Validate the current contract
-
-```powershell
-Copy-Item config/paths.example.toml config/paths.local.toml   # then edit the local paths
-pip install -r requirements-lock.txt
-$env:PYTHONPATH = "src"
-python src/build.py
-python qa/kpi/run_kpis.py
-```
-
-`build.py` validates Pydantic/table contracts, preserves the historical E6A/E6A.1 audit and accepted B/H results, regenerates C-G from accepted repository tables, and regenerates the separate E6A.2 multipage audits (satellite KPI I remains excluded). It does not invoke the production extractors or rebuild scientific outputs. It needs the bulletin PDFs and the E6A.2 lineage inputs listed in `config/paths.example.toml`. The frozen V010 ZIP hash check runs only when `v010_review_zip` is configured; otherwise `build.py` reports it as skipped. `run_kpis.py` recomputes the current quality indicators from repository files only.
-
-Open `gis/project/DamLevels-Data.qgs` in QGIS 3.44 or later to inspect the accepted spatial package. See `docs/gis.md` before interpreting incremental or network layers.
-
-## Current review boundary
-
-The current repository is ready for human review with explicit gaps. E6A.2 supplies separate Page 1, Page 2, and Page 3 transcription results and a categorical Page 3 semantic audit. No E6A.2 row is claimed as human-visual verification. Satellite validation and any governed scientific-value correction remain future work.
+Rebuilding the QA from the original bulletins and the full engineering record are described in [`docs/engineering_notes.md`](docs/engineering_notes.md) and [`CHANGELOG.md`](CHANGELOG.md).

@@ -1,0 +1,24 @@
+# What every printed bulletin column means: the concept it measures, the time
+# rule that dates its values, and how confident the mapping is.
+# (83 rows: the Page 2 "R.S." column is mapped but deliberately has no concept,
+# because its meaning is not documented by the publisher.)
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dlo:  <https://w3id.org/damlevels/ontology/>
+
+SELECT ?sourceTable ?sourceColumn ?concept ?timeRule ?confidence
+WHERE {
+  ?mapping a dlo:ColumnMapping ;
+           dlo:sourceTable ?table ;
+           dlo:sourceColumn ?sourceColumn ;
+           dlo:mapsToVariable ?variable ;
+           dlo:temporalSupport ?rule ;
+           dlo:mappingConfidence ?conf .
+  ?variable skos:prefLabel ?concept .
+  ?rule skos:prefLabel ?timeRule .
+  ?conf skos:prefLabel ?confidence .
+  FILTER(LANGMATCHES(LANG(?timeRule), "en"))
+  FILTER(LANGMATCHES(LANG(?confidence), "en") || LANG(?confidence) = "")
+  BIND(STRAFTER(STR(?table), "/source-table/") AS ?sourceTable)
+}
+ORDER BY ?sourceTable ?sourceColumn
