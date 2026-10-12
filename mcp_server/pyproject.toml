@@ -11,7 +11,7 @@ requires-python = ">=3.11"
 license = {text = "MIT"}
 authors = [
   {name = "Mohamed Hamza Nasfi"},
-  {name = "Soura Boulares"},
+  {name = "Soura Boulaares"},
   {name = "Tarek Gasmi"},
 ]
 dependencies = ["mcp>=1.2,<2", "pandas>=2.0", "pyarrow>=14", "pydantic>=2"]

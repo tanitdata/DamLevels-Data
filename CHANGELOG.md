@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Author name corrected to **Soura Boulaares** in `CITATION.cff`, `LICENSE`, the README and the MCP server package metadata (it was spelled "Boulares").
 - README citation section: removed the note about the GitHub "Cite this repository" button.
 - Zenodo concept DOI 10.5281/zenodo.23304326 (all versions; 1.1.2 is 10.5281/zenodo.23304327) added to the README (badge and citation section) and to `CITATION.cff`.
 

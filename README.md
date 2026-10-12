@@ -297,7 +297,7 @@ Details are in [`LICENSE-DATA`](LICENSE-DATA). The Page 3 extractor imports PyMu
 
 Please cite this repository using [`CITATION.cff`](CITATION.cff). Every release is archived on Zenodo: DOI [10.5281/zenodo.23304326](https://doi.org/10.5281/zenodo.23304326) always points to the latest version; each version also has its own DOI on that page.
 
-**Authors:** Mohamed Hamza Nasfi, Soura Boulares, Tarek Gasmi.
+**Authors:** Mohamed Hamza Nasfi, Soura Boulaares, Tarek Gasmi.
 
 The work was carried out as a Licence capstone project at MUST University, within the DataDoIt × MUST University incubator, for [TanitData](https://github.com/tanitdata), an open-data studio based in Tunisia. The bulletins are produced by the Direction Générale des Barrages et des Grands Travaux Hydrauliques (DGBGTH) and published by the Observatoire National de l'Agriculture (ONAGRI).
 
