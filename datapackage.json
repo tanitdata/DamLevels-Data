@@ -1116,6 +1116,416 @@
       "description": "Every printed Page 1 column, one row per governed dam and bulletin date (wide). Values as printed and never filled: blank means not printed or not readable. Same accepted extraction as data/storage.csv. Column meanings and time rules: DLO 0.3 source table P1_observations."
     },
     {
+      "name": "bulletin-page2",
+      "path": "data/bulletin_page2.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "primaryKey": "source_row_key",
+        "foreignKeys": [
+          {
+            "fields": "dam_id",
+            "reference": {
+              "resource": "dams",
+              "fields": "dam_id"
+            }
+          }
+        ],
+        "fields": [
+          {
+            "name": "source_row_key",
+            "type": "string",
+            "description": "Row key PAGE_2|bulletin_date|dam_id."
+          },
+          {
+            "name": "dam_id",
+            "type": "string",
+            "description": "Stable governed dam identifier."
+          },
+          {
+            "name": "bulletin_date",
+            "type": "date",
+            "description": "Bulletin date D as printed. Each value column states which day it describes; dates are not shifted."
+          },
+          {
+            "name": "region",
+            "type": "string",
+            "description": "Bulletin region block: nord, centre or cap_bon."
+          },
+          {
+            "name": "source_file",
+            "type": "string",
+            "description": "Source Page 2 PDF filename."
+          },
+          {
+            "name": "source_sha256",
+            "type": "string",
+            "description": "Source Page 2 PDF SHA-256; equals page2_sha256 in sources/manifest.csv."
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "description": "Bulletin page (2)."
+          },
+          {
+            "name": "layout",
+            "type": "string",
+            "description": "PRE_CUTOFF_MONTH_TO_DATE_INFLOW (to 2024-04-26) or POST_CUTOFF_INTERVAL_EVAPORATION (from 2024-04-27): physical column 23 changes meaning."
+          },
+          {
+            "name": "engine_version",
+            "type": "string",
+            "description": "Extractor engine version."
+          },
+          {
+            "name": "authority_release",
+            "type": "string",
+            "description": "Extraction authority: PAGE2_1.0.0_CURRENT_EXTRACTION_DELIVERY (the accepted Page 2 extraction of sources/manifest.csv)."
+          },
+          {
+            "name": "row_detection",
+            "type": "string",
+            "description": "How the dam row was found: TEXT_LABEL_EXACT_NORMALIZED, or RECOVERED_ROSTER_IDENTIFIED_ROW (2 rows, by row geometry)."
+          },
+          {
+            "name": "catchment_area_km2",
+            "type": "number",
+            "description": "Catchment area, km2 (Bassin versant). Static. Printed sums such as 75+11 are left blank. DLO: p2_bassin_versant_km2."
+          },
+          {
+            "name": "mean_annual_inflow_mm3_per_year",
+            "type": "number",
+            "description": "Long-term mean annual inflow, Mm3/year (Apport annuel moyen). Static. DLO: p2_apport_annuel_moyen_mm3."
+          },
+          {
+            "name": "minimum_annual_inflow_since_impoundment_mm3",
+            "type": "number",
+            "description": "Minimum annual inflow since first filling, Mm3 (Apport min depuis mise en eau). Static. DLO: p2_min_depuis_mise_en_eau_mm3."
+          },
+          {
+            "name": "normal_pool_elevation_m",
+            "type": "number",
+            "description": "Normal pool elevation, m (Cote de retenue normale). Static. DLO: p2_cote_retenue_normale_m."
+          },
+          {
+            "name": "initial_total_capacity_mm3",
+            "type": "number",
+            "description": "Initial total capacity, Mm3 (Cap totale initiale). DLO: p2_cap_totale_initiale_mm3."
+          },
+          {
+            "name": "useful_capacity_at_last_bathymetric_survey_mm3",
+            "type": "number",
+            "description": "Useful capacity at the last bathymetric survey, Mm3 (Cap utile actuelle); the capacity in data/capacity_history.csv. DLO: p2_cap_actuelle_mm3."
+          },
+          {
+            "name": "calculated_regulated_volume_mm3",
+            "type": "number",
+            "description": "Calculated regulated volume, Mm3 (Volume regul. calcule). DLO: p2_cap_reguliere_mm3."
+          },
+          {
+            "name": "maximum_evacuation_discharge_m3s",
+            "type": "number",
+            "description": "Maximum spillway discharge, m3/s (Debits max evacues). Printed sums such as 720+2500 are left blank. DLO: p2_debit_max_evacuateur_m3s."
+          },
+          {
+            "name": "measured_sediment_volume_mm3",
+            "type": "number",
+            "description": "Measured sediment volume, Mm3 (Envasement mesure). DLO: p2_envasement_volume_mm3."
+          },
+          {
+            "name": "mean_annual_sedimentation_mm3_per_year",
+            "type": "number",
+            "description": "Mean annual sedimentation, Mm3/year (Envasement annuel). DLO: p2_envasement_annuel_mm3."
+          },
+          {
+            "name": "sedimentation_pct_of_initial_capacity",
+            "type": "number",
+            "description": "Sediment as percent of initial capacity (Envasement pourcentage). DLO: p2_envasement_pct."
+          },
+          {
+            "name": "catchment_equivalent_erosion_mm_per_year",
+            "type": "number",
+            "description": "Equivalent catchment erosion, mm/year (Erosion du BV). DLO: p2_erosion_mm_an."
+          },
+          {
+            "name": "estimated_useful_capacity_after_post_survey_sedimentation_mm3",
+            "type": "number",
+            "description": "Useful capacity minus sediment arrived since the last survey, Mm3 (Cap utile calculee). DLO: p2_cap_utile_calculee_mm3."
+          },
+          {
+            "name": "previous_hydraulic_year_end_water_level_m",
+            "type": "number",
+            "description": "Water level at the end of the previous hydraulic year, m (Annee hydraulique precedente: plan d'eau). NOT the current level; previous hydraulic year (1 September to 31 August); changes on the bulletin of 2 September. DLO: p2_cote_plan_eau_m."
+          },
+          {
+            "name": "previous_hydraulic_year_end_storage_mm3",
+            "type": "number",
+            "description": "Storage at the end of the previous hydraulic year, Mm3, printed with 2 decimals; equals the Page 1 storage of the bulletin of 1 September. NOT the current storage; previous hydraulic year (1 September to 31 August); changes on the bulletin of 2 September. DLO: p2_volume_actuel_mm3."
+          },
+          {
+            "name": "previous_full_hydraulic_year_inflow_mm3",
+            "type": "number",
+            "description": "Inflow over the whole previous hydraulic year, Mm3; previous hydraulic year (1 September to 31 August); changes on the bulletin of 2 September. DLO: p2_apport_annee_prec_mm3."
+          },
+          {
+            "name": "previous_full_hydraulic_year_outflow_mm3",
+            "type": "number",
+            "description": "Withdrawal (soutirage) over the whole previous hydraulic year, Mm3; previous hydraulic year (1 September to 31 August); changes on the bulletin of 2 September. DLO: p2_soutirage_annee_prec_mm3."
+          },
+          {
+            "name": "water_level_current_m",
+            "type": "number",
+            "description": "Current water level, m (Cote plan d'eau), state on day D. This is the current level."
+          },
+          {
+            "name": "storage_current_total_corresponding_p2_mm3",
+            "type": "number",
+            "description": "Storage corresponding to the current level, Mm3 (Volume correspondant), state on day D; the Page 2 copy of Page 1 storage."
+          },
+          {
+            "name": "storage_current_exploitable_mm3",
+            "type": "number",
+            "description": "Usable storage corresponding to the current level, Mm3 (Volume correspondant utilisable), state on day D."
+          },
+          {
+            "name": "outflow_reporting_interval_p2_mm3",
+            "type": "number",
+            "description": "Withdrawal over day D-1, Mm3 (Soutirage du <D-1>); the Page 2 copy of the Page 1 current release."
+          },
+          {
+            "name": "inflow_reporting_interval_p2_mm3",
+            "type": "number",
+            "description": "Inflow over day D-1, Mm3 (Apport du <D-1>); the Page 2 copy of the Page 1 inflow."
+          },
+          {
+            "name": "inflow_month_to_date_p2_mm3",
+            "type": "number",
+            "description": "Inflow month to date through day D-1, Mm3 (Apport du mois). Physical column 23 up to 2024-04-26; blank afterwards."
+          },
+          {
+            "name": "evaporation_reporting_interval_mm3",
+            "type": "number",
+            "description": "Evaporation over day D-1, Mm3. Physical column 23 from 2024-04-27; blank before."
+          },
+          {
+            "name": "rainfall_reporting_interval_mm",
+            "type": "number",
+            "description": "Rainfall, mm (Pluv), DLO time rule day D-1 (medium confidence). Printed n,d is left blank."
+          },
+          {
+            "name": "p2_rs_unresolved_prohibited",
+            "type": "number",
+            "description": "Value printed under R.S. (g/l). Its meaning is not confirmed by a printed legend, so no variable is asserted; kept as printed."
+          }
+        ]
+      },
+      "description": "Every printed Page 2 column, one row per governed dam and bulletin date (wide), including the current water level. Values as printed and never filled: blank means not printed, not numeric (e.g. #VALEUR!, n,d, 720+2500) or not readable. Column names are the project's canonical names; each description gives the DLO 0.3 source column of table P2_observations."
+    },
+    {
+      "name": "bulletin-page2-parquet",
+      "path": "data/parquet/bulletin_page2.parquet",
+      "format": "parquet",
+      "schema": {
+        "primaryKey": "source_row_key",
+        "foreignKeys": [
+          {
+            "fields": "dam_id",
+            "reference": {
+              "resource": "dams",
+              "fields": "dam_id"
+            }
+          }
+        ],
+        "fields": [
+          {
+            "name": "source_row_key",
+            "type": "string",
+            "description": "Row key PAGE_2|bulletin_date|dam_id."
+          },
+          {
+            "name": "dam_id",
+            "type": "string",
+            "description": "Stable governed dam identifier."
+          },
+          {
+            "name": "bulletin_date",
+            "type": "date",
+            "description": "Bulletin date D as printed. Each value column states which day it describes; dates are not shifted."
+          },
+          {
+            "name": "region",
+            "type": "string",
+            "description": "Bulletin region block: nord, centre or cap_bon."
+          },
+          {
+            "name": "source_file",
+            "type": "string",
+            "description": "Source Page 2 PDF filename."
+          },
+          {
+            "name": "source_sha256",
+            "type": "string",
+            "description": "Source Page 2 PDF SHA-256; equals page2_sha256 in sources/manifest.csv."
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "description": "Bulletin page (2)."
+          },
+          {
+            "name": "layout",
+            "type": "string",
+            "description": "PRE_CUTOFF_MONTH_TO_DATE_INFLOW (to 2024-04-26) or POST_CUTOFF_INTERVAL_EVAPORATION (from 2024-04-27): physical column 23 changes meaning."
+          },
+          {
+            "name": "engine_version",
+            "type": "string",
+            "description": "Extractor engine version."
+          },
+          {
+            "name": "authority_release",
+            "type": "string",
+            "description": "Extraction authority: PAGE2_1.0.0_CURRENT_EXTRACTION_DELIVERY (the accepted Page 2 extraction of sources/manifest.csv)."
+          },
+          {
+            "name": "row_detection",
+            "type": "string",
+            "description": "How the dam row was found: TEXT_LABEL_EXACT_NORMALIZED, or RECOVERED_ROSTER_IDENTIFIED_ROW (2 rows, by row geometry)."
+          },
+          {
+            "name": "catchment_area_km2",
+            "type": "number",
+            "description": "Catchment area, km2 (Bassin versant). Static. Printed sums such as 75+11 are left blank. DLO: p2_bassin_versant_km2."
+          },
+          {
+            "name": "mean_annual_inflow_mm3_per_year",
+            "type": "number",
+            "description": "Long-term mean annual inflow, Mm3/year (Apport annuel moyen). Static. DLO: p2_apport_annuel_moyen_mm3."
+          },
+          {
+            "name": "minimum_annual_inflow_since_impoundment_mm3",
+            "type": "number",
+            "description": "Minimum annual inflow since first filling, Mm3 (Apport min depuis mise en eau). Static. DLO: p2_min_depuis_mise_en_eau_mm3."
+          },
+          {
+            "name": "normal_pool_elevation_m",
+            "type": "number",
+            "description": "Normal pool elevation, m (Cote de retenue normale). Static. DLO: p2_cote_retenue_normale_m."
+          },
+          {
+            "name": "initial_total_capacity_mm3",
+            "type": "number",
+            "description": "Initial total capacity, Mm3 (Cap totale initiale). DLO: p2_cap_totale_initiale_mm3."
+          },
+          {
+            "name": "useful_capacity_at_last_bathymetric_survey_mm3",
+            "type": "number",
+            "description": "Useful capacity at the last bathymetric survey, Mm3 (Cap utile actuelle); the capacity in data/capacity_history.csv. DLO: p2_cap_actuelle_mm3."
+          },
+          {
+            "name": "calculated_regulated_volume_mm3",
+            "type": "number",
+            "description": "Calculated regulated volume, Mm3 (Volume regul. calcule). DLO: p2_cap_reguliere_mm3."
+          },
+          {
+            "name": "maximum_evacuation_discharge_m3s",
+            "type": "number",
+            "description": "Maximum spillway discharge, m3/s (Debits max evacues). Printed sums such as 720+2500 are left blank. DLO: p2_debit_max_evacuateur_m3s."
+          },
+          {
+            "name": "measured_sediment_volume_mm3",
+            "type": "number",
+            "description": "Measured sediment volume, Mm3 (Envasement mesure). DLO: p2_envasement_volume_mm3."
+          },
+          {
+            "name": "mean_annual_sedimentation_mm3_per_year",
+            "type": "number",
+            "description": "Mean annual sedimentation, Mm3/year (Envasement annuel). DLO: p2_envasement_annuel_mm3."
+          },
+          {
+            "name": "sedimentation_pct_of_initial_capacity",
+            "type": "number",
+            "description": "Sediment as percent of initial capacity (Envasement pourcentage). DLO: p2_envasement_pct."
+          },
+          {
+            "name": "catchment_equivalent_erosion_mm_per_year",
+            "type": "number",
+            "description": "Equivalent catchment erosion, mm/year (Erosion du BV). DLO: p2_erosion_mm_an."
+          },
+          {
+            "name": "estimated_useful_capacity_after_post_survey_sedimentation_mm3",
+            "type": "number",
+            "description": "Useful capacity minus sediment arrived since the last survey, Mm3 (Cap utile calculee). DLO: p2_cap_utile_calculee_mm3."
+          },
+          {
+            "name": "previous_hydraulic_year_end_water_level_m",
+            "type": "number",
+            "description": "Water level at the end of the previous hydraulic year, m (Annee hydraulique precedente: plan d'eau). NOT the current level; previous hydraulic year (1 September to 31 August); changes on the bulletin of 2 September. DLO: p2_cote_plan_eau_m."
+          },
+          {
+            "name": "previous_hydraulic_year_end_storage_mm3",
+            "type": "number",
+            "description": "Storage at the end of the previous hydraulic year, Mm3, printed with 2 decimals; equals the Page 1 storage of the bulletin of 1 September. NOT the current storage; previous hydraulic year (1 September to 31 August); changes on the bulletin of 2 September. DLO: p2_volume_actuel_mm3."
+          },
+          {
+            "name": "previous_full_hydraulic_year_inflow_mm3",
+            "type": "number",
+            "description": "Inflow over the whole previous hydraulic year, Mm3; previous hydraulic year (1 September to 31 August); changes on the bulletin of 2 September. DLO: p2_apport_annee_prec_mm3."
+          },
+          {
+            "name": "previous_full_hydraulic_year_outflow_mm3",
+            "type": "number",
+            "description": "Withdrawal (soutirage) over the whole previous hydraulic year, Mm3; previous hydraulic year (1 September to 31 August); changes on the bulletin of 2 September. DLO: p2_soutirage_annee_prec_mm3."
+          },
+          {
+            "name": "water_level_current_m",
+            "type": "number",
+            "description": "Current water level, m (Cote plan d'eau), state on day D. This is the current level."
+          },
+          {
+            "name": "storage_current_total_corresponding_p2_mm3",
+            "type": "number",
+            "description": "Storage corresponding to the current level, Mm3 (Volume correspondant), state on day D; the Page 2 copy of Page 1 storage."
+          },
+          {
+            "name": "storage_current_exploitable_mm3",
+            "type": "number",
+            "description": "Usable storage corresponding to the current level, Mm3 (Volume correspondant utilisable), state on day D."
+          },
+          {
+            "name": "outflow_reporting_interval_p2_mm3",
+            "type": "number",
+            "description": "Withdrawal over day D-1, Mm3 (Soutirage du <D-1>); the Page 2 copy of the Page 1 current release."
+          },
+          {
+            "name": "inflow_reporting_interval_p2_mm3",
+            "type": "number",
+            "description": "Inflow over day D-1, Mm3 (Apport du <D-1>); the Page 2 copy of the Page 1 inflow."
+          },
+          {
+            "name": "inflow_month_to_date_p2_mm3",
+            "type": "number",
+            "description": "Inflow month to date through day D-1, Mm3 (Apport du mois). Physical column 23 up to 2024-04-26; blank afterwards."
+          },
+          {
+            "name": "evaporation_reporting_interval_mm3",
+            "type": "number",
+            "description": "Evaporation over day D-1, Mm3. Physical column 23 from 2024-04-27; blank before."
+          },
+          {
+            "name": "rainfall_reporting_interval_mm",
+            "type": "number",
+            "description": "Rainfall, mm (Pluv), DLO time rule day D-1 (medium confidence). Printed n,d is left blank."
+          },
+          {
+            "name": "p2_rs_unresolved_prohibited",
+            "type": "number",
+            "description": "Value printed under R.S. (g/l). Its meaning is not confirmed by a printed legend, so no variable is asserted; kept as printed."
+          }
+        ]
+      },
+      "description": "Every printed Page 2 column, one row per governed dam and bulletin date (wide), including the current water level. Values as printed and never filled: blank means not printed, not numeric (e.g. #VALEUR!, n,d, 720+2500) or not readable. Column names are the project's canonical names; each description gives the DLO 0.3 source column of table P2_observations."
+    },
+    {
       "name": "printed-fill-reference",
       "path": "qa/printed_fill_reference.csv",
       "profile": "tabular-data-resource",

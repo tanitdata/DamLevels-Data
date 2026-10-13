@@ -12,6 +12,7 @@ Every day the Tunisian Ministry of Agriculture publishes a three-page PDF bullet
 | **Dams** | 36 large dams, each with a stable identifier (`dam_id`) |
 | **Main table** | 129,390 daily storage values in million m³ (`data/storage.csv`) |
 | **Full Page 1** | every column printed on Page 1 — inflows, releases, fill %, last year's stock — one row per dam and bulletin (`data/bulletin_page1.csv`) |
+| **Full Page 2** | every column printed on Page 2 — water level, capacities, siltation, rain, evaporation, previous-year totals — one row per dam and bulletin (`data/bulletin_page2.csv`) |
 | **Also** | dam metadata and capacities, inter-dam transfers, catchments and river links (GIS), quality checks, and an ontology that defines every printed column |
 | **Source** | DGBGTH bulletins *Situation des barrages*, published by [ONAGRI](https://www.onagri.nat.tn/Situation-des-barrages/fr/19) |
 | **Method** | deterministic reading of the PDF text and drawn table lines — no OCR, no manual retyping |
@@ -201,6 +202,24 @@ flow_date
 
 `p1_apport_today` is the inflow and `p1_release_yesterday` the release, both in million m³. Do not use `p1_release_today` as the current release: it is the release on the same day one year earlier. Every column is described in the [data dictionary](docs/data_dictionary.md#databulletin_page1csv).
 
+Water levels, capacities and siltation are in the full Page 2 table. The current level is `water_level_current_m` (state on day D):
+
+```python
+p2 = pd.read_csv("data/bulletin_page2.csv", parse_dates=["bulletin_date"])
+salem = p2[p2.dam_id == "sidisalem"].set_index("bulletin_date").sort_index()
+print(salem.loc["2025-10-08":"2025-10-10", ["water_level_current_m", "storage_current_total_corresponding_p2_mm3"]])
+```
+
+```
+               water_level_current_m  storage_current_total_corresponding_p2_mm3
+bulletin_date
+2025-10-08                    101.42                                     133.745
+2025-10-09                    101.50                                     135.445
+2025-10-10                    101.58                                     137.196
+```
+
+Columns that start with `previous_hydraulic_year_` describe the hydraulic year that ended on 31 August, not the current day ([data dictionary](docs/data_dictionary.md#databulletin_page2csv)).
+
 Good practice:
 
 - **Join on `dam_id`**, never on dam names (they vary between bulletins and between French and Arabic).
@@ -272,6 +291,7 @@ Full documentation, all tools and their tests: [`mcp_server/README.md`](mcp_serv
 |---|---|
 | [`data/storage.csv`](data/storage.csv) | 129,390 daily storage values (Mm³) with full provenance |
 | [`data/bulletin_page1.csv`](data/bulletin_page1.csv) | all 15 printed Page 1 columns (inflows, releases, fill %, stock), 129,391 dam rows from 3,981 bulletins |
+| [`data/bulletin_page2.csv`](data/bulletin_page2.csv) | all 26 printed Page 2 columns (water level, capacities, siltation, rain, evaporation, previous-year totals), 129,472 dam rows from 3,983 bulletins |
 | [`data/dams.csv`](data/dams.csv) | 36 dams: `dam_id`, French and Arabic names, coordinates, reference capacity |
 | [`data/capacity_history.csv`](data/capacity_history.csv) | capacity regimes with the dates they apply |
 | [`data/transfers.csv`](data/transfers.csv) | 47,556 inter-dam transfer facts from Page 3 (authority `PROBABLE`) |
@@ -293,7 +313,8 @@ It is built on W3C/OGC standards (SOSA, OWL-Time, QUDT, PROV, SKOS) and can be o
 
 ## 11. Limitations
 
-- **Not every printed column is published yet.** Page 1 is complete. From Page 2, only the capacities are published (in `data/capacity_history.csv`), not the water levels, siltation or rainfall. From Page 3, only the transfer table is published, not the national and regional summaries.
+- **Not every printed column is published yet.** Pages 1 and 2 are complete. From Page 3, only the transfer table is published, not the national and regional summaries.
+- **Page 2 limits.** The column printed as *R.S. (g/l)* has no legend in the bulletin, so its meaning is left open. Mellègue's second Page 2 line (*Cote PHE*) is not extracted. For some small dams (Brek, Sficifa, Rmil, Sidi Aïch) similar printed levels go with very different volumes in different years; the cause is not established, so do not convert level to volume with a single curve.
 - **Page 3 (transfers) is the weakest source.** Its facts are published with authority `PROBABLE`; two transfer endpoints are only candidate matches, and their dates follow the bulletin rather than the verified day (see [known issues](docs/known_issues.md)).
 - **Some metadata is incomplete.** Basin names are given for 6 dams only; Arabic names for part of the roster.
 - **Six bulletins have no ONAGRI link** in the current listing (2019-09-28, 2020-06-01, 2022-07-08, 2024-08-24 to 26).

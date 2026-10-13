@@ -95,6 +95,52 @@ Every column printed on Page 1, in wide form: one row per governed dam and bulle
 
 The DLO 0.3 ontology (`ontology/`, source table `P1_observations`) defines each column and its time rule. The table holds the same values as `qa/kpi/inputs/page1.parquet`, so the current indicators K09 (Page 1 = Page 2), K10 (daily values against month and season counters) and K11 (printed fill against storage and capacity) apply to it; `tests/test_bulletin_page1.py` checks all of these equalities. `src/build_page1_table.py` builds it.
 
+## `data/bulletin_page2.csv`
+
+Every column printed on Page 2, in wide form: one row per governed dam and bulletin date, 129,472 rows from 3,983 bulletins (2014-07-02 to 2025-10-10). It comes from the accepted Page 2 extraction (engine `page2-authoritative-1.0.0`) that `sources/manifest.csv` lists. Values are as printed, with dot decimals. A blank cell means the bulletin printed nothing there, printed text instead of a number (`#VALEUR!`, `#N/A`, `n,d`, sums such as `720+2500` or `75+11`), or the cell was not readable. It is never zero and never filled. Dates are not shifted.
+
+Column names are the project's canonical names, not the extractor's `p2_*` names, because two of those are misleading: `p2_cote_plan_eau_m` and `p2_volume_actuel_mm3` are the level and volume at the **end of the previous hydraulic year**, not today's. The DLO 0.3 source column of each field is in `datapackage.json` and `src/build_page2_table.py`.
+
+| Field | Meaning (printed heading) | Day described |
+|---|---|---|
+| `source_row_key` | `PAGE_2\|bulletin_date\|dam_id`. | |
+| `dam_id`, `bulletin_date` | Governed dam ID and bulletin date D. | |
+| `region` | Region block of the bulletin: `nord`, `centre`, `cap_bon`. | |
+| `source_file`, `source_sha256`, `page` | Page 2 PDF; equal to the Page 2 entry of `sources/manifest.csv`. `page` is the bulletin page, 2. | |
+| `layout` | `PRE_CUTOFF_MONTH_TO_DATE_INFLOW` up to 2024-04-26, `POST_CUTOFF_INTERVAL_EVAPORATION` from 2024-04-27. | |
+| `engine_version`, `authority_release` | Extraction engine and authority. | |
+| `row_detection` | How the dam row was found; 2 rows (Bezirk 2016-08-11, Sidi Saad 2022-12-26) were recovered by row geometry. | |
+| `catchment_area_km2` | Catchment area, km² (*Bassin versant*). | static |
+| `mean_annual_inflow_mm3_per_year` | Long-term mean annual inflow, Mm³/year (*Apport annuel moyen*). | static |
+| `minimum_annual_inflow_since_impoundment_mm3` | Minimum annual inflow since first filling, Mm³ (*Apport min depuis mise en eau*). | static |
+| `normal_pool_elevation_m` | Normal pool elevation, m (*Retenue normale, cote*). | static |
+| `initial_total_capacity_mm3` | Initial total capacity, Mm³ (*Cap totale initiale*). | as printed |
+| `useful_capacity_at_last_bathymetric_survey_mm3` | Useful capacity at the last bathymetric survey, Mm³ (*Cap utile actuelle*). Every regime in `data/capacity_history.csv` is this printed value. | as printed |
+| `calculated_regulated_volume_mm3` | Calculated regulated volume, Mm³ (*Volume régul. calculé*). | static |
+| `maximum_evacuation_discharge_m3s` | Maximum spillway discharge, m³/s (*Débits max évacués*). | static |
+| `measured_sediment_volume_mm3` | Measured sediment volume, Mm³ (*Envasement mesuré*). | as printed |
+| `mean_annual_sedimentation_mm3_per_year` | Mean annual sedimentation, Mm³/year (*Envasement annuel*). | as printed |
+| `sedimentation_pct_of_initial_capacity` | Sediment, % of initial capacity (*Envasement pourcentage*). | as printed |
+| `catchment_equivalent_erosion_mm_per_year` | Equivalent catchment erosion, mm/year (*Érosion du BV*). | as printed |
+| `estimated_useful_capacity_after_post_survey_sedimentation_mm3` | Useful capacity minus sediment arrived since the last survey, Mm³ (*Cap utile calculée*). | as printed |
+| `previous_hydraulic_year_end_water_level_m` | Level at the end of the previous hydraulic year, m (*Année hydraulique précédente: plan d'eau*). **Not the current level.** | 31 August of the previous year |
+| `previous_hydraulic_year_end_storage_mm3` | Storage at the end of the previous hydraulic year, Mm³, 2 decimals. Equals the Page 1 storage of the bulletin of 1 September in 377 of 383 dam-years. **Not the current storage.** | 31 August of the previous year |
+| `previous_full_hydraulic_year_inflow_mm3` | Inflow over the previous hydraulic year, Mm³. | previous 1 September–31 August |
+| `previous_full_hydraulic_year_outflow_mm3` | Withdrawal (*soutirage*) over the previous hydraulic year, Mm³. | previous 1 September–31 August |
+| `water_level_current_m` | Current water level, m (*Côte plan d'eau*). **The current level.** | D |
+| `storage_current_total_corresponding_p2_mm3` | Storage at that level, Mm³ (*Volume correspondant*); the Page 2 copy of Page 1 storage. | D |
+| `storage_current_exploitable_mm3` | Usable storage at that level, Mm³ (*Volume correspondant utilisable*). | D |
+| `outflow_reporting_interval_p2_mm3` | Withdrawal, Mm³ (*Soutirage du* D−1); the Page 2 copy of `p1_release_yesterday`. | D−1 |
+| `inflow_reporting_interval_p2_mm3` | Inflow, Mm³ (*Apport du* D−1); the Page 2 copy of `p1_apport_today`. | D−1 |
+| `inflow_month_to_date_p2_mm3` | Inflow month to date, Mm³ (*Apport du mois*). Up to 2024-04-26 only. | 1st of the month to D−1 |
+| `evaporation_reporting_interval_mm3` | Evaporation, Mm³. From 2024-04-27 only (same physical column). | D−1 |
+| `rainfall_reporting_interval_mm` | Rainfall, mm (*Pluv*). Time rule from DLO 0.3, medium confidence. | D−1 |
+| `p2_rs_unresolved_prohibited` | Value printed under *R.S. (g/l)*. No legend defines it, so no meaning is asserted. | — |
+
+The previous-hydraulic-year columns change on the bulletin of 2 September. Four bulletins, 2021-01-14 to 2021-01-17, print other previous-year values for 32 dams; they are kept as printed (`docs/known_issues.md`).
+
+Checks (`tests/test_bulletin_page2.py`): every column equals `qa/kpi/inputs/page2.parquet`; Page 1 and Page 2 agree exactly on 128,995 of 128,996 storage pairs, 92,330 of 92,338 inflow pairs and 83,584 of 83,642 release pairs (KPI K09); all 60 capacity regimes equal the printed useful capacity. 117 rows have no Page 1 row: the three bulletins without a Page 1 (2022-05-03, 2022-10-28, 2024-12-28) and the dams missing from Page 1 on 2015-10-03 to 06 (Ben Metir, Sidi Aïch) and 2016-08-11 (Lebna). `src/build_page2_table.py` builds the table.
+
 ## `qa/printed_fill_reference.csv`
 
 The 84,620 non-primary percentages printed independently in Page 1 bulletins. It retains the same provenance columns and observation IDs used in E2. `variable` is `printed_fill_pct`, `unit` is `percent`, and `source_field` is `p1_stock_fill_pct`. This table is a comparison reference; it is not a replacement for storage.
@@ -109,7 +155,7 @@ Long/tidy selected Page 3 T5 facts. These rows remain `PAGE3_SELECTED_RELEASE_PR
 
 ## Parquet representations
 
-`data/parquet/storage.parquet`, `data/parquet/transfers.parquet`, `data/parquet/bulletin_page1.parquet`, and `qa/printed_fill_reference.parquet` contain the same logical rows, order, identifiers, variables, and numeric values as their CSV counterparts.
+`data/parquet/storage.parquet`, `data/parquet/transfers.parquet`, `data/parquet/bulletin_page1.parquet`, `data/parquet/bulletin_page2.parquet`, and `qa/printed_fill_reference.parquet` contain the same logical rows, order, identifiers, variables, and numeric values as their CSV counterparts.
 
 ## Quality indicators (current)
 

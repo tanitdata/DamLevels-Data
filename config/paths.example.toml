@@ -45,6 +45,8 @@ page1_checksum_source = "<FULL_RECONSTRUCTION>/data/extraction/page1/checksum_so
 # E6A.2 audit (src/build_e6a2.py, run by src/build.py); page1_observations also
 # feeds the full Page 1 table (src/build_page1_table.py)
 page1_observations = "<FULL_RECONSTRUCTION>/data/extraction/page1/observations.csv.gz"
+# Full Page 2 table (src/build_page2_table.py); SHA-256 is checked
+page2_observations = "<FULL_RECONSTRUCTION>/data/extraction/page2/observations.csv.gz"
 page2_value_lineage_run5 = "<PFE_WORK>/extraction/production_v2/output/combined_run5_20260813/page2/value_lineage.csv.gz"
 page3_canonical_facts = "<FULL_RECONSTRUCTION>/data/page3/canonical_base/PAGE3_CANONICAL_FACTS_LONG.parquet"
 page3_clean_daily_summary = "<FULL_RECONSTRUCTION>/data/page3/clean_release/CLEAN_PAGE3_DAILY_SUMMARY.csv"
