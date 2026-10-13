@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- **Full Page 1 table.** New `data/bulletin_page1.csv` (and `data/parquet/bulletin_page1.parquet`): all 15 columns printed on Page 1 — inflow of the day, month and season to date, long-term means, previous-year inflow, release codes, releases (day before, same day one year earlier, month and season to date, previous year), fill %, stock and last year's stock — one row per dam and bulletin, 129,391 rows from 3,981 bulletins. Same accepted extraction as `data/storage.csv` (input SHA-256 checked); no value changed, filled or shifted. Built by `src/build_page1_table.py`; `tests/test_bulletin_page1.py` checks that the stock and fill columns equal `data/storage.csv` and `qa/printed_fill_reference.csv`, that every row points to the Page 1 file of `sources/manifest.csv`, and that every column equals the KPI input `qa/kpi/inputs/page1.parquet`.
+- `datapackage.json` registers both files with a description and day rule for every field; data dictionary, README (summary, quick start with the D−1 rule, repository map, limitations) updated. README section 11 now says which Page 2 and Page 3 columns are not yet published.
+- KPIs rerun: K02 17/17 resources and K16 216/216 described fields (were 15/15 and 168/168); all other values identical.
 - Author name corrected to **Soura Boulaares** in `CITATION.cff`, `LICENSE`, the README and the MCP server package metadata (it was spelled "Boulares").
 - README citation section: removed the note about the GitHub "Cite this repository" button.
 - Zenodo concept DOI 10.5281/zenodo.23304326 (all versions; 1.1.2 is 10.5281/zenodo.23304327) added to the README (badge and citation section) and to `CITATION.cff`.

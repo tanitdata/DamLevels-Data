@@ -65,6 +65,36 @@ Long/tidy Page 1 primary storage observations. One row is one storage value for 
 
 `provenance/storage_lineage.csv` preserves cell IDs and parse/review states. `provenance/storage_missingness.csv` records source rows for which no numeric observation was emitted.
 
+## `data/bulletin_page1.csv`
+
+Every column printed on Page 1, in wide form: one row per governed dam and bulletin date, 129,391 rows from 3,981 bulletins (2014-07-02 to 2025-10-10). It comes from the same accepted extraction (engine `page1-authoritative-0.2.3`) as `data/storage.csv`; values are as printed, with dot decimals. A blank cell means the bulletin printed nothing usable there. It is never zero and never filled. Dates are not shifted: `bulletin_date` is the bulletin day D, and the table below gives the day each column describes.
+
+| Field | Meaning | Day described |
+|---|---|---|
+| `source_row_key` | `PAGE_1\|bulletin_date\|dam_id`; the same key as `source_row_key` in `data/storage.csv`. | |
+| `dam_id` | Governed stable dam ID. | |
+| `bulletin_date` | Bulletin date D. | |
+| `source_file`, `source_sha256`, `page` | Page 1 PDF; equal to the Page 1 entry of `sources/manifest.csv`. | |
+| `layout` | `P1_LAYOUT_16_WITH_FILL` (fill column printed, from 2019-02-05) or `P1_LAYOUT_15_NO_FILL`. | |
+| `engine_version`, `authority_release` | Extraction engine and authority, as in `data/storage.csv`. | |
+| `p1_apport_today` | Inflow, Mm³. Six negative printed values are kept. | D−1 |
+| `p1_apport_cumul_this_month` | Inflow month to date, Mm³; restarts on the bulletin of the 2nd. | 1st of the month to D−1 |
+| `p1_apport_average_month` | Long-term mean inflow of the month, Mm³ (a reference). | the month |
+| `p1_apport_cumul_since_sep` | Inflow season to date, Mm³; restarts on the bulletin of 2 September. | 1 September to D−1 |
+| `p1_apport_cumul_prev_year` | Inflow over the same period one year earlier, Mm³. | previous season, to the same day |
+| `p1_apport_average_period` | Long-term mean inflow of the season-to-date period, Mm³ (a reference). | 1 September to D−1 |
+| `p1_release_action_code` | Operation codes printed beside the releases, comma-separated as printed (`E`, `p`, `tr`, `T`, `d`, …). No printed legend was found; meanings are provisional. | D−1 |
+| `p1_release_yesterday` | Release, Mm³. **This is the current release.** | D−1 |
+| `p1_release_today` | Release on the same day one year earlier, Mm³ (second value under *Lâchers du jour*). **Never the current release.** | D−1, one year earlier |
+| `p1_release_cumul_this_month` | Release month to date, Mm³; restarts on the bulletin of the 2nd. | 1st of the month to D−1 |
+| `p1_release_cumul_year` | Release season to date, Mm³; restarts on the bulletin of 2 September. | 1 September to D−1 |
+| `p1_release_cumul_last_year` | Release over the same period one year earlier, Mm³. | previous season, to the same day |
+| `p1_stock_fill_pct` | Printed fill, % of useful capacity. Printed from 2019-02-05 only; equal to `qa/printed_fill_reference.csv`. | D |
+| `p1_stock_today_mm3` | Storage, Mm³; equal to `value` in `data/storage.csv`. | D |
+| `p1_stock_last_year_mm3` | Storage on the same date one year earlier, Mm³. | D, one year earlier |
+
+The DLO 0.3 ontology (`ontology/`, source table `P1_observations`) defines each column and its time rule. The table holds the same values as `qa/kpi/inputs/page1.parquet`, so the current indicators K09 (Page 1 = Page 2), K10 (daily values against month and season counters) and K11 (printed fill against storage and capacity) apply to it; `tests/test_bulletin_page1.py` checks all of these equalities. `src/build_page1_table.py` builds it.
+
 ## `qa/printed_fill_reference.csv`
 
 The 84,620 non-primary percentages printed independently in Page 1 bulletins. It retains the same provenance columns and observation IDs used in E2. `variable` is `printed_fill_pct`, `unit` is `percent`, and `source_field` is `p1_stock_fill_pct`. This table is a comparison reference; it is not a replacement for storage.
@@ -79,7 +109,7 @@ Long/tidy selected Page 3 T5 facts. These rows remain `PAGE3_SELECTED_RELEASE_PR
 
 ## Parquet representations
 
-`data/parquet/storage.parquet`, `data/parquet/transfers.parquet`, and `qa/printed_fill_reference.parquet` contain the same logical rows, order, identifiers, variables, and numeric values as their CSV counterparts.
+`data/parquet/storage.parquet`, `data/parquet/transfers.parquet`, `data/parquet/bulletin_page1.parquet`, and `qa/printed_fill_reference.parquet` contain the same logical rows, order, identifiers, variables, and numeric values as their CSV counterparts.
 
 ## Quality indicators (current)
 

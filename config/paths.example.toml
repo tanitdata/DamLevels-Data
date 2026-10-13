@@ -42,7 +42,8 @@ page1_value_lineage = "<PFE_READY>/DAM_DATA_PIPELINE_20260831/outputs/runs/RUN_2
 page1_checksum_validation = "<FULL_RECONSTRUCTION>/data/extraction/page1/checksum_validation.csv.gz"
 page1_checksum_source = "<FULL_RECONSTRUCTION>/data/extraction/page1/checksum_source.csv.gz"
 
-# E6A.2 audit (src/build_e6a2.py, run by src/build.py)
+# E6A.2 audit (src/build_e6a2.py, run by src/build.py); page1_observations also
+# feeds the full Page 1 table (src/build_page1_table.py)
 page1_observations = "<FULL_RECONSTRUCTION>/data/extraction/page1/observations.csv.gz"
 page2_value_lineage_run5 = "<PFE_WORK>/extraction/production_v2/output/combined_run5_20260813/page2/value_lineage.csv.gz"
 page3_canonical_facts = "<FULL_RECONSTRUCTION>/data/page3/canonical_base/PAGE3_CANONICAL_FACTS_LONG.parquet"

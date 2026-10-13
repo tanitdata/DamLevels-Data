@@ -836,6 +836,286 @@
       }
     },
     {
+      "name": "bulletin-page1",
+      "path": "data/bulletin_page1.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "primaryKey": "source_row_key",
+        "foreignKeys": [
+          {
+            "fields": "dam_id",
+            "reference": {
+              "resource": "dams",
+              "fields": "dam_id"
+            }
+          }
+        ],
+        "fields": [
+          {
+            "name": "source_row_key",
+            "type": "string",
+            "description": "Row key PAGE_1|bulletin_date|dam_id; equals source_row_key in data/storage.csv."
+          },
+          {
+            "name": "dam_id",
+            "type": "string",
+            "description": "Stable governed dam identifier."
+          },
+          {
+            "name": "bulletin_date",
+            "type": "date",
+            "description": "Bulletin date D as printed. Each value column states which day it describes; dates are not shifted."
+          },
+          {
+            "name": "source_file",
+            "type": "string",
+            "description": "Source Page 1 PDF filename."
+          },
+          {
+            "name": "source_sha256",
+            "type": "string",
+            "description": "Source Page 1 PDF SHA-256; equals page1_sha256 in sources/manifest.csv."
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "description": "Source page (1)."
+          },
+          {
+            "name": "layout",
+            "type": "string",
+            "description": "Page 1 layout: P1_LAYOUT_16_WITH_FILL (fill column printed, from 2019-02-05) or P1_LAYOUT_15_NO_FILL."
+          },
+          {
+            "name": "engine_version",
+            "type": "string",
+            "description": "Extractor engine version."
+          },
+          {
+            "name": "authority_release",
+            "type": "string",
+            "description": "Extraction authority: PAGE1_0.2.3_CURRENT_EXTRACTION_DELIVERY, the same as data/storage.csv."
+          },
+          {
+            "name": "p1_apport_today",
+            "type": "number",
+            "description": "Inflow over day D-1 (the day before the bulletin), Mm3. Six negative printed values are kept as printed."
+          },
+          {
+            "name": "p1_apport_cumul_this_month",
+            "type": "number",
+            "description": "Inflow month to date through day D-1, Mm3; restarts on the bulletin of the 2nd."
+          },
+          {
+            "name": "p1_apport_average_month",
+            "type": "number",
+            "description": "Long-term mean inflow of the month, Mm3 (a reference, not an observation of this year)."
+          },
+          {
+            "name": "p1_apport_cumul_since_sep",
+            "type": "number",
+            "description": "Inflow season to date, 1 September through day D-1, Mm3; restarts on the bulletin of 2 September."
+          },
+          {
+            "name": "p1_apport_cumul_prev_year",
+            "type": "number",
+            "description": "Inflow over the same season-to-date period one year earlier, Mm3."
+          },
+          {
+            "name": "p1_apport_average_period",
+            "type": "number",
+            "description": "Long-term mean inflow of the season-to-date period, Mm3 (a reference)."
+          },
+          {
+            "name": "p1_release_action_code",
+            "type": "string",
+            "description": "Operation codes printed beside the releases, comma-separated as printed (E, p, tr, T, d, ...). No printed legend was found: meanings are provisional."
+          },
+          {
+            "name": "p1_release_yesterday",
+            "type": "number",
+            "description": "Release over day D-1 (the day before the bulletin), Mm3. This is the current release."
+          },
+          {
+            "name": "p1_release_today",
+            "type": "number",
+            "description": "Release on the same day one year earlier, Mm3 (second value under 'Lachers du jour'). Never the current release."
+          },
+          {
+            "name": "p1_release_cumul_this_month",
+            "type": "number",
+            "description": "Release month to date through day D-1, Mm3; restarts on the bulletin of the 2nd."
+          },
+          {
+            "name": "p1_release_cumul_year",
+            "type": "number",
+            "description": "Release season to date, 1 September through day D-1, Mm3; restarts on the bulletin of 2 September."
+          },
+          {
+            "name": "p1_release_cumul_last_year",
+            "type": "number",
+            "description": "Release over the same season-to-date period one year earlier, Mm3."
+          },
+          {
+            "name": "p1_stock_fill_pct",
+            "type": "number",
+            "description": "Printed fill, percent of useful capacity, state on day D. Printed from 2019-02-05 only; equals qa/printed_fill_reference.csv."
+          },
+          {
+            "name": "p1_stock_today_mm3",
+            "type": "number",
+            "description": "Storage, state on day D, Mm3; equals value in data/storage.csv."
+          },
+          {
+            "name": "p1_stock_last_year_mm3",
+            "type": "number",
+            "description": "Storage on the same date one year earlier, Mm3."
+          }
+        ]
+      },
+      "description": "Every printed Page 1 column, one row per governed dam and bulletin date (wide). Values as printed and never filled: blank means not printed or not readable. Same accepted extraction as data/storage.csv. Column meanings and time rules: DLO 0.3 source table P1_observations."
+    },
+    {
+      "name": "bulletin-page1-parquet",
+      "path": "data/parquet/bulletin_page1.parquet",
+      "format": "parquet",
+      "schema": {
+        "primaryKey": "source_row_key",
+        "foreignKeys": [
+          {
+            "fields": "dam_id",
+            "reference": {
+              "resource": "dams",
+              "fields": "dam_id"
+            }
+          }
+        ],
+        "fields": [
+          {
+            "name": "source_row_key",
+            "type": "string",
+            "description": "Row key PAGE_1|bulletin_date|dam_id; equals source_row_key in data/storage.csv."
+          },
+          {
+            "name": "dam_id",
+            "type": "string",
+            "description": "Stable governed dam identifier."
+          },
+          {
+            "name": "bulletin_date",
+            "type": "date",
+            "description": "Bulletin date D as printed. Each value column states which day it describes; dates are not shifted."
+          },
+          {
+            "name": "source_file",
+            "type": "string",
+            "description": "Source Page 1 PDF filename."
+          },
+          {
+            "name": "source_sha256",
+            "type": "string",
+            "description": "Source Page 1 PDF SHA-256; equals page1_sha256 in sources/manifest.csv."
+          },
+          {
+            "name": "page",
+            "type": "integer",
+            "description": "Source page (1)."
+          },
+          {
+            "name": "layout",
+            "type": "string",
+            "description": "Page 1 layout: P1_LAYOUT_16_WITH_FILL (fill column printed, from 2019-02-05) or P1_LAYOUT_15_NO_FILL."
+          },
+          {
+            "name": "engine_version",
+            "type": "string",
+            "description": "Extractor engine version."
+          },
+          {
+            "name": "authority_release",
+            "type": "string",
+            "description": "Extraction authority: PAGE1_0.2.3_CURRENT_EXTRACTION_DELIVERY, the same as data/storage.csv."
+          },
+          {
+            "name": "p1_apport_today",
+            "type": "number",
+            "description": "Inflow over day D-1 (the day before the bulletin), Mm3. Six negative printed values are kept as printed."
+          },
+          {
+            "name": "p1_apport_cumul_this_month",
+            "type": "number",
+            "description": "Inflow month to date through day D-1, Mm3; restarts on the bulletin of the 2nd."
+          },
+          {
+            "name": "p1_apport_average_month",
+            "type": "number",
+            "description": "Long-term mean inflow of the month, Mm3 (a reference, not an observation of this year)."
+          },
+          {
+            "name": "p1_apport_cumul_since_sep",
+            "type": "number",
+            "description": "Inflow season to date, 1 September through day D-1, Mm3; restarts on the bulletin of 2 September."
+          },
+          {
+            "name": "p1_apport_cumul_prev_year",
+            "type": "number",
+            "description": "Inflow over the same season-to-date period one year earlier, Mm3."
+          },
+          {
+            "name": "p1_apport_average_period",
+            "type": "number",
+            "description": "Long-term mean inflow of the season-to-date period, Mm3 (a reference)."
+          },
+          {
+            "name": "p1_release_action_code",
+            "type": "string",
+            "description": "Operation codes printed beside the releases, comma-separated as printed (E, p, tr, T, d, ...). No printed legend was found: meanings are provisional."
+          },
+          {
+            "name": "p1_release_yesterday",
+            "type": "number",
+            "description": "Release over day D-1 (the day before the bulletin), Mm3. This is the current release."
+          },
+          {
+            "name": "p1_release_today",
+            "type": "number",
+            "description": "Release on the same day one year earlier, Mm3 (second value under 'Lachers du jour'). Never the current release."
+          },
+          {
+            "name": "p1_release_cumul_this_month",
+            "type": "number",
+            "description": "Release month to date through day D-1, Mm3; restarts on the bulletin of the 2nd."
+          },
+          {
+            "name": "p1_release_cumul_year",
+            "type": "number",
+            "description": "Release season to date, 1 September through day D-1, Mm3; restarts on the bulletin of 2 September."
+          },
+          {
+            "name": "p1_release_cumul_last_year",
+            "type": "number",
+            "description": "Release over the same season-to-date period one year earlier, Mm3."
+          },
+          {
+            "name": "p1_stock_fill_pct",
+            "type": "number",
+            "description": "Printed fill, percent of useful capacity, state on day D. Printed from 2019-02-05 only; equals qa/printed_fill_reference.csv."
+          },
+          {
+            "name": "p1_stock_today_mm3",
+            "type": "number",
+            "description": "Storage, state on day D, Mm3; equals value in data/storage.csv."
+          },
+          {
+            "name": "p1_stock_last_year_mm3",
+            "type": "number",
+            "description": "Storage on the same date one year earlier, Mm3."
+          }
+        ]
+      },
+      "description": "Every printed Page 1 column, one row per governed dam and bulletin date (wide). Values as printed and never filled: blank means not printed or not readable. Same accepted extraction as data/storage.csv. Column meanings and time rules: DLO 0.3 source table P1_observations."
+    },
+    {
       "name": "printed-fill-reference",
       "path": "qa/printed_fill_reference.csv",
       "profile": "tabular-data-resource",
