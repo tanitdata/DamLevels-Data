@@ -53,7 +53,8 @@ def build_server(root: Path | None = None) -> FastMCP:
 
     @tool
     def dataset_info() -> dict:
-        """What the archive contains: coverage dates, counts, units, time rules, source and licence."""
+        """What the archive contains: coverage dates, counts, the published tables with their row counts,
+        units, time rules, source and licence."""
         return data.dataset_info()
 
     @tool
@@ -118,8 +119,10 @@ def build_server(root: Path | None = None) -> FastMCP:
     def describe_variable(term: str) -> dict:
         """Meaning of a bulletin term or printed column from the DamLevels ontology (DLO 0.3): concept,
         definition, unit, French/Arabic labels and the time rule of each printed column
-        (e.g. 'Apports', 'الإيرادات', 'stored water volume', 'p1_release_today'). When a label belongs to
-        several concepts, all candidates are returned with their printed columns and none is chosen."""
+        (e.g. 'Apports', 'الإيرادات', 'stored water volume', 'p1_release_today'). Column names of
+        data/bulletin_page2.csv (e.g. 'previous_hydraulic_year_end_water_level_m') are answered with their
+        DLO source column. When a label belongs to several concepts, all candidates are returned with
+        their printed columns and none is chosen."""
         return data._envelope(onto.describe(term))
 
     def doc(path: str):

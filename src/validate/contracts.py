@@ -77,6 +77,36 @@ def _parquet_mirror_errors(csv_rows: list[dict[str, str]], parquet_path: Path, i
     return errors
 
 
+def _page_table_errors(
+    root: Path, page: str, expected_rows: int, dam_id_set: set[str], manifest: dict[str, dict[str, str]]
+) -> list[str]:
+    """Full page table: row count, key, dam IDs, manifest identity and Parquet mirror (keys and columns)."""
+    csv_path = root / f"data/bulletin_page{page}.csv"
+    parquet_path = root / f"data/parquet/bulletin_page{page}.parquet"
+    rows = _rows(csv_path)
+    errors: list[str] = []
+    if len(rows) != expected_rows:
+        errors.append(f"Expected {expected_rows} rows in {csv_path.name}, found {len(rows)}")
+    keys = [(row["dam_id"], row["bulletin_date"]) for row in rows]
+    if len(keys) != len(set(keys)):
+        errors.append(f"{csv_path.name} contains duplicate dam_id/bulletin_date rows")
+    if any(row["dam_id"] not in dam_id_set for row in rows):
+        errors.append(f"{csv_path.name} contains dam_id outside data/dams.csv")
+    for row in rows:
+        entry = manifest.get(row["bulletin_date"], {})
+        if (row["source_file"], row["source_sha256"]) != (entry.get(f"page{page}_source_file"), entry.get(f"page{page}_sha256")):
+            errors.append(f"{csv_path.name}: {row['source_row_key']} does not match the manifest Page {page} file")
+            break
+    table = pq.read_table(parquet_path)
+    with csv_path.open(encoding="utf-8", newline="") as f:
+        header = next(csv.reader(f))
+    if table.schema.names != header:
+        errors.append(f"{parquet_path.name} columns differ from {csv_path.name}")
+    elif table.column("source_row_key").to_pylist() != [row["source_row_key"] for row in rows]:
+        errors.append(f"{parquet_path.name} rows or order differ from {csv_path.name}")
+    return errors
+
+
 def validate_repository(root: Path) -> list[str]:
     errors: list[str] = []
     paths = {
@@ -131,6 +161,13 @@ def validate_repository(root: Path) -> list[str]:
     packaged_ids = {row["observation_id"] for row in storage} | {row["observation_id"] for row in fill}
     if packaged_ids != numeric_lineage_ids:
         errors.append("E3 storage/fill split does not preserve the complete E2 numeric observation identity set")
+
+    manifest = {row["bulletin_date"]: row for row in _rows(paths["manifest"])}
+    errors.extend(_page_table_errors(root, "1", 129391, dam_id_set, manifest))
+    errors.extend(_page_table_errors(root, "2", 129472, dam_id_set, manifest))
+    stock = {row["source_row_key"]: row["p1_stock_today_mm3"] for row in _rows(root / "data/bulletin_page1.csv")}
+    if any(stock.get(row["source_row_key"]) != row["value"] for row in storage):
+        errors.append("data/bulletin_page1.csv stock column differs from data/storage.csv")
 
     transfers = _rows(paths["transfers"])
     if any("PROBABLE" not in row["authority_release"] for row in transfers):

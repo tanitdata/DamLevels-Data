@@ -153,6 +153,17 @@ Long/tidy selected Page 3 T5 facts. These rows remain `PAGE3_SELECTED_RELEASE_PR
 
 `variable` is the published measure ID (`today`, `current_season_to_date`, or `previous_season_to_date`). Blank and structurally absent values remain blank with `value_status`. `date` and `effective_date_rule` reproduce the selected product fields without reinterpretation. Note: `date` is the bulletin date; under DLO 0.3, `today` describes day D−1 and the season measures describe an interval ending on D−1 (see `docs/known_issues.md`).
 
+## `provenance/RELEASE_ASSETS.csv`
+
+Files that belong to the dataset but exceed the 50 MB file limit of the repository. They are attached to the GitHub release named in `release`, byte-identical to the extraction output named in `source_artifact`; check a download against `sha256` and `bytes`.
+
+| Asset | Rows | Joins to | What one row is |
+|---|---:|---|---|
+| `page1_cell_lineage.csv.gz` | 1,896,094 | `data/bulletin_page1.csv` on `source_filename`, `canonical_dam_id` and `canonical_semantic_field` (the column name) | one Page 1 cell: cell and character bounding boxes, raw glyphs, normalisation, parser state, parsed value, incident and review status |
+| `page2_cell_lineage.csv.gz` | 3,366,272 | `data/bulletin_page2.csv` on `source_pdf`, `dam_id` and `canonical_semantic` (the DLO column; `SOURCE_COLUMNS` in `src/build_page2_table.py` gives the published name) | one Page 2 cell: row and column bounding boxes, raw cell text, parsed value, parse status |
+
+Every non-blank numeric cell of the two tables has a lineage record with the same value (Page 1: 1,747,658 cells; Page 2: 2,698,141). The other records are blank, non-numeric or label cells, which keep their raw text.
+
 ## Parquet representations
 
 `data/parquet/storage.parquet`, `data/parquet/transfers.parquet`, `data/parquet/bulletin_page1.parquet`, `data/parquet/bulletin_page2.parquet`, and `qa/printed_fill_reference.parquet` contain the same logical rows, order, identifiers, variables, and numeric values as their CSV counterparts.

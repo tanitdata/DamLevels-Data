@@ -87,7 +87,7 @@ The second-last number, `283,496`, is the stock in the reservoir that morning, i
 
 and its cell-level record in [`provenance/storage_lineage.csv`](provenance/storage_lineage.csv) keeps the evidence: physical column `14`, the cell's bounding box on the page, the raw printed characters `283,496`, the parse status `NUMERIC_PARSED`, and a link to the check against the printed regional subtotal.
 
-This "passport" exists for every value. If a number looks wrong, you can open the original PDF, go to the cell, and see what was printed.
+This "passport" exists for every value. If a number looks wrong, you can open the original PDF, go to the cell, and see what was printed. For storage, the cell-level record is in the repository. For the other columns of the full Page 1 and Page 2 tables, each row gives the file, fingerprint and page, and the cell-level records (about 5.3 million cells) are too large for the repository: they are attached to the GitHub release as two compressed files, listed with their SHA-256 in [`provenance/RELEASE_ASSETS.csv`](provenance/RELEASE_ASSETS.csv).
 
 ## 3. How the dataset was built
 
@@ -108,9 +108,9 @@ flowchart LR
 1. **Collect and fingerprint.** All bulletins were downloaded from ONAGRI, fingerprinted with SHA-256 and split into their three pages. Duplicates, backups and files with a date that disagrees with their content are kept in an inventory ([`sources/file_manifest.csv`](sources/file_manifest.csv)) rather than silently dropped.
 2. **Read the pages.** Three deterministic engines read the characters of the PDF text layer and the lines drawn to make the tables. The Page 1 engine finds the column borders from the vertical rulings and assigns each character to its cell. Nothing is retyped and no OCR is used, so running an engine twice on the same file gives the same output. Page 1 yields 129,391 dam-day observations, Page 2 129,472, Page 3 274,183 facts.
 3. **Identify the dams.** Dam names are printed in French and Arabic with varying spellings. A governed alias register maps every printed name to one stable `dam_id`.
-4. **Keep the evidence.** Every value keeps its file, fingerprint, page, column, bounding box and raw printed text (1,896,094 Page 1 cells traced). Missing or unreadable cells stay missing; nothing is interpolated or forward-filled.
+4. **Keep the evidence.** Every value keeps its file, fingerprint, page, column, bounding box and raw printed text (1,896,094 Page 1 cells and 3,366,272 Page 2 cells traced). Missing or unreadable cells stay missing; nothing is interpolated or forward-filled.
 5. **Check.** Five complementary checks are applied wherever a value can be compared with something else ([section 5](#5-how-the-data-was-checked)).
-6. **Package.** The results are published as long ("tidy") tables with a data dictionary, known issues, GIS layers and an ontology.
+6. **Package.** The results are published as long ("tidy") tables for storage and transfers, plus one wide table per bulletin page holding every printed Page 1 and Page 2 column, with a data dictionary, known issues, GIS layers and an ontology.
 
 The extraction code is in [`src/extract/`](src/extract/); the packaging, contracts and checks are in [`src/`](src/) and [`qa/`](qa/).
 
@@ -268,7 +268,9 @@ and for the national question, total storage on 10 October of each year:
 - transfers are always marked as less certain (`PROBABLE`);
 - every answer carries the source attribution and any caveats.
 
-**Tools available to the assistant:** `find_dam` (French or Arabic names), `list_dams`, `get_storage`, `get_fill`, `national_storage`, `compare_years`, `get_source`, `get_transfers`, `describe_variable` (meanings from the [ontology](ontology/)), `dataset_info`.
+**Tools available to the assistant:** `find_dam` (French or Arabic names), `list_dams`, `get_storage`, `get_fill`, `national_storage`, `compare_years`, `get_source`, `get_transfers`, `describe_variable` (meanings from the [ontology](ontology/), including every column of the full Page 1 and Page 2 tables), `dataset_info`.
+
+The server answers storage, fill and transfer questions; it does not yet serve inflows, releases or water levels, which are in the full page tables ([section 7](#7-quick-start)).
 
 **Set it up** (Python 3.11+, from a clone of this repository):
 

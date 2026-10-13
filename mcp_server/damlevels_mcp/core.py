@@ -164,6 +164,25 @@ class DamData:
         return pd.read_parquet(self.root / "data/parquet/transfers.parquet")
 
     @cached_property
+    def tables(self) -> dict[str, dict]:
+        """Published tables with their row counts (read from the Parquet metadata only)."""
+        import pyarrow.parquet as pq
+
+        described = {
+            "data/storage.csv": "daily storage, long format, one row per dam and date",
+            "data/bulletin_page1.csv": "every printed Page 1 column (inflows, releases, fill, stock), one row per dam "
+                                       "and bulletin; flows describe the day before the bulletin",
+            "data/bulletin_page2.csv": "every printed Page 2 column (water level, capacities, siltation, rain, "
+                                       "evaporation, previous hydraulic year), one row per dam and bulletin",
+            "data/transfers.csv": "Page 3 inter-dam transfer facts, authority PROBABLE",
+        }
+        out = {}
+        for path, what in described.items():
+            parquet = self.root / "data/parquet" / Path(path).with_suffix(".parquet").name
+            out[path] = {"content": what, "rows": pq.ParquetFile(parquet).metadata.num_rows}
+        return out
+
+    @cached_property
     def capacity(self):
         src = str(self.root / "src")
         if src not in sys.path:
@@ -278,10 +297,12 @@ class DamData:
         result = {
             "name": "DamLevels-Data",
             "description": "Daily storage of Tunisia's large dams reconstructed from the DGBGTH bulletins "
-                           "'Situation des barrages' (ONAGRI). Values are read from the PDF text layer; no OCR.",
+                           "'Situation des barrages' (ONAGRI), with every printed Page 1 and Page 2 column. "
+                           "Values are read from the PDF text layer; no OCR.",
             "dams": int(self.dams.shape[0]),
             "storage_observations": int(len(s)),
             "bulletin_dates": int(self.manifest.shape[0]),
+            "tables": self.tables,
             "unit": "Mm3 (million cubic metres)",
             "time_rules": {
                 "storage, level, fill": "state on the bulletin date",
@@ -291,7 +312,10 @@ class DamData:
             "repository": "https://github.com/tanitdata/DamLevels-Data",
         }
         return self._envelope(result, ["Missing days are gaps, never zeros.",
-                                       "Page 3 transfer facts have authority PROBABLE."])
+                                       "Page 3 transfer facts have authority PROBABLE.",
+                                       "Inflows, releases, water levels and the other Page 1/Page 2 columns are in the "
+                                       "full page tables; no tool serves them yet. describe_variable explains any "
+                                       "of their column names."])
 
     def list_dams(self) -> dict:
         spans = self.dam_spans

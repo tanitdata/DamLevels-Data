@@ -30,6 +30,8 @@ DLO writes each of these rules once and applies it to every value.
 
 The Page 2 column "R.S." is mapped but has no concept: the publisher does not document what it means, so DLO does not guess.
 
+**Where the mapped columns are published.** The Page 1 and Page 2 columns (source tables `P1_observations` and `P2_observations`) are all in the data: [`data/bulletin_page1.csv`](../data/bulletin_page1.csv) uses the DLO column names as they are (`p1_release_today`, …); [`data/bulletin_page2.csv`](../data/bulletin_page2.csv) gives the 17 `p2_*` columns the project's canonical English names, because some are misleading (`p2_cote_plan_eau_m` is the level at the end of the previous hydraulic year, published as `previous_hydraulic_year_end_water_level_m`), and its descriptions in `datapackage.json` give the DLO column of every field. Page 1 storage is also in `data/storage.csv` and the Page 3 transfer columns in `data/transfers.csv`; the other Page 3 tables and the printed Page 1 subtotals are mapped here but not published as tables.
+
 DLO reuses W3C and OGC standards rather than inventing terms: SOSA (observations), OWL-Time (days and intervals), QUDT (units), PROV (provenance), SKOS (code lists), I-ADOPT (variable decomposition), HY_Features (water bodies and catchments) and DQV (quality measurements).
 
 ## Files

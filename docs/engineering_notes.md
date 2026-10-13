@@ -43,6 +43,9 @@ Every published value should point to a source, producer, audit, and version. Co
 - `sources/manifest.csv` — one logical record per accepted bulletin date.
 - `sources/file_manifest.csv` — complete path-level corpus evidence, including duplicates and backups.
 - `data/storage.csv` and `data/parquet/storage.parquet` — accepted Page 1 primary storage observations only.
+- `data/bulletin_page1.csv` and `data/parquet/bulletin_page1.parquet` — every printed Page 1 column, wide, one row per dam and bulletin (`src/build_page1_table.py`).
+- `data/bulletin_page2.csv` and `data/parquet/bulletin_page2.parquet` — every printed Page 2 column, wide, canonical column names (`src/build_page2_table.py`).
+- `provenance/RELEASE_ASSETS.csv` — cell-lineage files of the two wide tables, attached to the GitHub release because they exceed the 50 MB file limit; SHA-256, size and join keys.
 - `data/transfers.csv` and `data/parquet/transfers.parquet` — qualified Page 3 edge/accounting facts.
 - `data/dams.csv` and `data/capacity_history.csv` — stable identities, selected metadata, and dated capacity evidence.
 - `gis/vector/` — five lightweight EPSG:4326 publication layers derived from the accepted R11A GeoPackage.

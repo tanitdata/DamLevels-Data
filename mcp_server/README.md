@@ -15,7 +15,7 @@ A read-only [Model Context Protocol](https://modelcontextprotocol.io) server tha
 
 | Tool | What it returns |
 |---|---|
-| `dataset_info` | coverage, counts, units, time rules, source, licence |
+| `dataset_info` | coverage, counts, the published tables (storage, full Page 1, full Page 2, transfers) with their row counts, units, time rules, source, licence |
 | `list_dams` | 36 dams: `dam_id`, French/Arabic names, coordinates, reference capacity, period in the bulletins |
 | `find_dam(query)` | `dam_id` from a French or Arabic name, alias or spelling variant, with `match_type` (`exact` or `partial`); candidates if ambiguous or unknown |
 | `get_storage(dam, start, end, resolution)` | daily values (max 400) or monthly summaries; missing bulletin dates listed, never filled; bulletins without a Page 1 counted apart from days without any bulletin |
@@ -24,7 +24,7 @@ A read-only [Model Context Protocol](https://modelcontextprotocol.io) server tha
 | `compare_years(dam, month_day)` | the same calendar day in every year, for one dam or `all`; `02-29` gives the leap years only |
 | `get_source(dam, date)` | for a **storage** value: bulletin URL, Page 1 source file and SHA-256, column, cell position, printed text |
 | `get_transfers(start, end, dam, measure, limit)` | Page 3 inter-dam transfers (authority `PROBABLE`) between two **bulletin** dates; each row has its fact id, both endpoint mapping statuses, and its Page 3 file, SHA-256, evidence id and printed text; rows that reach a dam only through a candidate crosswalk (Bouhertma→Bou Heurtma, Zayatin→Ziatine) are listed separately, never promoted; `limit` 1–1000 |
-| `describe_variable(term)` | meaning, unit, labels and time rule of a term or printed column, from the DLO ontology; when a label belongs to several concepts (e.g. الفارق) all candidates are returned and none is chosen |
+| `describe_variable(term)` | meaning, unit, labels and time rule of a term or printed column, from the DLO ontology; every column name of `data/bulletin_page1.csv` and `data/bulletin_page2.csv` is accepted (a Page 2 name such as `previous_hydraulic_year_end_water_level_m` is answered with its DLO column); when a label belongs to several concepts (e.g. الفارق) all candidates are returned and none is chosen |
 
 Resources: `damlevels://docs/data-dictionary`, `damlevels://docs/known-issues`, `damlevels://docs/licence`.
 
@@ -80,7 +80,8 @@ If `damlevels-mcp` is not on your PATH (pip prints a warning when its scripts fo
 
 `tests/test_mcp_server.py` (run with `python -m pytest -q` from the repository root) covers:
 
-- values against the published CSV tables: daily storage, monthly means (exact decimal mean, rounded half-to-even to 0.001 Mm³), fill and printed fill, national totals and leap-day totals, source cells, and transfer amounts, mapping statuses and source fields;
+- values against the published CSV tables: daily storage, monthly means (exact decimal mean, rounded half-to-even to 0.001 Mm³), fill and printed fill, national totals and leap-day totals, source cells, transfer amounts, mapping statuses and source fields, and the row counts of every published table;
+- the ontology answer for every column of the full Page 1 and Page 2 tables, with the Page 2 name map kept equal to the table builder's;
 - the rules: no filling of missing days, partial bulletins without Page 1, out-of-record dates, invalid dates, ranges and limits, the national-fill subset and the known national disagreements, candidate transfer endpoints, dam name variants (including Arabic tatweel), ambiguous ontology labels and a missing rdflib;
 - the MCP layer: tool and resource listing in-process, and real stdio sessions (the server started as a subprocess with `python -m damlevels_mcp`), including the ambiguous Arabic labels under three different hash seeds.
 

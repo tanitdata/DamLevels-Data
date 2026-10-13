@@ -162,6 +162,39 @@ def test_describe_variable_from_ontology():
     assert onto.describe("p2_rs_unresolved_prohibited")["concept"] is None
 
 
+def test_describe_variable_answers_every_published_page_column():
+    pytest.importorskip("rdflib")
+    sys.path.insert(0, str(ROOT / "src"))
+    from build_page1_table import VALUE_FIELDS as PAGE1_FIELDS
+    from build_page2_table import SOURCE_COLUMNS
+    from damlevels_mcp.ontology import PAGE2_PUBLISHED_COLUMNS, Ontology
+
+    assert PAGE2_PUBLISHED_COLUMNS == {k: v for k, v in SOURCE_COLUMNS.items() if k != v}
+    onto = Ontology(ROOT)
+    for column in PAGE1_FIELDS:
+        assert onto.describe(column)["match_type"] == "printed_column", column
+    for published, dlo_column in SOURCE_COLUMNS.items():
+        out = onto.describe(published)
+        assert out["match_type"] == "printed_column", published
+        if published != dlo_column:
+            assert (out["published_column"], out["dlo_column"]) == (published, dlo_column)
+            assert out == {**onto.describe(dlo_column), "term": published, "published_column": published,
+                           "published_in": "data/bulletin_page2.csv", "dlo_column": dlo_column}
+    level = onto.describe("previous_hydraulic_year_end_water_level_m")
+    rules = {c["column"]: c["time_rule"] for c in level["printed_columns"]}
+    assert rules["p2_cote_plan_eau_m"] != rules["water_level_current_m"]
+
+
+def test_dataset_info_lists_published_tables_with_row_counts(data):
+    tables = data.dataset_info()["result"]["tables"]
+    expected = {"data/storage.csv": 129390, "data/bulletin_page1.csv": 129391,
+                "data/bulletin_page2.csv": 129472, "data/transfers.csv": 47556}
+    assert {path: t["rows"] for path, t in tables.items()} == expected
+    for path, rows in expected.items():
+        with open(ROOT / path, encoding="utf-8", newline="") as f:
+            assert sum(1 for _ in csv.reader(f)) - 1 == rows
+
+
 def test_mcp_server_lists_read_only_tools_and_answers():
     pytest.importorskip("mcp")
     from damlevels_mcp.server import build_server

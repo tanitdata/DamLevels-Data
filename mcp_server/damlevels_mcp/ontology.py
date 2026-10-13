@@ -8,6 +8,27 @@ from .core import QueryError, _fold
 
 DLO = "https://w3id.org/damlevels/ontology/"
 SKOS = "http://www.w3.org/2004/02/skos/core#"
+# Published names in data/bulletin_page2.csv that differ from their DLO source column
+# (same mapping as SOURCE_COLUMNS in src/build_page2_table.py; a test keeps them equal).
+PAGE2_PUBLISHED_COLUMNS = {
+    "catchment_area_km2": "p2_bassin_versant_km2",
+    "mean_annual_inflow_mm3_per_year": "p2_apport_annuel_moyen_mm3",
+    "minimum_annual_inflow_since_impoundment_mm3": "p2_min_depuis_mise_en_eau_mm3",
+    "normal_pool_elevation_m": "p2_cote_retenue_normale_m",
+    "initial_total_capacity_mm3": "p2_cap_totale_initiale_mm3",
+    "useful_capacity_at_last_bathymetric_survey_mm3": "p2_cap_actuelle_mm3",
+    "calculated_regulated_volume_mm3": "p2_cap_reguliere_mm3",
+    "maximum_evacuation_discharge_m3s": "p2_debit_max_evacuateur_m3s",
+    "measured_sediment_volume_mm3": "p2_envasement_volume_mm3",
+    "mean_annual_sedimentation_mm3_per_year": "p2_envasement_annuel_mm3",
+    "sedimentation_pct_of_initial_capacity": "p2_envasement_pct",
+    "catchment_equivalent_erosion_mm_per_year": "p2_erosion_mm_an",
+    "estimated_useful_capacity_after_post_survey_sedimentation_mm3": "p2_cap_utile_calculee_mm3",
+    "previous_hydraulic_year_end_water_level_m": "p2_cote_plan_eau_m",
+    "previous_hydraulic_year_end_storage_mm3": "p2_volume_actuel_mm3",
+    "previous_full_hydraulic_year_inflow_mm3": "p2_apport_annee_prec_mm3",
+    "previous_full_hydraulic_year_outflow_mm3": "p2_soutirage_annee_prec_mm3",
+}
 
 
 class Ontology:
@@ -76,13 +97,18 @@ class Ontology:
         key = _fold(term) if isinstance(term, str) else ""
         if not key:
             raise QueryError("UNKNOWN_TERM", "Empty term.")
+        # A published Page 2 column name stands for its DLO source column.
+        published = term.strip()
+        column = PAGE2_PUBLISHED_COLUMNS.get(published, published)
+        extra = {"published_column": published, "published_in": "data/bulletin_page2.csv",
+                 "dlo_column": column} if column != published else {}
         # A printed column name maps directly to one concept.
-        for mapping in g.subjects(rdflib.URIRef(DLO + "sourceColumn"), rdflib.Literal(term.strip())):
+        for mapping in g.subjects(rdflib.URIRef(DLO + "sourceColumn"), rdflib.Literal(column)):
             concept = next(g.objects(mapping, rdflib.URIRef(DLO + "mapsToVariable")), None)
             if concept is None:
                 return {"term": term, "concept": None, "match_type": "printed_column",
                         "note": "This column is mapped but has no concept: its meaning is not documented by the publisher."}
-            return {**self._concept_dict(term, concept), "match_type": "printed_column"}
+            return {**self._concept_dict(term, concept), "match_type": "printed_column", **extra}
         exact = [c for c, keys in self._concepts if key in keys]
         partial = [c for c, keys in self._concepts if any(key in k for k in keys)]
         found, match_type = (exact, "exact_label") if exact else (partial, "partial_label")

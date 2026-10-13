@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-13T19:14:34+00:00",
+  "generated_utc": "2026-10-13T19:55:49+00:00",
   "python": "3.14.3",
   "pandas": "2.3.3",
   "numpy": "2.4.4",
@@ -46,7 +46,7 @@
     },
     "datapackage": {
       "path": "datapackage.json",
-      "sha256": "b459b7455bb5ec3f3fbacf9fbb7f765f8c79d7f89c2465409a98396f4bf862c5"
+      "sha256": "ef4b922a4f0229a5deebccdcfab23d1183287e82964468f6089bcfa235758d21"
     },
     "page1": {
       "path": "qa\\kpi\\inputs\\page1.parquet",

@@ -18,8 +18,10 @@ authors:
 abstract: >-
   Provenance-traced reconstruction of the daily DGBGTH dam bulletins published
   by ONAGRI (July 2014 to October 2025): 129,390 storage observations for 36
-  dams, qualified inter-dam transfer facts, dam metadata and capacity regimes,
-  QA results, and GIS layers. Values are extracted from the PDF text layer and
+  dams; every printed Page 1 and Page 2 column (inflows, releases, fill, water
+  levels, capacities, siltation, rainfall, evaporation) as one row per dam and
+  bulletin; qualified inter-dam transfer facts, dam metadata and capacity
+  regimes, QA results, and GIS layers. Values are extracted from the PDF text layer and
   vector rulings by deterministic engines (no OCR) and every row links to its
   source bulletin. Licences differ by part (full terms in LICENSE-DATA):
   tables, QA, provenance, docs and ontology CC BY 4.0; source values under the
@@ -30,6 +32,8 @@ keywords:
   - Tunisia
   - dams
   - reservoir storage
+  - reservoir water level
+  - reservoir inflow
   - hydrology
   - open data
 license: CC-BY-4.0  # tables; GIS catchments/natural network and map: CC BY-NC-SA 4.0, see license-url
