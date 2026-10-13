@@ -1,7 +1,8 @@
 # Changelog
 
-## Unreleased
+## 1.2.0 — full Page 1 and Page 2 tables — 2026-10-13
 
+- Version 1.2.0 in `CITATION.cff`, `datapackage.json`, `pyproject.toml` and `mcp_server`. The cell-lineage files listed in `provenance/RELEASE_ASSETS.csv` are attached to the GitHub release v1.2.0; Zenodo's GitHub archive holds the repository snapshot only.
 - **Cell lineage of the full page tables.** New `provenance/RELEASE_ASSETS.csv` lists two files attached to the GitHub release because they exceed the 50 MB file limit: `page1_cell_lineage.csv.gz` (1,896,094 cells) and `page2_cell_lineage.csv.gz` (3,366,272 cells), byte-identical to the extraction output, with SHA-256, size and join keys. Every non-blank numeric cell of the two tables has a lineage record with the same value. README sections 2 and 3 now say where the cell-level record of each value is.
 - **MCP server.** `dataset_info` lists the published tables with their row counts; `describe_variable` accepts every column name of the full page tables, answering a renamed Page 2 column (e.g. `previous_hydraulic_year_end_water_level_m`) with its DLO column. Two new tests; `mcp_server/README.md` and README section 8 updated (the server does not yet serve inflows, releases or water levels).
 - **Contract validation** (`src/validate/contracts.py`) also checks the two full page tables: row counts, unique keys, dam IDs, manifest file and SHA-256, Parquet columns and row order, and the Page 1 stock column against `data/storage.csv`.
