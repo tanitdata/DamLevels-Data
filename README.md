@@ -319,6 +319,7 @@ It is built on W3C/OGC standards (SOSA, OWL-Time, QUDT, PROV, SKOS) and can be o
 - **Page 2 limits.** The column printed as *R.S. (g/l)* has no legend in the bulletin, so its meaning is left open. Mellègue's second Page 2 line (*Cote PHE*) is not extracted. For some small dams (Brek, Sficifa, Rmil, Sidi Aïch) similar printed levels go with very different volumes in different years; the cause is not established, so do not convert level to volume with a single curve.
 - **Page 3 (transfers) is the weakest source.** Its facts are published with authority `PROBABLE`; two transfer endpoints are only candidate matches, and their dates follow the bulletin rather than the verified day (see [known issues](docs/known_issues.md)).
 - **Some metadata is incomplete.** Basin names are given for 6 dams only; Arabic names for part of the roster.
+- **A few bulletins need care.** The bulletins filed as 28 and 29 September 2019 print the 29th and 30th, so their rows are dated one day early. On 2 and 3 July 2022 the bulletin repeats the previous day's storage and releases for every dam. Details in [known issues](docs/known_issues.md).
 - **Six bulletins have no ONAGRI link** in the current listing (2019-09-28, 2020-06-01, 2022-07-08, 2024-08-24 to 26).
 - **Catchments:** Mellègue has no accepted catchment; two incremental catchments are special cases (see [GIS notes](docs/gis.md)).
 - **Not official statistics.** This is an independent reconstruction from public bulletins. No forecasting model is included or claimed.

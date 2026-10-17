@@ -322,7 +322,7 @@ sosa:phenomenonTime a owl:ObjectProperty ;
 
 <https://w3id.org/damlevels/id/mapping/P1_observations/p1_release_action_code> a dlo:ColumnMapping ;
     rdfs:label "p1_release_action_code (P1_observations)" ;
-    rdfs:comment "code meanings provisional (no printed legend located)"@en ;
+    rdfs:comment "code meanings from the legend printed on every Page 1 bulletin"@en ;
     dlo:emissionMode dlc:EmitPerPrintedValue ;
     dlo:evidenceNote "PATCH-11;PATCH_11_OPERATION_CODE_REGISTRY" ;
     dlo:featureRole dlc:RoleManagedReservoir ;
@@ -3683,7 +3683,7 @@ dlo:reportedOperation a owl:ObjectProperty ;
     rdfs:domain dlo:BulletinObservation ;
     rdfs:isDefinedBy dlo: ;
     rdfs:range skos:Concept ;
-    skos:definition "An operation code printed beside the release (scheme dlc:OperationCodeScheme, provisional meanings)."@en .
+    skos:definition "An operation code printed beside the release (scheme dlc:OperationCodeScheme; meanings from the legend printed on every Page 1 bulletin)."@en .
 
 dlo:routeSource a owl:FunctionalProperty,
         owl:ObjectProperty ;
@@ -3979,75 +3979,84 @@ dlc:LayerProvenance a skos:Concept ;
     dlo:safeTemporalAggregation "not a hydrological aggregation"@en .
 
 dlc:OpDesilting a skos:Concept ;
-    vs:term_status "unstable" ;
-    skos:definition "Printed code 'd' (project registry confidence HIGH)."@en ;
+    vs:term_status "stable" ;
+    skos:definition "Printed code 'd'. Legend: \"d : dévasement\" (desilting)."@en ;
     skos:inScheme dlc:OperationCodeScheme ;
     skos:notation "d" ;
     skos:prefLabel "desilting"@en ;
-    skos:scopeNote "Provisional meaning: no printed legend located."@en ;
+    skos:scopeNote "Meaning from the legend printed on every Page 1 bulletin, 2014-07-02 to 2025-10-10."@en ;
+    skos:topConceptOf dlc:OperationCodeScheme .
+
+dlc:OpDrawdown a skos:Concept ;
+    vs:term_status "stable" ;
+    skos:definition "Printed-legend code 'a'. Legend: \"a : déstockage pour abaissement du plan d'eau\" (release to lower the water level). Not printed beside any release, 2014-07-02 to 2025-10-10."@en ;
+    skos:inScheme dlc:OperationCodeScheme ;
+    skos:notation "a" ;
+    skos:prefLabel "release to lower the water level"@en ;
+    skos:scopeNote "Meaning from the legend printed on every Page 1 bulletin, 2014-07-02 to 2025-10-10."@en ;
     skos:topConceptOf dlc:OperationCodeScheme .
 
 dlc:OpDrainageLeakage a skos:Concept ;
     vs:term_status "unstable" ;
-    skos:definition "Printed code 'p' (project registry confidence HIGH)."@en ;
+    skos:definition "Printed code 'p' (lowercase). Not in the printed legend, which defines uppercase 'P'."@en ;
     skos:inScheme dlc:OperationCodeScheme ;
     skos:notation "p" ;
-    skos:prefLabel "drainage or leakage"@en ;
-    skos:scopeNote "Provisional meaning: no printed legend located."@en ;
+    skos:prefLabel "code p (not in the printed legend)"@en ;
+    skos:scopeNote "Printed beside releases but not defined in the legend printed on every Page 1 bulletin; meaning unknown."@en ;
     skos:topConceptOf dlc:OperationCodeScheme .
 
 dlc:OpDrainageSourceVariant a skos:Concept ;
-    vs:term_status "unstable" ;
-    skos:definition "Printed code 'P' (project registry confidence MEDIUM)."@en ;
+    vs:term_status "stable" ;
+    skos:definition "Printed code 'P'. Legend: \"P : fuite de drainage\" (drainage leakage)."@en ;
     skos:inScheme dlc:OperationCodeScheme ;
     skos:notation "P" ;
-    skos:prefLabel "drainage or source variant"@en ;
-    skos:scopeNote "Provisional meaning: no printed legend located."@en ;
+    skos:prefLabel "drainage leakage"@en ;
+    skos:scopeNote "Meaning from the legend printed on every Page 1 bulletin, 2014-07-02 to 2025-10-10."@en ;
     skos:topConceptOf dlc:OperationCodeScheme .
 
 dlc:OpOrdinaryRelease a skos:Concept ;
-    vs:term_status "unstable" ;
-    skos:definition "Printed code 'E' (project registry confidence HIGH)."@en ;
+    vs:term_status "stable" ;
+    skos:definition "Printed code 'E'. Legend: \"E : Exploitation\" (ordinary operating release)."@en ;
     skos:inScheme dlc:OperationCodeScheme ;
     skos:notation "E" ;
-    skos:prefLabel "ordinary operation release"@en ;
-    skos:scopeNote "Provisional meaning: no printed legend located."@en ;
+    skos:prefLabel "exploitation (ordinary operating release)"@en ;
+    skos:scopeNote "Meaning from the legend printed on every Page 1 bulletin, 2014-07-02 to 2025-10-10."@en ;
     skos:topConceptOf dlc:OperationCodeScheme .
 
 dlc:OpSpill a skos:Concept ;
-    vs:term_status "unstable" ;
-    skos:definition "Printed code 'D' (project registry confidence HIGH)."@en ;
+    vs:term_status "stable" ;
+    skos:definition "Printed code 'D'. Legend: \"D : Déversement\" (spill)."@en ;
     skos:inScheme dlc:OperationCodeScheme ;
     skos:notation "D" ;
-    skos:prefLabel "spill or overflow"@en ;
-    skos:scopeNote "Provisional meaning: no printed legend located."@en ;
+    skos:prefLabel "spill"@en ;
+    skos:scopeNote "Meaning from the legend printed on every Page 1 bulletin, 2014-07-02 to 2025-10-10."@en ;
     skos:topConceptOf dlc:OperationCodeScheme .
 
 dlc:OpTransfer a skos:Concept ;
-    vs:term_status "unstable" ;
-    skos:definition "Printed code 'tr' (project registry confidence HIGH)."@en ;
+    vs:term_status "stable" ;
+    skos:definition "Printed code 'tr'. Legend: \"tr : Transfert\" (transfer)."@en ;
     skos:inScheme dlc:OperationCodeScheme ;
     skos:notation "tr" ;
     skos:prefLabel "transfer"@en ;
-    skos:scopeNote "Provisional meaning: no printed legend located."@en ;
+    skos:scopeNote "Meaning from the legend printed on every Page 1 bulletin, 2014-07-02 to 2025-10-10."@en ;
     skos:topConceptOf dlc:OperationCodeScheme .
 
 dlc:OpTurbining a skos:Concept ;
-    vs:term_status "unstable" ;
-    skos:definition "Printed code 'T' (project registry confidence HIGH)."@en ;
+    vs:term_status "stable" ;
+    skos:definition "Printed code 'T'. Legend: \"T : Turbinage\" (turbining)."@en ;
     skos:inScheme dlc:OperationCodeScheme ;
     skos:notation "T" ;
     skos:prefLabel "turbining"@en ;
-    skos:scopeNote "Provisional meaning: no printed legend located."@en ;
+    skos:scopeNote "Meaning from the legend printed on every Page 1 bulletin, 2014-07-02 to 2025-10-10."@en ;
     skos:topConceptOf dlc:OperationCodeScheme .
 
 dlc:OpUnknownF a skos:Concept ;
     vs:term_status "unstable" ;
-    skos:definition "Printed code 'f' (project registry confidence LOW)."@en ;
+    skos:definition "Printed code 'f'. Not in the printed legend."@en ;
     skos:inScheme dlc:OperationCodeScheme ;
     skos:notation "f" ;
-    skos:prefLabel "unknown code f"@en ;
-    skos:scopeNote "Provisional meaning: no printed legend located."@en ;
+    skos:prefLabel "code f (not in the printed legend)"@en ;
+    skos:scopeNote "Printed beside releases but not defined in the legend printed on every Page 1 bulletin; meaning unknown."@en ;
     skos:topConceptOf dlc:OperationCodeScheme .
 
 dlc:PresentText a skos:Concept ;
@@ -8681,16 +8690,17 @@ dlc:RoleRegionOrNation a skos:Concept ;
     dlo:supportingCases "11265"^^xsd:nonNegativeInteger .
 
 dlc:OperationCodeScheme a skos:ConceptScheme ;
-    skos:definition "Letters printed beside the Page 1 release. Meanings come from the project's registry (PATCH_11); no printed legend has been located, so every concept is provisional. Codes are case-sensitive."@en ;
+    skos:definition "Letters printed beside the Page 1 release. Their meanings are printed in a legend on every Page 1 bulletin (2014-07-02 to 2025-10-10): \"* D : Déversement, E : Exploitation, tr : Transfert, a : déstockage pour abaissement du plan d'eau, d : dévasement, T : Turbinage, P : fuite de drainage\". Codes p and f are printed beside releases but are not in the legend. Codes are case-sensitive."@en ;
     skos:hasTopConcept dlc:OpDesilting,
         dlc:OpDrainageLeakage,
+        dlc:OpDrawdown,
         dlc:OpDrainageSourceVariant,
         dlc:OpOrdinaryRelease,
         dlc:OpSpill,
         dlc:OpTransfer,
         dlc:OpTurbining,
         dlc:OpUnknownF ;
-    skos:prefLabel "reported operation codes (provisional)"@en .
+    skos:prefLabel "reported operation codes"@en .
 
 <https://w3id.org/damlevels/id/test/H29c> a dlo:SemanticTest ;
     dcterms:description "Page 1 printed grand total storage equals the Page 3 national storage"@en ;

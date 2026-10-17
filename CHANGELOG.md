@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.1 — documentation corrections — 2026-10-17
+
+No published value changed. Found by checking every bulletin PDF against the published tables.
+
+- **Operation-code legend.** Every Page 1 bulletin (3,981 of 3,981) prints a legend for the letters beside the releases: "D : Déversement, E : Exploitation, tr : Transfert, a : déstockage pour abaissement du plan d'eau, d : dévasement, T : Turbinage, P : fuite de drainage". Earlier versions said no legend had been found. The ontology (`ontology/*.ttl`, `*.owl`), `datapackage.json` and the data dictionary now give the printed meanings. Codes `p` and `f` are printed but are not in the legend. The ontology label of `P` was wrong ("drainage or source variant", now "drainage leakage"), and `p` no longer carries a guessed meaning. New concept `dlc:OpDrawdown` for legend code `a`, which is never printed. No IRI changed.
+- **Two bulletins dated one day early** (`docs/known_issues.md`, README section 11). The files filed as 28 and 29 September 2019 print 29-09-19 and 30-09-19 on Pages 1 and 2. The rows keep their published dates.
+- **July 2022.** The stale bulletins of 2 and 3 July 2022 repeat the previous day's **releases** as well as storage, for all 36 dams.
+- **January 2021.** The previous-year anomaly affects 33 dams, not 32 (Sficifa differs in the previous-year inflow only).
+- Version 1.2.1 in `CITATION.cff`, `datapackage.json`, `pyproject.toml` and `mcp_server`. KPIs rerun: values identical. The cell-lineage release assets stay attached to v1.2.0 (`provenance/RELEASE_ASSETS.csv`).
+
 ## 1.2.0 — full Page 1 and Page 2 tables — 2026-10-13
 
 - Version 1.2.0 in `CITATION.cff`, `datapackage.json`, `pyproject.toml` and `mcp_server`. The cell-lineage files listed in `provenance/RELEASE_ASSETS.csv` are attached to the GitHub release v1.2.0; Zenodo's GitHub archive holds the repository snapshot only.

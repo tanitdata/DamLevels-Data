@@ -3,7 +3,7 @@
   "name": "damlevels-data",
   "title": "DamLevels-Data: daily storage of Tunisia's 36 large dams, 2014-2025",
   "description": "Provenance-traced daily storage observations, every printed Page 1 and Page 2 column (inflows, releases, fill, water levels, capacities, siltation, rainfall, evaporation) as one row per dam and bulletin, qualified inter-dam transfer facts, dam metadata, QA results and GIS layers reconstructed from the DGBGTH bulletins published by ONAGRI. Current quality indicators: qa/kpi/results.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "licenses": [
     {
       "name": "CC-BY-4.0",
@@ -929,7 +929,7 @@
           {
             "name": "p1_release_action_code",
             "type": "string",
-            "description": "Operation codes printed beside the releases, comma-separated as printed (E, p, tr, T, d, ...). No printed legend was found: meanings are provisional."
+            "description": "Operation codes printed beside the releases, comma-separated as printed (E, p, tr, T, d, ...). Meanings are printed in a legend on every Page 1 bulletin: D : Déversement (spill), E : Exploitation (ordinary release), tr : Transfert (transfer), T : Turbinage (turbining), d : dévasement (desilting), P : fuite de drainage (drainage leakage); a (déstockage pour abaissement du plan d'eau) is in the legend but never printed. Codes p and f are printed but are not in the legend; their meaning is unknown."
           },
           {
             "name": "p1_release_yesterday",
@@ -1069,7 +1069,7 @@
           {
             "name": "p1_release_action_code",
             "type": "string",
-            "description": "Operation codes printed beside the releases, comma-separated as printed (E, p, tr, T, d, ...). No printed legend was found: meanings are provisional."
+            "description": "Operation codes printed beside the releases, comma-separated as printed (E, p, tr, T, d, ...). Meanings are printed in a legend on every Page 1 bulletin: D : Déversement (spill), E : Exploitation (ordinary release), tr : Transfert (transfer), T : Turbinage (turbining), d : dévasement (desilting), P : fuite de drainage (drainage leakage); a (déstockage pour abaissement du plan d'eau) is in the legend but never printed. Codes p and f are printed but are not in the legend; their meaning is unknown."
           },
           {
             "name": "p1_release_yesterday",

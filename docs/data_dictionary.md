@@ -83,7 +83,7 @@ Every column printed on Page 1, in wide form: one row per governed dam and bulle
 | `p1_apport_cumul_since_sep` | Inflow season to date, Mm³; restarts on the bulletin of 2 September. | 1 September to D−1 |
 | `p1_apport_cumul_prev_year` | Inflow over the same period one year earlier, Mm³. | previous season, to the same day |
 | `p1_apport_average_period` | Long-term mean inflow of the season-to-date period, Mm³ (a reference). | 1 September to D−1 |
-| `p1_release_action_code` | Operation codes printed beside the releases, comma-separated as printed (`E`, `p`, `tr`, `T`, `d`, …). No printed legend was found; meanings are provisional. | D−1 |
+| `p1_release_action_code` | Operation codes printed beside the releases, comma-separated as printed (`E`, `p`, `tr`, `T`, `d`, …). Their meanings are printed in a legend on every Page 1 bulletin: D : Déversement (spill), E : Exploitation (ordinary release), tr : Transfert (transfer), T : Turbinage (turbining), d : dévasement (desilting), P : fuite de drainage (drainage leakage); a (déstockage pour abaissement du plan d'eau) is in the legend but never printed. Codes p and f are printed but are not in the legend; their meaning is unknown. | D−1 |
 | `p1_release_yesterday` | Release, Mm³. **This is the current release.** | D−1 |
 | `p1_release_today` | Release on the same day one year earlier, Mm³ (second value under *Lâchers du jour*). **Never the current release.** | D−1, one year earlier |
 | `p1_release_cumul_this_month` | Release month to date, Mm³; restarts on the bulletin of the 2nd. | 1st of the month to D−1 |
@@ -137,7 +137,7 @@ Column names are the project's canonical names, not the extractor's `p2_*` names
 | `rainfall_reporting_interval_mm` | Rainfall, mm (*Pluv*). Time rule from DLO 0.3, medium confidence. | D−1 |
 | `p2_rs_unresolved_prohibited` | Value printed under *R.S. (g/l)*. No legend defines it, so no meaning is asserted. | — |
 
-The previous-hydraulic-year columns change on the bulletin of 2 September. Four bulletins, 2021-01-14 to 2021-01-17, print other previous-year values for 32 dams; they are kept as printed (`docs/known_issues.md`).
+The previous-hydraulic-year columns change on the bulletin of 2 September. Four bulletins, 2021-01-14 to 2021-01-17, print other previous-year values for 33 dams; they are kept as printed (`docs/known_issues.md`).
 
 Checks (`tests/test_bulletin_page2.py`): every column equals `qa/kpi/inputs/page2.parquet`; Page 1 and Page 2 agree exactly on 128,995 of 128,996 storage pairs, 92,330 of 92,338 inflow pairs and 83,584 of 83,642 release pairs (KPI K09); all 60 capacity regimes equal the printed useful capacity. 117 rows have no Page 1 row: the three bulletins without a Page 1 (2022-05-03, 2022-10-28, 2024-12-28) and the dams missing from Page 1 on 2015-10-03 to 06 (Ben Metir, Sidi Aïch) and 2016-08-11 (Lebna). `src/build_page2_table.py` builds the table.
 

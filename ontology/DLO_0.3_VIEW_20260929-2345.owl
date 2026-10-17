@@ -174,7 +174,7 @@
   </dlo:ColumnMapping>
   <owl:ObjectProperty rdf:about="https://w3id.org/damlevels/ontology/reportedOperation">
     <rdfs:label xml:lang="en">reported operation</rdfs:label>
-    <skos:definition xml:lang="en">An operation code printed beside the release (scheme dlc:OperationCodeScheme, provisional meanings).</skos:definition>
+    <skos:definition xml:lang="en">An operation code printed beside the release (scheme dlc:OperationCodeScheme; meanings from the legend printed on every Page 1 bulletin).</skos:definition>
     <rdfs:domain rdf:resource="https://w3id.org/damlevels/ontology/BulletinObservation"/>
     <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
     <rdfs:isDefinedBy>
@@ -4170,7 +4170,7 @@
   </dlo:ColumnMapping>
   <dlo:ColumnMapping rdf:about="https://w3id.org/damlevels/id/mapping/P1_observations/p1_release_action_code">
     <rdfs:label>p1_release_action_code (P1_observations)</rdfs:label>
-    <rdfs:comment xml:lang="en">code meanings provisional (no printed legend located)</rdfs:comment>
+    <rdfs:comment xml:lang="en">code meanings from the legend printed on every Page 1 bulletin</rdfs:comment>
     <dlo:emissionMode rdf:resource="https://w3id.org/damlevels/code/EmitPerPrintedValue"/>
     <dlo:evidenceNote>PATCH-11;PATCH_11_OPERATION_CODE_REGISTRY</dlo:evidenceNote>
     <dlo:featureRole rdf:resource="https://w3id.org/damlevels/code/RoleManagedReservoir"/>
@@ -8273,96 +8273,107 @@
     <dlo:storesWaterBody rdf:resource="https://w3id.org/damlevels/id/water-body/kasseb"/>
   </dlo:ManagedReservoir>
   <skos:ConceptScheme rdf:about="https://w3id.org/damlevels/code/OperationCodeScheme">
-    <skos:definition xml:lang="en">Letters printed beside the Page 1 release. Meanings come from the project's registry (PATCH_11); no printed legend has been located, so every concept is provisional. Codes are case-sensitive.</skos:definition>
+    <skos:definition xml:lang="en">Letters printed beside the Page 1 release. Their meanings are printed in a legend on every Page 1 bulletin (2014-07-02 to 2025-10-10): "* D : Déversement, E : Exploitation, tr : Transfert, a : déstockage pour abaissement du plan d'eau, d : dévasement, T : Turbinage, P : fuite de drainage". Codes p and f are printed beside releases but are not in the legend. Codes are case-sensitive.</skos:definition>
     <skos:hasTopConcept>
       <skos:Concept rdf:about="https://w3id.org/damlevels/code/OpDesilting">
-        <vs:term_status>unstable</vs:term_status>
-        <skos:definition xml:lang="en">Printed code 'd' (project registry confidence HIGH).</skos:definition>
+        <vs:term_status>stable</vs:term_status>
+        <skos:definition xml:lang="en">Printed code 'd'. Legend: "d : dévasement" (desilting).</skos:definition>
         <skos:inScheme rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
         <skos:notation>d</skos:notation>
         <skos:prefLabel xml:lang="en">desilting</skos:prefLabel>
-        <skos:scopeNote xml:lang="en">Provisional meaning: no printed legend located.</skos:scopeNote>
+        <skos:scopeNote xml:lang="en">Meaning from the legend printed on every Page 1 bulletin, 2014-07-02 to 2025-10-10.</skos:scopeNote>
+        <skos:topConceptOf rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
+      </skos:Concept>
+    </skos:hasTopConcept>
+    <skos:hasTopConcept>
+      <skos:Concept rdf:about="https://w3id.org/damlevels/code/OpDrawdown">
+        <vs:term_status>stable</vs:term_status>
+        <skos:definition xml:lang="en">Printed-legend code 'a'. Legend: "a : déstockage pour abaissement du plan d'eau" (release to lower the water level). Not printed beside any release, 2014-07-02 to 2025-10-10.</skos:definition>
+        <skos:inScheme rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
+        <skos:notation>a</skos:notation>
+        <skos:prefLabel xml:lang="en">release to lower the water level</skos:prefLabel>
+        <skos:scopeNote xml:lang="en">Meaning from the legend printed on every Page 1 bulletin, 2014-07-02 to 2025-10-10.</skos:scopeNote>
         <skos:topConceptOf rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
       </skos:Concept>
     </skos:hasTopConcept>
     <skos:hasTopConcept>
       <skos:Concept rdf:about="https://w3id.org/damlevels/code/OpDrainageLeakage">
         <vs:term_status>unstable</vs:term_status>
-        <skos:definition xml:lang="en">Printed code 'p' (project registry confidence HIGH).</skos:definition>
+        <skos:definition xml:lang="en">Printed code 'p' (lowercase). Not in the printed legend, which defines uppercase 'P'.</skos:definition>
         <skos:inScheme rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
         <skos:notation>p</skos:notation>
-        <skos:prefLabel xml:lang="en">drainage or leakage</skos:prefLabel>
-        <skos:scopeNote xml:lang="en">Provisional meaning: no printed legend located.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">code p (not in the printed legend)</skos:prefLabel>
+        <skos:scopeNote xml:lang="en">Printed beside releases but not defined in the legend printed on every Page 1 bulletin; meaning unknown.</skos:scopeNote>
         <skos:topConceptOf rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
       </skos:Concept>
     </skos:hasTopConcept>
     <skos:hasTopConcept>
       <skos:Concept rdf:about="https://w3id.org/damlevels/code/OpDrainageSourceVariant">
-        <vs:term_status>unstable</vs:term_status>
-        <skos:definition xml:lang="en">Printed code 'P' (project registry confidence MEDIUM).</skos:definition>
+        <vs:term_status>stable</vs:term_status>
+        <skos:definition xml:lang="en">Printed code 'P'. Legend: "P : fuite de drainage" (drainage leakage).</skos:definition>
         <skos:inScheme rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
         <skos:notation>P</skos:notation>
-        <skos:prefLabel xml:lang="en">drainage or source variant</skos:prefLabel>
-        <skos:scopeNote xml:lang="en">Provisional meaning: no printed legend located.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">drainage leakage</skos:prefLabel>
+        <skos:scopeNote xml:lang="en">Meaning from the legend printed on every Page 1 bulletin, 2014-07-02 to 2025-10-10.</skos:scopeNote>
         <skos:topConceptOf rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
       </skos:Concept>
     </skos:hasTopConcept>
     <skos:hasTopConcept>
       <skos:Concept rdf:about="https://w3id.org/damlevels/code/OpOrdinaryRelease">
-        <vs:term_status>unstable</vs:term_status>
-        <skos:definition xml:lang="en">Printed code 'E' (project registry confidence HIGH).</skos:definition>
+        <vs:term_status>stable</vs:term_status>
+        <skos:definition xml:lang="en">Printed code 'E'. Legend: "E : Exploitation" (ordinary operating release).</skos:definition>
         <skos:inScheme rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
         <skos:notation>E</skos:notation>
-        <skos:prefLabel xml:lang="en">ordinary operation release</skos:prefLabel>
-        <skos:scopeNote xml:lang="en">Provisional meaning: no printed legend located.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">exploitation (ordinary operating release)</skos:prefLabel>
+        <skos:scopeNote xml:lang="en">Meaning from the legend printed on every Page 1 bulletin, 2014-07-02 to 2025-10-10.</skos:scopeNote>
         <skos:topConceptOf rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
       </skos:Concept>
     </skos:hasTopConcept>
     <skos:hasTopConcept>
       <skos:Concept rdf:about="https://w3id.org/damlevels/code/OpSpill">
-        <vs:term_status>unstable</vs:term_status>
-        <skos:definition xml:lang="en">Printed code 'D' (project registry confidence HIGH).</skos:definition>
+        <vs:term_status>stable</vs:term_status>
+        <skos:definition xml:lang="en">Printed code 'D'. Legend: "D : Déversement" (spill).</skos:definition>
         <skos:inScheme rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
         <skos:notation>D</skos:notation>
-        <skos:prefLabel xml:lang="en">spill or overflow</skos:prefLabel>
-        <skos:scopeNote xml:lang="en">Provisional meaning: no printed legend located.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">spill</skos:prefLabel>
+        <skos:scopeNote xml:lang="en">Meaning from the legend printed on every Page 1 bulletin, 2014-07-02 to 2025-10-10.</skos:scopeNote>
         <skos:topConceptOf rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
       </skos:Concept>
     </skos:hasTopConcept>
     <skos:hasTopConcept>
       <skos:Concept rdf:about="https://w3id.org/damlevels/code/OpTransfer">
-        <vs:term_status>unstable</vs:term_status>
-        <skos:definition xml:lang="en">Printed code 'tr' (project registry confidence HIGH).</skos:definition>
+        <vs:term_status>stable</vs:term_status>
+        <skos:definition xml:lang="en">Printed code 'tr'. Legend: "tr : Transfert" (transfer).</skos:definition>
         <skos:inScheme rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
         <skos:notation>tr</skos:notation>
         <skos:prefLabel xml:lang="en">transfer</skos:prefLabel>
-        <skos:scopeNote xml:lang="en">Provisional meaning: no printed legend located.</skos:scopeNote>
+        <skos:scopeNote xml:lang="en">Meaning from the legend printed on every Page 1 bulletin, 2014-07-02 to 2025-10-10.</skos:scopeNote>
         <skos:topConceptOf rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
       </skos:Concept>
     </skos:hasTopConcept>
     <skos:hasTopConcept>
       <skos:Concept rdf:about="https://w3id.org/damlevels/code/OpTurbining">
-        <vs:term_status>unstable</vs:term_status>
-        <skos:definition xml:lang="en">Printed code 'T' (project registry confidence HIGH).</skos:definition>
+        <vs:term_status>stable</vs:term_status>
+        <skos:definition xml:lang="en">Printed code 'T'. Legend: "T : Turbinage" (turbining).</skos:definition>
         <skos:inScheme rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
         <skos:notation>T</skos:notation>
         <skos:prefLabel xml:lang="en">turbining</skos:prefLabel>
-        <skos:scopeNote xml:lang="en">Provisional meaning: no printed legend located.</skos:scopeNote>
+        <skos:scopeNote xml:lang="en">Meaning from the legend printed on every Page 1 bulletin, 2014-07-02 to 2025-10-10.</skos:scopeNote>
         <skos:topConceptOf rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
       </skos:Concept>
     </skos:hasTopConcept>
     <skos:hasTopConcept>
       <skos:Concept rdf:about="https://w3id.org/damlevels/code/OpUnknownF">
         <vs:term_status>unstable</vs:term_status>
-        <skos:definition xml:lang="en">Printed code 'f' (project registry confidence LOW).</skos:definition>
+        <skos:definition xml:lang="en">Printed code 'f'. Not in the printed legend.</skos:definition>
         <skos:inScheme rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
         <skos:notation>f</skos:notation>
-        <skos:prefLabel xml:lang="en">unknown code f</skos:prefLabel>
-        <skos:scopeNote xml:lang="en">Provisional meaning: no printed legend located.</skos:scopeNote>
+        <skos:prefLabel xml:lang="en">code f (not in the printed legend)</skos:prefLabel>
+        <skos:scopeNote xml:lang="en">Printed beside releases but not defined in the legend printed on every Page 1 bulletin; meaning unknown.</skos:scopeNote>
         <skos:topConceptOf rdf:resource="https://w3id.org/damlevels/code/OperationCodeScheme"/>
       </skos:Concept>
     </skos:hasTopConcept>
-    <skos:prefLabel xml:lang="en">reported operation codes (provisional)</skos:prefLabel>
+    <skos:prefLabel xml:lang="en">reported operation codes</skos:prefLabel>
   </skos:ConceptScheme>
   <geo:Geometry rdf:about="https://w3id.org/damlevels/id/dam/gamgoum/geometry">
     <geo:asWKT rdf:datatype="http://www.opengis.net/ont/geosparql#wktLiteral">POINT(9.267222 37.198611)</geo:asWKT>
